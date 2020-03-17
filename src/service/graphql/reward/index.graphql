@@ -1,0 +1,19 @@
+mutation TimeRewardMutation($reward_type: TimeRewardEnum) {
+    timeReward(reward_type: $reward_type) {
+        gold_reward
+        ticket_reward
+        contribute_reward
+    }
+}
+
+query systemConfigQuery {
+    systemConfig {
+        time
+        time_unix
+        next_time_hour_reward {
+            time
+            time_unix
+        }
+        max_signs_day
+    }
+}

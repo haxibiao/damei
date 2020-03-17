@@ -1,0 +1,1357 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00E356F31AD99517003FC87E /* dameiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* dameiTests.m */; };
+		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
+		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2C1340C6231FB996005BD593 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1340C5231FB996005BD593 /* libsqlite3.0.tbd */; };
+		2C90EEB8231E43A700053670 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C90EEB7231E43A700053670 /* StoreKit.framework */; };
+		2C90EEBA231E43AE00053670 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C90EEB9231E43AE00053670 /* MobileCoreServices.framework */; };
+		2C90EEBC231E43B600053670 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C90EEBB231E43B600053670 /* WebKit.framework */; };
+		2C90EEBE231E43BD00053670 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C90EEBD231E43BD00053670 /* MediaPlayer.framework */; };
+		2C90EEC0231E43C500053670 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C90EEBF231E43C500053670 /* CoreMedia.framework */; };
+		2C90EEC2231E43CB00053670 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C90EEC1231E43CB00053670 /* AVFoundation.framework */; };
+		2C90EEC4231E43D200053670 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C90EEC3231E43D200053670 /* CoreTelephony.framework */; };
+		2C90EEC6231E43DA00053670 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C90EEC5231E43DA00053670 /* SystemConfiguration.framework */; };
+		2C90EEC8231E43E000053670 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C90EEC7231E43E000053670 /* AdSupport.framework */; };
+		2C90EECA231E43EA00053670 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C90EEC9231E43EA00053670 /* CoreMotion.framework */; };
+		2C90EECC231E43F500053670 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C90EECB231E43F500053670 /* libresolv.9.tbd */; };
+		2C90EECE231E43FF00053670 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C90EECD231E43FF00053670 /* libc++.tbd */; };
+		2C90EED0231E440700053670 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C90EECF231E440700053670 /* libz.tbd */; };
+		2CAFA79B233C99F600C20E17 /* BUDSlotViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA756233C99F600C20E17 /* BUDSlotViewModel.m */; };
+		2CAFA79C233C99F600C20E17 /* BUDBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA75A233C99F600C20E17 /* BUDBase64.m */; };
+		2CAFA79D233C99F600C20E17 /* UIView+Draw.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA75D233C99F600C20E17 /* UIView+Draw.m */; };
+		2CAFA79E233C99F600C20E17 /* NSString+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA75E233C99F600C20E17 /* NSString+Json.m */; };
+		2CAFA79F233C99F600C20E17 /* NSString+LocalizedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA75F233C99F600C20E17 /* NSString+LocalizedString.m */; };
+		2CAFA7A0233C99F600C20E17 /* RRFPSBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA765233C99F600C20E17 /* RRFPSBar.m */; };
+		2CAFA7A1233C99F600C20E17 /* BUDCocoaSecurity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA767233C99F600C20E17 /* BUDCocoaSecurity.m */; };
+		2CAFA7A2233C99F600C20E17 /* BUDRewardedVideoAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA769233C99F600C20E17 /* BUDRewardedVideoAdViewController.m */; };
+		2CAFA7A4233C99F600C20E17 /* BannerAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA76E233C99F600C20E17 /* BannerAd.m */; };
+		2CAFA7A5233C99F600C20E17 /* FeedAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA770233C99F600C20E17 /* FeedAd.m */; };
+		2CAFA7A6233C99F600C20E17 /* DrawFeedAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA771233C99F600C20E17 /* DrawFeedAd.m */; };
+		2CAFA7A7233C99F600C20E17 /* FeedAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA772233C99F600C20E17 /* FeedAdManager.m */; };
+		2CAFA7A8233C99F600C20E17 /* BannerAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA774233C99F600C20E17 /* BannerAdManager.m */; };
+		2CAFA7A9233C99F600C20E17 /* DrawFeedAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA776233C99F600C20E17 /* DrawFeedAdManager.m */; };
+		2CAFA7AA233C99F600C20E17 /* BUDConfigHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA779233C99F600C20E17 /* BUDConfigHelper.m */; };
+		2CAFA7AB233C99F600C20E17 /* BUDFeedNormalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA77D233C99F600C20E17 /* BUDFeedNormalModel.m */; };
+		2CAFA7AC233C99F600C20E17 /* BUDFeedNormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA77F233C99F600C20E17 /* BUDFeedNormalTableViewCell.m */; };
+		2CAFA7AD233C99F600C20E17 /* BUDRefreshButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA780233C99F600C20E17 /* BUDRefreshButton.m */; };
+		2CAFA7AE233C99F600C20E17 /* BUDNormalButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA781233C99F600C20E17 /* BUDNormalButton.m */; };
+		2CAFA7AF233C99F600C20E17 /* BUDSettingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA784233C99F600C20E17 /* BUDSettingTableView.m */; };
+		2CAFA7B0233C99F600C20E17 /* BUDFeedStyleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA785233C99F600C20E17 /* BUDFeedStyleHelper.m */; };
+		2CAFA7B1233C99F600C20E17 /* BUDDrawTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA786233C99F600C20E17 /* BUDDrawTableViewCell.m */; };
+		2CAFA7B2233C99F600C20E17 /* BUDPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA787233C99F600C20E17 /* BUDPlayerController.m */; };
+		2CAFA7B3233C99F600C20E17 /* BUDdemoDislikeCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA78B233C99F600C20E17 /* BUDdemoDislikeCollectionCell.m */; };
+		2CAFA7B4233C99F600C20E17 /* BUDActionAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA78C233C99F600C20E17 /* BUDActionAreaView.m */; };
+		2CAFA7B5233C99F600C20E17 /* FullScreenVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA792233C99F600C20E17 /* FullScreenVideo.m */; };
+		2CAFA7B6233C99F600C20E17 /* AppUtilModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA793233C99F600C20E17 /* AppUtilModule.m */; };
+		2CAFA7B7233C99F600C20E17 /* RewardVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA794233C99F600C20E17 /* RewardVideo.m */; };
+		2CAFA7B8233C99F600C20E17 /* SplashAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA795233C99F600C20E17 /* SplashAd.m */; };
+		2CAFA7B9233C99F600C20E17 /* VideoUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA796233C99F600C20E17 /* VideoUploader.m */; };
+		2CAFA7BA233C99F600C20E17 /* AdBoss.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA799233C99F600C20E17 /* AdBoss.m */; };
+		2CAFA7BD233CA8A900C20E17 /* BUDFullscreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFA7BC233CA8A900C20E17 /* BUDFullscreenViewController.m */; };
+		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2DCD954D1E0B4F2C00145EB5 /* dameiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* dameiTests.m */; };
+		5288FA72DADD5A62AD0729B8 /* libPods-damei.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4970C1014CB72A64B77B9FD3 /* libPods-damei.a */; };
+		65054D7DDD0B4E0883245D0D /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B0CEE7D5A944D69AEA889EA /* iconfont.ttf */; };
+		9CF777456DF3F3F6461AEBDB /* libPods-dameiTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 72DD8BA11F3E77E85C87B432 /* libPods-dameiTests.a */; };
+		A747B63F01A23C5EA47696E0 /* libPods-damei-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B44A5837A61D2A1BCBBEEC /* libPods-damei-tvOSTests.a */; };
+		C6A9FF1B31FDDE2766BA024C /* libPods-damei-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C464180ABE21802F6FDE94E /* libPods-damei-tvOS.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		00E356F41AD99517003FC87E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
+			remoteInfo = damei;
+		};
+		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
+			remoteInfo = "damei-tvOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		00E356EE1AD99517003FC87E /* dameiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dameiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* dameiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dameiTests.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* damei.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = damei.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = damei/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = damei/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = damei/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = damei/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = damei/main.m; sourceTree = "<group>"; };
+		2B0CEE7D5A944D69AEA889EA /* iconfont.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = iconfont.ttf; path = ../src/components/Iconfont/fonts/iconfont.ttf; sourceTree = "<group>"; };
+		2C1340C5231FB996005BD593 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		2C90EEB7231E43A700053670 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		2C90EEB9231E43AE00053670 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		2C90EEBB231E43B600053670 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		2C90EEBD231E43BD00053670 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		2C90EEBF231E43C500053670 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		2C90EEC1231E43CB00053670 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		2C90EEC3231E43D200053670 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		2C90EEC5231E43DA00053670 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2C90EEC7231E43E000053670 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		2C90EEC9231E43EA00053670 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		2C90EECB231E43F500053670 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
+		2C90EECD231E43FF00053670 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		2C90EECF231E440700053670 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		2C90EED1231E445400053670 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		2CAFA753233C99F600C20E17 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		2CAFA756233C99F600C20E17 /* BUDSlotViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDSlotViewModel.m; sourceTree = "<group>"; };
+		2CAFA757233C99F600C20E17 /* BUDDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDDefs.h; sourceTree = "<group>"; };
+		2CAFA758233C99F600C20E17 /* BUDSlotViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDSlotViewModel.h; sourceTree = "<group>"; };
+		2CAFA75A233C99F600C20E17 /* BUDBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDBase64.m; sourceTree = "<group>"; };
+		2CAFA75C233C99F600C20E17 /* NSString+LocalizedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+LocalizedString.h"; sourceTree = "<group>"; };
+		2CAFA75D233C99F600C20E17 /* UIView+Draw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Draw.m"; sourceTree = "<group>"; };
+		2CAFA75E233C99F600C20E17 /* NSString+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Json.m"; sourceTree = "<group>"; };
+		2CAFA75F233C99F600C20E17 /* NSString+LocalizedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+LocalizedString.m"; sourceTree = "<group>"; };
+		2CAFA760233C99F600C20E17 /* NSString+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Json.h"; sourceTree = "<group>"; };
+		2CAFA761233C99F600C20E17 /* UIView+Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Draw.h"; sourceTree = "<group>"; };
+		2CAFA762233C99F600C20E17 /* BUDCocoaSecurity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDCocoaSecurity.h; sourceTree = "<group>"; };
+		2CAFA764233C99F600C20E17 /* RRFPSBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRFPSBar.h; sourceTree = "<group>"; };
+		2CAFA765233C99F600C20E17 /* RRFPSBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRFPSBar.m; sourceTree = "<group>"; };
+		2CAFA766233C99F600C20E17 /* BUDBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDBase64.h; sourceTree = "<group>"; };
+		2CAFA767233C99F600C20E17 /* BUDCocoaSecurity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDCocoaSecurity.m; sourceTree = "<group>"; };
+		2CAFA769233C99F600C20E17 /* BUDRewardedVideoAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDRewardedVideoAdViewController.m; sourceTree = "<group>"; };
+		2CAFA76B233C99F600C20E17 /* BUDRewardedVideoAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDRewardedVideoAdViewController.h; sourceTree = "<group>"; };
+		2CAFA76E233C99F600C20E17 /* BannerAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerAd.m; sourceTree = "<group>"; };
+		2CAFA76F233C99F600C20E17 /* DrawFeedAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawFeedAd.h; sourceTree = "<group>"; };
+		2CAFA770233C99F600C20E17 /* FeedAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedAd.m; sourceTree = "<group>"; };
+		2CAFA771233C99F600C20E17 /* DrawFeedAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawFeedAd.m; sourceTree = "<group>"; };
+		2CAFA772233C99F600C20E17 /* FeedAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedAdManager.m; sourceTree = "<group>"; };
+		2CAFA773233C99F600C20E17 /* BannerAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerAd.h; sourceTree = "<group>"; };
+		2CAFA774233C99F600C20E17 /* BannerAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerAdManager.m; sourceTree = "<group>"; };
+		2CAFA775233C99F600C20E17 /* FeedAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedAd.h; sourceTree = "<group>"; };
+		2CAFA776233C99F600C20E17 /* DrawFeedAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawFeedAdManager.m; sourceTree = "<group>"; };
+		2CAFA778233C99F600C20E17 /* BUDMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDMacros.h; sourceTree = "<group>"; };
+		2CAFA779233C99F600C20E17 /* BUDConfigHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDConfigHelper.m; sourceTree = "<group>"; };
+		2CAFA77A233C99F600C20E17 /* BUDConfigHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDConfigHelper.h; sourceTree = "<group>"; };
+		2CAFA77C233C99F600C20E17 /* BUDFeedNormalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDFeedNormalModel.h; sourceTree = "<group>"; };
+		2CAFA77D233C99F600C20E17 /* BUDFeedNormalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDFeedNormalModel.m; sourceTree = "<group>"; };
+		2CAFA77F233C99F600C20E17 /* BUDFeedNormalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDFeedNormalTableViewCell.m; sourceTree = "<group>"; };
+		2CAFA780233C99F600C20E17 /* BUDRefreshButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDRefreshButton.m; sourceTree = "<group>"; };
+		2CAFA781233C99F600C20E17 /* BUDNormalButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDNormalButton.m; sourceTree = "<group>"; };
+		2CAFA782233C99F600C20E17 /* BUDActionAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDActionAreaView.h; sourceTree = "<group>"; };
+		2CAFA783233C99F600C20E17 /* BUDdemoDislikeCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDdemoDislikeCollectionCell.h; sourceTree = "<group>"; };
+		2CAFA784233C99F600C20E17 /* BUDSettingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDSettingTableView.m; sourceTree = "<group>"; };
+		2CAFA785233C99F600C20E17 /* BUDFeedStyleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDFeedStyleHelper.m; sourceTree = "<group>"; };
+		2CAFA786233C99F600C20E17 /* BUDDrawTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDDrawTableViewCell.m; sourceTree = "<group>"; };
+		2CAFA787233C99F600C20E17 /* BUDPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDPlayerController.m; sourceTree = "<group>"; };
+		2CAFA788233C99F600C20E17 /* BUDRefreshButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDRefreshButton.h; sourceTree = "<group>"; };
+		2CAFA789233C99F600C20E17 /* BUDFeedNormalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDFeedNormalTableViewCell.h; sourceTree = "<group>"; };
+		2CAFA78A233C99F600C20E17 /* BUDSettingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDSettingTableView.h; sourceTree = "<group>"; };
+		2CAFA78B233C99F600C20E17 /* BUDdemoDislikeCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDdemoDislikeCollectionCell.m; sourceTree = "<group>"; };
+		2CAFA78C233C99F600C20E17 /* BUDActionAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDActionAreaView.m; sourceTree = "<group>"; };
+		2CAFA78D233C99F600C20E17 /* BUDNormalButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDNormalButton.h; sourceTree = "<group>"; };
+		2CAFA78E233C99F600C20E17 /* BUDPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDPlayerController.h; sourceTree = "<group>"; };
+		2CAFA78F233C99F600C20E17 /* BUDDrawTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDDrawTableViewCell.h; sourceTree = "<group>"; };
+		2CAFA790233C99F600C20E17 /* BUDFeedStyleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDFeedStyleHelper.h; sourceTree = "<group>"; };
+		2CAFA792233C99F600C20E17 /* FullScreenVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenVideo.m; sourceTree = "<group>"; };
+		2CAFA793233C99F600C20E17 /* AppUtilModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUtilModule.m; sourceTree = "<group>"; };
+		2CAFA794233C99F600C20E17 /* RewardVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardVideo.m; sourceTree = "<group>"; };
+		2CAFA795233C99F600C20E17 /* SplashAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashAd.m; sourceTree = "<group>"; };
+		2CAFA796233C99F600C20E17 /* VideoUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoUploader.m; sourceTree = "<group>"; };
+		2CAFA798233C99F600C20E17 /* AdBoss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdBoss.h; sourceTree = "<group>"; };
+		2CAFA799233C99F600C20E17 /* AdBoss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdBoss.m; sourceTree = "<group>"; };
+		2CAFA7BB233CA87E00C20E17 /* BUDFullscreenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUDFullscreenViewController.h; sourceTree = "<group>"; };
+		2CAFA7BC233CA8A900C20E17 /* BUDFullscreenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUDFullscreenViewController.m; sourceTree = "<group>"; };
+		2D02E47B1E0B4A5D006451C7 /* damei-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "damei-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* damei-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "damei-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		303B951FAC95018165B73DC4 /* Pods-damei-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-damei-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-damei-tvOSTests/Pods-damei-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		35B44A5837A61D2A1BCBBEEC /* libPods-damei-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-damei-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		35C198215154815CD1144E6B /* Pods-damei-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-damei-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-damei-tvOSTests/Pods-damei-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		4970C1014CB72A64B77B9FD3 /* libPods-damei.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-damei.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		51C106BE14A40DB408315118 /* Pods-dameiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dameiTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-dameiTests/Pods-dameiTests.release.xcconfig"; sourceTree = "<group>"; };
+		5A5DB692AD79C34533C861DB /* Pods-damei.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-damei.debug.xcconfig"; path = "Pods/Target Support Files/Pods-damei/Pods-damei.debug.xcconfig"; sourceTree = "<group>"; };
+		72DD8BA11F3E77E85C87B432 /* libPods-dameiTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dameiTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C464180ABE21802F6FDE94E /* libPods-damei-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-damei-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DE17108526AC1D4B99B30AA /* Pods-damei-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-damei-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-damei-tvOS/Pods-damei-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		89F93C42E96C3ED10098D010 /* Pods-damei-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-damei-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-damei-tvOS/Pods-damei-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		8CE8169102297C04460BC705 /* Pods-dameiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dameiTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-dameiTests/Pods-dameiTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8F2FAA779162F594FEF885BB /* Pods-damei.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-damei.release.xcconfig"; path = "Pods/Target Support Files/Pods-damei/Pods-damei.release.xcconfig"; sourceTree = "<group>"; };
+		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		00E356EB1AD99517003FC87E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CF777456DF3F3F6461AEBDB /* libPods-dameiTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C1340C6231FB996005BD593 /* libsqlite3.0.tbd in Frameworks */,
+				2C90EED0231E440700053670 /* libz.tbd in Frameworks */,
+				2C90EECE231E43FF00053670 /* libc++.tbd in Frameworks */,
+				2C90EECC231E43F500053670 /* libresolv.9.tbd in Frameworks */,
+				2C90EECA231E43EA00053670 /* CoreMotion.framework in Frameworks */,
+				2C90EEC8231E43E000053670 /* AdSupport.framework in Frameworks */,
+				2C90EEC6231E43DA00053670 /* SystemConfiguration.framework in Frameworks */,
+				2C90EEC4231E43D200053670 /* CoreTelephony.framework in Frameworks */,
+				2C90EEC2231E43CB00053670 /* AVFoundation.framework in Frameworks */,
+				2C90EEC0231E43C500053670 /* CoreMedia.framework in Frameworks */,
+				2C90EEBE231E43BD00053670 /* MediaPlayer.framework in Frameworks */,
+				2C90EEBC231E43B600053670 /* WebKit.framework in Frameworks */,
+				2C90EEBA231E43AE00053670 /* MobileCoreServices.framework in Frameworks */,
+				2C90EEB8231E43A700053670 /* StoreKit.framework in Frameworks */,
+				5288FA72DADD5A62AD0729B8 /* libPods-damei.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E4781E0B4A5D006451C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6A9FF1B31FDDE2766BA024C /* libPods-damei-tvOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E48D1E0B4A5D006451C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A747B63F01A23C5EA47696E0 /* libPods-damei-tvOSTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00E356EF1AD99517003FC87E /* dameiTests */ = {
+			isa = PBXGroup;
+			children = (
+				00E356F21AD99517003FC87E /* dameiTests.m */,
+				00E356F01AD99517003FC87E /* Supporting Files */,
+			);
+			path = dameiTests;
+			sourceTree = "<group>";
+		};
+		00E356F01AD99517003FC87E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				00E356F11AD99517003FC87E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		13B07FAE1A68108700A75B9A /* damei */ = {
+			isa = PBXGroup;
+			children = (
+				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
+				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				13B07FB61A68108700A75B9A /* Info.plist */,
+				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
+				13B07FB71A68108700A75B9A /* main.m */,
+			);
+			name = damei;
+			sourceTree = "<group>";
+		};
+		2CAFA752233C99F600C20E17 /* toolkits */ = {
+			isa = PBXGroup;
+			children = (
+				2CAFA753233C99F600C20E17 /* .gitignore */,
+				2CAFA754233C99F600C20E17 /* ttad */,
+				2CAFA797233C99F600C20E17 /* src */,
+			);
+			name = toolkits;
+			path = ../../../ios/toolkits;
+			sourceTree = "<group>";
+		};
+		2CAFA754233C99F600C20E17 /* ttad */ = {
+			isa = PBXGroup;
+			children = (
+				2CAFA755233C99F600C20E17 /* viewmodel */,
+				2CAFA759233C99F600C20E17 /* Until */,
+				2CAFA768233C99F600C20E17 /* controller */,
+				2CAFA76D233C99F600C20E17 /* rnviews */,
+				2CAFA777233C99F600C20E17 /* Macros */,
+				2CAFA77B233C99F600C20E17 /* model */,
+				2CAFA77E233C99F600C20E17 /* view */,
+				2CAFA791233C99F600C20E17 /* rnmodules */,
+			);
+			path = ttad;
+			sourceTree = "<group>";
+		};
+		2CAFA755233C99F600C20E17 /* viewmodel */ = {
+			isa = PBXGroup;
+			children = (
+				2CAFA756233C99F600C20E17 /* BUDSlotViewModel.m */,
+				2CAFA757233C99F600C20E17 /* BUDDefs.h */,
+				2CAFA758233C99F600C20E17 /* BUDSlotViewModel.h */,
+			);
+			path = viewmodel;
+			sourceTree = "<group>";
+		};
+		2CAFA759233C99F600C20E17 /* Until */ = {
+			isa = PBXGroup;
+			children = (
+				2CAFA75A233C99F600C20E17 /* BUDBase64.m */,
+				2CAFA75B233C99F600C20E17 /* Category */,
+				2CAFA762233C99F600C20E17 /* BUDCocoaSecurity.h */,
+				2CAFA763233C99F600C20E17 /* FPSLabel */,
+				2CAFA766233C99F600C20E17 /* BUDBase64.h */,
+				2CAFA767233C99F600C20E17 /* BUDCocoaSecurity.m */,
+			);
+			path = Until;
+			sourceTree = "<group>";
+		};
+		2CAFA75B233C99F600C20E17 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				2CAFA75C233C99F600C20E17 /* NSString+LocalizedString.h */,
+				2CAFA75D233C99F600C20E17 /* UIView+Draw.m */,
+				2CAFA75E233C99F600C20E17 /* NSString+Json.m */,
+				2CAFA75F233C99F600C20E17 /* NSString+LocalizedString.m */,
+				2CAFA760233C99F600C20E17 /* NSString+Json.h */,
+				2CAFA761233C99F600C20E17 /* UIView+Draw.h */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		2CAFA763233C99F600C20E17 /* FPSLabel */ = {
+			isa = PBXGroup;
+			children = (
+				2CAFA764233C99F600C20E17 /* RRFPSBar.h */,
+				2CAFA765233C99F600C20E17 /* RRFPSBar.m */,
+			);
+			path = FPSLabel;
+			sourceTree = "<group>";
+		};
+		2CAFA768233C99F600C20E17 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				2CAFA769233C99F600C20E17 /* BUDRewardedVideoAdViewController.m */,
+				2CAFA76B233C99F600C20E17 /* BUDRewardedVideoAdViewController.h */,
+				2CAFA7BB233CA87E00C20E17 /* BUDFullscreenViewController.h */,
+				2CAFA7BC233CA8A900C20E17 /* BUDFullscreenViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		2CAFA76D233C99F600C20E17 /* rnviews */ = {
+			isa = PBXGroup;
+			children = (
+				2CAFA76E233C99F600C20E17 /* BannerAd.m */,
+				2CAFA76F233C99F600C20E17 /* DrawFeedAd.h */,
+				2CAFA770233C99F600C20E17 /* FeedAd.m */,
+				2CAFA771233C99F600C20E17 /* DrawFeedAd.m */,
+				2CAFA772233C99F600C20E17 /* FeedAdManager.m */,
+				2CAFA773233C99F600C20E17 /* BannerAd.h */,
+				2CAFA774233C99F600C20E17 /* BannerAdManager.m */,
+				2CAFA775233C99F600C20E17 /* FeedAd.h */,
+				2CAFA776233C99F600C20E17 /* DrawFeedAdManager.m */,
+			);
+			path = rnviews;
+			sourceTree = "<group>";
+		};
+		2CAFA777233C99F600C20E17 /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				2CAFA778233C99F600C20E17 /* BUDMacros.h */,
+				2CAFA779233C99F600C20E17 /* BUDConfigHelper.m */,
+				2CAFA77A233C99F600C20E17 /* BUDConfigHelper.h */,
+			);
+			path = Macros;
+			sourceTree = "<group>";
+		};
+		2CAFA77B233C99F600C20E17 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				2CAFA77C233C99F600C20E17 /* BUDFeedNormalModel.h */,
+				2CAFA77D233C99F600C20E17 /* BUDFeedNormalModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		2CAFA77E233C99F600C20E17 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				2CAFA77F233C99F600C20E17 /* BUDFeedNormalTableViewCell.m */,
+				2CAFA780233C99F600C20E17 /* BUDRefreshButton.m */,
+				2CAFA781233C99F600C20E17 /* BUDNormalButton.m */,
+				2CAFA782233C99F600C20E17 /* BUDActionAreaView.h */,
+				2CAFA783233C99F600C20E17 /* BUDdemoDislikeCollectionCell.h */,
+				2CAFA784233C99F600C20E17 /* BUDSettingTableView.m */,
+				2CAFA785233C99F600C20E17 /* BUDFeedStyleHelper.m */,
+				2CAFA786233C99F600C20E17 /* BUDDrawTableViewCell.m */,
+				2CAFA787233C99F600C20E17 /* BUDPlayerController.m */,
+				2CAFA788233C99F600C20E17 /* BUDRefreshButton.h */,
+				2CAFA789233C99F600C20E17 /* BUDFeedNormalTableViewCell.h */,
+				2CAFA78A233C99F600C20E17 /* BUDSettingTableView.h */,
+				2CAFA78B233C99F600C20E17 /* BUDdemoDislikeCollectionCell.m */,
+				2CAFA78C233C99F600C20E17 /* BUDActionAreaView.m */,
+				2CAFA78D233C99F600C20E17 /* BUDNormalButton.h */,
+				2CAFA78E233C99F600C20E17 /* BUDPlayerController.h */,
+				2CAFA78F233C99F600C20E17 /* BUDDrawTableViewCell.h */,
+				2CAFA790233C99F600C20E17 /* BUDFeedStyleHelper.h */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		2CAFA791233C99F600C20E17 /* rnmodules */ = {
+			isa = PBXGroup;
+			children = (
+				2CAFA792233C99F600C20E17 /* FullScreenVideo.m */,
+				2CAFA793233C99F600C20E17 /* AppUtilModule.m */,
+				2CAFA794233C99F600C20E17 /* RewardVideo.m */,
+				2CAFA795233C99F600C20E17 /* SplashAd.m */,
+				2CAFA796233C99F600C20E17 /* VideoUploader.m */,
+			);
+			path = rnmodules;
+			sourceTree = "<group>";
+		};
+		2CAFA797233C99F600C20E17 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				2CAFA798233C99F600C20E17 /* AdBoss.h */,
+				2CAFA799233C99F600C20E17 /* AdBoss.m */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2C1340C5231FB996005BD593 /* libsqlite3.0.tbd */,
+				2C90EECF231E440700053670 /* libz.tbd */,
+				2C90EECD231E43FF00053670 /* libc++.tbd */,
+				2C90EECB231E43F500053670 /* libresolv.9.tbd */,
+				2C90EEC9231E43EA00053670 /* CoreMotion.framework */,
+				2C90EEC7231E43E000053670 /* AdSupport.framework */,
+				2C90EEC5231E43DA00053670 /* SystemConfiguration.framework */,
+				2C90EEC3231E43D200053670 /* CoreTelephony.framework */,
+				2C90EEC1231E43CB00053670 /* AVFoundation.framework */,
+				2C90EEBF231E43C500053670 /* CoreMedia.framework */,
+				2C90EEBD231E43BD00053670 /* MediaPlayer.framework */,
+				2C90EEBB231E43B600053670 /* WebKit.framework */,
+				2C90EEB9231E43AE00053670 /* MobileCoreServices.framework */,
+				2C90EEB7231E43A700053670 /* StoreKit.framework */,
+				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
+				4970C1014CB72A64B77B9FD3 /* libPods-damei.a */,
+				7C464180ABE21802F6FDE94E /* libPods-damei-tvOS.a */,
+				35B44A5837A61D2A1BCBBEEC /* libPods-damei-tvOSTests.a */,
+				72DD8BA11F3E77E85C87B432 /* libPods-dameiTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		83CBB9F61A601CBA00E9B192 = {
+			isa = PBXGroup;
+			children = (
+				2CAFA752233C99F600C20E17 /* toolkits */,
+				13B07FAE1A68108700A75B9A /* damei */,
+				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				00E356EF1AD99517003FC87E /* dameiTests */,
+				83CBBA001A601CBA00E9B192 /* Products */,
+				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				ED3FA1DFE23A3AF94130EA5F /* Pods */,
+				C55B7570D4A74124ABBB8D75 /* Resources */,
+			);
+			indentWidth = 2;
+			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 0;
+		};
+		83CBBA001A601CBA00E9B192 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13B07F961A680F5B00A75B9A /* damei.app */,
+				00E356EE1AD99517003FC87E /* dameiTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* damei-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* damei-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C55B7570D4A74124ABBB8D75 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2B0CEE7D5A944D69AEA889EA /* iconfont.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		ED3FA1DFE23A3AF94130EA5F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5A5DB692AD79C34533C861DB /* Pods-damei.debug.xcconfig */,
+				8F2FAA779162F594FEF885BB /* Pods-damei.release.xcconfig */,
+				7DE17108526AC1D4B99B30AA /* Pods-damei-tvOS.debug.xcconfig */,
+				89F93C42E96C3ED10098D010 /* Pods-damei-tvOS.release.xcconfig */,
+				303B951FAC95018165B73DC4 /* Pods-damei-tvOSTests.debug.xcconfig */,
+				35C198215154815CD1144E6B /* Pods-damei-tvOSTests.release.xcconfig */,
+				8CE8169102297C04460BC705 /* Pods-dameiTests.debug.xcconfig */,
+				51C106BE14A40DB408315118 /* Pods-dameiTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		00E356ED1AD99517003FC87E /* dameiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "dameiTests" */;
+			buildPhases = (
+				E93161D6B4E3C2E33ABC7175 /* [CP] Check Pods Manifest.lock */,
+				00E356EA1AD99517003FC87E /* Sources */,
+				00E356EB1AD99517003FC87E /* Frameworks */,
+				00E356EC1AD99517003FC87E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				00E356F51AD99517003FC87E /* PBXTargetDependency */,
+			);
+			name = dameiTests;
+			productName = dameiTests;
+			productReference = 00E356EE1AD99517003FC87E /* dameiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		13B07F861A680F5B00A75B9A /* damei */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "damei" */;
+			buildPhases = (
+				877CE80718126A9077B6D4C7 /* [CP] Check Pods Manifest.lock */,
+				13B07F871A680F5B00A75B9A /* Sources */,
+				FD10A7F022414F080027D42C /* Start Packager */,
+				13B07F8C1A680F5B00A75B9A /* Frameworks */,
+				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				13B07F8E1A680F5B00A75B9A /* Resources */,
+				79157427BB94875BC4AF2C31 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = damei;
+			productName = damei;
+			productReference = 13B07F961A680F5B00A75B9A /* damei.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2D02E47A1E0B4A5D006451C7 /* damei-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "damei-tvOS" */;
+			buildPhases = (
+				D4344ED58CAA5BFF32EC73E5 /* [CP] Check Pods Manifest.lock */,
+				FD10A7F122414F3F0027D42C /* Start Packager */,
+				2D02E4771E0B4A5D006451C7 /* Sources */,
+				2D02E4781E0B4A5D006451C7 /* Frameworks */,
+				2D02E4791E0B4A5D006451C7 /* Resources */,
+				2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "damei-tvOS";
+			productName = "damei-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* damei-tvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2D02E48F1E0B4A5D006451C7 /* damei-tvOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "damei-tvOSTests" */;
+			buildPhases = (
+				2EA8C0E2F783C2ECAE6169BB /* [CP] Check Pods Manifest.lock */,
+				2D02E48C1E0B4A5D006451C7 /* Sources */,
+				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
+				2D02E48E1E0B4A5D006451C7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
+			);
+			name = "damei-tvOSTests";
+			productName = "damei-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* damei-tvOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		83CBB9F71A601CBA00E9B192 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 940;
+				ORGANIZATIONNAME = Facebook;
+				TargetAttributes = {
+					00E356ED1AD99517003FC87E = {
+						CreatedOnToolsVersion = 6.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 3W7L7CX92N;
+						ProvisioningStyle = Manual;
+					};
+					2D02E47A1E0B4A5D006451C7 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 3W7L7CX92N;
+						ProvisioningStyle = Automatic;
+					};
+					2D02E48F1E0B4A5D006451C7 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2D02E47A1E0B4A5D006451C7;
+					};
+				};
+			};
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "damei" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = 83CBB9F61A601CBA00E9B192;
+			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				13B07F861A680F5B00A75B9A /* damei */,
+				00E356ED1AD99517003FC87E /* dameiTests */,
+				2D02E47A1E0B4A5D006451C7 /* damei-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* damei-tvOSTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		00E356EC1AD99517003FC87E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07F8E1A680F5B00A75B9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				65054D7DDD0B4E0883245D0D /* iconfont.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E4791E0B4A5D006451C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E48E1E0B4A5D006451C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native code and images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+		};
+		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native Code And Images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		2EA8C0E2F783C2ECAE6169BB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-damei-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79157427BB94875BC4AF2C31 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-damei/Pods-damei-resources.sh",
+				"${PODS_ROOT}/Bytedance-UnionAD/Bytedance-UnionAd/Frameworks/BUAdSDK.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/QBImagePickerController/QBImagePicker.bundle",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+				"${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BUAdSDK.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QBImagePicker.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RSKImageCropperStrings.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-damei/Pods-damei-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		877CE80718126A9077B6D4C7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-damei-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D4344ED58CAA5BFF32EC73E5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-damei-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E93161D6B4E3C2E33ABC7175 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-dameiTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FD10A7F022414F080027D42C /* Start Packager */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Start Packager";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FD10A7F122414F3F0027D42C /* Start Packager */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Start Packager";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		00E356EA1AD99517003FC87E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00E356F31AD99517003FC87E /* dameiTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07F871A680F5B00A75B9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CAFA7A6233C99F600C20E17 /* DrawFeedAd.m in Sources */,
+				2CAFA7BA233C99F600C20E17 /* AdBoss.m in Sources */,
+				2CAFA7B3233C99F600C20E17 /* BUDdemoDislikeCollectionCell.m in Sources */,
+				2CAFA7A4233C99F600C20E17 /* BannerAd.m in Sources */,
+				2CAFA7A8233C99F600C20E17 /* BannerAdManager.m in Sources */,
+				2CAFA79B233C99F600C20E17 /* BUDSlotViewModel.m in Sources */,
+				2CAFA7AE233C99F600C20E17 /* BUDNormalButton.m in Sources */,
+				2CAFA7A2233C99F600C20E17 /* BUDRewardedVideoAdViewController.m in Sources */,
+				2CAFA79E233C99F600C20E17 /* NSString+Json.m in Sources */,
+				2CAFA7B7233C99F600C20E17 /* RewardVideo.m in Sources */,
+				2CAFA7B0233C99F600C20E17 /* BUDFeedStyleHelper.m in Sources */,
+				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				2CAFA7BD233CA8A900C20E17 /* BUDFullscreenViewController.m in Sources */,
+				2CAFA7B2233C99F600C20E17 /* BUDPlayerController.m in Sources */,
+				2CAFA7A7233C99F600C20E17 /* FeedAdManager.m in Sources */,
+				2CAFA79C233C99F600C20E17 /* BUDBase64.m in Sources */,
+				2CAFA7AC233C99F600C20E17 /* BUDFeedNormalTableViewCell.m in Sources */,
+				2CAFA7B4233C99F600C20E17 /* BUDActionAreaView.m in Sources */,
+				2CAFA7AD233C99F600C20E17 /* BUDRefreshButton.m in Sources */,
+				2CAFA7A9233C99F600C20E17 /* DrawFeedAdManager.m in Sources */,
+				2CAFA7AA233C99F600C20E17 /* BUDConfigHelper.m in Sources */,
+				2CAFA7AF233C99F600C20E17 /* BUDSettingTableView.m in Sources */,
+				2CAFA7B8233C99F600C20E17 /* SplashAd.m in Sources */,
+				2CAFA7B1233C99F600C20E17 /* BUDDrawTableViewCell.m in Sources */,
+				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				2CAFA7A1233C99F600C20E17 /* BUDCocoaSecurity.m in Sources */,
+				2CAFA7B6233C99F600C20E17 /* AppUtilModule.m in Sources */,
+				2CAFA7AB233C99F600C20E17 /* BUDFeedNormalModel.m in Sources */,
+				2CAFA79F233C99F600C20E17 /* NSString+LocalizedString.m in Sources */,
+				2CAFA79D233C99F600C20E17 /* UIView+Draw.m in Sources */,
+				2CAFA7A0233C99F600C20E17 /* RRFPSBar.m in Sources */,
+				2CAFA7B9233C99F600C20E17 /* VideoUploader.m in Sources */,
+				2CAFA7B5233C99F600C20E17 /* FullScreenVideo.m in Sources */,
+				2CAFA7A5233C99F600C20E17 /* FeedAd.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E4771E0B4A5D006451C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
+				2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E48C1E0B4A5D006451C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2DCD954D1E0B4F2C00145EB5 /* dameiTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13B07F861A680F5B00A75B9A /* damei */;
+			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2D02E47A1E0B4A5D006451C7 /* damei-tvOS */;
+			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				13B07FB21A68108700A75B9A /* Base */,
+				2C90EED1231E445400053670 /* zh-Hans */,
+			);
+			name = LaunchScreen.xib;
+			path = damei;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		00E356F61AD99517003FC87E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8CE8169102297C04460BC705 /* Pods-dameiTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = dameiTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/damei.app/damei";
+			};
+			name = Debug;
+		};
+		00E356F71AD99517003FC87E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51C106BE14A40DB408315118 /* Pods-dameiTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = dameiTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/damei.app/damei";
+			};
+			name = Release;
+		};
+		13B07F941A680F5B00A75B9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A5DB692AD79C34533C861DB /* Pods-damei.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 3W7L7CX92N;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = damei/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 2.3;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.damei;
+				PRODUCT_NAME = damei;
+				PROVISIONING_PROFILE_SPECIFIER = damei_test;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		13B07F951A680F5B00A75B9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F2FAA779162F594FEF885BB /* Pods-damei.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3W7L7CX92N;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = damei/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 2.3;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.damei;
+				PRODUCT_NAME = damei;
+				PROVISIONING_PROFILE_SPECIFIER = damei_test;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		2D02E4971E0B4A5E006451C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7DE17108526AC1D4B99B30AA /* Pods-damei-tvOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3W7L7CX92N;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "damei-tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.damei-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		2D02E4981E0B4A5E006451C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89F93C42E96C3ED10098D010 /* Pods-damei-tvOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3W7L7CX92N;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "damei-tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.damei-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Release;
+		};
+		2D02E4991E0B4A5E006451C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 303B951FAC95018165B73DC4 /* Pods-damei-tvOSTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "damei-tvOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.damei-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/damei-tvOS.app/damei-tvOS";
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Debug;
+		};
+		2D02E49A1E0B4A5E006451C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35C198215154815CD1144E6B /* Pods-damei-tvOSTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "damei-tvOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.damei-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/damei-tvOS.app/damei-tvOS";
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Release;
+		};
+		83CBBA201A601CBA00E9B192 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		83CBBA211A601CBA00E9B192 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "dameiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00E356F61AD99517003FC87E /* Debug */,
+				00E356F71AD99517003FC87E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "damei" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13B07F941A680F5B00A75B9A /* Debug */,
+				13B07F951A680F5B00A75B9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "damei-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D02E4971E0B4A5E006451C7 /* Debug */,
+				2D02E4981E0B4A5E006451C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "damei-tvOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D02E4991E0B4A5E006451C7 /* Debug */,
+				2D02E49A1E0B4A5E006451C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "damei" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83CBBA201A601CBA00E9B192 /* Debug */,
+				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
+}

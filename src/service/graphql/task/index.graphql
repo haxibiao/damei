@@ -1,0 +1,97 @@
+query TasksQuery($type: Int, $offset: Int, $limit: Int) {
+    tasks(type: $type, offset: $offset, limit: $limit) {
+        id
+        name
+        details
+        type
+        gold
+        ticket
+        count
+        status
+        taskStatus
+        route
+        submit_name
+    }
+}
+#领取任务
+mutation ReceiveTaskMutation($task_id: Int!) {
+    receiveTask(task_id: $task_id)
+}
+
+#领取奖励
+mutation TaskRewardMutation($task_id: Int!) {
+    taskReward(task_id: $task_id)
+}
+
+#答复任务
+mutation ReplyTaskMutation($task_id: Int!, $content: ReplyContent) {
+    replyTask(task_id: $task_id, content: $content)
+}
+
+#上传图片
+mutation UploadImage($image: [String]!) {
+    uploadImage(image: $image)
+}
+
+#看视频奖励
+mutation UserRewardMutation($reward: RewardEnum) {
+    userReward(reward: $reward) {
+        gold
+        ticket
+        contribute
+    }
+}
+# 签到
+mutation CreateSignInMutation {
+    createSignIn {
+        id
+        gold_reward
+        contribute_reward
+    }
+}
+# 签到记录
+query SignInsQuery($days: Int) {
+    signIns(days: $days) {
+        today_signed
+        keep_signin_days
+        signs {
+            day
+            year
+            date
+            created_at
+            signed
+            gold_reward
+            contribute_reward
+            is_gift
+        }
+    }
+}
+
+# 领取分红
+mutation receiveStockBonusMutation($position: Int!) {
+    receiveStockBonus(position: $position) {
+        id
+        received
+        bonusExpirationTime
+        totalBonusEarnings
+        stockRate
+        stockNumber
+        perStockPrice
+        yesterdayEarnings
+        totalEarnings
+        todayUnclaimedBonusEarnings
+        goldTree {
+            rmb
+            total
+            balance
+            received_at
+        }
+    }
+}
+
+# 用户已经看过分红数
+mutation updateUserStockInfoMutation($is_first_stock: Boolean!) {
+    updateUserStockInfo(is_first_stock: $is_first_stock) {
+        id
+    }
+}
