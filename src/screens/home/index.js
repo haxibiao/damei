@@ -86,8 +86,8 @@ class index extends Component {
                         }
                     });
             }
-            NetInfo.isConnected.fetch().then(isConnected => {
-                if (!isConnected) {
+            NetInfo.fetch().then(state => {
+                if (!state.isConnected) {
                     Toast.show({ content: '网络不可用' });
                 }
             });
