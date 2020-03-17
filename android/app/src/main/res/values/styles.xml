@@ -1,0 +1,31 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">true</item>
+      
+    </style>
+     <style name="SplashScreenTheme" parent="SplashScreen_SplashTheme">
+        <item name="colorPrimaryDark">@color/status_bar_color</item>
+    </style>
+
+    <style name="SelfDialog" parent="@android:style/Theme.Dialog">
+        <!--背景颜色及和透明程度-->
+        <item name="android:background">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+        <!--是否有覆盖-->
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 浮于Activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否去除标题 -->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--是否去除边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--Dialog以外的区域模糊效果-->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+</resources>

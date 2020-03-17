@@ -1,0 +1,42 @@
+#邀请奖励列表
+query InvitationRewardsQuery($limit: Int!) {
+    invitationRewards(limit: $limit)
+}
+
+# 口令邀请
+mutation resolveInvitationMutation($slogan: String!) {
+    resolveInvitation(slogan: $slogan) {
+        id
+        user {
+            id
+            avatar
+            name
+        }
+        be_inviter_reward
+        be_inviter_reward_unit
+    }
+}
+
+#邀请列表
+# query InvitationsQuery($user_id: Int) {
+#     invitations(user_id: $user_id) {
+#         id
+#         invited_in
+#         be_inviter {
+#             name
+#             avatar
+#             created_at
+#         }
+#     }
+# }
+
+query InvitationsQuery($user_id: Int, $filter: InvitationFilterEnum) {
+    invitations(user_id: $user_id, filter: $filter) {
+        id
+        invited_in
+        beInviter {
+            name
+            avatar
+        }
+    }
+}

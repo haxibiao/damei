@@ -1,0 +1,27 @@
+{
+    "name": "damei",
+    "AppName": "答妹",
+    "Version": "2.7.0",
+    "ServerRoot": "http://gql.xiaodamei.com",
+    "UploadServer": "http://video.xiaodamei.com",
+    "SocketServer": "ws://socket.xiaodamei.com:6002",
+    "AppSlogan": "学有所伴，见证成长每一步",
+    "Build": 1,
+    "PackageName": "com.damei",
+    "AppVersionNumber": 2.7,
+
+    "TTAppId": "5026208",
+
+    "CodeIdBanner": "926208914",
+    "CodeIdBannerIOS": "917553682",
+    "CodeIdFeed": "926208028",
+    "CodeIdFeedIOS": "917553461",
+    "CodeIdSplash": "826208133",
+    "CodeIdSplashIOS": "817553419",
+    "CodeIdDrawFeed": "926208787",
+    "CodeIdDrawFeedIOS": "917553461",
+    "CodeIdFullVideo": "926208289",
+    "CodeIdFullVideoIOS": "917553893",
+    "CodeIdRewardVideo": "926208759",
+    "CodeIdRewardVideoIOS": "917553284"
+}

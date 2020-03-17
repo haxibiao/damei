@@ -1,0 +1,50 @@
+#设置提现信息
+mutation SetUserPaymentInfoMutation($pay_account: String!, $real_name: String!, $code: String) {
+    setUserPaymentInfo(pay_account: $pay_account, real_name: $real_name, code: $code) {
+        id
+    }
+}
+
+#提交提现
+mutation CreateWithdrawMutation($amount: Float!, $platform: WithdrawPlatformEnum) {
+    createWithdrawal(amount: $amount, platform: $platform)
+}
+
+#提现日志
+query WithdrawsQuery($limit: Int, $offset: Int) {
+    withdraws(limit: $limit, offset: $offset) {
+        id
+        status
+        amount
+        created_at
+        remark
+        to_platform
+    }
+}
+
+#提现详情
+query WithdrawQuery($id: Int!) {
+    withdraw(id: $id) {
+        id
+        status
+        amount
+        remark
+        trade_no
+        biz_no
+        created_at
+        updated_at
+        to_account
+        to_platform
+    }
+}
+
+#余额变动记录
+query TransactionsQuery($limit: Int, $offset: Int) {
+    transactions(limit: $limit, offset: $offset) {
+        id
+        amount
+        remark
+        created_at
+        balance
+    }
+}

@@ -1,0 +1,220 @@
+# 用户出题
+mutation createQuestionMutation($data: CreateQuestionInputType) {
+    createQuestion(data: $data) {
+        id
+        gold
+        description
+        count_likes
+        count_comments
+        liked
+        form
+        is_resolved
+        created_at
+        video {
+            id
+            width
+            height
+            url
+            cover
+            is_ad_video
+        }
+        user {
+            id
+            name
+            avatar
+            followed_user_status
+        }
+        category {
+            id
+            name
+        }
+    }
+}
+
+# 用户出题解析
+mutation createExplanationMutation($content: String, $video_id: Int, $images: [String]) {
+    createExplanation(content: $content, video_id: $video_id, images: $images) {
+        id
+        content
+    }
+}
+
+# 发布题目(精力不足出题后暂存的或者撤回的)
+mutation publishQuestion($id: Int!) {
+    publishQuestion(id: $id)
+}
+
+# 撤回题目
+mutation removeQuestionMutation($id: Int) {
+    removeQuestion(id: $id)
+}
+
+# 删除题目
+mutation deleteQuestionMutation($id: Int) {
+    deleteQuestion(id: $id)
+}
+
+# 出题记录
+query mySubmitQuestionHistoryQuery($offset: Int, $limit: Int) {
+    user {
+        id
+        name
+        avatar
+        gender
+        profile {
+            age
+        }
+        level {
+            id
+            level
+        }
+        questions(offset: $offset, limit: $limit, order: CREATED_AT) {
+            id
+            description
+            created_at
+            image {
+                id
+                path
+            }
+            video {
+                id
+                url
+                path
+                cover
+                height
+                width
+            }
+            category {
+                id
+                name
+            }
+            user {
+                id
+                name
+                avatar
+                gender
+                profile {
+                    age
+                }
+                level {
+                    id
+                    level
+                }
+            }
+            submit
+            status
+            remark
+            count
+            accepted_count
+            declined_count
+            correct_count
+            liked
+            count_likes
+            count_comments
+        }
+    }
+}
+
+query myVideoQuestionHistoryQuery($offset: Int, $limit: Int, $QuestionFormEnumType: QuestionFormEnumType) {
+    user {
+        id
+        name
+        avatar
+        gender
+        profile {
+            age
+        }
+        level {
+            id
+            level
+        }
+        questions(offset: $offset, limit: $limit, order: CREATED_AT, form: $QuestionFormEnumType) {
+            id
+            gold
+            description
+            count_likes
+            count_comments
+            liked
+            form
+            is_resolved
+            created_at
+            count
+            submit
+            video {
+                id
+                width
+                height
+                url
+                cover
+                is_ad_video
+            }
+            user {
+                id
+                name
+                avatar
+                followed_user_status
+                profile {
+                    age
+                }
+                level {
+                    id
+                    level
+                }
+            }
+            image {
+                id
+                width
+                height
+                path
+            }
+            category {
+                id
+                name
+            }
+        }
+    }
+}
+
+# 采集视频
+mutation resolveDouyinVideo($share_link: String!) {
+    resolveDouyinVideo(share_link: $share_link) {
+        id
+    }
+}
+
+#爬虫视频列表
+query SpidersQuery($limit: Int, $offset: Int) {
+    spiders(limit: $limit, offset: $offset) {
+        id
+        status
+        source_url
+        title
+        reward
+        remark
+        video {
+            id
+            width
+            height
+            url
+            cover
+            is_ad_video
+            count_likes
+            created_at
+            liked
+            count_comments
+            user {
+                id
+                name
+                avatar
+                followed_user_status
+                profile {
+                    age
+                }
+                level {
+                    id
+                    level
+                }
+            }
+        }
+    }
+}
