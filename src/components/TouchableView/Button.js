@@ -28,8 +28,8 @@ class Button extends Component {
     };
 
     checkNetwork(submit) {
-        NetInfo.isConnected.fetch().then(isConnected => {
-            if (isConnected) {
+        NetInfo.fetch().then(state => {
+            if (state.isConnected) {
                 submit();
             } else {
                 Toast.show({ content: '网络错误,请检查是否连接网络' });
