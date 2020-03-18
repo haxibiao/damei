@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image,TouchableOpacity,Dimensions } from 'react-native';
 import { PxFit, Theme, ISIOS, Tools } from 'utils';
 import { TouchFeedback, Row, SafeText } from 'components';
 import { ad } from 'native';
@@ -11,6 +11,8 @@ import VideoStore from '../VideoStore';
 import { GQL, useMutation } from 'apollo';
 import { exceptionCapture } from 'common';
 import { NavigationActions } from 'react-navigation';
+
+const {width:sw,height:sh} = Dimensions.get('window');
 
 export default observer(props => {
     const { media, index, navigation } = props;
@@ -87,6 +89,11 @@ export default observer(props => {
             </View>
         );
 
+    const JumpLiveRoomHandler = () => {
+        props.navigation.navigate('liveroom');
+        // showLiveList();
+    }
+
     return (
         <View style={{ height: VideoStore.viewportHeight }}>
             {media.cover && (
@@ -127,6 +134,10 @@ export default observer(props => {
             <View style={styles.videoSideBar}>
                 <SideBar media={media} />
             </View>
+            <TouchableOpacity activeOpacity={0.9} onPress={JumpLiveRoomHandler} style={{position:'absolute',top:sh * 0.06,left:13,alignItems:'center'}}>
+                <Image source={require('../../../assets/images/zhibo.png')} resizeMode='contain' style={{height:33,width:33,opacity:1}}/>
+                <Text style={{fontSize:11,color:'#ffffffcc'}}>小直播</Text>
+            </TouchableOpacity>
             {isAskQuestion && (
                 <View
                     style={{
