@@ -3,6 +3,11 @@
  * @Date:   2019-08-01 09:55:03
  */
 
+ //直播
+ import LiveRoom from '../screens/live/liveroom/LiveRoom';
+ import StartLive from '../screens/live/showtime/StartLive';
+
+
 import MainTabNavigator from './MainTabNavigator';
 // 登录注验证
 import LoginScreen from '../screens/login';
@@ -318,4 +323,10 @@ export default {
     SetLoginInfo: {
         screen: SetLoginInfoScreen,
     },
+    liveroom: {
+        screen: LiveRoom
+    },
+    startlive: {
+        screen: StartLive
+    }
 };

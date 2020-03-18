@@ -4328,6 +4328,14 @@ human-signals@^1.1.1:
   resolved "https://registry.npm.taobao.org/human-signals/download/human-signals-1.1.1.tgz?cache=0&sync_timestamp=1584198662293&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fhuman-signals%2Fdownload%2Fhuman-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha1-xbHNFPUK6uCatsWf5jujOV/k36M=
 
+"hxf-react-native-uilib@git+http://auto:hxb332211@code.haxibiao.cn/native/hxf-react-native-uilib.git":
+  version "1.0.0"
+  resolved "git+http://auto:hxb332211@code.haxibiao.cn/native/hxf-react-native-uilib.git#6ce504368885af3d139187ed3b236f6515e97879"
+
+"hxf-tencent-live@git+http://auto:hxb332211@code.haxibiao.cn/native/tencentlive.git":
+  version "1.0.0"
+  resolved "git+http://auto:hxb332211@code.haxibiao.cn/native/tencentlive.git#6410aad09736b315bfcf372caa82241e4bc58eb3"
+
 iconv-lite@0.4.24, iconv-lite@^0.4.17, iconv-lite@^0.4.24, iconv-lite@~0.4.13:
   version "0.4.24"
   resolved "https://registry.npm.taobao.org/iconv-lite/download/iconv-lite-0.4.24.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ficonv-lite%2Fdownload%2Ficonv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
@@ -7277,10 +7285,10 @@ react-native-vector-icons@^6.6.0:
     prop-types "^15.6.2"
     yargs "^13.2.2"
 
-react-native-video@^5.0.0:
-  version "5.0.2"
-  resolved "https://registry.npm.taobao.org/react-native-video/download/react-native-video-5.0.2.tgz#8f07da0cd85a1d4b316d115f3786409efc9e39fb"
-  integrity sha1-jwfaDNhaHUsxbRFfN4ZAnvyeOfs=
+react-native-video@^4.4.5:
+  version "4.4.5"
+  resolved "https://registry.npm.taobao.org/react-native-video/download/react-native-video-4.4.5.tgz#d0db799293f8622c7894dd0f8875cb41bfafbde8"
+  integrity sha1-0Nt5kpP4Yix4lN0PiHXLQb+vveg=
   dependencies:
     keymirror "^0.1.1"
     prop-types "^15.5.10"

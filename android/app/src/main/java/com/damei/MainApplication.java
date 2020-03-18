@@ -1,15 +1,17 @@
 package com.damei;
 
+import com.brentvatne.react.ReactVideoPackage;
+
 import android.app.Application;
 import android.util.Log;
 
-import com.facebook.react.PackageList;
 import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
 import com.facebook.react.bridge.JavaScriptExecutorFactory;
 import com.microsoft.codepush.react.CodePush;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.facebook.react.PackageList;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.soloader.SoLoader;
 
@@ -27,7 +29,6 @@ import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
 import com.bytedance.sdk.openadsdk.TTFullScreenVideoAd;
 
 import com.damei.wxapi.WxEntryPackage;
-
 // import com.theweflex.react.WeChatPackage;
 import androidx.multidex.MultiDexApplication;
 
@@ -47,6 +48,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     @Override
     protected List<ReactPackage> getPackages() {
       @SuppressWarnings("UnnecessaryLocalVariable")
+
       List<ReactPackage> packages = new PackageList(this).getPackages();
       // Packages that cannot be autolinked yet can be added manually here, for
       // example:
@@ -55,6 +57,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
       packages.add(new AdPackage());
       packages.add(new ToolkitsPackage());
       packages.add(new WxEntryPackage());
+      packages.add(new ReactVideoPackage());
       // packages.add(new WeChatPackage());
       return packages;
     }

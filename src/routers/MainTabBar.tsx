@@ -10,6 +10,8 @@ import { Theme, PxFit, ISIOS } from '../utils';
 import { app, config } from 'store';
 import { observer } from 'mobx-react';
 
+import * as PublishOption from './PublishOptionModal';
+
 @observer
 class TabBarComponent extends React.Component {
     public renderItem = (route: any, index: number) => {
@@ -39,7 +41,9 @@ class TabBarComponent extends React.Component {
         return (
             <TouchableWithoutFeedback
                 key={'create'}
-                onPress={() => this.props.navigation.navigate(app.login ? 'AskQuestion' : 'Login')}>
+                onPress={() => {
+                    PublishOption.showPublishOption(this.props.navigation);
+                }}>
                 <View style={styles.tabItem}>
                     <Image style={styles.videoPlayer} source={require('../assets/images/ic_ring_menu.png')} />
                 </View>
