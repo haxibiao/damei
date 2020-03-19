@@ -193,6 +193,10 @@ android {
                 APP_CHANNEL: "developer-default"    //应用渠道号
         ]
         resValue "string", "build_config_package", "com.datizhuanqian"
+
+        // react-native-blur 配置
+        renderscriptTargetApi 23
+        renderscriptSupportModeEnabled true
     }
     splits {
         abi {
@@ -356,6 +360,8 @@ android {
         pickFirst '**/armeabi-v7a/libjsc.so'
     }
     buildToolsVersion = buildToolsVersion
+
+
 }
 
 repositories {
