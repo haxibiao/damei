@@ -15,6 +15,9 @@ import AppRouter from './routers';
 
 import { useCaptureVideo } from '@src/common';
 
+import { DataCenter } from './data';
+
+
 export default observer(props => {
     const { checkServer } = props;
 

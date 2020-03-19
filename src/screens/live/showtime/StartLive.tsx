@@ -2,31 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Dimensions, TouchableOpacity, Text, TextInput, Image, Slider } from 'react-native';
 import { RoundedImage } from 'hxf-react-native-uilib';
 
+import MemoBeautySlider from './widgets/MemoBeautySlider';
+import MemoLivePreview from './widgets/MemoLivePreview';
+
 const { width: sw, height: sh } = Dimensions.get('window');
-
-const MemoLivePreview = React.memo(() => {
-    return (
-        <View style={{ position: 'absolute', zIndex: -9, height: sh, width: sw }}>
-            <Image source={require('../res/bg.jpg')} resizeMode='cover' style={{height:sh,width:sw}}/>
-        </View>
-    )
-})
-
-const MemoBeautySlider = React.memo(() => {
-    
-    return (
-        <View style={{ width: sw * 0.5 }}>
-            <Text style={{ color: '#ffffffaa', marginBottom: 5 }}>磨皮</Text>
-            <View style={{ width: sw * 0.5, height: 18, borderRadius: 12, backgroundColor: '#00000022' }}>
-                <Slider value={0} thumbTintColor='#000000aa' minimumTrackTintColor='#000' onValueChange={(value) => { console.log(value) }} />
-            </View>
-            <Text style={{ color: '#ffffffaa', marginTop: 15, marginBottom: 5 }}>美白</Text>
-            <View style={{ width: sw * 0.5, height: 18, borderRadius: 12, backgroundColor: '#00000022' }}>
-                <Slider value={0} thumbTintColor='#000000aa' minimumTrackTintColor='#000' onValueChange={(value) => { }} />
-            </View>
-        </View>
-    )
-})
 
 const StartLiveButtonWidth = sw * 0.72;
 const StartLiveButtonHeight = StartLiveButtonWidth * 0.2;

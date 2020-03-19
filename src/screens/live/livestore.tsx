@@ -21,6 +21,7 @@ class LiveStore {
         }
     ];
 
+
     @action.bound
     public setshowlivemodal(show:boolean){
         this.showlivemodal = {change:true,flag:show};

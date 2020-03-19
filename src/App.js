@@ -22,6 +22,8 @@ import { checkUpdate } from 'common';
 
 import Apollo from './Apollo';
 
+import { LivePullManager } from 'hxf-tencent-live';
+
 class App extends Component {
     toast: Toast;
     constructor(props) {
@@ -49,7 +51,7 @@ class App extends Component {
         });
 
         if (Config.AppStore !== 'huawei') {
-            ad.Splash.loadSplashAd();
+            //ad.Splash.loadSplashAd();
         }
 
         // SplashScreen.hide();
@@ -73,6 +75,13 @@ class App extends Component {
         ad.RewardVideo.loadAd().then(data => {
             // config.rewardVideoAdCache = data;
         });
+
+        /**
+         *  直播设置licenseKey,url
+         */
+        const licenseUrl = "";
+        const licenseKey = "";
+        LivePullManager.liveSetupLicence(licenseUrl,licenseKey);
     }
 
     checkServer = () => {
