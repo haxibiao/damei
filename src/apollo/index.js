@@ -27,11 +27,12 @@ if (!emu) {
         }); // ip地址
 }
 
-export function makeClient(user = {}, checkServer) {
+export function makeClient(user = {}, checkServer,isnew) {
     const { token } = user;
+    let suffix = isnew ? '/gql' : '/graphql';
+    console.log("构建client的后缀为 : ",Config.ServerRoot + suffix + '?token=' + token);
     return new ApolloClient({
-        uri: Config.ServerRoot + '/graphql',
-        // uri: 'http://staging.datizhuanqian.com/graphql',
+        uri: Config.ServerRoot + suffix + '?token=' + token,
         request: async operation => {
             operation.setContext({
                 headers: {

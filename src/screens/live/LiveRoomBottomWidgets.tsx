@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet,KeyboardAvoidingView, Dimensions,Keyboard, Image, SafeAreaView, NativeModules, StatusBar, Platform, TextInput,TouchableOpacity } from 'react-native';
 const { StatusBarManager } = NativeModules;
-import LiveStore from '../livestore';
+import LiveStore from './LiveStore';
 import { observer } from 'mobx-react';
 const { width: sw, height: sh } = Dimensions.get("window");
 
@@ -52,7 +52,7 @@ const LiveRoomBottomWidgets = () => {
                 temp.push({name: 'hello',message:'我滴个乖乖'});
                 LiveStore.setDankamu([...temp]);
             }}>
-            <Image source={require('../res/send.png')} resizeMode='contain' style={{height:BOTTOM_BUTTON_SIZE,width:BOTTOM_BUTTON_SIZE}}/>
+            <Image source={require('./res/send.png')} resizeMode='contain' style={{height:BOTTOM_BUTTON_SIZE,width:BOTTOM_BUTTON_SIZE}}/>
             </TouchableOpacity>
         </View>
         </KeyboardAvoidingView>

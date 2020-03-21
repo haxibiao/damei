@@ -4,8 +4,8 @@
  */
 
  //直播
- import LiveRoom from '../screens/live/liveroom/LiveRoom';
- import StartLive from '../screens/live/showtime/StartLive';
+ import LiveRoom from '../screens/live/LiveRoom';
+ import StartLive from '../screens/live/ShowTimeStartLive';
 
 
 import MainTabNavigator from './MainTabNavigator';

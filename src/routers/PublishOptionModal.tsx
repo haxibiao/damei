@@ -3,7 +3,7 @@ import { View, Text, Dimensions, TouchableOpacity, Image,StyleSheet } from "reac
 import { Overlay } from "teaset";
 import { app, config } from "store";
 import {DataCenter,observer} from '../data';
-import * as PermissionChecker from '../screens/live/widgets/PermissionChecker';
+import * as PermissionChecker from '../screens/live/CommonWidgetPermissionChecker';
 const { width: sw, height: sh } = Dimensions.get("window");
 
 const IconSize = 65;

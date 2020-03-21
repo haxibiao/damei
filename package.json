@@ -30,7 +30,6 @@
         "appcenter-crashes": "2.2.0",
         "global": "^4.4.0",
         "hxf-react-native-uilib": "git+http://auto:hxb332211@code.haxibiao.cn/native/hxf-react-native-uilib.git",
-        "hxf-tencent-live": "git+http://auto:hxb332211@code.haxibiao.cn/native/tencentlive.git",
         "jcore-react-native": "1.3.2",
         "jpush-react-native": "2.5.3",
         "laravel-echo": "^1.6.1",

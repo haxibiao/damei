@@ -1,11 +1,11 @@
 import React, { useEffect, useState,useRef } from 'react';
 import { View, Text, StyleSheet, Dimensions, FlatList } from 'react-native';
 import { observer } from 'mobx-react';
-import LiveStore from '../livestore';
+import LiveStore from './LiveStore';
 const { width: sw, height: sh } = Dimensions.get("window");
 const Store = LiveStore; //直播 store
 
-const LiveRoomMessages = (props) => {
+const CommonWidgetLiveRoomMessages = (props) => {
     const ListRef = useRef<FlatList>(null);
 
     const ContentChangeHandler = () => {
@@ -57,4 +57,4 @@ const LiveRoomMessages = (props) => {
     )
 }
 
-export default observer(LiveRoomMessages);
+export default observer(CommonWidgetLiveRoomMessages);
