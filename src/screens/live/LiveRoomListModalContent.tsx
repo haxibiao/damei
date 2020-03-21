@@ -22,7 +22,7 @@ const LiveRoomListModalContent = (props:any) => {
                 <View style={styles.bottomTitle}>
                     <Text style={{color:'#ffffffcc',maxWidth: ItemWidth * 0.62,}} numberOfLines={1} >{item.title}</Text>
                     <View style={{flexDirection:'row',}}>
-                        <Image source={require('../res/fill_person.png')} resizeMode='contain' style={{height:15,width:15,opacity:0.8,marginTop:1.5}}/>
+                        <Image source={require('./res/fill_person.png')} resizeMode='contain' style={{height:15,width:15,opacity:0.8,marginTop:1.5}}/>
                         <Text style={{color:'#ffffffcc'}}>{item.numberofaudience}</Text>
                     </View>
                 </View>
@@ -46,70 +46,45 @@ export default LiveRoomListModalContent;
 
 const FakeData:Item[] = [
     {
-        cover: require('../res/avatar.png'),
+        cover: require('./res/avatar.png'),
         title: '这个标题有点厉害',
         numberofaudience: 120
     },
     {
-        cover: require('../res/avatar.png'),
+        cover: require('./res/avatar.png'),
         title: '这个标题有点厉害',
         numberofaudience: 120
     },
     {
-        cover: require('../res/avatar.png'),
+        cover: require('./res/avatar.png'),
         title: '这个标题有点厉害',
         numberofaudience: 120
     },
     {
-        cover: require('../res/avatar.png'),
+        cover: require('./res/avatar.png'),
         title: '这个标题有点厉害',
         numberofaudience: 120
     },
     {
-        cover: require('../res/avatar.png'),
+        cover: require('./res/avatar.png'),
         title: '这个标题有点厉害',
         numberofaudience: 120
     },
     {
-        cover: require('../res/avatar.png'),
+        cover: require('./res/avatar.png'),
         title: '这个标题有点厉害',
         numberofaudience: 120
     },
     {
-        cover: require('../res/avatar.png'),
+        cover: require('./res/avatar.png'),
         title: '这个标题有点厉害',
         numberofaudience: 120
     },
     {
-        cover: require('../res/avatar.png'),
+        cover: require('./res/avatar.png'),
         title: '这个标题有点厉害',
         numberofaudience: 120
     },
-    {
-        cover: require('../res/avatar.png'),
-        title: '这个标题有点厉害',
-        numberofaudience: 120
-    },
-    {
-        cover: require('../res/avatar.png'),
-        title: '这个标题有点厉害',
-        numberofaudience: 120
-    },
-    {
-        cover: require('../res/avatar.png'),
-        title: '这个标题有点厉害',
-        numberofaudience: 120
-    },
-    {
-        cover: require('../res/avatar.png'),
-        title: '这个标题有点厉害',
-        numberofaudience: 120
-    },
-    {
-        cover: require('../res/avatar.png'),
-        title: '这个标题有点厉害',
-        numberofaudience: 120
-    }
 ]
 
 const styles = StyleSheet.create({

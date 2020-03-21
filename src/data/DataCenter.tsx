@@ -31,6 +31,15 @@ class DataCenter {
      **********************************
      */
     @action.bound
+    public AppSetClient(client:any){
+        this.App.client = client;
+    }
+    @action.bound
+    public AppSetNewClient(client:any){
+        this.App.newclient = client;
+    }
+
+    @action.bound
     public AppSetSufficientPermissions(sufficient: boolean){
         this.App.sufficient_permissions = sufficient;
     }

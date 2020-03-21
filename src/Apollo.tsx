@@ -1,6 +1,5 @@
 import React, { Component, useContext, useCallback, useEffect } from 'react';
 import { Platform } from 'react-native';
-
 import { makeClient, ApolloProvider, useClientBuilder } from 'apollo';
 import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks';
 
@@ -17,13 +16,18 @@ import { useCaptureVideo } from '@src/common';
 
 import { DataCenter } from './data';
 
-
 export default observer(props => {
     const { checkServer } = props;
 
     // const store = useContext(StoreContext);
-    const client = makeClient(app.me, checkServer); // 构建apollo client;
-    app.client = client;
+    const client = makeClient(app.me, checkServer,false); // 构建apollo client;
+    const newclient = makeClient(app.me,checkServer,true); // 新的后台 endpoint
+    app.client = client; //旧版全局状态
+
+    DataCenter.AppSetClient(client);
+    DataCenter.AppSetNewClient(newclient);
+
+
 
     const onFailed = useCallback(error => {
         Toast.show({ content: error.message });

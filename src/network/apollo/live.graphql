@@ -1,0 +1,14 @@
+# -------- query below ----------
+
+
+
+
+# -------- mutation below ----------
+
+mutation GetLivePushURL($title: String){
+  createLiveRoom(title: $title){
+    id
+    title
+    push_url
+  }
+}

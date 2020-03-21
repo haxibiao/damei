@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Dimensions, Image, SafeAreaView, NativeModules, TouchableOpacity,StatusBar, Platform, TextInput } from 'react-native';
 const { StatusBarManager } = NativeModules;
 import { observer } from 'mobx-react';
-import LiveStore from '../livestore';
+import LiveStore from './LiveStore';
 // import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const { width: sw, height: sh } = Dimensions.get("window");
@@ -27,7 +27,7 @@ const LiveRoomTopWidgets = (props:{navigation:any}) => {
         <View style={styles.TopWidgetContainer}>
             <View style={styles.TopLeftWidget}>
                 <View style={{ height: TOP_WIDGET_AVATAR_SIZE, width: TOP_WIDGET_AVATAR_SIZE, overflow: 'hidden', borderRadius: TOP_WIDGET_AVATAR_SIZE / 2 }}>
-                    <Image source={require('../res/avatar.png')} resizeMode='cover' style={{ height: TOP_WIDGET_AVATAR_SIZE, width: TOP_WIDGET_AVATAR_SIZE }} />
+                    <Image source={require('./res/avatar.png')} resizeMode='cover' style={{ height: TOP_WIDGET_AVATAR_SIZE, width: TOP_WIDGET_AVATAR_SIZE }} />
                 </View>
                 <View style={{
                     width: TOP_WIDGET_CENTER_WIDTH,
@@ -55,7 +55,7 @@ const LiveRoomTopWidgets = (props:{navigation:any}) => {
                     }}>当前在看1000人</Text>
                 </View>
                 <TouchableOpacity activeOpacity={0.9} onPress={ () => {props.navigation.goBack()} }>
-                    <Image source={require('../res/close.png')} resizeMode={'contain'} style={{ height: TOP_WIDGET_CLOSE_SIZE, width: TOP_WIDGET_CLOSE_SIZE }} />
+                    <Image source={require('./res/close.png')} resizeMode={'contain'} style={{ height: TOP_WIDGET_CLOSE_SIZE, width: TOP_WIDGET_CLOSE_SIZE }} />
                 </TouchableOpacity>
             </View>
 

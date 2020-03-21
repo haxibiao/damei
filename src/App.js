@@ -22,7 +22,10 @@ import { checkUpdate } from 'common';
 
 import Apollo from './Apollo';
 
-import { LivePullManager } from 'hxf-tencent-live';
+import { LicenseUrl,LicenseKey } from '../app.json';
+// import { LivePullManager } from 'hxf-tencent-live'; //导入直播
+import { check,request,PERMISSIONS,RESULTS } from 'react-native-permissions';
+import { DataCenter } from './data';
 
 class App extends Component {
     toast: Toast;
@@ -79,9 +82,23 @@ class App extends Component {
         /**
          *  直播设置licenseKey,url
          */
-        const licenseUrl = "";
-        const licenseKey = "";
-        LivePullManager.liveSetupLicence(licenseUrl,licenseKey);
+        //LivePullManager.liveSetupLicence(LicenseUrl,LicenseKey);
+        //只做直播相关权限检查，获取交由权限浮层
+        this.checkPermission();
+    }
+
+    //直播权限检查函数
+    checkPermission(){
+        check(PERMISSIONS.ANDROID.CAMERA)
+            .then(result => {
+                if(result == RESULTS.GRANTED){
+                    //有摄像头权限，下一步检查麦克风权限
+                    check(PERMISSIONS.ANDROID.RECORD_AUDIO)
+                        .then(result => {
+                            if(result == RESULTS.GRANTED) DataCenter.AppSetSufficientPermissions(true);
+                        });
+                }
+            })
     }
 
     checkServer = () => {

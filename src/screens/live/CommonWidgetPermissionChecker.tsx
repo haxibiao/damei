@@ -9,12 +9,12 @@ import {
 } from "react-native";
 const { width: sw, height: sh } = Dimensions.get("window");
 import { Overlay } from "teaset";
-import { observer,DataCenter } from '../../../data';
+import { observer,DataCenter } from '../../data';
 import { check, request, PERMISSIONS, RESULTS } from "react-native-permissions";
 
 const BOXWIDTH = sw * 0.86;
-const MicroIcon = require("../res/maikefeng.png");
-const CameraIcon = require("../res/xiangji.png");
+const MicroIcon = require("./res/maikefeng.png");
+const CameraIcon = require("./res/xiangji.png");
 
 const GRANT = "已授权";
 const CHECKING = "检查中";

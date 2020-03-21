@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { View,Text,Dimensions,TouchableOpacity,StyleSheet,Animated,Easing,Image } from 'react-native';
-import LiveStore from '../livestore';
+import LiveStore from './LiveStore';
 import { observer } from 'mobx-react';
 import { when } from 'mobx';
 import LiveRoomListModalContent from './LiveRoomListModalContent';
@@ -93,7 +93,7 @@ const LiveRoomListModal = (props:any) => {
             borderTopRightRadius: CloseButtonWidth,
             borderBottomRightRadius: CloseButtonWidth,
             }}>
-            <Image source={require('../res/close.png')} resizeMode='contain' style={{height:28,width:28,marginEnd:5}} />
+            <Image source={require('./res/close.png')} resizeMode='contain' style={{height:28,width:28,marginEnd:5}} />
             </TouchableOpacity>
         </Animated.View>
 

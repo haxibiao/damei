@@ -4,8 +4,11 @@ import { observable } from 'mobx';
 class AppStore {
 
     @observable public network_connected: boolean = true;
-    //@observable public client:any = null;
     @observable public appLoading: boolean = true;
+    
+    //Apollo Client 新旧均保留
+    @observable public client:any = null;
+    @observable public newclient:any = null;
 
     /**
      **********************
