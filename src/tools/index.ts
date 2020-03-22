@@ -15,5 +15,10 @@ const sw: number = Dimensions.get('window').width,
  */
 import * as ART from '@react-native-community/art';
 
+/**
+ *  App 参数
+ */
+import AppConfig from './AppConfig';
 
-export { sw, sh, Adp, ART }
+
+export { sw, sh, Adp, ART,AppConfig }

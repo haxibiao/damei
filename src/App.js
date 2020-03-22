@@ -11,7 +11,6 @@ import { StyleSheet, YellowBox, View, Image, Text } from 'react-native';
 import { Toast, ErrorBoundary } from 'components';
 import { app, config } from 'store';
 
-import SplashScreen from 'react-native-splash-screen';
 import Orientation from 'react-native-orientation';
 import codePush from 'react-native-code-push';
 import { ad, WeChat } from 'native';
