@@ -15,6 +15,7 @@ interface Props{
     zIndex?:number;
     hasNotch?:boolean;
     arrow?:boolean;
+    navigation:any;
 }
 export default function Header(props:Props){
     let absolute = props?.absolute ?? false;
@@ -43,7 +44,7 @@ export default function Header(props:Props){
             <View style={{opacity: 1 ?? 1,position:'absolute',zIndex: -1,minHeight:HeaderHeight,backgroundColor:backgroundColor}}/>
 
             <View style={[styles.left,{flex:3,minHeight}]}>
-                <HeaderBackButton arrow={props?.arrow ?? false}/>
+                <HeaderBackButton arrow={props?.arrow ?? false} navigation={props.navigation}/>
                 <Text style={props?.leftTitleStyle ?? {marginStart:5,fontSize:18}}>{props?.leftTitle ?? ''}</Text>
             </View>
             <View style={[styles.center,{flex:1,minHeight}]}>

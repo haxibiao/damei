@@ -29,6 +29,8 @@ export default function Page(props: {
     contentBackgroundColor?: string;
     contentFrameStyle?: ViewStyle;
     navBackgroundColor?: string;
+    enableNavBottomBorder?: boolean;
+    navBottomBorderColor?: string;
     centerTitle?: string;
     leftTitle?: string;
     centerTitleStyle?: TextStyle;
@@ -37,6 +39,8 @@ export default function Page(props: {
     arrow?: boolean;
     barStyle?: keyof BarStyle;
     barBackground?: string;
+    navigation: any;
+    
 }) {
 
     const backgroundColor = props?.backgroundColor ?? PageBackground; //最外层view的背景色 
@@ -53,8 +57,11 @@ export default function Page(props: {
     //导航栏高度适配
     const NavBarHeight = isAndroid() ? 48 : 44; //安卓对应48，IOS对应44
 
-
     const barStyle = props?.barStyle ?? (props?.barBackground == 'white' || !props?.barBackground) ? 'dark-content' : 'default';
+    var navBottomBorderStyle:ViewStyle = {borderBottomColor: props?.navBottomBorderColor ?? 'transparent' ,borderBottomWidth: props?.navBottomBorderColor ? 1 : 0};
+    if(props?.enableNavBottomBorder){// 允许顶部导航栏下划线
+        navBottomBorderStyle = {borderBottomWidth:1,borderBottomColor:'#f1f1f1'}
+    }
 
     const hasNotch = DeviceInfo.hasNotch();
     //判断 hasNotch。iPhone刘海高 34
@@ -75,24 +82,10 @@ export default function Page(props: {
         return StatusBarHeight;
     }
 
-    /**
-     *  如果启用 safe 属性，则内容顶部将预留出 （导航栏高 + 状态栏高 : 前提是设置了状态栏透明）
-     */
-    // const safePT: () => number = () => {
-    //     let statusH = safeStatusHeight();
-    //     let result = 0;
-    //     if (Platform.OS == 'android') {
-    //         result = props.safe ? HeaderHeight + statusH : statusH;
-    //     } else if (Platform.OS == 'ios') {
-    //         //TODO: 适配IOS下状态栏透明时距离顶部预留高度
-    //     }
-    //     return result;
-    // }
-
     return (
         <View flex style={{ backgroundColor: backgroundColor }}>
 
-            <StatusBar backgroundColor={props?.barBackground ?? 'white'} barStyle={barStyle} />
+            <StatusBar backgroundColor={props?.barBackground ?? 'transparent'} barStyle={barStyle}/>
 
             {/*  头部导航栏  开始*/}
             <View style={[
@@ -102,9 +95,10 @@ export default function Page(props: {
                     width: width,
                     backgroundColor: navBackgroundColor,
                 },
+                navBottomBorderStyle
             ]}>
                 <View flex-3 row left centerV style={{ height: NavBarHeight }}>
-                    <HeaderBackButton arrow={props?.arrow ?? false} color={'#454545'} />
+                    <HeaderBackButton arrow={props?.arrow ?? false} color={'#454545'} navigation={props.navigation}/>
                     <Text style={props?.leftTitleStyle ?? { marginStart: 5, fontSize: 18 }}>{props?.leftTitle ?? ''}</Text>
                 </View>
                 <View flex-2 row center style={{ height: NavBarHeight }}>
