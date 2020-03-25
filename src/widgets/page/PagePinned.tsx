@@ -53,6 +53,8 @@ export default function PagePinned(props: {
     barStyle?: keyof BarStyle;
     barBackground?: string;
     contentBackgroundColor?: string;
+
+    navigation:any;
 }) {
 
     const backgroundColor = props?.backgroundColor ?? PagePinnedBackground; //最外层view的背景色 
@@ -142,7 +144,7 @@ export default function PagePinned(props: {
                 backgroundColor: navBackgroundColor 
                 }}/>
                 <View flex-3 row left centerV style={{height:NavBarHeight}}>
-                    <HeaderBackButton arrow={props?.arrow ?? false}  color={'#f1f1f1'}/>
+                    <HeaderBackButton navigation={props.navigation} arrow={props?.arrow ?? false}  color={'#f1f1f1'}/>
                     <Animated.View style={{
                         position:'absolute',left:0,
                         zIndex:1,
@@ -151,7 +153,7 @@ export default function PagePinned(props: {
                             outputRange: [0,0, 1]
                         })
                         }}>
-                        <HeaderBackButton arrow={props?.arrow ?? false}  color={'#454545'}/>
+                        <HeaderBackButton navigation={props.navigation} arrow={props?.arrow ?? false}  color={'#454545'}/>
                     </Animated.View>
                     <Text style={props?.leftTitleStyle ?? { marginStart: 5, fontSize: 18 }}>{props?.leftTitle ?? ''}</Text>
                 </View>

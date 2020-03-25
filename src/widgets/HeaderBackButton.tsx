@@ -8,9 +8,10 @@ interface Props {
   marginBottom?: number;
   color?: string;
   arrow?: boolean;
+  navigation:any;
 }
 export default function HeaderBackButton(props: Props) {
-  //const navigation = useNavigation();
+  const navigation = props.navigation;
   const color = props.color ?? "#222";
 
   let { paddingStart, marginBottom } = props;
