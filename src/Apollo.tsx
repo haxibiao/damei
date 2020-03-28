@@ -86,6 +86,7 @@ export default observer(props => {
         content: any;
         title: any;
     }) => {
+        console.log('notice', data)
         const currentDate = new Date();
         JPushModule.sendLocalNotification({
             buildId: 1,

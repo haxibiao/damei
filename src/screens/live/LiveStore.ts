@@ -6,33 +6,40 @@ class LiveStore {
         change: boolean,
         flag: boolean } = { change: false, flag: false };
     
-    @observable dankamu: {name:string,message:string}[] = [
-        {
-            name: "Cersei Lannister",
-            message: "When you play the Game of Thrones, you win or you die. There is no middle ground."
-        },
-        {
-            name: "Tyrion Lannister",
-            message: "Speaking for the grotesques, I’d have to disagree. Death is so final, whereas life is full of possibilities."
-        },
-        {
-            name: "琼·雪诺",
-            message: "害,难搞"
-        },
-        {
-            name: "Cersei Lannister",
-            message: "When you play the Game of Thrones, you win or you die. There is no middle ground."
-        },
-        {
-            name: "Tyrion Lannister",
-            message: "Speaking for the grotesques, I’d have to disagree. Death is so final, whereas life is full of possibilities."
-        },
-        {
-            name: "琼·雪诺",
-            message: "害,难搞"
-        }
-    ];
+    @observable dankamu: {name:string,message:string}[] = [];
+    @observable hot:number = 0;
+    @observable count_audience = 0;
+    @observable joinRoomEcho:any = null;
+    @observable leaveRoom:boolean = false;
+    @observable roomidForOnlinePeople:string = '';
+    @observable streamerLeft:boolean = false;
 
+    @action.bound
+    public setStreamerLeft(left:boolean){
+        this.streamerLeft = left;
+    }
+
+    @action.bound
+    public setroomidForOnlinePeople(id:string){
+        this.roomidForOnlinePeople = id;
+    }
+
+    @action.bound
+    public setLeaveRoom(leave:boolean){
+        this.leaveRoom = leave;
+    }
+    @action.bound
+    public setJoinRoomEcho(echo:any){
+        this.joinRoomEcho = echo;
+    }
+    @action.bound
+    public setHot(hot:number){
+        this.hot = hot;
+    }
+    @action.bound
+    public setCountAudience(count:number){
+        this.count_audience = count;
+    }
 
     @action.bound
     public setshowlivemodal(show:boolean){
@@ -43,9 +50,22 @@ class LiveStore {
         this.showlivemodal.change = false;
     }
     @action.bound
-    public setDankamu(dankamu:any){
-        this.dankamu = [...dankamu]
+    public setDankamu(dankamu:{name:string,message:string}[]){
+        this.dankamu = [...dankamu];
+        this.hot = dankamu.length;
     }
+    @action.bound
+    public pushDankamu(dankamu:{name:string,message:string}){
+        let temp = this.dankamu;
+        temp.push(dankamu);
+        this.dankamu = [...temp];
+        this.hot = temp.length;
+    }
+    @action.bound
+    public clearDankamu(){
+        this.dankamu = [];
+    }
+
 }
 
 export default new LiveStore();

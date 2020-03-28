@@ -1,5 +1,5 @@
 import { observable } from 'mobx';
-//import { ApolloClient } from 'apollo-boost';
+import ApolloClient from 'apollo-boost';
 
 class AppStore {
 
@@ -7,8 +7,8 @@ class AppStore {
     @observable public appLoading: boolean = true;
     
     //Apollo Client 新旧均保留
-    @observable public client:any = null;
-    @observable public newclient:any = null;
+    @observable public client:ApolloClient<unknown>  = null;
+    @observable public newclient:ApolloClient<unknown>  = null;
 
     /**
      **********************

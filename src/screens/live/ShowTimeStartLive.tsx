@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Dimensions, TouchableOpacity, Text, TextInput, Image, Slider } from 'react-native';
 import { RoundedImage } from 'hxf-react-native-uilib';
-// import { LivePushManager } from 'hxf-tencent-live';
+import { LivePushManager } from 'hxf-tencent-live';
 
 import ShowTimeWidgetLivePreview from './ShowTimeWidgetLivePreview';
 import ShowTimeWidgetConfigureLayer from './ShowTimeWidgetConfigureLayer';
@@ -22,7 +22,7 @@ const ShowTimeStartLive = (props: any) => {
         <View style={styles.body}>
             <ShowTimeWidgetLivePreview />
             {
-                started ? <ShowTimeWidgetLiveOnLayer /> : <ShowTimeWidgetConfigureLayer navigation={props.navigation} startCallback={() => {setstarted(true)}}/>
+                started ? <ShowTimeWidgetLiveOnLayer navigation={props.navigation} /> : <ShowTimeWidgetConfigureLayer navigation={props.navigation} startCallback={() => {setstarted(true)}}/>
             }
         </View>
     )

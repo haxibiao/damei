@@ -1,14 +1,15 @@
 {
     "name": "damei",
     "AppName": "答妹",
-    "Version": "2.7.0",
+    "Version": "2.8.0",
     "ServerRoot": "http://gql.xiaodamei.com",
     "UploadServer": "http://video.xiaodamei.com",
     "SocketServer": "ws://socket.xiaodamei.com:6002",
+    "devSocketServer": "http://192.168.1.132:6001",
     "AppSlogan": "学有所伴，见证成长每一步",
     "Build": 1,
     "PackageName": "com.damei",
-    "AppVersionNumber": 2.7,
+    "AppVersionNumber": 2.8,
 
     "TTAppId": "5026208",
 

@@ -69,6 +69,7 @@ export default observer(() => {
         },
         skip: !me.id,
     });
+    console.log("钱包页面run")
 
     const user = useMemo(() => {
         const userData = syncGetter('user', UserMeans) || { withdrawInfo };

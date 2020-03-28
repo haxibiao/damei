@@ -4,6 +4,7 @@ import {getBrand,isEmulator,getSystemVersion,getUniqueId,getIpAddress} from 'rea
 import ApolloClient,{InMemoryCache} from 'apollo-boost';
 import { ServerRoot } from '../../../app.json';
 import { AppConfig } from '../../tools';
+import {GetLivePushURL} from './gqls';
 
 const deviceHeaders = {
     os: Platform.OS,
@@ -20,8 +21,9 @@ const deviceHeaders = {
 };
 
 export default function useClientMaker(token:string,isnew:boolean,checkServer:any){
-    const endpoint_suffix = isnew ? '/gql' : '/graphql';
-
+    let endpoint_suffix = isnew ? '/gql' : '/graphql';
+    endpoint_suffix += token ? '?token='+token : '';
+    console.log("结尾: ",endpoint_suffix)
     //创建Apollo的缓存对象
     const cache = new InMemoryCache();
     
@@ -60,12 +62,11 @@ export default function useClientMaker(token:string,isnew:boolean,checkServer:an
     const [client,setclient] = useState( createClient() )
 
     useEffect(() => {
-        if(!client){
-            let c = createClient();
-            setclient(c);
-        }
+        let c = createClient();
+        setclient(c);
+
     },[token])
 
-    console.log("新的client生成器即将返回client,当前endpoint为",endpoint_suffix)
+    // console.log("新的client生成器即将返回client,当前endpoint为",endpoint_suffix)
     return client;
 }

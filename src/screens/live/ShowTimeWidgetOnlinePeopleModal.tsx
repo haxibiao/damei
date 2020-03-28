@@ -1,39 +1,95 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Dimensions, Text, FlatList } from 'react-native';
+import { View, StyleSheet, Dimensions, Text, FlatList, Image } from 'react-native';
 const { width: sw, height: sh } = Dimensions.get('window');
 import { Overlay } from 'teaset';
 import { Avatar } from 'hxf-react-native-uilib';
+import { DataCenter, observer } from '../../data';
+import { GQL } from '../../network';
+import { ApolloClient } from 'apollo-boost';
+import LiveStore from './LiveStore';
 
 const radius = 12;
+let client: ApolloClient<unknown>;
 
-const ContentView = () => {
+const ContentView = observer((props: any) => {
 
-    const RenderItem = ({item,index}:{item:{name:string,avatar:any},index:number}) => {
+    const [data, setdata] = useState([]);
+    const [loading, setloading] = useState(true);
+    const [error, seterror] = useState(false);
+
+    useEffect(() => {
+        client = DataCenter.App.newclient;
+        if (client) {
+            client.query({
+                query: GQL.GetOnlinePeople,
+                variables: { roomid: parseInt(LiveStore.roomidForOnlinePeople) },
+                fetchPolicy:'network-only'
+            }).then(rs => {
+                console.log(rs);
+                let list = rs.data?.getLiveRoomUsers ?? [];
+                setdata([...list]);
+                console.log(list);
+                setloading(false);
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+    }, [])
+
+    const RenderItem = ({ item, index }: { item: { name: string, avatar: any }, index: number }) => {
+        console.log("用户头像",item.avatar);
         return (
-            <View style={{width:sw,paddingVertical:8,flexDirection:'row',alignItems:'center'}}>
-                <Avatar size={32} file={item.avatar} frameStyle={{marginHorizontal:10}}/>
-                <Text style={{fontSize:15,color:'#333'}}>{item.name}</Text>
+            <View style={styles.onlinePeople}>
+                <Avatar size={32} uri={item.avatar} frameStyle={{ marginHorizontal: 10 }} />
+                <Text style={{ fontSize: 15, color: '#333' }}>{item.name}</Text>
             </View>
         )
     }
 
     return (
         <View style={styles.body}>
-                <FlatList
-                data={FakeData}
-                keyExtractor={ (item,index) => index.toString() }
-                renderItem={RenderItem}
-                />
+            {
+                error ? (
+                    <View style={styles.errorWrapper}>
+                        <Image source={require('../../assets/images/default_error.png')} resizeMode='contain' style={{ height: '38%', width: '38%' }} />
+                    </View>
+                ) : (
+                        <>
+                            {
+                                loading ? (
+                                    <View style={styles.loadingWrapper}>
+                                        <Image source={require('../../assets/images/lightning.png')} resizeMode='contain' style={{ height: 34, width:34}} />
+                                        <Text>加载中...</Text>
+                                    </View>
+                                ) : (
+                                        <FlatList
+                                            data={data}
+                                            keyExtractor={(item, index) => index.toString()}
+                                            renderItem={RenderItem}
+                                            ListEmptyComponent={() => {
+                                                return (
+                                                    <View style={styles.emptyWrapper}>
+                                                        <Image source={require('../../assets/images/default_message.png')} resizeMode='contain' style={{ height: '46%', width: '46%' }} />
+                                                        <Text style={{color:'#999'}}>暂无在线观众</Text>
+                                                    </View>
+                                                )
+                                            }}
+                                        />
+                                    )
+                            }
+                        </>
+                    )
+            }
         </View>
     )
-}
+});
 
 
-let overlaykey:any = null;
+let overlaykey: any = null;
 const showOnlinePeopleModal = () => {
     const view = (
-        <Overlay.PullView side='bottom' containerStyle={{backgroundColor:'transparent'}}>
-            <ContentView/>
+        <Overlay.PullView side='bottom' containerStyle={{ backgroundColor: 'transparent' }}>
+            <ContentView />
         </Overlay.PullView>
     );
     overlaykey = Overlay.show(view);
@@ -43,38 +99,40 @@ const hideOnlinePeopleModal = () => {
     Overlay.hide(overlaykey);
 }
 
-export { showOnlinePeopleModal,hideOnlinePeopleModal }
+export { showOnlinePeopleModal, hideOnlinePeopleModal }
 
 const styles = StyleSheet.create({
     body: {
-        height:sh*0.45,
-        width:sw,
-        borderTopLeftRadius:radius,
-        borderTopRightRadius:radius,
-        backgroundColor:'white',
-        paddingTop:10
+        height: sh * 0.45,
+        width: sw,
+        borderTopLeftRadius: radius,
+        borderTopRightRadius: radius,
+        backgroundColor: 'white',
+        paddingTop: 10
+    },
+    onlinePeople:{ 
+        width: sw, 
+        paddingVertical: 8, 
+        flexDirection: 'row', 
+        alignItems: 'center' 
+    },
+    errorWrapper:{ 
+        height: '100%', 
+        width: '100%', 
+        justifyContent: 'center', 
+        alignItems: 'center' 
+    },
+    loadingWrapper:{ 
+        height: '100%', 
+        width: '100%', 
+        justifyContent: 'center', 
+        alignItems: 'center',
+        flexDirection:'row' 
+    },
+    emptyWrapper:{ 
+        height: sh*0.45,
+        width:sw, 
+        justifyContent: 'center', 
+        alignItems: 'center' 
     }
 });
-
-const FakeData = [
-    {
-        name: 'test name',
-        avatar: require('./res/avatar.png')
-    },
-    {
-        name: 'test name',
-        avatar: require('./res/avatar.png')
-    },
-    {
-        name: 'test name',
-        avatar: require('./res/avatar.png')
-    },
-    {
-        name: 'test name',
-        avatar: require('./res/avatar.png')
-    },
-    {
-        name: 'test name',
-        avatar: require('./res/avatar.png')
-    },
-]

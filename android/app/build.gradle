@@ -178,9 +178,9 @@ android {
     }
 
     defaultConfig {
-//       ndk {
-//        abiFilters "armeabi", "armeabi-v7a"
-//       }
+       ndk {
+        abiFilters "armeabi", "armeabi-v7a"
+       }
         applicationId rootProject.ext.applicationId 
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion

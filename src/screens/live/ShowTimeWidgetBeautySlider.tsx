@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Dimensions, Text, Image, Slider } from 'react-native';
 const { width: sw, height: sh } = Dimensions.get('window');
-// import { LivePushManager } from 'hxf-tencent-live';
+import { LivePushManager } from 'hxf-tencent-live';
 
 const ShowTimeWidgetBeautySlider = React.memo(() => {
 
     useEffect(() => {
-        //LivePushManager.liveSetBeautyMode('NATURAL');
+        LivePushManager.liveSetBeautyMode('NATURAL');
     },[])
 
     const BlurHandler = (value:number) => {
-        //LivePushManager.liveSetBeautyLevel(Math.round(value)*10);
+        LivePushManager.liveSetBeautyLevel(Math.round(value)*10);
     }
 
     const WhiteHandler = (value:number) => {
-        //LivePushManager.liveSetWhitenessLevel(Math.round(value)*10);
+        LivePushManager.liveSetWhitenessLevel(Math.round(value)*10);
     }
     
     return (

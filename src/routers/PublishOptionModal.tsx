@@ -23,7 +23,7 @@ const StartLiveButton = observer((props:any) => {
                     PermissionChecker.showPermissionCheck();
                 }
             }else{
-                navigation.navigate("login");
+                navigation.navigate("Login");
                 hidePublishOption();
             }
         }}
@@ -91,8 +91,7 @@ export { showPublishOption, hidePublishOption };
 
 const styles = StyleSheet.create({
     container:{
-        width: sw,
-        height: sh,
+        flex:1,
         justifyContent: "flex-end",
         alignItems: "center",
         backgroundColor: "#fffffffb"

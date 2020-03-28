@@ -1,23 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Dimensions,SafeAreaView, TouchableOpacity, Text, TextInput, Image, Slider } from 'react-native';
-import { RoundedImage } from 'hxf-react-native-uilib';
-// import { LivePushManager } from 'hxf-tencent-live';
-import MemoBeautySlider from './ShowTimeWidgetBeautySlider';
-import {DataCenter} from '../../data';
-import {app} from '../../store'; //TODO: replace this import later
-import { GQL } from '../../network';
+import { LivePushManager } from 'hxf-tencent-live';
 const { width: sw, height: sh } = Dimensions.get('window');
 
 import ShowTimeWidgetLiveOnWidgetTopBar from './ShowTimeWidgetLiveOnWidgetTopBar';
 import CommonWidgetLiveRoomMessages from './CommonWidgetLiveRoomMessages';
+import * as BeautyModal from './ShowTimeWidgetBeautyModal';
+import {show} from './ShowTimeWidgetMirrorModal';
+import ShowTimeWSMountPoint from './ShowTimeWSMountPoint';
+const SideBarWidth = 42;
+const OptionSize = 37;
 
-const ShowTimeWidgetLiveOnLayer = (props:any) => {
+const MemoMountPoint = React.memo(() => <ShowTimeWSMountPoint/>)
+
+
+const AbilitySideBar = (props:any) => {
+    const [mirror,setmirror] = useState(false);
+    return (
+        <View style={styles.sidebar}>
+            <TouchableOpacity onPress={() => {
+                //切换前后摄像头
+                LivePushManager.liveSwitchCamera();
+            }} style={[{marginBottom:12},styles.btn]}>
+                <Image source={require('./res/switch_camera.png')} resizeMode='contain' style={styles.img}/>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => {
+                //调出美颜浮层
+                BeautyModal.showBeautyModal();
+            }} style={[{marginBottom:12},styles.btn]}>
+                <Image source={require('./res/meiyan.png')} resizeMode='contain' style={styles.img}/>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => {
+                //设置镜像
+                setmirror(!mirror);
+                LivePushManager.liveSetMirrorEnabled(mirror);
+                show(mirror);
+            }} style={styles.btn}>
+                <Image source={require('./res/jingxiang.png')} resizeMode='contain' style={styles.img}/>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+const ShowTimeWidgetLiveOnLayer = (props:{navigation:any}) => {
 
     return (
         <View style={styles.body}>
-            <SafeAreaView style={{ flex: 1,paddingTop:30,paddingBottom:12, justifyContent: 'space-between', alignItems: 'flex-start',backgroundColor:'transparent' }}>
-                <ShowTimeWidgetLiveOnWidgetTopBar navigation={null}/>
+            <SafeAreaView style={styles.safearea}>
+                <ShowTimeWidgetLiveOnWidgetTopBar navigation={props.navigation}/>
+                <AbilitySideBar/>
                 <CommonWidgetLiveRoomMessages/>
+                <MemoMountPoint/>
             </SafeAreaView>
         </View>
     )
@@ -29,5 +64,34 @@ const styles = StyleSheet.create({
     body: {
         height:sh,
         width:sw
+    },
+    safearea:{ 
+        flex: 1,
+        paddingTop:30,
+        paddingBottom:12, 
+        justifyContent: 'space-between', 
+        alignItems: 'flex-start',
+        backgroundColor:'transparent' 
+    },
+    btn:{
+        height: OptionSize,
+        width:OptionSize,
+        borderRadius:OptionSize/2,
+        overflow:'hidden',
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:'#00000066'
+    },
+    sidebar:{
+        position:'absolute',
+        zIndex:10,
+        right:10,
+        top:sh * 0.13,
+        width:SideBarWidth,
+        alignItems:'center'
+    },
+    img:{
+        height:'60%',
+        width:'60%'
     }
 });
