@@ -4,7 +4,8 @@
  */
 
  //直播
- import LiveRoom from '../screens/live/LiveRoom';
+ import Live from '../screens/live';
+ import LiveWatch from '../screens/live/LiveRoom';
  import StartLive from '../screens/live/ShowTimeStartLive';
 
 
@@ -29,7 +30,7 @@ import VideoExplanationScreen from '../screens/question/VideoExplanation';
 import WithdrawsScreen from '../screens/withdraw';
 import WithdrawLogDetailScreen from '../screens/withdraw/WithdrawLogDetails';
 import WithdrawApplyScreen from '../screens/withdraw/WithdrawApply';
-import BalanceScreen from '../screens/wallet/Balance';
+import BalanceScreen from '../screens/withdraw/Balance';
 // 任务
 import CpcTaskScreen from '../screens/task/CpcTask';
 import SubmitTaskScreen from '../screens/task/SubmitTask';
@@ -324,9 +325,12 @@ export default {
         screen: SetLoginInfoScreen,
     },
     liveroom: {
-        screen: LiveRoom
+        screen: Live
     },
     startlive: {
         screen: StartLive
+    },
+    livewatch: {
+        screen: LiveWatch
     }
 };

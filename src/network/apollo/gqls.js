@@ -1,7 +1,21 @@
-import {GetLivePushURL} from './graphql/live.graphql';
+import {
+    GetLivePushURL,
+    EnterLiveRoom,
+    RecommendLiveRoom,
+    GetOnlinePeople,
+    CloseLiveRoom,
+    CommentLive,
+    LeaveLiveRoom
+} from './graphql/live.graphql';
 import {Testme} from './graphql/user.graphql';
 
 export { 
     GetLivePushURL,
-    Testme
+    Testme,
+    EnterLiveRoom,
+    RecommendLiveRoom,
+    GetOnlinePeople,
+    CloseLiveRoom,
+    CommentLive,
+    LeaveLiveRoom
 }

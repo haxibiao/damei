@@ -22,7 +22,7 @@ import { checkUpdate } from 'common';
 import Apollo from './Apollo';
 
 import { LicenseUrl,LicenseKey } from '../app.json';
-// import { LivePullManager } from 'hxf-tencent-live'; //导入直播
+import { LivePullManager } from 'hxf-tencent-live'; //导入直播
 import { check,request,PERMISSIONS,RESULTS } from 'react-native-permissions';
 import { DataCenter } from './data';
 
@@ -81,7 +81,7 @@ class App extends Component {
         /**
          *  直播设置licenseKey,url
          */
-        //LivePullManager.liveSetupLicence(LicenseUrl,LicenseKey);
+        LivePullManager.liveSetupLicence(LicenseUrl,LicenseKey);
         //只做直播相关权限检查，获取交由权限浮层
         this.checkPermission();
     }

@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import * as ART from '@react-native-community/art';
-import { Adp } from '../tools';
+import { Adp } from '../../tools';
 
 export default function SvgIcon(props:  {
     name: string[],

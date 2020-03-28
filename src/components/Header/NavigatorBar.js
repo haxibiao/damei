@@ -76,7 +76,7 @@ class NavigatorBar extends Component {
             ...style,
         };
 
-        if (!statusBarColor) statusBarColor = Theme.navBarBackground;
+        if (!statusBarColor) statusBarColor = 'transparent';
 
         //build titleViewStyle
         titleViewStyle = {

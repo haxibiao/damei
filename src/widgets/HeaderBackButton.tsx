@@ -23,7 +23,7 @@ export default function HeaderBackButton(props: Props) {
   let scale = props?.arrow ? 0.026 : 0.030;
 
   function _backHanlder() {
-    //navigation.goBack();
+    navigation.goBack();
   }
   return (
     <TouchableOpacity

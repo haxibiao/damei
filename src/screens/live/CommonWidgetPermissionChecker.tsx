@@ -29,7 +29,7 @@ const BAD = "red";
 const PermissionView = observer((props: any) => {
   const [camerastatus, setcamerastatus] = useState(CHECKING);
   const [microstatus, setmicrostatus] = useState(CHECKING);
-  const [cameracolor, setcamearcolor] = useState(DEFAULT);
+  const [cameracolor, setcameracolor] = useState(DEFAULT);
   const [microcolor, setmicrocolor] = useState(DEFAULT);
   const [checkdone, setcheckdone] = useState(false);
 
@@ -39,13 +39,13 @@ const PermissionView = observer((props: any) => {
       switch (result) {
         case RESULTS.UNAVAILABLE:
           setcamerastatus(UNAVAILABLE);
-          setcamearcolor(BAD);
+          setcameracolor(BAD);
           //检查麦克风授权
           MicroCheck();
           break;
         case RESULTS.GRANTED:
           setcamerastatus(GRANT);
-          setcamearcolor(GREEN);
+          setcameracolor(GREEN);
           //检查麦克风授权
           MicroCheck();
           break;
@@ -54,13 +54,13 @@ const PermissionView = observer((props: any) => {
                 .then(result => {
                     if(result == RESULTS.GRANTED){
                         setcamerastatus(GRANT);
-                        setcamearcolor(GREEN);
+                        setcameracolor(GREEN);
                     }else if(result == RESULTS.DENIED){
                         setcamerastatus(DENY);
-                        setcamearcolor(BAD);
+                        setcameracolor(BAD);
                     }else if(result == RESULTS.BLOCKED){
                         setcamerastatus(BLOCK);
-                        setcamearcolor(BAD);
+                        setcameracolor(BAD);
                     }
                 }).then(
                     //检查麦克风授权
@@ -71,7 +71,7 @@ const PermissionView = observer((props: any) => {
           break;
         case RESULTS.BLOCKED:
           setcamerastatus(BLOCK);
-          setcamearcolor(BAD);
+          setcameracolor(BAD);
           break;
       }
     });
@@ -90,7 +90,6 @@ const PermissionView = observer((props: any) => {
                   setmicrostatus(GRANT);
                   setmicrocolor(GREEN);
                   setcheckdone(true);
-
                   DataCenter.AppSetSufficientPermissions(true);
                   break;
                 case RESULTS.DENIED:
@@ -99,6 +98,7 @@ const PermissionView = observer((props: any) => {
                             if(result == RESULTS.GRANTED){
                                 setmicrostatus(GRANT);
                                 setmicrocolor(GREEN);
+                                DataCenter.AppSetSufficientPermissions(true);
                             }else if(result == RESULTS.DENIED){
                                 setmicrostatus(DENY);
                                 setmicrocolor(BAD);
@@ -117,34 +117,25 @@ const PermissionView = observer((props: any) => {
                   setmicrostatus(BLOCK);
                   setmicrocolor(BAD);
                   setcheckdone(true);
-                  DataCenter.AppSetSufficientPermissions(true);
+                  if(camerastatus == GRANT && microstatus == GRANT){
+                    DataCenter.AppSetSufficientPermissions(true);
+                  }
                   break;
               }
-        }).then(() => {
-            if(DataCenter.App.sufficient_permissions){
-                DataCenter.AppSetSufficientPermissions(true);
-            }else{
-                DataCenter.AppSetSufficientPermissions(false);
-            }
-        });
+        })
   }
 
   return (
-    <Overlay.View
-      modal={true}
-      animated={true}
-      overlayOpacity={0.8}
-      style={{ justifyContent: "center", alignItems: "center" }}
-    >
+    
       <View style={styles.container}>
 
-        <Text style={{fontSize:17,color:'#222',width:'100%',textAlign:'center',paddingBottom:15}}>直播需要打开以下权限哦~</Text>
+        <Text style={styles.title}>直播需要打开以下权限哦~</Text>
 
         <View style={styles.row_item}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Image
               source={CameraIcon}
-              style={{ height: 25, width: 25, marginEnd: 5 }}
+              style={styles.camera}
               resizeMode="contain"
             />
             <Text>摄像头</Text>
@@ -173,17 +164,26 @@ const PermissionView = observer((props: any) => {
             activeOpacity={0.88}
             style={styles.done_btn}
           >
-            <Text style={{ color: DataCenter.App.sufficient_permissions ? "green" : "#222", fontSize: 16 }}>{DataCenter.App.sufficient_permissions ? '前往直播吧' : '关闭'}</Text>
+            <Text style={{ color: DataCenter.App.sufficient_permissions ? "green" : "#222", fontSize: 16 }}>{DataCenter.App.sufficient_permissions ? '关闭后、前往直播吧' : '关闭'}</Text>
           </TouchableOpacity>
         )}
       </View>
-    </Overlay.View>
+
   );
 });
 
 let overlaykey: any = null;
 const showPermissionCheck = () => {
-  overlaykey = Overlay.show(<PermissionView />);
+  overlaykey = Overlay.show(
+    <Overlay.View
+      modal={true}
+      animated={true}
+      overlayOpacity={0.8}
+      style={{ justifyContent: "center", alignItems: "center" }}
+    >
+      <PermissionView/>
+    </Overlay.View>
+  );
 };
 const hidePermissionCheck = () => {
   Overlay.hide(overlaykey);
@@ -213,5 +213,17 @@ const styles = StyleSheet.create({
     height: 30,
     justifyContent: "center",
     alignItems: "center"
+  },
+  title:{
+    fontSize:17,
+    color:'#222',
+    width:'100%',
+    textAlign:'center',
+    paddingBottom:15
+  },
+  camera:{ 
+    height: 25, 
+    width: 25, 
+    marginEnd: 5 
   }
 });

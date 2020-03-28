@@ -3,7 +3,7 @@ import { View,Text,Dimensions,TouchableOpacity,StyleSheet,Animated,Easing,Image 
 import LiveStore from './LiveStore';
 import { observer } from 'mobx-react';
 import { when } from 'mobx';
-import LiveRoomListModalContent from './LiveRoomListModalContent';
+import LiveRoomListModalContent from './Depre_LiveRoomListModalContent';
 const MemoLiveRoomListModalContent = React.memo(() => <LiveRoomListModalContent /> );
 
 const {width:sw,height:sh} = Dimensions.get('window');
@@ -23,6 +23,13 @@ const LiveRoomListModal = (props:any) => {
     const [transx,settransx] = useState(new Animated.Value(LiveModalWidth));
     const [transclose,settransclose] = useState(new Animated.Value(-CloseButtonWidth));
     const [z,setz] = useState(-99)
+
+    useEffect(() => {
+        //组件首次挂载，清空聊天store信息
+        LiveStore.clearDankamu();
+        //发送直播加载中信息
+        LiveStore.pushDankamu({name: '',message:'直播加载中...'})
+    },[]);
 
     const modaltoggle = (show:boolean) => {
         LiveStore.closelivemodaltower();
@@ -120,9 +127,9 @@ const styles = StyleSheet.create({
     content:{
         height:LiveModalHeight, 
         width:LiveModalWidth,
-        backgroundColor:'white',
+        backgroundColor:'#000000bb',
         borderTopLeftRadius: ModalRadius,
         borderBottomLeftRadius:ModalRadius,
-        flexDirection:'row'
+        flexDirection:'row',
     }
 })

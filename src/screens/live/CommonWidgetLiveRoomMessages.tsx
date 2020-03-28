@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from 'react';
+import React, { useEffect,useRef } from 'react';
 import { View, Text, StyleSheet, Dimensions, FlatList } from 'react-native';
 import { observer } from 'mobx-react';
 import LiveStore from './LiveStore';
@@ -17,24 +17,9 @@ const CommonWidgetLiveRoomMessages = (props) => {
     const RenderDanmu = ({ item, index }: { item: any, index: number }) => {
 
         return (
-            <View style={{
-                paddingHorizontal: 9,
-                paddingVertical: 6,
-                backgroundColor: '#00000033',
-                borderRadius: 18,
-                marginBottom: 6,
-            }}>
-                <Text style={{
-                    fontSize: 14,
-                    color: 'white',
-                    fontWeight: '500',
-                    lineHeight: 17
-                }}>
-                    <Text style={{
-                        fontSize: 14,
-                        color: '#FE5F5F',
-                        fontWeight: '500'
-                    }}>{item.name + "："}</Text>
+            <View style={styles.dankamuWrapper}>
+                <Text style={styles.dankamuText}>
+                    <Text style={styles.dankamuName}>{item.name + (item.message != '' ? '：' : '')}</Text>
                     {item.message}
                 </Text>
             </View>
@@ -42,7 +27,7 @@ const CommonWidgetLiveRoomMessages = (props) => {
     }
 
     return (
-        <View style={{height:sh *0.3,width:sw *0.6,marginStart: 12,marginBottom:20}}>
+        <View style={styles.body}>
             <FlatList
             ref={ListRef}
             data={Store.dankamu}
@@ -58,3 +43,30 @@ const CommonWidgetLiveRoomMessages = (props) => {
 }
 
 export default observer(CommonWidgetLiveRoomMessages);
+
+const styles = StyleSheet.create({
+    body:{
+        height:sh *0.3,
+        width:sw *0.6,
+        marginStart: 12,
+        marginBottom:20
+    },
+    dankamuWrapper:{
+        paddingHorizontal: 9,
+        paddingVertical: 6,
+        backgroundColor: '#00000033',
+        borderRadius: 18,
+        marginBottom: 6,
+    },
+    dankamuText:{
+        fontSize: 14,
+        color: 'white',
+        fontWeight: '500',
+        lineHeight: 17
+    },
+    dankamuName:{
+        fontSize: 14,
+        color: '#FE5F5F',
+        fontWeight: '500'
+    }
+})

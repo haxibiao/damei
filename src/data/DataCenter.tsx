@@ -1,4 +1,5 @@
 import { observable, action } from 'mobx';
+import ApolloClient from 'apollo-boost';
 import { Storage } from './Storage';
 
 // Individual Store
@@ -31,11 +32,11 @@ class DataCenter {
      **********************************
      */
     @action.bound
-    public AppSetClient(client:any){
+    public AppSetClient(client:ApolloClient<unknown>){
         this.App.client = client;
     }
     @action.bound
-    public AppSetNewClient(client:any){
+    public AppSetNewClient(client:ApolloClient<unknown>){
         this.App.newclient = client;
     }
 
@@ -52,6 +53,14 @@ class DataCenter {
      * UserStore 操作模块
      ***********************************
      */
+    @action.bound
+    public UserSetStartLivePushSocket(start: boolean){
+        this.User.start_livepush_socket = start;
+    }
+    @action.bound
+    public UserSetStartLiveWatchSocket(start: boolean){
+        this.User.start_livewatch_socket = start;
+    }
 
 
      /**********************************
