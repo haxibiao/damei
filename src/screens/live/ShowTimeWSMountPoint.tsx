@@ -7,31 +7,15 @@ const SocketIO = require('socket.io-client');
 import * as KissBoBoModal from './EasterEggs/KissBoBoModal';
 import {SocketServer} from '../../../app.json';
 
-var LiveEcho:any = null;
-
 enum ColorfulEgg {
     bbobbo = 'BboBbo'
 }
 
 const ShowTimeWSMountPoint = (props:{}) => {
 
-    when(
-        () => LiveStore.leaveRoom,
-        () => {
-            console.log('主播离开，关闭直播')
-            if(LiveStore.joinRoomEcho){
-                LiveEcho.leaveChannel(`live_room.${LiveStore.roomidForOnlinePeople}`);
-                LiveEcho = null;
-                LiveStore.setJoinRoomEcho(null);
-                LiveStore.setLeaveRoom(false);
-            }
-        }
-    )
-
     useEffect(() => {
-        console.log("MountPoint函数useEffect执行了")
-
-        LiveEcho = new Echo({
+        console.log("ShowTimeMountPoint函数useEffect执行了")
+        let LiveEcho:any = new Echo({
             broadcaster: 'socket.io',
             host: SocketServer,
             client: SocketIO,
@@ -60,6 +44,18 @@ const ShowTimeWSMountPoint = (props:{}) => {
                 if(e.message) LiveStore.pushDankamu({name:e.message,message:''});
                 if(e.count_audience) LiveStore.setCountAudience(e.count_audience);
             })
+
+            return () => {
+                if(LiveEcho){
+                    LiveEcho.leaveChannel(`live_room.${LiveStore.roomidForOnlinePeople}`);
+                    console.log("主播端Echo离开channel:"+`live_room.${LiveStore.roomidForOnlinePeople}`);
+                }
+                LiveEcho = undefined;
+                if(LiveEcho == undefined){
+                    console.log("主播端Echo销毁成功");
+                }
+            }
+
     },[LiveStore.roomidForOnlinePeople]);
 
 

@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         height:sh *0.3,
         width:sw *0.6,
         marginStart: 12,
-        marginBottom:20
+        marginBottom:20,
     },
     dankamuWrapper:{
         paddingHorizontal: 9,

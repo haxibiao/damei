@@ -74,6 +74,11 @@ const Live = (props: any) => {
 
     useEffect(() => {
         FetchLiveList(page);
+        let listener = props.navigation.addListener('willFocus',(e:any) => {
+            console.log("获得焦点，刷新数据")
+            FetchLiveList(page,true);
+        });
+        return () => listener.remove();
     }, [])
 
     const RenderItem = ({ item, index }: { item: Item, index: number }) => {
@@ -167,9 +172,11 @@ const Live = (props: any) => {
                             onEndReachedThreshold={0.33}
                             onEndReached={() => {
                                 //触底加载更多
-                                let nextpage = page + 1;
-                                setpage(nextpage);
-                                FetchLiveList(nextpage, false);
+                                if(hasmore){
+                                    let nextpage = page + 1;
+                                    setpage(nextpage);
+                                    FetchLiveList(nextpage, false);
+                                }
                             }}
                         />
                     )
