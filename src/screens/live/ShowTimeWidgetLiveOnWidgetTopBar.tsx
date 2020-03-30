@@ -31,6 +31,7 @@ const ModalContent = observer((props: any) => {
          *  停止直播，调用下播接口
          */
         LivePushManager.liveStopLivePush();
+        console.log('停止推流');
         if (DataCenter.App.newclient) {
             DataCenter.App.newclient.mutate({
                 mutation: GQL.CloseLiveRoom,
@@ -101,18 +102,21 @@ const ShowTimeWidgetLiveOnWidgetTopBar = (props: { navigation: any }) => {
     useEffect(() => {
         return () => {
             LivePushManager.liveStopLivePush();
+            console.log("[Safeguard]停止推流");
             if (DataCenter.App.newclient) {
                 DataCenter.App.newclient.mutate({
                     mutation: GQL.CloseLiveRoom,
                     variables: { roomid: LiveStore.roomidForOnlinePeople }
                 }).then(rs => {
                     //TODO: 下播成功
-                    console.log("下播成功,",rs);
+                    console.log("[Safeguard]下播成功,",rs);
                 }).catch(err => {
                     //TODO: 下播接口错误
-                    console.log("下播失败,",err);
+                    console.log("[Safeguard]下播失败,",err);
                 })
             }
+        LiveStore.setHot(0);
+        LiveStore.clearDankamu();
         }
     },[])
 

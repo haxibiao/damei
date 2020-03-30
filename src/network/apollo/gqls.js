@@ -5,7 +5,8 @@ import {
     GetOnlinePeople,
     CloseLiveRoom,
     CommentLive,
-    LeaveLiveRoom
+    LeaveLiveRoom,
+    ExceptionLiveReport
 } from './graphql/live.graphql';
 import {Testme} from './graphql/user.graphql';
 
@@ -17,5 +18,6 @@ export {
     GetOnlinePeople,
     CloseLiveRoom,
     CommentLive,
-    LeaveLiveRoom
+    LeaveLiveRoom,
+    ExceptionLiveReport
 }

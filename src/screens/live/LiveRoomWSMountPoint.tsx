@@ -7,37 +7,22 @@ const SocketIO = require('socket.io-client');
 import * as KissBoBoModal from './EasterEggs/KissBoBoModal';
 import {SocketServer} from '../../../app.json';
 
-var LiveEcho:any = null;
-
 enum ColorfulEgg {
     bbobbo = 'BboBbo'
 }
 
 const LiveRoomWSMountPoint = (props:{id:string}) => {
 
-    when(
-        () => LiveStore.leaveRoom,
-        () => {
-            if(LiveStore.joinRoomEcho){
-                LiveEcho.leaveChannel(`live_room.${props.id}`);
-                LiveEcho = null;
-                LiveStore.setJoinRoomEcho(null);
-                LiveStore.setLeaveRoom(false);
-            }
-        }
-    )
-
-    console.log("观看直播间挂载点执行")
-
     useEffect(() => {
-        console.log("MountPoint函数useEffect执行了",SocketServer,props.id);
-
-        LiveEcho = new Echo({
+        console.log("LiveRoomMountPoint函数useEffect执行了",SocketServer,props.id);
+        let LiveEcho:any = new Echo({
             broadcaster: 'socket.io',
             host: SocketServer,
             client: SocketIO,
         });
-
+        if(LiveEcho){
+            console.log("echo对象创建成功");
+        }
 
         LiveEcho.channel(`live_room.${props.id}`)
             .listen('.user_come_in',e => {
@@ -49,6 +34,7 @@ const LiveRoomWSMountPoint = (props:{id:string}) => {
                 console.log("新消息",e);
                 let msg:string = e?.message ?? '';
                 LiveStore.pushDankamu({name:e?.user_name ?? ''  ,message: msg});
+                console.log("直播间新消息",LiveStore.dankamu[LiveStore.dankamu.length-1])
                 if(e.egg.popup){
                     switch(e.egg.type){
                         case ColorfulEgg.bbobbo:
@@ -60,16 +46,28 @@ const LiveRoomWSMountPoint = (props:{id:string}) => {
             .listen('.close_room',e => {
                 console.log(e);
                 //TODO: 主播下播
-                LiveEcho.leaveChannel(`live_room.${props.id}`);
+                if(LiveEcho){
+                    LiveEcho.leaveChannel(`live_room.${props.id}`);
+                }
                 LiveStore.setStreamerLeft(true);
-                LiveEcho = null;
-                LiveStore.setJoinRoomEcho(null);
+                LiveEcho = undefined;
             })
             .listen('.user_go_out',e => {
                 console.log(e);
                 //if(e.message) LiveStore.pushDankamu({name:e.message,message:''});
                 if(e.count_audience) LiveStore.setCountAudience(e.count_audience);
             })
+
+        return () => {
+            if(LiveEcho){
+                LiveEcho.leaveChannel(`live_room.${props.id}`);
+                console.log("观众端Echo离开channel:"+`live_room.${props.id}`);
+            }
+            LiveEcho = undefined;
+            if(LiveEcho == undefined){
+                console.log("观众端Echo销毁成功")
+            }
+        }
     },[])
 
     return <View style={{position:'absolute'}}/>

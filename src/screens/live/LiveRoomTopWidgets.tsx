@@ -8,6 +8,7 @@ import { GQL } from 'apollo'; //需要调用的接口为旧答妹的接口
 import { DataCenter } from '../../data';
 import { ApolloClient } from 'apollo-boost';
 import {GQL as NewGQL} from '../../network';
+const StatusBarHeight = StatusBar.currentHeight ?? 0; //状态栏高度
 // import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const { width: sw, height: sh } = Dimensions.get("window");
@@ -123,10 +124,8 @@ const CurrentPeople = observer((props:any) => {
 
         return () => {
             /**
-             *  在组件销毁的时候调用离开直播间
              *  将热度和人数值复位
              */
-            LiveStore.setLeaveRoom(true);
             LiveStore.setHot(0);
             LiveStore.setCountAudience(0);
         }
@@ -155,11 +154,16 @@ const CloseButton = observer((props:any) => {
                 variables: {roomid: LiveStore.roomidForOnlinePeople}
             }).then(rs => {
                 //离开成功
+                console.log("[Protect]用户离开直播间mutation调用成功",rs);
             }).catch(err => {
                 //TODO: 离开接口调用失败
-                console.log("用户离开直播间接口错误",err);
+                console.log("[Protect]用户离开直播间接口错误",err);
             });
             LiveStore.setStreamerLeft(false); //离开时设置 主播下播 为false, 隐藏下播状态图
+            LivePullManager.liveStopPull();
+            console.log("[Protect]停止拉流");
+            LiveStore.clearDankamu();
+            console.log("[Protect]清除弹幕数据");
         }
     },[])
 
@@ -168,11 +172,11 @@ const CloseButton = observer((props:any) => {
             props.navigation.goBack();
             //销毁直播
             LivePullManager.liveStopPull();
+            console.log("停止拉流");
             //清除弹幕
             LiveStore.clearDankamu();
-            console.log("清除弹幕数据")
-            //离开直播间
-            LiveStore.setLeaveRoom(true); //断开socket
+            console.log("清除弹幕数据");
+
             //离开直播间接口调用
             newclient.mutate({
                 mutation: NewGQL.LeaveLiveRoom,
@@ -194,7 +198,7 @@ const CloseButton = observer((props:any) => {
 const LiveRoomTopWidgets = (props:{navigation:any,streamer:{id:string,name:string,avatar:string,count_audience:number}}) => {
 
     return (
-        <View style={styles.TopWidgetContainer}>
+        <View style={[styles.TopWidgetContainer,{marginTop: StatusBarHeight + 12}]}>
             <View style={styles.TopLeftWidget}>
                 <TouchableOpacity activeOpacity={0.9} onPress={() => {
                     console.log("点击头像")

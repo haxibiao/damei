@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Dimensions, Text, Image, Slider } from 'react-native';
-const { width: sw, height: sh } = Dimensions.get('window');
+import { View, StyleSheet } from 'react-native';
 import {LivePushView} from 'hxf-tencent-live';
 
 const ShowTimeWidgetLivePreview = React.memo(() => {

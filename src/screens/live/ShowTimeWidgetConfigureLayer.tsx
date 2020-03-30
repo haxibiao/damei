@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Dimensions, TouchableOpacity, Text, TextInput, Image, Slider } from 'react-native';
+import { View, StyleSheet, Dimensions, TouchableOpacity, Text, TextInput, Image, StatusBar } from 'react-native';
 import { RoundedImage } from 'hxf-react-native-uilib';
 import { LivePushManager } from 'hxf-tencent-live';
 import MemoBeautySlider from './ShowTimeWidgetBeautySlider';
@@ -13,6 +13,7 @@ const StartLiveButtonWidth = sw * 0.72;
 const StartLiveButtonHeight = StartLiveButtonWidth * 0.2;
 const CardWidth = sw * 0.8;
 const CardHeight = CardWidth * 0.23;
+const StatusBarHeight = StatusBar.currentHeight ?? 0;
 
 const ShowTimeWidgetConfigureLayer = (props:{
     navigation:any,
@@ -53,11 +54,11 @@ const ShowTimeWidgetConfigureLayer = (props:{
 
             });
         }
-        //props.startCallback();
+        props.startCallback();
     }
 
     return (
-        <View style={styles.body}>
+        <View style={[styles.body]}>
             <TouchableOpacity 
                 onPress={() => {props.navigation.goBack()}} 
                 style={styles.closebtn}
@@ -96,9 +97,10 @@ export default observer(ShowTimeWidgetConfigureLayer);
 
 const styles = StyleSheet.create({
     body: {
-        height: sh,
-        width: sw,
+        flex:1,
         alignItems: 'center',
+        backgroundColor:'#00000001',
+        width:sw,
     },
     StartButton: {
         width: StartLiveButtonWidth,
@@ -112,8 +114,12 @@ const styles = StyleSheet.create({
     },
     closebtn:{
         position:'absolute',
-        left:10,
-        top: sh * 0.06
+        left:20,
+        top: StatusBarHeight + 16,
+        zIndex:10,
+        height:34,
+        width:34,
+        backgroundColor:'#00000001'
     },
     cameraSwitch:{ 
         width: CardWidth, 

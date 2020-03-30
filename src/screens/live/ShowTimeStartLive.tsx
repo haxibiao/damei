@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Dimensions, TouchableOpacity, Text, TextInput, Image, Slider } from 'react-native';
-import { RoundedImage } from 'hxf-react-native-uilib';
-import { LivePushManager } from 'hxf-tencent-live';
 
 import ShowTimeWidgetLivePreview from './ShowTimeWidgetLivePreview';
 import ShowTimeWidgetConfigureLayer from './ShowTimeWidgetConfigureLayer';
@@ -32,8 +30,7 @@ export default ShowTimeStartLive;
 
 const styles = StyleSheet.create({
     body: {
-        height: sh,
-        width: sw,
+        flex:1,
         alignItems: 'center',
         backgroundColor: '#999'
     },

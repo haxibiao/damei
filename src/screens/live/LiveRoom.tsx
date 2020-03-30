@@ -11,11 +11,9 @@ import LiveRoomTopWidgets from './LiveRoomTopWidgets';
 import LiveRoomBottomWidgets from './LiveRoomBottomWidgets';
 import CommonWidgetLiveRoomMessages from './CommonWidgetLiveRoomMessages';
 
-import LiveRoomListModal from './Depre_LiveRoomListModal';
+//import LiveRoomListModal from './Depre_LiveRoomListModal';
 import { ApolloClient } from 'apollo-boost';
-const MemoLiveRoomListModal = React.memo(() => <LiveRoomListModal /> );
 import LiveRoomWSMountPoint from './LiveRoomWSMountPoint';
-import {app} from '../../store';
 
 interface MountPoint {
     id: string
@@ -47,28 +45,40 @@ const LiveRoom = (props:any) => {
     const [loading,setloading] = useState(true);
     const [prepared,setprepared] = useState(false);
     const [streamer,setstreamer] = useState({}); //主播信息
-    const [alreadyleave,setalreadyleave] = useState(false);
 
     useEffect(() => {
-        // let connectevt = LivePullManager.subscrib('PLAY_EVT_CONNECT_SUCC',e => {
-        //     LiveStore.pushDankamu({name:'连接服务器成功',message:''})
-        // })
 
-        // let loadingevt = LivePullManager.subscrib('PLAY_EVT_PLAY_LOADING',event => {
-        //     LiveStore.pushDankamu({name:"直播加载中...",message:""})
-        // })
         let beginevt = LivePullManager.subscrib('PLAY_EVT_PLAY_BEGIN',(event) => {
             //LiveStore.pushDankamu({name:"直播开始!",message:''});
             setloading(false);
         });
         let endevt = LivePullManager.subscrib('PLAY_EVT_PLAY_END',(event) => {
             //直播已结束
+            console.log(event);
             LiveStore.pushDankamu({name:"直播已结束",message:''})
         });
+        let reconnect = LivePullManager.subscrib('PLAY_WARNING_RECONNECT',(event) => {
+            //网络错误，启动重连
+            if(!LiveStore.streamerLeft){
+                LiveStore.pushDankamu({name:"主播网络异常、或已下播，尝试重新连接...",message:''});
+            }
+        })
+
         let disconnectevt = LivePullManager.subscrib('PLAY_ERR_NET_DISCONNECT',(event) => {
             //网络无法重连，可能直播已结束
-            //LiveStore.pushDankamu({name:"网络严重错误",message:''})
-            setalreadyleave(true);
+            console.log('直播无法重连,',event);
+            if(!LiveStore.streamerLeft){
+                newclient.mutate({
+                    mutation: GQL.ExceptionLiveReport,
+                    variables:{roomid: RoomId}
+                }).then(rs => {
+                    console.log("直播间网络异常报告结果: ",rs);
+                    LiveStore.pushDankamu({name:"主播异常下播、直播已结束",message:''})
+                }).catch(err => {
+                    console.log("直播间网络异常报告错误: ",err);
+                })   
+            }
+            LiveStore.setStreamerLeft(true);
         });
 
         return () => {
@@ -76,6 +86,7 @@ const LiveRoom = (props:any) => {
             // loadingevt.remove();
             beginevt.remove();
             endevt.remove();
+            reconnect.remove();
             disconnectevt.remove();
         }
     },[])
@@ -116,19 +127,18 @@ const LiveRoom = (props:any) => {
 
         return () => {
             //组件销毁，清除数据
-            LivePullManager.liveStopPull();
             LiveStore.clearDankamu();
             LiveStore.setStreamerLeft(false);
         }
     },[]);
 
     return (
-        <View style={styles.body}>
-            <StatusBar hidden={true}/>
+        <View style={[styles.body]}>
+            <StatusBar hidden={false} backgroundColor='transparent' />
             
-            <View style={styles.content}>
+            <View style={[styles.content]}>
                 {
-                    prepared && <LivePullView style={{height:sh,width:sw,backgroundColor:'#333'}}/>
+                    prepared && <LivePullView style={{flex:1,backgroundColor:'#333'}}/>
                 }
                 {
                     loading && <LottieView source={require('./res/wind.json')} style={{width:'100%',position:'absolute',zIndex:8}} loop autoPlay/>
@@ -153,7 +163,6 @@ const styles = StyleSheet.create({
     body:{ 
         flex: 1,
         justifyContent:'space-between',
-        paddingTop:20,
         backgroundColor:'#333',
     },
     content:{
@@ -162,7 +171,7 @@ const styles = StyleSheet.create({
         top:0,
         bottom:0,
         width:sw*0.9999,
-        height:sh,
+        flex:1,
         justifyContent:'center',
         backgroundColor:'#333'
     }

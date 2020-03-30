@@ -10,7 +10,6 @@ class LiveStore {
     @observable hot:number = 0;
     @observable count_audience = 0;
     @observable joinRoomEcho:any = null;
-    @observable leaveRoom:boolean = false;
     @observable roomidForOnlinePeople:string = '';
     @observable streamerLeft:boolean = false;
 
@@ -24,10 +23,6 @@ class LiveStore {
         this.roomidForOnlinePeople = id;
     }
 
-    @action.bound
-    public setLeaveRoom(leave:boolean){
-        this.leaveRoom = leave;
-    }
     @action.bound
     public setJoinRoomEcho(echo:any){
         this.joinRoomEcho = echo;

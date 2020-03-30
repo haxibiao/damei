@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Dimensions,SafeAreaView, TouchableOpacity, Text, TextInput, Image, Slider } from 'react-native';
+import { View, StyleSheet, Dimensions,SafeAreaView, TouchableOpacity,NativeModules,StatusBar, Image, Slider } from 'react-native';
 import { LivePushManager } from 'hxf-tencent-live';
 const { width: sw, height: sh } = Dimensions.get('window');
-
 import ShowTimeWidgetLiveOnWidgetTopBar from './ShowTimeWidgetLiveOnWidgetTopBar';
 import CommonWidgetLiveRoomMessages from './CommonWidgetLiveRoomMessages';
 import * as BeautyModal from './ShowTimeWidgetBeautyModal';
 import {show} from './ShowTimeWidgetMirrorModal';
 import ShowTimeWSMountPoint from './ShowTimeWSMountPoint';
 const SideBarWidth = 42;
+const StatusBarHeight = StatusBar.currentHeight ?? 0;
 const OptionSize = 37;
+
 
 const MemoMountPoint = React.memo(() => <ShowTimeWSMountPoint/>)
 
@@ -62,12 +63,11 @@ export default ShowTimeWidgetLiveOnLayer;
 
 const styles = StyleSheet.create({
     body: {
-        height:sh,
-        width:sw
+        flex:1,
     },
     safearea:{ 
         flex: 1,
-        paddingTop:30,
+        paddingTop:StatusBarHeight+12,
         paddingBottom:12, 
         justifyContent: 'space-between', 
         alignItems: 'flex-start',
