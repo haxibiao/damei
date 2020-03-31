@@ -6,10 +6,8 @@
 import Iconfont from './Iconfont';
 // Basics
 import Avatar from './Basics/Avatar';
-// import SafeText from './Basics/SafeText';
-import SafeText from './Basics/SafeText.tsx';
-// import PlaceholderImage from './Basics/PlaceholderImage';
-import PlaceholderImage from './Basics/PlaceholderImage.tsx';
+import SafeText from './Basics/SafeText';
+import PlaceholderImage from './Basics/PlaceholderImage';
 import ResponseImage from './Basics/ResponseImage';
 import CustomTextInput from './Basics/CustomTextInput';
 import HxfButton from './Basics/HxfButton';
@@ -46,10 +44,8 @@ import RewardTipsOverlay from './Overlay/RewardTipsOverlay';
 // Layout
 import MasonryList from './Layout/MasonryList';
 // List
-// import PullList from './List/PullList';
-import PullList from './List/PullList.tsx';
+import PullList from './List/PullList';
 import ListFooter from './List/ListFooter';
-import HorizontalList from './List/HorizontalList';
 import ListItem from './List/ListItem';
 import CustomRefreshControl from './List/CustomRefreshControl';
 import ItemSeparator from './List/ItemSeparator';
@@ -59,8 +55,7 @@ import Button from './TouchableView/Button.tsx';
 // import AnimationButton from './TouchableView/AnimationButton';
 import AnimationButton from './TouchableView/AnimationButton.tsx';
 import FollowButton from './TouchableView/FollowButton';
-// import TouchFeedback from './TouchableView/TouchFeedback';
-import TouchFeedback from './TouchableView/TouchFeedback.tsx';
+import TouchFeedback from './TouchableView/TouchFeedback';
 import Radio from './TouchableView/Radio';
 import Like from './TouchableView/Like';
 // ThirdParty
@@ -124,7 +119,6 @@ export {
     MasonryList,
     PullList,
     ListFooter,
-    HorizontalList,
     ListItem,
     CustomRefreshControl,
     ItemSeparator,

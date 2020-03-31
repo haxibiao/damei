@@ -3,14 +3,15 @@ import { TouchableOpacity, ViewStyle } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
 
 function TouchFeedback(props: {
-    authenticated?: boolean;
-    style?: any;
-    activeOpacity?: number;
-    navigation?: any;
-    onPress?: any;
-    disabled?: any;
-    checkNetwork?: any;
-    key?: any;
+    authenticated?: boolean,
+    style?: any,
+    activeOpacity?: number,
+    navigation?: any,
+    onPress?: any,
+    disabled?: any,
+    checkNetwork?: any,
+    key?: any,
+    children:any
 }) {
     const authenticated = props?.authenticated ?? false;
     const activeOpacity = props?.activeOpacity ?? 0.6;
@@ -39,7 +40,7 @@ function TouchFeedback(props: {
         let onPress = props?.onPress ?? null;
         let navigation = props?.navigation ?? null;
         let style = props.style;
-        let disabled = props.disabled ?? false;
+        let disabled = props.disabled;
 
         if (authenticated && navigation) {
             onPress = middleware(onPress, navigation);
@@ -49,7 +50,7 @@ function TouchFeedback(props: {
             onPress = checkNetwork(onPress);
         }
 
-        if (props.disabled) {
+        if (disabled) {
             if (style instanceof Array) {
                 style = [
                     {
@@ -69,8 +70,8 @@ function TouchFeedback(props: {
         return { onPress, disabled, style };
     };
     let p = buildProps();
-    if (props?.key) return <TouchableOpacity {...p} key={props.key} />;
-    return <TouchableOpacity {...p} />;
+if (props?.key) return <TouchableOpacity onPress={p.onPress} disabled={p.disabled} style={p.style} key={props.key} >{props.children}</TouchableOpacity>;
+    return <TouchableOpacity onPress={p.onPress} disabled={p.disabled} style={p.style}  >{props.children}</TouchableOpacity>;
 }
 
 export default TouchFeedback;
