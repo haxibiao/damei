@@ -13,7 +13,7 @@ export default function(glyphMap, fontName, expoAssetId) {
     const RNVIconComponent = createIconSet(glyphMap, fontName);
 
     class Icon extends React.Component {
-        static propTypes = RNVIconComponent.propTypes;
+        // static propTypes = RNVIconComponent.propTypes;
         static defaultProps = RNVIconComponent.defaultProps;
 
         state = {
