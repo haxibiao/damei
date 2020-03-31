@@ -52,8 +52,6 @@ import ItemSeparator from './List/ItemSeparator';
 // TouchableView
 // import Button from './TouchableView/Button';
 import Button from './TouchableView/Button.tsx';
-// import AnimationButton from './TouchableView/AnimationButton';
-import AnimationButton from './TouchableView/AnimationButton.tsx';
 import FollowButton from './TouchableView/FollowButton';
 import TouchFeedback from './TouchableView/TouchFeedback';
 import Radio from './TouchableView/Radio';
@@ -123,7 +121,6 @@ export {
     CustomRefreshControl,
     ItemSeparator,
     Button,
-    AnimationButton,
     FollowButton,
     TouchFeedback,
     Radio,

@@ -5,7 +5,7 @@ import { PxFit, Theme, ISAndroid } from '../../utils';
 
 import NetInfo from '@react-native-community/netinfo';
 
-function Button(props: {
+const Button = React.memo((props: {
     size?: 'default' | 'small' | 'large',
     title: any,
     titleStyle: any,
@@ -15,7 +15,7 @@ function Button(props: {
     children: any,
     textColor: any,
     others: any
-}) {
+})=>{
     
     const size = props?.size ?? 'default';
     const activeOpacity = props?.activeOpacity ?? 0.6;
@@ -86,6 +86,7 @@ function Button(props: {
         );
     }
     if (!children) children = title;
+    console.log('Button组件执行')
 
     return (
         <View style={style}>
@@ -94,7 +95,7 @@ function Button(props: {
             </TouchableOpacity>
         </View>
     );
-}
+});
 
 const styles = StyleSheet.create({
     touch: { flex: 1, alignItems: 'center' },
