@@ -16,7 +16,7 @@ import HxfButton from './Basics/HxfButton';
 import GradientView from './Basics/GradientView';
 // Container
 import PageContainer from './Container/PageContainer';
-import Row from './Container/Row';
+import Row from './Container/Row.tsx';
 import Center from './Container/Center';
 import ErrorBoundary from './Container/ErrorBoundary';
 // Content
