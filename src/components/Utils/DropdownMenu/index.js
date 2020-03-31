@@ -16,7 +16,6 @@ import {
     Easing,
     StyleSheet,
 } from 'react-native';
-import PropTypes from 'prop-types';
 
 class DropdownMenu extends Component {
     constructor(props, context) {
@@ -277,21 +276,7 @@ class DropdownMenu extends Component {
     }
 }
 
-DropdownMenu.propTypes = {
-    style: PropTypes.object,
-    dropStyle: PropTypes.object,
-    dropItemStyle: PropTypes.object,
-    bgColor: PropTypes.string,
-    tintColor: PropTypes.string,
-    activityTintColor: PropTypes.string,
-    lable: PropTypes.element,
-    arrowImg: PropTypes.number,
-    checkImage: PropTypes.number,
-    data: PropTypes.array,
-    bannerAction: PropTypes.func,
-    optionTextStyle: PropTypes.object,
-    titleStyle: PropTypes.object,
-};
+
 
 const styles = StyleSheet.create({
     title_style: {

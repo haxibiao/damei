@@ -12,32 +12,30 @@ import {
     Text,
     TouchableOpacity,
     Animated,
-    ViewPropTypes,
     Dimensions,
 } from 'react-native';
-import PropTypes from 'prop-types';
 import { withNavigation } from 'react-navigation';
 import Iconfont from '../Iconfont';
 import { PxFit, Theme, NAVBAR_HEIGHT } from '../../utils';
 
 class NavigatorBar extends Component {
-    static propTypes = {
-        ...ViewPropTypes,
-        isTopNavigator: PropTypes.bool, //whether the page is initialized
-        title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-        titleStyle: PropTypes.object,
-        titleViewStyle: PropTypes.object,
-        backButtonPress: PropTypes.func,
-        backButtonColor: PropTypes.string,
-        leftView: PropTypes.element,
-        rightView: PropTypes.element,
-        sideViewStyle: PropTypes.object,
-        hidden: PropTypes.bool, //bar hidden
-        animated: PropTypes.bool, //hide or show bar with animation
-        statusBarStyle: PropTypes.oneOf(['default', 'light-content', 'dark-content']),
-        statusBarColor: PropTypes.string,
-        statusBarHidden: PropTypes.bool, //status bar hidden
-    };
+    // static propTypes = {
+    //     ...ViewPropTypes,
+    //     isTopNavigator: PropTypes.bool, //whether the page is initialized
+    //     title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+    //     titleStyle: PropTypes.object,
+    //     titleViewStyle: PropTypes.object,
+    //     backButtonPress: PropTypes.func,
+    //     backButtonColor: PropTypes.string,
+    //     leftView: PropTypes.element,
+    //     rightView: PropTypes.element,
+    //     sideViewStyle: PropTypes.object,
+    //     hidden: PropTypes.bool, //bar hidden
+    //     animated: PropTypes.bool, //hide or show bar with animation
+    //     statusBarStyle: PropTypes.oneOf(['default', 'light-content', 'dark-content']),
+    //     statusBarColor: PropTypes.string,
+    //     statusBarHidden: PropTypes.bool, //status bar hidden
+    // };
 
     static defaultProps = {
         ...View.defaultProps,

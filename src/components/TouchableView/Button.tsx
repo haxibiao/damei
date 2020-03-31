@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Platform, View, Text, ViewStyle } from 'react-native';
 import { PxFit, Theme, ISAndroid } from '../../utils';
 

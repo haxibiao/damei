@@ -58,7 +58,6 @@ import Radio from './TouchableView/Radio';
 import Like from './TouchableView/Like';
 // ThirdParty
 import ScrollTabBar from './ThirdParty/ScrollTabBar';
-// import ScrollTabBar from './ThirdParty/ScrollTabBar.tsx';
 import ScrollTabBarHeader from './ThirdParty/ScrollTabBarHeader';
 // Utils
 import ImagePickerViewer from './Utils/ImagePickerViewer';

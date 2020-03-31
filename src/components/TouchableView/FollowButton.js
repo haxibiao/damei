@@ -21,7 +21,7 @@ type Props = {
     titleStyle?: any,
     activeColor?: any,
     tintColor?: any,
-    ...TouchableWithoutFeedback.propTypes,
+    ...others,
 };
 
 class FollowButton extends Component<Props> {

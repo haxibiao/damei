@@ -22,7 +22,7 @@ type Props = {
     tabWidth?: number,
     tabStyle?: any,
     textStyle?: any,
-    ...View.propTypes,
+    ...ViewStyle,
 };
 
 export default class ScrollTabBar extends Component<Props> {
