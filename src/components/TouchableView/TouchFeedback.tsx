@@ -70,7 +70,7 @@ function TouchFeedback(props: {
         return { onPress, disabled, style };
     };
     let p = buildProps();
-if (props?.key) return <TouchableOpacity onPress={p.onPress} disabled={p.disabled} style={p.style} key={props.key} >{props.children}</TouchableOpacity>;
+
     return <TouchableOpacity onPress={p.onPress} disabled={p.disabled} style={p.style}  >{props.children}</TouchableOpacity>;
 }
 

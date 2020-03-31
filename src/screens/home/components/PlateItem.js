@@ -65,7 +65,7 @@ class PlateItem extends Component {
                                     navigation={navigation}
                                     style={styles.subItem}
                                     onPress={() => navigation.navigate('Answer', { category: item, question_id: null })}
-                                    key={index}>
+                                    >
                                     <Text style={styles.subItemText}>{item.name}</Text>
                                 </TouchFeedback>
                             )}
