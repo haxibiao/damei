@@ -16,8 +16,8 @@ function ResponseImage(props: {
     let style: ImageStyle = props?.style ?? {};
     let resizeMode = props?.resizeMode ?? "cover";
 
-    const [calc_width, set_calc_width] = useState();
-    const [calc_height, set_calc_height] = useState();
+    const [calc_width, set_calc_width] = useState(0);
+    const [calc_height, set_calc_height] = useState(0);
 
     // style = {
     //     width: calc_width,
@@ -51,12 +51,12 @@ function ResponseImage(props: {
 
         })
 
-    })
+    },[])
 
 
     return (
-        <View style={style}>
-            <Image source={{ uri }} style={style} resizeMode={resizeMode} />
+        <View style={[{width:calc_width,height:calc_height},style]}>
+            <Image source={{ uri }} style={[{width:calc_width,height:calc_height},style]} resizeMode={resizeMode} />
         </View>
     )
 }

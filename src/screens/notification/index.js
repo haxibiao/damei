@@ -51,7 +51,7 @@ class index extends Component {
                     <View style={styles.itemContent}>
                         <SafeText style={styles.itemName}>系统通知</SafeText>
                         {calcUnreads('system') ? (
-                            <Badge count={calcUnreads('system')} />
+                            <Badge count={12} />
                         ) : (
                             <Iconfont name={'right'} size={PxFit(16)} color={Theme.subTextColor} />
                         )}
