@@ -1,9 +1,3 @@
-/*
- * @flow
- * created by wyk made in 2018-12-07 16:38:12
- */
-'use strict';
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Platform, View, Text, ViewStyle } from 'react-native';
@@ -15,7 +9,6 @@ function Button(props: {
     size?: 'default' | 'small' | 'large',
     title: any,
     titleStyle: any,
-    // ...TouchableWithoutFeedback.propTypes,
     onPress: any,
     style: ViewStyle,
     disabled: any,
@@ -23,10 +16,16 @@ function Button(props: {
     textColor: any,
     others: any
 }) {
-
-    const size = 'default';
-    const activeOpacity = 0.6;
+    
+    const size = props?.size ?? 'default';
+    const activeOpacity = props?.activeOpacity ?? 0.6;
     const hitSlop = { top: 12, bottom: 12, left: 8, right: 8 };
+    let style = props?.style ?? {};
+    let disabled = props.disabled;
+    let title = props?.title;
+    let titleStyle = props?.titleStyle ?? {};
+    let textColor = props.textColor;
+    let children = props?.children ?? null;
 
     const checkNetwork = (submit: any) => {
         NetInfo.fetch().then(state => {
@@ -38,12 +37,10 @@ function Button(props: {
         });
     }
 
-    // const buildProps = () => {
-    // let { size, style, disabled, title, titleStyle, children, textColor, ...others } = this.props;
     let borderRadius, paddingVertical, paddingHorizontal, textFontSize;
     let borderColor = Theme.primaryColor;
     // let textColor = '#fff';
-    switch (props.size) {
+    switch (size) {
         case 'large':
             borderRadius = PxFit(6);
             paddingVertical = PxFit(8);
@@ -62,7 +59,7 @@ function Button(props: {
             paddingHorizontal = PxFit(12);
             textFontSize = PxFit(14);
     }
-    props.style = {
+    style = {
         borderColor,
         borderRadius,
         paddingVertical,
@@ -71,33 +68,29 @@ function Button(props: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        ...props.style,
+        ...style,
     };
-    if (props.disabled) {
-        props.style.opacity = 0.65;
+    if (disabled) {
+        style.opacity = 0.65;
     }
-    if (!React.isValidElement(props.title)) {
+    if (!React.isValidElement(title)) {
         let style = {
             color: props.textColor ? props.textColor : '#FFF',
             fontSize: textFontSize,
             overflow: 'hidden',
         };
-        props.title = (
-            <Text style={Object.assign({}, style, props.titleStyle)} numberOfLines={1}>
-                {props.title}
+        title = (
+            <Text style={Object.assign({}, style, titleStyle)} numberOfLines={1}>
+                {title}
             </Text>
         );
     }
-    if (!props.children) props.children = props.title;
-    // return { style, children, disabled, ...props.others };
-    // }
-
-    // let { props.children, style, onPress, ...others } = buildProps;
+    if (!children) children = title;
 
     return (
-        <View style={props.style}>
+        <View style={style}>
             <TouchableOpacity style={styles.touch} onPress={() => checkNetwork(props.onPress)} {...props.others}>
-                {props.children}
+                {children}
             </TouchableOpacity>
         </View>
     );
