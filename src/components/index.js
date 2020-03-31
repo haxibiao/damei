@@ -6,8 +6,10 @@
 import Iconfont from './Iconfont';
 // Basics
 import Avatar from './Basics/Avatar';
-import SafeText from './Basics/SafeText';
-import PlaceholderImage from './Basics/PlaceholderImage';
+// import SafeText from './Basics/SafeText';
+import SafeText from './Basics/SafeText.tsx';
+// import PlaceholderImage from './Basics/PlaceholderImage';
+import PlaceholderImage from './Basics/PlaceholderImage.tsx';
 import ResponseImage from './Basics/ResponseImage';
 import CustomTextInput from './Basics/CustomTextInput';
 import HxfButton from './Basics/HxfButton';
