@@ -44,21 +44,25 @@ import RewardTipsOverlay from './Overlay/RewardTipsOverlay';
 // Layout
 import MasonryList from './Layout/MasonryList';
 // List
-import PullList from './List/PullList';
+// import PullList from './List/PullList';
+import PullList from './List/PullList.tsx';
 import ListFooter from './List/ListFooter';
 import HorizontalList from './List/HorizontalList';
 import ListItem from './List/ListItem';
 import CustomRefreshControl from './List/CustomRefreshControl';
 import ItemSeparator from './List/ItemSeparator';
 // TouchableView
-import Button from './TouchableView/Button';
-import AnimationButton from './TouchableView/AnimationButton';
+// import Button from './TouchableView/Button';
+import Button from './TouchableView/Button.tsx';
+// import AnimationButton from './TouchableView/AnimationButton';
+import AnimationButton from './TouchableView/AnimationButton.tsx';
 import FollowButton from './TouchableView/FollowButton';
 import TouchFeedback from './TouchableView/TouchFeedback';
 import Radio from './TouchableView/Radio';
 import Like from './TouchableView/Like';
 // ThirdParty
 import ScrollTabBar from './ThirdParty/ScrollTabBar';
+// import ScrollTabBar from './ThirdParty/ScrollTabBar.tsx';
 import ScrollTabBarHeader from './ThirdParty/ScrollTabBarHeader';
 // Utils
 import ImagePickerViewer from './Utils/ImagePickerViewer';
