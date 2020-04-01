@@ -16,7 +16,7 @@ import { Theme, PxFit, SCREEN_WIDTH, SCREEN_HEIGHT, Api, Tools, ISIOS } from 'ut
 import { Query, compose, withApollo, graphql, Mutation, GQL } from 'apollo';
 import { app, observer } from 'store';
 import ImagePicker from 'react-native-image-crop-picker';
-
+import {Page} from '../../widgets';
 @observer
 class index extends Component {
 	constructor(props) {
@@ -215,16 +215,16 @@ class index extends Component {
 	render() {
 		let { submitting, avatar, gender, age } = this.state;
 		return (
-			<PageContainer
-				submitting={submitting}
-				title="编辑资料"
-				white
-				rightView={
+				<Page.Page
+				arrow
+				navigation={this.props.navigation}
+				centerTitle="编辑资料"
+				rightWidget={
 					<TouchFeedback style={styles.saveButton} onPress={this.saveChange}>
 						<Text style={styles.saveText}> 保存修改 </Text>
 					</TouchFeedback>
 				}
-			>
+				>
 				<ScrollView ref={ref => (this._ScrollView = ref)} style={styles.container}>
 					<View style={styles.avatarItem}>
 						<TouchFeedback onPress={this.changeAvatar}>
@@ -371,7 +371,7 @@ class index extends Component {
 						</TouchFeedback>
 					</Row>*/}
 				</ScrollView>
-			</PageContainer>
+				</Page.Page>
 		);
 	}
 }
@@ -383,7 +383,9 @@ const styles = StyleSheet.create({
 	},
 	saveButton: {
 		flex: 1,
-		justifyContent: 'center'
+		justifyContent: 'center',
+		alignItems:'flex-end',
+		paddingEnd:10
 	},
 	saveText: {
 		fontSize: PxFit(15),
