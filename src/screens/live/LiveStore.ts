@@ -12,6 +12,20 @@ class LiveStore {
     @observable joinRoomEcho:any = null;
     @observable roomidForOnlinePeople:string = '';
     @observable streamerLeft:boolean = false;
+    @observable onlinePeople:{
+        user_id:number,
+        user_name:string,
+        user_avatar:string,
+    }[] = [];
+
+    @action.bound
+    public setonlinepeople(people:{
+        user_id:number,
+        user_name:string,
+        user_avatar:string,
+    }[]){
+        this.onlinePeople = [...people];
+    }
 
     @action.bound
     public setStreamerLeft(left:boolean){

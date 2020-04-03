@@ -1193,8 +1193,8 @@
 
 "@react-native-community/viewpager@^2.0.1":
   version "2.0.2"
-  resolved "https://registry.npm.taobao.org/@react-native-community/viewpager/download/@react-native-community/viewpager-2.0.2.tgz#622b190294b1310c4825c98daeaee1c8443f7124"
-  integrity sha1-YisZApSxMQxIJcmNrq7hyEQ/cSQ=
+  resolved "https://registry.yarnpkg.com/@react-native-community/viewpager/-/viewpager-2.0.2.tgz#622b190294b1310c4825c98daeaee1c8443f7124"
+  integrity sha512-CKVhIZdX/Cmb80muog8sKpi5vM8npwFp4tx4Dj1IvTBidZweuO22+VH2rDOj7E0LzdV9IYRJ4FGBwcPBD2qUrQ==
 
 "@react-native-community/viewpager@^3.3.0":
   version "3.3.0"
@@ -4505,7 +4505,7 @@ human-signals@^1.1.1:
 
 "hxf-tencent-live@git+http://auto:hxb332211@code.haxibiao.cn/native/tencentlive.git":
   version "1.0.0"
-  resolved "git+http://auto:hxb332211@code.haxibiao.cn/native/tencentlive.git#61c7052fcf3adbcd14875cadd593e5191448e6a0"
+  resolved "git+http://auto:hxb332211@code.haxibiao.cn/native/tencentlive.git#889192898ea76f4df25a07cd3ddcadea70224f08"
 
 iconv-lite@0.4.24, iconv-lite@^0.4.17, iconv-lite@^0.4.24, iconv-lite@~0.4.13:
   version "0.4.24"
@@ -7443,8 +7443,8 @@ react-native-lightbox@^0.8.1:
 
 react-native-linear-gradient@^2.5.6:
   version "2.5.6"
-  resolved "https://registry.npm.taobao.org/react-native-linear-gradient/download/react-native-linear-gradient-2.5.6.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-native-linear-gradient%2Fdownload%2Freact-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
-  integrity sha1-liFcvF7HoBJHogiQiIqnW4NNRKA=
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
+  integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
 
 react-native-marquee-ab@^1.2.6:
   version "1.2.6"
@@ -7531,8 +7531,8 @@ react-native-screens@^2.3.0:
 
 react-native-scrollable-tab-view@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.npm.taobao.org/react-native-scrollable-tab-view/download/react-native-scrollable-tab-view-1.0.0.tgz#87319896067f7bb643ecd7fba2cba4d6d8f9e18b"
-  integrity sha1-hzGYlgZ/e7ZD7Nf7osuk1tj54Ys=
+  resolved "https://registry.yarnpkg.com/react-native-scrollable-tab-view/-/react-native-scrollable-tab-view-1.0.0.tgz#87319896067f7bb643ecd7fba2cba4d6d8f9e18b"
+  integrity sha512-lpZ9xz+PBdgSzpk93VjCIfxV0zvJDX9iEUP8ImDg3p1QJGHOWbWyfDx+lcx5VCDVrrdZdtuVAAdc0tkYXZyQDw==
   dependencies:
     "@react-native-community/viewpager" "^2.0.1"
     create-react-class "^15.6.2"

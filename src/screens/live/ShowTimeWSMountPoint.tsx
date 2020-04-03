@@ -26,6 +26,14 @@ const ShowTimeWSMountPoint = (props:{}) => {
                 console.log(e);
                 LiveStore.pushDankamu({name:`用户 ${e.user_name} 进入直播间`,message:''});
                 if(e.count_audience) LiveStore.setCountAudience(e.count_audience);
+                let newuser = {
+                    user_id: e.user_id,
+                    user_name:e.user_name,
+                    user_avatar:e.user_avatar
+                }
+                let prev = LiveStore.onlinePeople;
+                prev.splice(0,0,newuser);
+                LiveStore.setonlinepeople([...prev]);
             })
             .listen('.new_comment',e => {
                 console.log("新消息",e);
@@ -43,6 +51,14 @@ const ShowTimeWSMountPoint = (props:{}) => {
                 console.log(e);
                 if(e.message) LiveStore.pushDankamu({name:e.message,message:''});
                 if(e.count_audience) LiveStore.setCountAudience(e.count_audience);
+                let temp = LiveStore.onlinePeople;
+                for(let i = 0 ; i < temp.length; i++){
+                    if(temp[i].user_id == e.user_id){
+                        temp.splice(i,1);
+                        break;
+                    }
+                }
+                LiveStore.setonlinepeople(temp);
             })
 
             return () => {
@@ -54,6 +70,8 @@ const ShowTimeWSMountPoint = (props:{}) => {
                 if(LiveEcho == undefined){
                     console.log("主播端Echo销毁成功");
                 }
+                LiveStore.setonlinepeople([]);
+                console.log("LiveStore中的用户列表现在为: ",LiveStore.onlinePeople)
             }
 
     },[LiveStore.roomidForOnlinePeople]);

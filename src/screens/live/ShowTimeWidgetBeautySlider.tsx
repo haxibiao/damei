@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Dimensions, Text, Image, Slider } from 'react-native';
 const { width: sw, height: sh } = Dimensions.get('window');
 import { LivePushManager } from 'hxf-tencent-live';
+import {observe} from 'mobx';
+import LiveBeautyStore from './LiveBeautyStore';
 
 const ShowTimeWidgetBeautySlider = React.memo(() => {
 
@@ -10,11 +12,15 @@ const ShowTimeWidgetBeautySlider = React.memo(() => {
     },[])
 
     const BlurHandler = (value:number) => {
-        LivePushManager.liveSetBeautyLevel(Math.round(value)*10);
+        let v = Math.round(value)*10;
+        LivePushManager.liveSetBeautyLevel(v);
+        LiveBeautyStore.setBlur(v);
     }
 
     const WhiteHandler = (value:number) => {
-        LivePushManager.liveSetWhitenessLevel(Math.round(value)*10);
+        let v = Math.round(value)*10;
+        LivePushManager.liveSetWhitenessLevel(v);
+        LiveBeautyStore.setWhiteness(v);
     }
     
     return (
@@ -22,7 +28,7 @@ const ShowTimeWidgetBeautySlider = React.memo(() => {
             <Text style={styles.option_title}>磨皮</Text>
             <View style={styles.slider_wrapper}>
                 <Slider 
-                value={0} 
+                value={LiveBeautyStore.blur} 
                 thumbTintColor='#ffffffdd' 
                 minimumTrackTintColor='#fff' 
                 onValueChange={BlurHandler}/>
@@ -30,7 +36,7 @@ const ShowTimeWidgetBeautySlider = React.memo(() => {
             <Text style={styles.option_title}>美白</Text>
             <View style={styles.slider_wrapper}>
                 <Slider 
-                value={0} 
+                value={LiveBeautyStore.whiteness} 
                 thumbTintColor='#ffffffdd' 
                 minimumTrackTintColor='#fff' 
                 onValueChange={WhiteHandler}/>

@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     body: {
         flex:1,
         alignItems: 'center',
-        backgroundColor: '#999'
+        backgroundColor: '#333'
     },
     StartButton: {
         width: StartLiveButtonWidth,

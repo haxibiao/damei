@@ -85,7 +85,6 @@ const Button = React.memo((props: {
         );
     }
     if (!children) children = title;
-    console.log('Button组件执行')
 
     return (
         <View style={style}>

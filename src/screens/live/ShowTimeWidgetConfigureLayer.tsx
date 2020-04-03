@@ -23,38 +23,47 @@ const ShowTimeWidgetConfigureLayer = (props:{
     const [titlevalue, settitlevalue] = useState(`${app.me?.name ?? ''}的直播`);
     const [showBeauty,setshowbeauty] = useState(false);
 
+    let clicked = false;
+
     const titleHandler = (text: string) => {
         settitlevalue(text);
     }
 
     const StartLiveHandler = () => {
         let client = DataCenter.App.newclient;
-        if(client){
-            client.mutate({
-                mutation: GQL.GetLivePushURL,
-                variables: {
-                    title: titlevalue
-                },
-                fetchPolicy: 'no-cache',
-            }).then((result:any) => {
-                console.log("1直播推流接口返回数据:  ",result);
-                let push_url = result.data?.createLiveRoom?.push_url ?? "";
-                let room_id = result.data?.createLiveRoom?.id ?? '';
-                LiveStore.setroomidForOnlinePeople(room_id);
-
-                console.log("推流地址: ",push_url,room_id);
-                LivePushManager.liveStartLivePush(push_url);
-                props.startCallback();
-                LiveStore.pushDankamu({name:'小答妹: 为了营造绿色网络环境、请遵守文明准则哦。禁止发表涉及暴力、色情、歧视等言论。不遵守者一旦被查出将有封号风险。',message:''});
-
-            }).catch((err:any) => {
-                //TODO: error 
-                //console.log("1直播推流接口错误: ",err)
-                Toast.show({content:"服务器内部错误、请尝试稍后再试或者联系我们~"});
-
-            });
+        if(!clicked){
+            clicked = true;
+            if(client){
+                client.mutate({
+                    mutation: GQL.GetLivePushURL,
+                    variables: {
+                        title: titlevalue
+                    },
+                    fetchPolicy: 'no-cache',
+                }).then((result:any) => {
+                    console.log("1直播推流接口返回数据:  ",result);
+                    let push_url = result.data?.createLiveRoom?.push_url ?? "";
+                    let room_id = result.data?.createLiveRoom?.id ?? '';
+                    LiveStore.setroomidForOnlinePeople(room_id);
+    
+                    console.log("推流地址: ",push_url,room_id);
+                    LivePushManager.liveStartLivePush(push_url);
+                    props.startCallback();
+                    LiveStore.pushDankamu({name:'小答妹: 为了营造绿色网络环境、请遵守文明准则哦。禁止发表涉及暴力、色情、歧视等言论。不遵守者一旦被查出将有封号风险。',message:''});
+    
+                }).catch((err:any) => {
+                    //TODO: error 
+                    //console.log("1直播推流接口错误: ",err)
+                    Toast.show({content:"服务器内部错误、请尝试稍后再试或者联系我们~"});
+    
+                }).finally(() => {
+                    clicked = false;
+                })
+            }
+        }else{
+            //当前clicked 为 true ,不能点击
         }
-        props.startCallback();
+        // props.startCallback();
     }
 
     return (
@@ -86,7 +95,7 @@ const ShowTimeWidgetConfigureLayer = (props:{
 
             { showBeauty && <MemoBeautySlider /> }
 
-            <TouchableOpacity onPress={StartLiveHandler} style={styles.StartButton}>
+            <TouchableOpacity disabled={clicked} onPress={StartLiveHandler} style={styles.StartButton}>
                 <Text style={styles.startTitle}>开始直播</Text>
             </TouchableOpacity>
         </View>
@@ -106,7 +115,7 @@ const styles = StyleSheet.create({
         width: StartLiveButtonWidth,
         height: StartLiveButtonHeight,
         borderRadius: StartLiveButtonHeight / 2,
-        backgroundColor: '#F2CB17ee',
+        backgroundColor: '#F2CB17f1',
         position: 'absolute',
         bottom: sh * 0.1,
         justifyContent: 'center',

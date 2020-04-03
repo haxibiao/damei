@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, Image, SafeAreaView, NativeModules, TouchableOpacity,StatusBar, Platform, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Image, SafeAreaView, NativeModules, TouchableOpacity,StatusBar, Platform, TextInput,FlatList } from 'react-native';
 import {LivePullManager} from 'hxf-tencent-live';
 import { observer } from 'mobx-react';
 import LiveStore from './LiveStore';
@@ -13,9 +13,9 @@ const StatusBarHeight = StatusBar.currentHeight ?? 0; //状态栏高度
 
 const { width: sw, height: sh } = Dimensions.get("window");
 
-const TOP_WIDGET_HEIGHT = 40;
-const TOP_WIDGET_WIDTH = sw * 0.41;
-const TOP_WIDGET_AVATAR_SIZE = 36; // 2
+const TOP_WIDGET_HEIGHT = 30;
+const TOP_WIDGET_WIDTH = sw * 0.34;
+const TOP_WIDGET_AVATAR_SIZE = 25; // 2
 const TOP_WIDGET_FOLLOW_HEIGHT = TOP_WIDGET_HEIGHT * 0.5;
 const TOP_WIDGET_FOLLOW_WIDTH = TOP_WIDGET_FOLLOW_HEIGHT * 2.2;
 const TOP_WIDGET_CENTER_WIDTH = TOP_WIDGET_WIDTH - TOP_WIDGET_AVATAR_SIZE - TOP_WIDGET_FOLLOW_WIDTH - 12;
@@ -96,7 +96,7 @@ const FollowButton = observer((props:{isFollowed:boolean,streamerid:string}) => 
             {
                 followed ? (
                     <TouchableOpacity disabled={disabled} onPress={unfollowHandler} style={styles.likeBtn}>
-                        <Image source={require('../../assets/images/ic_liked.png')} style={{height:35,width:35}} resizeMode='contain'/>
+                        <Image source={require('../../assets/images/ic_liked.png')} style={{height:28,width:28}} resizeMode='contain'/>
                     </TouchableOpacity>
                 ) : (
                     <TouchableOpacity disabled={disabled} onPress={followHandler} style={styles.FollowWrapper}>
@@ -112,31 +112,36 @@ const FollowButton = observer((props:{isFollowed:boolean,streamerid:string}) => 
  *  topwidget 子组件 =>  热度
  */
 const HotDot = observer(() => {
-    return <Text style={{ fontSize: 10, color: 'white' }}>{`当前热度${LiveStore.hot}`}</Text>
+    return <Text style={{ fontSize: 8, color: 'white',width:TOP_WIDGET_CENTER_WIDTH*0.8 }} numberOfLines={1}>{`热度${LiveStore.hot}6787`}</Text>
 });
 
 /**
  *  topwidget 子组件 => 当前人数
  */
 const CurrentPeople = observer((props:any) => {
-
     useEffect(() => {
-
         return () => {
             /**
              *  将热度和人数值复位
              */
             LiveStore.setHot(0);
-            LiveStore.setCountAudience(0);
         }
     },[])
 
     return (
-        <View style={styles.AudienceCountWrapper}>
-            <Text style={{
-                fontSize: 12,
-                color: 'white'
-            }}>{LiveStore.count_audience}</Text>
+        <View style={{flexDirection:'row',alignItems:'center',position:'absolute',right:TOP_WIDGET_CLOSE_SIZE}}>
+            <View style={{minWidth:35,maxWidth:sw * 0.4,height:36}}>
+            <FlatList
+            keyExtractor={(item,index) => index.toString()}
+            data={LiveStore.onlinePeople}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{alignItems:'center',minWidth:35,maxWidth:sw * 0.4,height:36}}
+            renderItem={({item,index}) => {
+                return <Avatar uri={item.user_avatar} size={TOP_WIDGET_AVATAR_SIZE} frameStyle={{marginEnd:5,backgroundColor:'transparent'}}/>
+            }}
+            />
+            </View>
         </View>
     )
 });
@@ -168,7 +173,9 @@ const CloseButton = observer((props:any) => {
     },[])
 
     return (
-        <TouchableOpacity activeOpacity={0.9} onPress={ () => {
+        <TouchableOpacity 
+        activeOpacity={0.9} 
+        onPress={ () => {
             props.navigation.goBack();
             //销毁直播
             LivePullManager.liveStopPull();
@@ -213,7 +220,7 @@ const LiveRoomTopWidgets = (props:{navigation:any,streamer:{id:string,name:strin
                     <Avatar uri={props.streamer.avatar} size={TOP_WIDGET_AVATAR_SIZE}/>
                 </TouchableOpacity>
                 <View style={styles.hot}>
-                    <Text style={styles.nameTitle} numberOfLines={1}>{props?.streamer?.name ?? ''}</Text>
+                    <Text style={styles.nameTitle} numberOfLines={1}>{props?.streamer?.name+'什么鬼' ?? ''}</Text>
                     <HotDot />
                 </View>
                 <FollowButton isFollowed={props.streamer.is_followed} streamerid={props.streamer.id}/>
@@ -273,11 +280,11 @@ const styles = StyleSheet.create({
         marginEnd: 3
     },
     nameTitle:{ 
-        fontSize: 14, 
+        fontSize: 12, 
         fontWeight: '500', 
         color: 'white', 
         marginBottom: 1, 
-        width: TOP_WIDGET_CENTER_WIDTH * 0.78 
+        width: TOP_WIDGET_CENTER_WIDTH*0.8 
     },
     row:{
         flexDirection: 'row',
