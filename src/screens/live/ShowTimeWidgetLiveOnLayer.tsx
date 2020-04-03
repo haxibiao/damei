@@ -5,11 +5,12 @@ const { width: sw, height: sh } = Dimensions.get('window');
 import ShowTimeWidgetLiveOnWidgetTopBar from './ShowTimeWidgetLiveOnWidgetTopBar';
 import CommonWidgetLiveRoomMessages from './CommonWidgetLiveRoomMessages';
 import * as BeautyModal from './ShowTimeWidgetBeautyModal';
-import {show} from './ShowTimeWidgetMirrorModal';
+import * as MirrorModal from './ShowTimeWidgetMirrorModal';
+import * as VoiceChanger from './ShowTimeWidgetVoiceChangerModal';
 import ShowTimeWSMountPoint from './ShowTimeWSMountPoint';
-const SideBarWidth = 42;
+const SideBarWidth = 38;
 const StatusBarHeight = StatusBar.currentHeight ?? 0;
-const OptionSize = 37;
+const OptionSize = 33;
 
 
 const MemoMountPoint = React.memo(() => <ShowTimeWSMountPoint/>)
@@ -19,28 +20,42 @@ const AbilitySideBar = (props:any) => {
     const [mirror,setmirror] = useState(false);
     return (
         <View style={styles.sidebar}>
-            <TouchableOpacity onPress={() => {
+            <TouchableOpacity 
+            activeOpacity={0.95}
+            onPress={() => {
                 //切换前后摄像头
                 LivePushManager.liveSwitchCamera();
             }} style={[{marginBottom:12},styles.btn]}>
                 <Image source={require('./res/switch_camera.png')} resizeMode='contain' style={styles.img}/>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => {
+            <TouchableOpacity 
+            activeOpacity={0.95}
+            onPress={() => {
                 //调出美颜浮层
                 BeautyModal.showBeautyModal();
             }} style={[{marginBottom:12},styles.btn]}>
                 <Image source={require('./res/meiyan.png')} resizeMode='contain' style={styles.img}/>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => {
+            <TouchableOpacity 
+            activeOpacity={0.95}
+            onPress={() => {
                 //设置镜像
-                setmirror(!mirror);
-                LivePushManager.liveSetMirrorEnabled(mirror);
-                show(mirror);
-            }} style={styles.btn}>
+                MirrorModal.showMirrorModal();
+            }} style={[{marginBottom:12},styles.btn]}>
                 <Image source={require('./res/jingxiang.png')} resizeMode='contain' style={styles.img}/>
             </TouchableOpacity>
+
+            {/* <TouchableOpacity 
+            activeOpacity={0.95}
+            onPress={() => {
+                //变声
+                VoiceChanger.showVoiceChangerModal();
+            }} style={styles.btn}>
+                <Image source={require('./res/Voice.png')} resizeMode='contain' style={styles.img}/>
+            </TouchableOpacity> */}
+            
         </View>
     )
 }
@@ -86,7 +101,7 @@ const styles = StyleSheet.create({
         position:'absolute',
         zIndex:10,
         right:10,
-        top:sh * 0.13,
+        top:sh * 0.15,
         width:SideBarWidth,
         alignItems:'center'
     },

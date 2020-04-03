@@ -138,10 +138,10 @@ const LiveRoom = (props:any) => {
             
             <View style={[styles.content]}>
                 {
-                    prepared && <LivePullView style={{flex:1,backgroundColor:'#333'}}/>
+                    prepared && <LivePullView style={{flex:1,backgroundColor:'#111'}}/>
                 }
                 {
-                    loading && <LottieView source={require('./res/wind.json')} style={{width:'100%',position:'absolute',zIndex:8}} loop autoPlay/>
+                    loading && <LottieView source={require('./res/wind.json')} style={{width:'100%'}} loop autoPlay/>
                 }
                 <StreamerLeft />
             </View>
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     body:{ 
         flex: 1,
         justifyContent:'space-between',
-        backgroundColor:'#333',
+        backgroundColor:'#111',
     },
     content:{
         position:'absolute',
@@ -171,8 +171,7 @@ const styles = StyleSheet.create({
         top:0,
         bottom:0,
         width:sw*0.9999,
-        flex:1,
         justifyContent:'center',
-        backgroundColor:'#333'
+        backgroundColor:'#111',
     }
 })

@@ -14,31 +14,41 @@ const Content = observer((props: any) => {
 
     const inputRef = useRef<any>(null);
 
-    const [h, seth] = useState(20);
+    
     const [text,settext] = useState('');
+    const [h, seth] = useState(0);
 
     useEffect(() => {
-        Keyboard.addListener('keyboardDidShow', (e) => {
-            //console.log(e.endCoordinates.screenY);
-            //seth(20);
-        });
-        Keyboard.addListener('keyboardDidHide', (e) => {
-            //seth(0);
-        });
+        
         if (inputRef) {
             inputRef.current.focus();
         }
     }, []);
 
-    console.log("h高度",h);
+    
+    useEffect(() => {
+        let show = Keyboard.addListener('keyboardDidShow', (e) => {
+            console.log(e.endCoordinates.screenY);
+            seth(15);
+        });
+        let hide = Keyboard.addListener('keyboardDidHide', (e) => {
+            seth(0);
+        });
+        return () => {
+            show.remove();
+            hide.remove();
+        }
+    },[])
+
+    // console.log("h高度",h);
 
     return (
         <View style={{ flex: 1, justifyContent: 'flex-end' }}>
             <View style={{ width: sw, minHeight: 38, borderRadius: 5, backgroundColor: 'white', overflow: 'hidden' ,position:'absolute'}}>
-                <View style={{ width:sw,height:38, flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ width:sw,minHeight:38, flexDirection: 'row', justifyContent: 'space-between' }}>
                     <TextInput
                         ref={inputRef}
-                        style={{ width: sw - BOTTOM_BUTTON_SIZE - 10, minHeight: 38, paddingVertical: 0 ,paddingStart:10}}
+                        style={{ width: sw - BOTTOM_BUTTON_SIZE - 10, minHeight: 38, paddingTop: 5,paddingBottom:h ,paddingStart:10}}
                         multiline={true}
                         maxLength={50}
                         placeholder={'输入消息'}
@@ -72,7 +82,6 @@ const Content = observer((props: any) => {
                         />
                     </TouchableOpacity>
                 </View>
-                <View style={{ height: h, backgroundColor: 'white' }} />
             </View>
         </View>
     )

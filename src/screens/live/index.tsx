@@ -26,7 +26,7 @@ interface Item {
 }
 let newclient: ApolloClient<unknown>;
 
-const Live = (props: any) => {
+const Live = (props: {navigation}) => {
     const [page, setpage] = useState(1);
     const [hasmore, sethasmore] = useState(true);
     const [liverooms, setliverooms] = useState([]);
@@ -74,11 +74,11 @@ const Live = (props: any) => {
 
     useEffect(() => {
         FetchLiveList(page);
-        let listener = props.navigation.addListener('willFocus',(e:any) => {
-            console.log("获得焦点，刷新数据")
-            FetchLiveList(page,true);
-        });
-        return () => listener.remove();
+        // let listener = props.navigation.addListener('willFocus',(e:any) => {
+        //     console.log("获得焦点，刷新数据")
+        //     FetchLiveList(page,true);
+        // });
+        // return () => listener.remove();
     }, [])
 
     const RenderItem = ({ item, index }: { item: Item, index: number }) => {
@@ -123,31 +123,7 @@ const Live = (props: any) => {
     const NavBarHeight = isAndroid() ? 48 : 44; //安卓对应48，IOS对应44
 
     return (
-        <View >
-            <StatusBar backgroundColor={props?.barBackground ?? 'transparent'} barStyle={'dark-content'} />
-            <View style={{
-                backgroundColor: 'white',
-                width: sw,
-                flexDirection: 'row',
-                alignItems: 'flex-end',
-                marginTop:24
-            }}>
-                <View style={{ height: NavBarHeight, flexDirection: 'row', alignItems: 'center', flex: 3 }}>
-                    <HeaderBackButton arrow={props?.arrow ?? false} color={'#454545'} navigation={props.navigation} />
-                    <Text style={props?.leftTitleStyle ?? { marginStart: 5, fontSize: 18 }}>{props?.leftTitle ?? ''}</Text>
-                </View>
-                <View style={{ height: NavBarHeight, flexDirection: 'row', flex: 2, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={props?.centerTitleStyle ?? { fontSize: 20, color: '#222' }}>
-                        {'热门直播'}
-                    </Text>
-                </View>
-                <View style={{ height: NavBarHeight, flexDirection: 'row', flex: 3, justifyContent: 'flex-end' }}>
-                    {
-                        props?.rightWidget ?? <View />
-                    }
-                </View>
-            </View>
-            <>
+        <Page.PageCleared safe >
                 {
                     loading ? RenderLoading() : (
                         <FlatList
@@ -157,6 +133,9 @@ const Live = (props: any) => {
                             renderItem={RenderItem}
                             showsVerticalScrollIndicator={false}
                             ListEmptyComponent={RenderEmpty}
+                            ListHeaderComponent={() => {
+                                return <View style={{height:36}}/>
+                            }}
                             refreshControl={
                                 <RefreshControl
                                     title={'加载中...'}
@@ -181,8 +160,7 @@ const Live = (props: any) => {
                         />
                     )
                 }
-            </>
-        </View>
+        </Page.PageCleared>
     )
 }
 export default Live;

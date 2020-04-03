@@ -31,7 +31,7 @@ class TabBarComponent extends React.Component {
                         {renderIcon(scene)}
                         {route.key === '我的' && app.unreadNotice > 0 && <View style={styles.badge} />}
                     </View>
-                    <Text style={{ fontSize: PxFit(10), color }}>{route.key}</Text>
+                    <Text style={{ fontSize: 10, color }}>{route.key}</Text>
                 </View>
             </TouchableWithoutFeedback>
         );

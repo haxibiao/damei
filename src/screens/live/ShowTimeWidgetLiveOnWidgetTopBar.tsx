@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, Image, SafeAreaView, NativeModules, TouchableOpacity, StatusBar, Platform, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Image, NativeModules, TouchableOpacity, StatusBar, FlatList,ScrollView } from 'react-native';
 const { StatusBarManager } = NativeModules;
 import { observer } from 'mobx-react';
 import LiveStore from './LiveStore';
@@ -12,15 +12,14 @@ import { app } from '../../store'; //TODO: replace this import later
 const { width: sw, height: sh } = Dimensions.get("window");
 import { DataCenter } from '../../data';
 import { GQL } from '../../network';
-
-const TOP_WIDGET_HEIGHT = 40;
-const TOP_WIDGET_WIDTH = sw * 0.33;
-const TOP_WIDGET_AVATAR_SIZE = 36; // 2
+const TOP_WIDGET_HEIGHT = 30;
+const TOP_WIDGET_WIDTH = sw * 0.3;
+const TOP_WIDGET_AVATAR_SIZE = 25; // 2
 const TOP_WIDGET_FOLLOW_HEIGHT = TOP_WIDGET_HEIGHT * 0.5;
 const TOP_WIDGET_FOLLOW_WIDTH = TOP_WIDGET_FOLLOW_HEIGHT * 2.2;
 const TOP_WIDGET_CENTER_WIDTH = TOP_WIDGET_WIDTH - TOP_WIDGET_AVATAR_SIZE - 12;
-const TOP_WIDGET_CLOSE_SIZE = 30;
-const TOP_WIDGET_ONLINE_WRAPPER_HEIGHT = 27;
+const TOP_WIDGET_CLOSE_SIZE = 28;
+const TOP_WIDGET_ONLINE_WRAPPER_HEIGHT = 23;
 
 const ModalContent = observer((props: any) => {
 
@@ -83,17 +82,32 @@ const hideQuitModal = () => {
 }
 
 const HotValue = observer(() => {
-    return <Text style={{ fontSize: 10, color: 'white' }}>{`当前热度${LiveStore.hot}`}</Text>
+    return <Text style={{ fontSize: 8, color: 'white' }}>{`当前热度${LiveStore.hot}`}</Text>
 })
 
 const OnlinePeople = observer((props: any) => {
     return (
-        <TouchableOpacity onPress={() => { OnlinePeopleModal.showOnlinePeopleModal() }} style={styles.AudienceCountWrapper}>
+        <View style={styles.AudienceContainer}>
+            <View style={{minWidth:35,maxWidth:sw * 0.34,height:36}}>
+            <FlatList
+            keyExtractor={(item,index) => index.toString()}
+            data={LiveStore.onlinePeople}
+            horizontal
+            contentContainerStyle={{alignItems:'center'}}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({item,index}) => {
+                return <Avatar size={TOP_WIDGET_AVATAR_SIZE} uri={item.user_avatar} frameStyle={{ marginHorizontal: 10 }} />
+            }}
+            />
+            </View>
+            
+        <TouchableOpacity  onPress={() => { OnlinePeopleModal.showOnlinePeopleModal() }} style={styles.AudienceCountWrapper}>
             <Text style={{
                 fontSize: 12,
                 color: 'white'
-            }}>{`当前在看${LiveStore.count_audience}人`}</Text>
+            }}>{`当前${LiveStore.count_audience}人`}</Text>
         </TouchableOpacity>
+        </View>
     )
 })
 
@@ -180,16 +194,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginEnd: 3
     },
+    AudienceContainer: {
+        flexDirection:'row',
+        alignItems:'center',
+        position:'absolute',
+        right: TOP_WIDGET_CLOSE_SIZE,
+    },
     row:{
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center'
     },
     nameTitle:{ 
-        fontSize: 14, 
+        fontSize: 12, 
         fontWeight: '500', 
-        color: 'white', 
-        marginBottom: 1, 
+        color: 'white',  
         width: TOP_WIDGET_CENTER_WIDTH * 0.78 
     },
     hot:{

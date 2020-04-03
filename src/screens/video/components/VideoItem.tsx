@@ -134,10 +134,6 @@ export default observer(props => {
             <View style={styles.videoSideBar}>
                 <SideBar media={media} />
             </View>
-            <TouchableOpacity activeOpacity={0.9} onPress={JumpLiveRoomHandler} style={{position:'absolute',top:sh * 0.06,left:13,alignItems:'center'}}>
-                <Image source={require('../../../assets/images/zhibo.png')} resizeMode='contain' style={{height:33,width:33,opacity:1}}/>
-                <Text style={{fontSize:11,color:'#ffffffcc'}}>小直播</Text>
-            </TouchableOpacity>
             {isAskQuestion && (
                 <View
                     style={{
