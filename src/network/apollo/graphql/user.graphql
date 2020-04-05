@@ -17,6 +17,8 @@ mutation AutoSignIn($account: String, $uuid: String) {
     name
     avatar
     gender
+    gold
+    ticket
     profile {
       introduction
       birthday
