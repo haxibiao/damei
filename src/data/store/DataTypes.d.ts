@@ -7,6 +7,8 @@ interface DMUser {
     name?: string;
     avatar?: string;
     gender?: number;
+    gold?:number;
+    ticket?:number;
     profile?:{
         introduction?:string;
         birthday?:string;

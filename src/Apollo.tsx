@@ -98,7 +98,6 @@ export default observer(props => {
         });
     };
 
-    // let user = Helper.syncGetter('userStore.me', store);
 
     useEffect(() => {
         mountWebSocket(app.me);

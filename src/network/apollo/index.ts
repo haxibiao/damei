@@ -23,10 +23,10 @@ const deviceHeaders = {
 export default function useClientMaker(token:string,isnew:boolean,checkServer:any){
     let endpoint_suffix = isnew ? '/gql' : '/graphql';
     endpoint_suffix += token ? '?token='+token : '';
-    console.log("结尾: ",endpoint_suffix)
+    //console.log("结尾: ",endpoint_suffix);
     //创建Apollo的缓存对象
     const cache = new InMemoryCache();
-    
+
     //http请求定制
     const request = async (operation:any) => {
         await getIpAddress().then(result => {
