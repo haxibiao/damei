@@ -4,8 +4,12 @@ import {Page,VideoLiveScrollTab} from '../../widgets';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Video from './Video';
 import LiveList from '../live';
+import {observer,DataCenter} from '../../data';
 
-export default function VideoPlayground(props){
+import LoginMountPoint from '../../data/LoginMountPoint';
+
+
+export default function VideoPlayground(props:any){
 
     return (
         <Page.PageCleared barStyle={'light-content'}>
@@ -14,8 +18,10 @@ export default function VideoPlayground(props){
             renderTabBar={() => <VideoLiveScrollTab/> }
             >
                 <Video tabLabel="推荐"/>
-                <LiveList tabLabel='直播' navigation={props.navigation}/>
+                {/*<LiveList tabLabel='直播' navigation={props.navigation}/>*/}
             </ScrollableTabView>
+
+        <LoginMountPoint navigation={props.navigation}/>
         </Page.PageCleared>
     )
 }

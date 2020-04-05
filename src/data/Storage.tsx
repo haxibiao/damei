@@ -2,8 +2,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const TAG = "数据 :: 持久化存储storage :: \\ "
 interface KeyType {
-    user: string;
+    me: string;
     firstInstall: string;
+    manualLogout: string;
 }
 
 async function getItem(key: keyof KeyType) {

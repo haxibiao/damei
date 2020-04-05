@@ -10,10 +10,10 @@ const TAG = "数据 :: 数据中心DataCenter :: \\";
 
 // 处理对象类型  -- key声明
 interface DataKeys {
-    DCAssets: string,
-    DCUser: string,
+    DMUser: string,
 }
-type DATA = number | string | boolean ;
+
+type DATA = number | string | boolean | DMUser;
 
 
 
@@ -61,68 +61,75 @@ class DataCenter {
     public UserSetStartLiveWatchSocket(start: boolean){
         this.User.start_livewatch_socket = start;
     }
-
+    @action.bound
+    public UserSaveUserInfo(user:DMUser){ //直接设置整个 User.me
+        this.User.me = user;
+    }
+    @action.bound
+    public UserUpdateUserInfo(user:DMUser){ //更新 User.me 的字段
+        this.__ObjectTypeHandler(user,'DMUser')
+    }
+    @action.bound
+    public UserSetLoggined(login:boolean){
+        this.User.loggined = login;
+    }
 
      /**********************************
-     * @param data 
-     * @param key 
+     * @param data
+     * @param key
      * 数据处理模块 ，包括对象数据，基本类型数据模块
      ***********************************
      */
-    @action.bound
-    public DataSettingHandler< T extends DATA >(data: T,key: keyof DataKeys){
-        let t = typeof(data);
-        console.log("OneForAll::数据中心:: 数据处理器接收到的数据和数据类型为 : ",data,t);
-        switch(t){
-            case 'object':
-                this.__ObjectTypeHandler(data,key);
-                break;
-            case 'number':
-                this.__BaseTypeDataHandler(data);
-                break;
-            default:
-                console.error("Error : 数据类型错误，请检查待处理的数据 ",data);
-        }
-    }
-
-    private __souceCombine(source:any,data:any,keys:any){
+     private static __souceCombine(source:any, data:any, keys:any){
+        let t = source;
         if(keys.length > 0){
             for(let k of keys){
-                if(source[k] != undefined || source[k] != null){
-                    source[k] = data[k]
-                }else {
-                    console.error("Error: 数据中存在目标对象所未拥有的数据类型，key-> ",k," value-> ",data[k]," 所有已注册类型为 : ",Object.keys(source),"传入的数据所有类型: ",keys);
+                //如果源对象中不存在该 key，则直接赋值
+                let _o = t[k];
+                let _t = data[k];
+                if(!_o){
+                    t[k] = _t;
+                    //console.log('WARNING: 目标对象中存在源对象未声明属性、请检查数据，并严格声明数据类型。key: ',k,' value: ',data[k])
+                }else{
+                    //源对象中存在该Key,在第一层遍历中判断值的类型，如果非object类型则直接赋值。object类型还需要做数组判断
+                    if(typeof _o != 'object'){
+                        t[k] = data[k];
+                    }else{
+                        if(_o instanceof Array){
+                            //数组类型
+                            t[k] = [...data[k]];
+                        }else{
+                            //对象类型,继续做Key筛选
+                            for(let key of Object.keys(_t)){
+                                if(!_o[key]){
+                                    t[k][key] = data[k][key];
+                                    console.log('WARNING: 目标对象属性二级子对象中存在源对象二级子对象未声明属性，请检查数据，严格声明数据类型。 key: ',key,'  value: ',data[k][key]);
+                                }else{
+                                    t[k][key] = data[k][key];
+                                }
+                            }
+                        }
+                    }
                 }
             }
-            return source;
         }
+        return t;
     }
 
     @action.bound
     public __ObjectTypeHandler<T extends DATA>(data:T,key: keyof DataKeys){
         console.log("OneForAll::数据中心:: <对象类型>数据处理器 接收到的数据和key为",data,key)
-        // switch(key){
-        //     case 'DCAssets':
-        //         let source:DCAssets = this.Assets;
-        //         let IncomeObjKeys = Object.keys(data);
-        //         // REPLACE_TAG 1
-        //         let resultSource = this.__souceCombine(source,data,IncomeObjKeys);
-        //         this.Assets = resultSource;
-        //         break;
-        //     case 'DCUser':
-        //         let source_user :DCUserType = this.User.user;
-        //         let IncomeObjKeys_user = Object.keys(data);
-        //         let resultSource_user = this.__souceCombine(source_user,data,IncomeObjKeys_user);
-        //         this.User.user = resultSource_user;
-        //         break;
-        //     //TODO: ADD MORE 
-        //     default:
-        //         console.error("Error: 数据类型未注册，请检查数据中心已注册数据类型");
-        // }
-    }
-    @action.bound
-    public __BaseTypeDataHandler<T extends DATA>(data:T){
-        //处理基本类型数据更新
+        switch(key){
+            case 'DMUser':
+                let source_user :DMUser = this.User.me;
+                let IncomeObjKeys_user = Object.keys(data);
+                let resultSource_user = DataCenter.__souceCombine(source_user,data,IncomeObjKeys_user);
+                this.User.me = {...resultSource_user};
+                break;
+            //TODO: ADD MORE
+            default:
+                console.error("Error: 数据类型未注册，请检查数据中心已注册数据类型");
+        }
     }
 }
 
