@@ -5,3 +5,52 @@ query Testme{
     token
   }
 }
+
+#----------------- mutation below -------------------------
+
+#静默登录
+mutation AutoSignIn($account: String, $uuid: String) {
+  autoSignIn(account: $account, uuid: $uuid) {
+    id
+    token
+    account
+    name
+    avatar
+    gender
+    profile {
+      introduction
+      birthday
+      age
+      total_contributes
+    }
+    followers_count
+    follow_users_count
+    level {
+      id
+      name
+      ticket_max
+      level
+      exp
+    }
+    next_level_exp
+    withdrawInfo {
+      amount
+      description
+    }
+    wallet {
+      id
+      real_name
+      balance
+      available_balance
+      pay_account
+      open_id
+      total_withdraw_amount
+      pay_info_change_count
+    }
+    is_bind_wechat
+    is_admin
+    verified_at
+    auto_uuid_user
+    auto_phone_user
+  }
+}

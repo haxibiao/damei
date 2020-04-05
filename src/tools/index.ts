@@ -3,22 +3,20 @@
  */
 import { Adapter } from './Adapter';
 const Adp = Adapter.shared;
-/**
- *  屏幕宽，高
- */
+
+//屏幕宽高
 import { Dimensions } from 'react-native';
 const sw: number = Dimensions.get('window').width,
     sh: number = Dimensions.get('window').height;
 
-/**
- *  ART库
- */
+//ART库
 import * as ART from '@react-native-community/art';
 
-/**
- *  App 参数
- */
+//App参数
 import AppConfig from './AppConfig';
 
+// 登录工具函数
+import useLogin from './useLogin';
 
-export { sw, sh, Adp, ART,AppConfig }
+
+export { sw, sh, Adp, ART,AppConfig,useLogin }

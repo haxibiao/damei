@@ -5,6 +5,7 @@ import { Theme, PxFit, Config, ISIOS } from 'utils';
 import { app } from 'store';
 import { withApollo, GQL } from 'apollo';
 import { checkUpdate } from 'common';
+import { Storage } from '../../data';
 
 class index extends Component {
     constructor(props) {
@@ -36,6 +37,7 @@ class index extends Component {
                     leftConfirm: async () => {
                         app.signOut();
                         app.forget();
+                        Storage.setItem('manualLogout',true); //TODO:将该页面用函数重构，并将app store逐步替换为新的全局管理中心
                         navigation.navigate('Main', null, navigation.navigate({ routeName: '答题' }));
                     },
                     onConfirm: () => {
@@ -48,6 +50,7 @@ class index extends Component {
                     onConfirm: async () => {
                         app.signOut();
                         app.forget();
+                        Storage.setItem('manualLogout',true);//TODO:将该页面用函数重构，并将app store逐步替换为新的全局管理中心
                         navigation.navigate('Main', null, navigation.navigate({ routeName: '答题' }));
                     },
                 });
@@ -58,6 +61,7 @@ class index extends Component {
                 onConfirm: async () => {
                     app.signOut();
                     app.forget();
+                    Storage.setItem('manualLogout',true); //TODO:将该页面用函数重构，并将app store逐步替换为新的全局管理中心
                     navigation.navigate('Main', null, navigation.navigate({ routeName: '答题' }));
                 },
             });

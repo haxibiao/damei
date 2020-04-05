@@ -6,9 +6,12 @@ import {
     CloseLiveRoom,
     CommentLive,
     LeaveLiveRoom,
-    ExceptionLiveReport
+    ExceptionLiveReport,
 } from './graphql/live.graphql';
-import {Testme} from './graphql/user.graphql';
+import {
+    Testme,
+    AutoSignIn
+} from './graphql/user.graphql';
 
 export { 
     GetLivePushURL,
@@ -19,5 +22,6 @@ export {
     CloseLiveRoom,
     CommentLive,
     LeaveLiveRoom,
-    ExceptionLiveReport
+    ExceptionLiveReport, 
+    AutoSignIn,//用户相关
 }

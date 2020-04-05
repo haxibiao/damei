@@ -33,6 +33,7 @@ export default function PageCleared(props: {
     enableBack?: boolean;
     barStyle?: keyof BarStyle;
     safe?: boolean;
+    containerStyle?:ViewStyle
 }) {
 
     const backgroundColor = props?.backgroundColor ?? PageBackground; //最外层view的背景色 
@@ -89,7 +90,7 @@ export default function PageCleared(props: {
     } : {};
 
     return (
-        <View flex style={{ backgroundColor: backgroundColor }}>
+        <View flex style={[{ backgroundColor: backgroundColor },props.containerStyle]}>
 
             <StatusBar backgroundColor={'transparent'} barStyle={barStyle} />
 
