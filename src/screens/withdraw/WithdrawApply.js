@@ -9,6 +9,7 @@ import { Button, PageContainer, TouchFeedback } from 'components';
 import { Theme, SCREEN_WIDTH, SCREEN_HEIGHT, PxFit, Config, ISIOS } from 'utils';
 import { Overlay } from 'teaset';
 import { ad } from 'native';
+import {sh,sw} from '../../tools';
 
 import { observer, app, config, keys, storage } from 'store';
 
@@ -125,6 +126,7 @@ class WithdrawApply extends Component {
                         }}
                     />
                 </View>
+                <View style={{position:'absolute',bottom:0,zIndex:99,backgroundColor:'white',height:sh*0.2,width:sw}}/>
             </PageContainer>
         );
     }

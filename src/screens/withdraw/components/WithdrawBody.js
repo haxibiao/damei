@@ -46,6 +46,11 @@ const WithdrawalPlatforms = [
         name: '懂得赚',
         icon: require('@src/assets/images/dongdezhuan.png'),
     },
+    {
+        type:'wechat',
+        name:'微信',
+        icon:require('@src/assets/images/wechat_radio.png')
+    }
 ];
 
 export default observer(() => {
@@ -125,14 +130,12 @@ export default observer(() => {
     }, []);
 
     const checkWithdrawType = () => {
-        console.log('withdrawType', withdrawType);
 
         if (withdrawType === 'dongdezhuan' && !installDDZ) {
             DongdezhuanIntro.show();
         } else if (withdrawType === 'datizhuanqian' && !installDTZQ) {
             DatizhuanqianIntro.show();
         } else {
-            console.log('withdrawType', withdrawType);
             withdrawRequest();
         }
     };
@@ -142,6 +145,7 @@ export default observer(() => {
     }, []);
 
     useEffect(() => {
+        console.log("提现请求结果: ",withdrawData)
         if (withdrawData) {
             navigation.navigate('WithdrawApply', {
                 amount,
@@ -150,6 +154,7 @@ export default observer(() => {
     }, [withdrawData, amount, navigation]);
 
     useEffect(() => {
+        console.log("提现请求错误: ",error);
         if (error) {
             Toast.show({ content: String(error).replace('Error: GraphQL error: ', '') || '提现失败' });
         }
@@ -169,6 +174,18 @@ export default observer(() => {
                         }}>{`已绑定`}</Text>
                 </TouchableOpacity>
             );
+        }
+        if(withdrawType === 'wechat' && Tools.syncGetter('is_bind_wechat',user)){
+            return (
+                <TouchableOpacity onPress={navigationAction}>
+                    <Text
+                        style={{
+                            color: '#363636',
+                            fontSize: PxFit(14),
+                            textDecorationLine: 'underline',
+                        }}>{`已绑定`}</Text>
+                </TouchableOpacity>
+            )
         }
         if (withdrawType === 'dongdezhuan') {
             return (
@@ -196,13 +213,13 @@ export default observer(() => {
             );
         }
 
-        let platformName = '支付宝';
+        let platformName = withdrawType == 'wechat' ? '微信' : '支付宝';
         let bindPlatform = () => {
             navigation.navigate('ModifyAliPay');
         };
 
-        return (
-            <TouchableOpacity onPress={bindPlatform}>
+        return (    
+            <TouchableOpacity onPress={navigationAction}>
                 <Row>
                     <Image source={require('@src/assets/images/broad_tips.png')} style={styles.broadTipsImage} />
                     <Text style={styles.bindPlatform}>{`去绑定${platformName}`}</Text>
