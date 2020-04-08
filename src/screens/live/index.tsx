@@ -26,7 +26,8 @@ interface Item {
 }
 let newclient: ApolloClient<unknown>;
 
-const Live = (props: {navigation}) => {
+
+const Live = (props: {navigation:any,inCurrent:boolean}) => {
     const [page, setpage] = useState(1);
     const [hasmore, sethasmore] = useState(true);
     const [liverooms, setliverooms] = useState([]);
@@ -74,12 +75,12 @@ const Live = (props: {navigation}) => {
 
     useEffect(() => {
         FetchLiveList(page);
-        // let listener = props.navigation.addListener('willFocus',(e:any) => {
-        //     console.log("获得焦点，刷新数据")
-        //     FetchLiveList(page,true);
-        // });
-        // return () => listener.remove();
-    }, [])
+    }, []);
+
+
+    useEffect(() => {
+        if(props.inCurrent) FetchLiveList(page,true);            
+    },[props.inCurrent])
 
     const RenderItem = ({ item, index }: { item: Item, index: number }) => {
         // console.log("直播列表item ",item)
@@ -152,6 +153,7 @@ const Live = (props: {navigation}) => {
                             onEndReached={() => {
                                 //触底加载更多
                                 if(hasmore){
+                                    console.log("触底加载更多")
                                     let nextpage = page + 1;
                                     setpage(nextpage);
                                     FetchLiveList(nextpage, false);
