@@ -1,9 +1,4 @@
-/*
- * @Author: Gaoxuan
- * @Date:   2019-08-01 09:55:03
- */
-
- //直播
+//直播
  import Live from '../screens/live';
  import LiveWatch from '../screens/live/LiveRoom';
  import StartLive from '../screens/live/ShowTimeStartLive';
