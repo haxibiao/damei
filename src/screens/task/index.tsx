@@ -16,9 +16,10 @@ export default observer(props => {
         setPage(1);
     }, [setPage]);
 
-    useEffect(() => {
-        setPage(0);
-    }, [me.id]);
+    const tabChangeHandler = (e:any) => {
+        setPage(e.i);
+        console.log("切换到tab ",e.i);
+    }
 
     const renderTabItem = useCallback(
         ({ name, isActive, page }) => {
@@ -36,10 +37,8 @@ export default observer(props => {
     return (
         <PageContainer hiddenNavBar contentViewStyle={styles.contentViewStyle} white>
             <ScrollableTabView
-                prerenderingSiblingsNumber={Infinity}
-                page={page}
-                onChangeTab={e => setPage(e.i)}
-                renderTabBar={props => (
+                onChangeTab={tabChangeHandler}
+                renderTabBar={ props => (
                     <ScrollTabBar
                         {...props}
                         hiddenUnderLine={true}
