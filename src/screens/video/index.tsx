@@ -11,14 +11,17 @@ import LoginMountPoint from '../../data/LoginMountPoint';
 
 export default function VideoPlayground(props:any){
 
+    const [currentPage,setcurrentPage] = useState(0);
+
     return (
         <Page.PageCleared barStyle={'light-content'}>
             <ScrollableTabView
             tabBarPosition='overlayTop'
+            onChangeTab={e => setcurrentPage(e.i)}
             renderTabBar={() => <VideoLiveScrollTab/> }
             >
                 <Video tabLabel="推荐"/>
-                {/*<LiveList tabLabel='直播' navigation={props.navigation}/>*/}
+                <LiveList tabLabel='直播' navigation={props.navigation} inCurrent={ currentPage == 1}/>
             </ScrollableTabView>
 
         <LoginMountPoint navigation={props.navigation}/>
