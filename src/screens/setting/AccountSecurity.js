@@ -12,6 +12,7 @@ import UserPanel from './components/UserPanel';
 import { WeChat } from 'native';
 
 import { app } from 'store';
+import { DataCenter } from '../../data';
 
 import { compose, graphql, GQL } from 'apollo';
 import { checkLoginInfo } from 'common';
@@ -34,28 +35,30 @@ class AccountSecurity extends Component {
             .then(isSupported => {
                 if (isSupported) {
                     WeChat.wechatLogin().then(code => {
-                        let data = new FormData();
-                        data.append('code', code);
-                        fetch(Config.ServerRoot + '/api/v1/wechat/app/auth', {
-                            method: 'POST',
-                            body: data,
-                        })
-                            .then(response => response.json())
-                            .then(result => {
-                                if (result.data && result.data.unionid) {
-                                    this.bindWx(result.data);
-                                } else {
-                                    Toast.show({
-                                        content: '当前登录微信已绑定账号' + result.data.user.account,
-                                    });
-                                }
-                            })
+                        // let data = new FormData();
+                        // data.append('code', code);
+                        // fetch(Config.ServerRoot + '/api/v1/wechat/app/auth', {
+                        //     method: 'POST',
+                        //     body: data,
+                        // })
+                        //     .then(response => response.json())
+                        //     .then(result => {
+                        //         if (result.data && result.data.unionid) {
+                        //             this.bindWx(result.data);
+                        //         } else {
+                        //             Toast.show({
+                        //                 content: '当前登录微信已绑定账号' + result.data.user.account,
+                        //             });
+                        //         }
+                        //     })
 
-                            .catch(error => {
-                                Toast.show({
-                                    content: '微信账号获取失败',
-                                });
-                            });
+                        //     .catch(error => {
+                        //         Toast.show({
+                        //             content: '微信账号获取失败',
+                        //         });
+                        //     });
+                        console.log('微信授权码: ',code);
+                        this.bindWx({code:code});
                     });
                 } else {
                     Toast.show({ content: '未安装微信或当前微信版本较低' });
@@ -67,36 +70,68 @@ class AccountSecurity extends Component {
     };
 
     bindWx = async data => {
-        let result = {};
-        try {
-            result = await this.props.BindWechatMutation({
-                variables: {
-                    union_id: data.unionid,
+
+        DataCenter.App.client.mutate({
+            mutation: GQL.BindWechatMutation,
+            variables:{
+                code:data.code
+            },
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
+            refetchQueries: () => [
+                {
+                    query: GQL.UserAutoQuery,
+                    variables: { id: app.me.id },
+                    fetchPolicy: 'network-only',
                 },
-                errorPolicy: 'all',
-                refetchQueries: () => [
-                    {
-                        query: GQL.UserAutoQuery,
-                        variables: { id: app.me.id },
-                        fetchPolicy: 'network-only',
-                    },
-                ],
-            });
-        } catch (ex) {
-            result.errors = ex;
-        }
-        if (result && result.errors) {
-            this.setState({
-                submitting: false,
-            });
-            const str = result.errors[0].message;
-            Toast.show({ content: str });
-        } else {
-            this.setState({
-                is_bind_wechat: true,
-            });
-            Toast.show({ content: '绑定成功' });
-        }
+            ]
+        }).then(rs => {
+            if(rs?.errors){
+                //console.log("返回了错误>>>>>>>.",rs.errors[0].message)
+                Toast.show({content: rs?.errors[0]?.message ?? '',duration:2000});
+                this.setState({
+                    submitting: false,
+                });
+            }else{
+                //console.log("绑定微信成功>>>>>>>>>>>");
+                this.setState({
+                    is_bind_wechat: true,
+                });
+                Toast.show({ content: '绑定成功',duration:2000});
+            }
+        })
+
+        // let result = {};
+        // try {
+        //     result = await this.props.BindWechatMutation({
+        //         variables: {
+        //             code: data.code
+        //         },
+        //         errorPolicy: 'all',
+        //         refetchQueries: () => [
+        //             {
+        //                 query: GQL.UserAutoQuery,
+        //                 variables: { id: app.me.id },
+        //                 fetchPolicy: 'network-only',
+        //             },
+        //         ],
+        //     });
+        // } catch (ex) {
+        //     result.errors = ex;
+        // }
+        // console.log("绑定微信结果: ",result);
+        // if (result && result.errors) {
+        //     this.setState({
+        //         submitting: false,
+        //     });
+        //     const str = result.errors[0].message;
+        //     Toast.show({ content: str });
+        // } else {
+        //     this.setState({
+        //         is_bind_wechat: true,
+        //     });
+        //     Toast.show({ content: '绑定成功' });
+        // }
     };
 
     checkAccount = (auto_uuid_user, auto_phone_user) => {
