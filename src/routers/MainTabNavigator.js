@@ -9,7 +9,7 @@ import { StackNavigator, TabBarBottom, createBottomTabNavigator, createStackNavi
 import HomeScreen from '../screens/home';
 import TaskScreen from '../screens/task';
 // import NotificationScreen from '../screens/notification';
-import VideoScreen from '../screens/video';
+import VideoPlayground from '../screens/video/indexs';
 
 import ProfileScreen from '../screens/profile';
 import MainTabBar from './MainTabBar';
@@ -19,7 +19,7 @@ import { Iconfont } from '../components';
 export default createBottomTabNavigator(
     {
         学习: {
-            screen: VideoScreen,
+            screen: VideoPlayground,
             navigationOptions: () => TabOptions('学习'),
         },
         答题: {

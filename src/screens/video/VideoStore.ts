@@ -41,6 +41,13 @@ class VideoStore {
     @observable public rewardProgress: number = 0;
     @observable public getReward = [];
 
+    @observable public onLiveTab: boolean = false;
+
+    @action.bound
+    public setOnLiveTab(onlive: boolean){
+        this.onLiveTab = onlive;
+    }
+
     @action.bound
     public addSource(source: Video[]) {
         this.dataSource = this.dataSource.concat(source);
