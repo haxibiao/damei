@@ -14,7 +14,7 @@ import CommonWidgetLiveRoomMessages from './CommonWidgetLiveRoomMessages';
 //import LiveRoomListModal from './Depre_LiveRoomListModal';
 import { ApolloClient } from 'apollo-boost';
 import LiveRoomWSMountPoint from './LiveRoomWSMountPoint';
-
+import * as StreamerLeftModal from './LiveRoomStreamLeftModal';
 interface MountPoint {
     id: string
 }
@@ -23,18 +23,11 @@ const MemoMountPoint = React.memo( (props:MountPoint) => <LiveRoomWSMountPoint i
 
 const StreamerLeft = observer( (props:any) => {
 
-    if(LiveStore.streamerLeft){
-        return (
-            <View style={{height:sh,width:sw,justifyContent:'center',alignItems:'center',position:'absolute',top:0}}>
-                    <Image source={require('./res/offline.png')} resizeMode='contain' style={{height:sw *0.3,width:sw*0.3 }}/>
-                    <View style={{backgroundColor:'#00000055',borderRadius:8,alignItems:'center',justifyContent:'center',marginTop:10,paddingHorizontal:8}}>
-                        <Text style={{color:'white',fontSize:16}}>主播已下播~</Text>
-                    </View>
-            </View>
-        )
-    }else{
-        return <View style={{position:'absolute',width:0,height:0}}/>
-    }
+    useEffect(() => {
+        if(LiveStore.streamerLeft) StreamerLeftModal.showStreamerLeft(props.navigation);
+    },[LiveStore.streamerLeft])
+
+    return <View style={{position:'absolute'}}/>
 })
 
 var newclient: ApolloClient<unknown> ;
@@ -144,7 +137,7 @@ const LiveRoom = (props:any) => {
                 {
                     loading && <LottieView source={require('./res/wind.json')} style={{width:'100%'}} loop autoPlay/>
                 }
-                <StreamerLeft />
+                <StreamerLeft navigation={navigation}/>
             </View>
             <LiveRoomTopWidgets navigation={props.navigation} streamer={streamer} loadingEnd={!loading}/>
             <View style={{height:sh*0.35 + 40,zIndex:22}}>
