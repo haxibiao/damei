@@ -14,13 +14,17 @@ const StatusBarHeight = StatusBar.currentHeight ?? 0; //状态栏高度
 const { width: sw, height: sh } = Dimensions.get("window");
 
 const TOP_WIDGET_HEIGHT = 30;
-const TOP_WIDGET_WIDTH = sw * 0.34;
+const TOP_WIDGET_WIDTH = sw * 0.345;
 const TOP_WIDGET_AVATAR_SIZE = 25; // 2
-const TOP_WIDGET_FOLLOW_HEIGHT = TOP_WIDGET_HEIGHT * 0.5;
-const TOP_WIDGET_FOLLOW_WIDTH = TOP_WIDGET_FOLLOW_HEIGHT * 2.2;
-const TOP_WIDGET_CENTER_WIDTH = TOP_WIDGET_WIDTH - TOP_WIDGET_AVATAR_SIZE - TOP_WIDGET_FOLLOW_WIDTH - 12;
+
+const TOP_WIDGET_FOLLOW_CONTAINER_SIZE = 24;
+const TOP_WIDGET_FOLLOW_CONTAINER_SIZE_WIDTH = 30;
+const TOP_FOLLOW_SIZE = 20;
+
+const TOP_WIDGET_CENTER_WIDTH = TOP_WIDGET_WIDTH - TOP_WIDGET_AVATAR_SIZE - TOP_WIDGET_FOLLOW_CONTAINER_SIZE_WIDTH;
 const TOP_WIDGET_CLOSE_SIZE = 30;
 const TOP_WIDGET_ONLINE_WRAPPER_HEIGHT = 27;
+
 
 /**
  *  topwidget 子组件 =>  关注按钮
@@ -92,15 +96,15 @@ const FollowButton = observer((props:{isFollowed:boolean,streamerid:string}) => 
     }
 
     return (
-        <View>
+        <View style={{backgroundColor: '#ffffffee',borderRadius:TOP_WIDGET_FOLLOW_CONTAINER_SIZE/2,height:TOP_WIDGET_FOLLOW_CONTAINER_SIZE,width:TOP_WIDGET_FOLLOW_CONTAINER_SIZE_WIDTH,justifyContent:'center',alignItems:'center',marginEnd:0}}>
             {
                 followed ? (
-                    <TouchableOpacity disabled={disabled} onPress={unfollowHandler} style={styles.likeBtn}>
-                        <Image source={require('../../assets/images/ic_liked.png')} style={{height:28,width:28}} resizeMode='contain'/>
+                    <TouchableOpacity disabled={disabled} onPress={unfollowHandler}>
+                        <Image source={require('../../assets/images/ic_liked.png')} style={{height:TOP_FOLLOW_SIZE,width:TOP_FOLLOW_SIZE}} resizeMode='contain'/>
                     </TouchableOpacity>
                 ) : (
-                    <TouchableOpacity disabled={disabled} onPress={followHandler} style={styles.FollowWrapper}>
-                        <Text style={{ fontSize: 13, color: 'white' }}>关注</Text>
+                    <TouchableOpacity disabled={disabled} onPress={followHandler}>
+                        <Text style={{ fontSize: 12, color: 'red',fontWeight:'bold' }}>关注</Text>
                     </TouchableOpacity>
                 )
             }
@@ -112,7 +116,7 @@ const FollowButton = observer((props:{isFollowed:boolean,streamerid:string}) => 
  *  topwidget 子组件 =>  热度
  */
 const HotDot = observer(() => {
-    return <Text style={{ fontSize: 8, color: 'white',width:TOP_WIDGET_CENTER_WIDTH*0.8 }} numberOfLines={1}>{`热度${LiveStore.hot}6787`}</Text>
+    return <Text style={styles.HotDot} numberOfLines={1}>{`热度${LiveStore.hot}`}</Text>
 });
 
 /**
@@ -129,22 +133,45 @@ const CurrentPeople = observer((props:any) => {
     },[])
 
     return (
-        <View style={{flexDirection:'row',alignItems:'center',position:'absolute',right:TOP_WIDGET_CLOSE_SIZE}}>
+        <View style={{flexDirection:'row',alignItems:'center'}}>
             <View style={{minWidth:35,maxWidth:sw * 0.4,height:36}}>
             <FlatList
             keyExtractor={(item,index) => index.toString()}
             data={LiveStore.onlinePeople}
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{alignItems:'center',minWidth:35,maxWidth:sw * 0.4,height:36}}
+            contentContainerStyle={{alignItems:'center'}}
             renderItem={({item,index}) => {
-                return <Avatar uri={item.user_avatar} size={TOP_WIDGET_AVATAR_SIZE} frameStyle={{marginEnd:5,backgroundColor:'transparent'}}/>
+                console.log(item.user_avatar,item.user_id);
+                return <Avatar uri={item.user_avatar} size={TOP_WIDGET_AVATAR_SIZE*1.1} frameStyle={{marginEnd:2,backgroundColor:'white'}}/>
             }}
             />
             </View>
         </View>
     )
 });
+
+/**
+ * 在线人数
+ */
+const OnlineCount = observer((props:any) => {
+
+    const getCount = () => {
+        let c = LiveStore.count_audience;
+        if(c >= 1000 && c < 10000){
+            return (c/1000).toFixed(1) + 'k';
+        }else if(c >= 10000){
+            return (c/10000).toFixed(1)+'w';
+        }
+        return c;
+    }
+
+    return (
+        <View style={{height:TOP_WIDGET_CLOSE_SIZE,minWidth:TOP_WIDGET_CLOSE_SIZE,borderRadius:TOP_WIDGET_CLOSE_SIZE/2,backgroundColor:'#00000033',justifyContent:'center',alignItems:'center',paddingHorizontal:3}}>
+            <Text style={{fontSize:12,color:'white'}}>{getCount()}</Text>
+        </View>
+    )
+})
 
 /**
  * 离开直播间按钮
@@ -202,10 +229,10 @@ const CloseButton = observer((props:any) => {
     )
 })
 
-const LiveRoomTopWidgets = (props:{navigation:any,streamer:{id:string,name:string,avatar:string,count_audience:number}}) => {
+const LiveRoomTopWidgets = (props:{navigation:any,streamer:{id:string,name:string,avatar:string,count_audience:number},loadingEnd:boolean}) => {
 
     return (
-        <View style={[styles.TopWidgetContainer,{marginTop: StatusBarHeight + 12}]}>
+        <View style={[styles.TopWidgetContainer,{marginTop: StatusBarHeight + 12,zIndex:props.loadingEnd ? 22 : 10}]}>
             <View style={styles.TopLeftWidget}>
                 <TouchableOpacity activeOpacity={0.9} onPress={() => {
                     console.log("点击头像")
@@ -221,14 +248,15 @@ const LiveRoomTopWidgets = (props:{navigation:any,streamer:{id:string,name:strin
                 </TouchableOpacity>
                 <View style={styles.hot}>
                     <Text style={styles.nameTitle} numberOfLines={1}>{props?.streamer?.name+'什么鬼' ?? ''}</Text>
-                    <HotDot />
                 </View>
                 <FollowButton isFollowed={props.streamer.is_followed} streamerid={props.streamer.id}/>
             </View>
 
+            <HotDot />
+
             <View style={styles.row}>
                 <CurrentPeople count_audience={props.streamer.count_audience ?? 0}/>
-                <CloseButton navigation={props.navigation}/>
+                <OnlineCount />
             </View>
 
             {/* <TouchableOpacity activeOpacity={0.9} onPress={MoreLiveHandler} style={{position:'absolute',right:13,bottom:-30,backgroundColor:'#00000033',paddingHorizontal:8,paddingVertical:2,borderRadius:12}}>
@@ -248,7 +276,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 12,
-        zIndex:10
     },
     TopLeftWidget: {
         height: TOP_WIDGET_HEIGHT,
@@ -259,16 +286,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#00000033',
         borderRadius: TOP_WIDGET_HEIGHT / 2,
         overflow: 'hidden',
-        paddingHorizontal: 5
-    },
-    FollowWrapper:{
-        height: TOP_WIDGET_FOLLOW_HEIGHT,
-        width: TOP_WIDGET_FOLLOW_WIDTH,
-        borderRadius: TOP_WIDGET_FOLLOW_HEIGHT / 2,
-        overflow: 'hidden',
-        backgroundColor: '#FE5F5F',
-        justifyContent: 'center',
-        alignItems: 'center'
+        paddingHorizontal:5
     },
     AudienceCountWrapper:{
         paddingHorizontal: 9,
@@ -297,10 +315,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingStart: 8
     },
-    likeBtn:{
-        height:38,
-        width:TOP_WIDGET_FOLLOW_WIDTH,
-        justifyContent:'center',
-        alignItems:'center'
+    HotDot:{ 
+        fontSize: 12, 
+        color: 'white',
+        position:'absolute',
+        left:12,
+        bottom: -25,
+        backgroundColor:'#00000033',
+        borderRadius:10,
+        textAlign:'center',
+        paddingHorizontal:5,
+        paddingVertical:1
     }
 });
