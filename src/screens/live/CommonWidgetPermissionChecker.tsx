@@ -164,7 +164,7 @@ const PermissionView = observer((props: any) => {
             activeOpacity={0.88}
             style={styles.done_btn}
           >
-            <Text style={{ color: DataCenter.App.sufficient_permissions ? "green" : "#222", fontSize: 16 }}>{DataCenter.App.sufficient_permissions ? '关闭后、前往直播吧' : '关闭'}</Text>
+            <Text style={{ color: DataCenter.App.sufficient_permissions ? "green" : "#222", fontSize: 16, backgroundColor: '#f1f1f1',borderRadius:5,paddingHorizontal:10,paddingVertical:5 }}>{DataCenter.App.sufficient_permissions ? '关闭后、前往直播吧' : '关闭'}</Text>
           </TouchableOpacity>
         )}
       </View>
