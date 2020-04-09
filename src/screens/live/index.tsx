@@ -7,10 +7,11 @@ import { GQL } from '../../network';
 const { width: sw, height: sh } = Dimensions.get('window');
 import ApolloClient from 'apollo-boost';
 import LottieView from 'lottie-react-native';
+import * as PermissionChecker from './CommonWidgetPermissionChecker';
 import HeaderBackButton from '../../widgets/HeaderBackButton';
 var StatusBarHeight = StatusBar.currentHeight ?? 0;// 状态栏高度
 console.log(StatusBarHeight);
-
+import {app} from 'store';
 const ItemGap = 6;
 const ItemWidth = (sw - ItemGap * 3) / 2;
 
@@ -25,7 +26,6 @@ interface Item {
     count_audience: number
 }
 let newclient: ApolloClient<unknown>;
-
 
 const Live = (props: {navigation:any,inCurrent:boolean}) => {
     const [page, setpage] = useState(1);
@@ -105,10 +105,29 @@ const Live = (props: {navigation:any,inCurrent:boolean}) => {
     }
 
     const RenderEmpty = (props: any) => {
+
+        const GoPushHandler = () => {
+            if(app.login){
+                if(DataCenter.App.sufficient_permissions){
+                    props.navigation.navigate("startlive");
+                }else{
+                    //权限不够，打开权限窗口
+                    PermissionChecker.showPermissionCheck();
+                }
+            }else{
+                props.navigation.navigate("Login");
+            }
+        }
+
         return (
-            <View style={{ height: sh, width: sw, justifyContent: 'center', alignItems: 'center', paddingTop: sh * 0.3 }}>
+            <View style={{ flex:1,height:sh - sh * 0.2, justifyContent: 'space-around', alignItems: 'center' }}>
+                <View style={{alignItems:'center'}}>
                 <LottieView source={require('./res/empty_live.json')} style={{ height: sw * 0.23, width: sw * 0.23 }} autoPlay loop />
-                <Text style={{ color: "#777", marginTop: 10 }}>啊哦、暂时没有主播在播~</Text>
+                <Text style={{ color: "#777",marginTop: 10}}>啊哦、暂时没有主播在播~</Text>
+                </View>
+                <TouchableOpacity activeOpacity={0.9} onPress={GoPushHandler}>
+                    <Image source={require('./res/gotopush.png')} style={{width:sw *0.3,height:(sw * 0.3 * 76)/280 }}/>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -133,7 +152,7 @@ const Live = (props: {navigation:any,inCurrent:boolean}) => {
                             keyExtractor={(item, index) => index.toString()}
                             renderItem={RenderItem}
                             showsVerticalScrollIndicator={false}
-                            ListEmptyComponent={RenderEmpty}
+                            ListEmptyComponent={() => <RenderEmpty navigation={props.navigation}/>}
                             ListHeaderComponent={() => {
                                 return <View style={{height:36}}/>
                             }}
