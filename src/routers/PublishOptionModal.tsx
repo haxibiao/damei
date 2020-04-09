@@ -31,7 +31,7 @@ const StartLiveButton = observer((props:any) => {
       >
         <View style={{ alignItems: "center" }}>
           <Image
-            source={require("../assets/images/publish_twitter.png")}
+            source={require("../assets/images/publish_live.png")}
             resizeMode="contain"
             style={{ height: IconSize, width: IconSize }}
           />
@@ -61,7 +61,7 @@ const showPublishOption = (navigation: any) => {
           >
             <View style={{ alignItems: "center" }}>
               <Image
-                source={require("../assets/images/publish_live.png")}
+                source={require("../assets/images/publish_twitter.png")}
                 resizeMode="contain"
                 style={{ height: IconSize, width: IconSize }}
               />
