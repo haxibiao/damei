@@ -122,6 +122,7 @@ const LiveRoom = (props:any) => {
                 let content = err.message.replace('GraphQL error: ', '');
                 //if(content.indexOf('离开') == -1) content = '小答妹:（o´ﾟ□ﾟ`o）啊哦、服务器出错~';
                 //LiveStore.pushDankamu({name:content,message:''})
+                Toast.show({content: content,duration:2000})
             })
         }
 
@@ -145,11 +146,11 @@ const LiveRoom = (props:any) => {
                 }
                 <StreamerLeft />
             </View>
-            <LiveRoomTopWidgets navigation={props.navigation} streamer={streamer}/>
-            <View style={{height:sh*0.35 + 40,zIndex:10}}>
+            <LiveRoomTopWidgets navigation={props.navigation} streamer={streamer} loadingEnd={!loading}/>
+            <View style={{height:sh*0.35 + 40,zIndex:22}}>
                 <CommonWidgetLiveRoomMessages />
                 {
-                    !loading && <LiveRoomBottomWidgets />
+                    !loading && <LiveRoomBottomWidgets navigation={props.navigation}/>
                 }
             </View>
             <MemoMountPoint id={RoomId} />
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
     },
     content:{
         position:'absolute',
-        zIndex:5,
+        zIndex:20,
         top:0,
         bottom:0,
         width:sw*0.9999,

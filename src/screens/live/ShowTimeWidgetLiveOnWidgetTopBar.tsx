@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Dimensions, Image, NativeModules, TouchableOpac
 const { StatusBarManager } = NativeModules;
 import { observer } from 'mobx-react';
 import LiveStore from './LiveStore';
+import LiveBeautyStore from './LiveBeautyStore';
 import { Avatar } from 'hxf-react-native-uilib';
 import { LivePushManager } from 'hxf-tencent-live';
 // import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -47,6 +48,10 @@ const ModalContent = observer((props: any) => {
         if (props.navigation) {
             props.navigation.goBack();
         }
+        //重置美颜store的值
+        LiveBeautyStore.setBlur(0);
+        LiveBeautyStore.setWhiteness(0);
+
     }
 
     return (
@@ -86,6 +91,18 @@ const HotValue = observer(() => {
 })
 
 const OnlinePeople = observer((props: any) => {
+
+    const getCount = () => {
+        let c = LiveStore.count_audience;
+        if(c >= 1000 && c < 10000){
+            return (c/1000).toFixed(1) + 'k';
+        }else if(c >= 10000){
+            return (c/10000).toFixed(1)+'w';
+        }
+        return c;
+    }
+
+
     return (
         <View style={styles.AudienceContainer}>
             <View style={{minWidth:35,maxWidth:sw * 0.34,height:36}}>
@@ -96,7 +113,7 @@ const OnlinePeople = observer((props: any) => {
             contentContainerStyle={{alignItems:'center'}}
             showsHorizontalScrollIndicator={false}
             renderItem={({item,index}) => {
-                return <Avatar size={TOP_WIDGET_AVATAR_SIZE} uri={item.user_avatar} frameStyle={{ marginHorizontal: 10 }} />
+                return <Avatar size={TOP_WIDGET_AVATAR_SIZE} uri={item.user_avatar} frameStyle={{ marginEnd:2 }} />
             }}
             />
             </View>
@@ -105,7 +122,7 @@ const OnlinePeople = observer((props: any) => {
             <Text style={{
                 fontSize: 12,
                 color: 'white'
-            }}>{`当前${LiveStore.count_audience}人`}</Text>
+            }}>{getCount()}</Text>
         </TouchableOpacity>
         </View>
     )
@@ -129,8 +146,12 @@ const ShowTimeWidgetLiveOnWidgetTopBar = (props: { navigation: any }) => {
                     console.log("[Safeguard]下播失败,",err);
                 })
             }
-        LiveStore.setHot(0);
-        LiveStore.clearDankamu();
+
+            if(LiveStore.hot != 0) LiveStore.setHot(0);
+            LiveStore.clearDankamu();
+
+            if(LiveBeautyStore.blur != 0) LiveBeautyStore.setBlur(0);
+            if(LiveBeautyStore.whiteness != 0) LiveBeautyStore.setWhiteness(0);
         }
     },[])
 
@@ -188,6 +209,7 @@ const styles = StyleSheet.create({
     AudienceCountWrapper: {
         paddingHorizontal: 5,
         height: TOP_WIDGET_ONLINE_WRAPPER_HEIGHT,
+        minWidth: TOP_WIDGET_ONLINE_WRAPPER_HEIGHT,
         backgroundColor: '#00000033',
         borderRadius: TOP_WIDGET_ONLINE_WRAPPER_HEIGHT / 2,
         justifyContent: 'center',
