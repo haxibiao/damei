@@ -19,7 +19,7 @@ export default observer(props => {
     const progress = useRef(0);
     const duration = useRef(100);
     const videoRef = useRef();
-    const isIntoView = index === VideoStore.viewableItemIndex;
+    const isIntoView = index === VideoStore.viewableItemIndex && !VideoStore.onLiveTab;
     const [paused, setPause] = useState(true);
     const [loading, setLoaded] = useState(true);
     const resizeMode = useMemo(() => {

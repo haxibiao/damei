@@ -8,23 +8,34 @@ import {observer,DataCenter} from '../../data';
 
 import LoginMountPoint from '../../data/LoginMountPoint';
 
+import VideoStore from './VideoStore';
 
-export default function VideoPlayground(props:any){
+const VideoPlayground = (props:any) => {
 
     const [currentPage,setcurrentPage] = useState(0);
+
+    const tabHandler = e => {
+        setcurrentPage(e.i);
+        if(e.i == 1){
+            VideoStore.setOnLiveTab(true);
+        }else{
+            VideoStore.setOnLiveTab(false);
+        }
+    }
 
     return (
         <Page.PageCleared barStyle={'light-content'}>
             <ScrollableTabView
             tabBarPosition='overlayTop'
-            onChangeTab={e => setcurrentPage(e.i)}
+            onChangeTab={tabHandler}
             renderTabBar={() => <VideoLiveScrollTab/> }
             >
                 <Video tabLabel="推荐"/>
                 <LiveList tabLabel='直播' navigation={props.navigation} inCurrent={ currentPage == 1}/>
             </ScrollableTabView>
-
-        <LoginMountPoint navigation={props.navigation}/>
+            <LoginMountPoint navigation={props.navigation}/>
         </Page.PageCleared>
     )
 }
+
+export default observer(VideoPlayground);

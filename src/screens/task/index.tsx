@@ -18,7 +18,6 @@ export default observer(props => {
 
     const tabChangeHandler = (e:any) => {
         setPage(e.i);
-        console.log("切换到tab ",e.i);
     }
 
     const renderTabItem = useCallback(
