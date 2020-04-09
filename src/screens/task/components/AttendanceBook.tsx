@@ -1,5 +1,5 @@
 import React, { useMemo, useCallback, useState, useEffect, useRef } from 'react';
-import { StyleSheet, View, Text, Image, ImageBackground, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, Text, Image, ImageBackground, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { Row, Iconfont } from 'components';
 import { Theme, PxFit, SCREEN_WIDTH, ISIOS, Tools } from 'utils';
 import { GQL, useMutation, useQuery, useApolloClient } from 'apollo';
@@ -112,12 +112,12 @@ const AttendanceBook = (props): JSX.Element => {
                         已签到
                         <Text style={styles.keepSignInText}>{`${keep_signin_days}/${app.config.max_signs_day}`}</Text>天
                     </Text>
-                    <TouchableWithoutFeedback onPress={() => Tools.navigate('Attendance')}>
+                    <TouchableOpacity onPress={() => Tools.navigate('Attendance')}>
                         <Row style={styles.shareButton}>
                             <Text style={styles.shareText}>查看签到记录</Text>
                             <Iconfont name="right" color={'#FF5733'} size={PxFit(13)} />
                         </Row>
-                    </TouchableWithoutFeedback>
+                    </TouchableOpacity>
                 </View>
                 <TouchableWithoutFeedback onPress={toDaySignIn}>
                     <View style={styles.attendance}>
