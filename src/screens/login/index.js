@@ -17,6 +17,8 @@ import { Overlay } from 'teaset';
 import { Util } from 'native';
 import { getUniqueId } from 'react-native-device-info';
 
+import {Storage} from '../../data';
+
 const shadowOpt = {
     width: SCREEN_WIDTH - Theme.itemSpace * 3,
     color: '#E8E8E8',
@@ -96,10 +98,13 @@ class index extends Component {
         } else {
             const user = result.data.autoSignIn;
             this._saveUserData(user);
+
+            Storage.setItem('manualLogout',false);
         }
         this.setState({
             submitting: false,
         });
+
     };
 
     signIn = async () => {
@@ -266,6 +271,7 @@ class index extends Component {
                         });
                         console.log('code', code);
                         this.getWechatInfo(code);
+                        Storage.setItem('manualLogout',false);
                     });
                 } else {
                     Toast.show({ content: '未安装微信或当前微信版本较低' });
@@ -289,17 +295,10 @@ class index extends Component {
         })
             .then(response => response.json())
             .then(result => {
-                console.log('result', result);
-                if (result.data && result.data.unionid) {
-                    //新用户绑定手机号
-                    this.props.navigation.navigate('PhoneBind', { data: result.data });
-                    this.setState({
-                        submitting: false,
-                    });
-                } else {
-                    //老用户直接登录
-                    this.getUserData(result.data.user);
-                }
+                console.log('微信登录返回结果: ', result);
+                
+                this.getUserData(result.data.user);
+                
             })
             .catch(error => {
                 console.log('error', error);
@@ -321,6 +320,7 @@ class index extends Component {
                 },
             })
             .then(result => {
+                console.log('登录query返回数据: ',result)
                 let token = { token: user.api_token };
                 let userLoginInfo = { ...result.data.user, token: user.api_token };
                 this._saveUserData(userLoginInfo);
