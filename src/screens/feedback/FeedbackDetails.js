@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Keyboard, FlatList, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Keyboard, FlatList, ScrollView, StyleSheet } from 'react-native';
 import { PageContainer, Iconfont, SubmitLoading, ListFooter, CustomRefreshControl, ErrorView } from 'components';
 
 import { Theme, Api, PxFit, SCREEN_WIDTH } from 'utils';
@@ -51,7 +51,7 @@ class FeedbackDetails extends Component {
 							return elem.user.is_admin == true;
 						});
 						return (
-							<View style={{ flex: 1 }}>
+							<>
 								<FlatList
 									ref={ref => (this.scrollRef = ref)}
 									onScrollBeginDrag={() => {
@@ -113,20 +113,22 @@ class FeedbackDetails extends Component {
 										);
 									}}
 								/>
-								<Comment
-									isInput={isInput}
-									reply={reply}
-									content={content}
-									changeText={this.changeText}
-									switchReplyType={this.switchReplyType}
-									submitComment={() => {
-										this.submitComment(adminComment.length);
-									}}
-									openPhotos={this.openPhotos}
-									image={this.state.image}
-									deleteImage={this.deleteImage}
-								/>
-							</View>
+								<View style={styles.commentContainer}>
+									<Comment
+										isInput={isInput}
+										reply={reply}
+										content={content}
+										changeText={this.changeText}
+										switchReplyType={this.switchReplyType}
+										submitComment={() => {
+											this.submitComment(adminComment.length);
+										}}
+										openPhotos={this.openPhotos}
+										image={this.state.image}
+										deleteImage={this.deleteImage}
+									/>
+								</View>
+							</>
 						);
 					}}
 				</Query>
@@ -239,5 +241,16 @@ class FeedbackDetails extends Component {
 		});
 	};
 }
+
+const styles = StyleSheet.create({
+	commentContainer:{
+		position:'absolute',
+		bottom:0,
+		left:0,
+		right:0,
+		paddingBottom:Theme.HOME_INDICATOR_HEIGHT,
+		backgroundColor:'#fff'
+	}
+});
 
 export default compose(graphql(GQL.createCommentMutation, { name: 'createCommentMutation' }))(FeedbackDetails);
