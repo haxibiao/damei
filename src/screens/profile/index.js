@@ -28,7 +28,7 @@ class index extends Component {
 
     componentDidUpdate(nextProps, nextState) {
         const { data } = this.props;
-        if (data && data.user && nextProps.data.user !== data.user) {
+        if (data && data.user && nextProps?.data?.user !== data.user) {
             app.updateUserCache(data.user);
         }
     }

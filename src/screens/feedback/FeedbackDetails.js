@@ -38,7 +38,7 @@ class FeedbackDetails extends Component {
 		let { feedback_id } = navigation.state.params;
 		let { isInput, reply, content, waitingVisible } = this.state;
 		return (
-			<PageContainer title="反馈详情" white topInsets={0}>
+			<PageContainer title="反馈详情" white topInsets={0} autoKeyboardInsets={false}>
 				<Query
 					query={GQL.feedbackCommentsQuery}
 					variables={{ commentable_id: feedback_id, commentable_type: 'feedbacks' }}
