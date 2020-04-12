@@ -19,7 +19,9 @@ import { Theme, PxFit, Config, SCREEN_WIDTH, Tools } from 'utils';
 
 import { compose, graphql, GQL } from 'apollo';
 import { app } from 'store';
+import { observer } from 'mobx-react';
 
+@observer
 class EditProfileScreen extends Component {
     constructor(props) {
         super(props);
@@ -31,7 +33,7 @@ class EditProfileScreen extends Component {
 
     sendVerificationCode = async () => {
         const { navigation, data } = this.props;
-        const { user } = data;
+        let user = app.me;
         if (user && user.account) {
             let result = {};
             this.setState({
@@ -69,10 +71,13 @@ class EditProfileScreen extends Component {
     };
 
     render() {
+        console.log('修改支付宝页面通过props获取的data: ',data);
         let { navigation, data } = this.props;
         const { pay_account, submitting } = this.state;
         if (loading) return null;
-        let { loading, user } = data;
+        let { loading } = data;
+        let user = app.me;
+        console.log('通过store拿到的me :>>>>>',user);
         return (
             <PageContainer title="账户绑定" white submitting={submitting}>
                 <View style={styles.container}>
@@ -110,7 +115,7 @@ class EditProfileScreen extends Component {
                     <TouchFeedback
                         style={{ marginHorizontal: 28, marginTop: 15 }}
                         onPress={() => {
-                            user.verified_at
+                            (user && user.verified_at)
                                 ? Toast.show({ content: '已经修改或绑定了哦' })
                                 : navigation.navigate('ModifyAccount');
                         }}>

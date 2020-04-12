@@ -11,24 +11,7 @@ import DatizhuanqianIntro from './DatizhuanqianIntro';
 import { AppUtil } from 'native';
 
 const GOLD_IMAGE_BG = SCREEN_WIDTH - PxFit(Theme.itemSpace * 2);
-const withdrawInfo = [
-    {
-        amount: 1,
-        description: '一元提现是新人专享福利，每个账户仅享受一次。',
-    },
-    {
-        amount: 10,
-        description: '需达到360贡献值，并连续签到7天才可提现。每个账户每月仅享受一次',
-    },
-    {
-        amount: 30,
-        description: '需达到1080贡献值，并连续签到15天才可提现。每个账户每月仅享受一次',
-    },
-    {
-        amount: 50,
-        description: '需达到1800贡献值，并连续签到30天才可提现。每个账户每月仅享受一次',
-    },
-];
+const withdrawInfo = [];
 
 const WithdrawalPlatforms = [
     {

@@ -2,7 +2,10 @@ import TipsOverlay from '../../components/Overlay/TipsOverlay';
 
 export function checkLoginInfo(auto_uuid_user?: boolean, auto_phone_user?: boolean, navigation?: any, user?: object) {
     console.log('object :', user);
-    if (auto_uuid_user || auto_phone_user) {
+    let acc = user?.account ?? undefined;
+    console.log("account: ",acc);
+
+    if (!acc) {
         TipsOverlay.show({
             title: '您还未完善登录信息',
             content: '完善登录信息后即可绑定支付宝',
