@@ -34,20 +34,12 @@ let client:ApolloClient<unknown>;
 let newclient:ApolloClient<unknown>;
 const FollowButton = observer((props:{isFollowed:boolean,streamerid:string}) => {
     const [followed,setfollowed] = useState(false);
-    const [clickcount,setclickcount] = useState(0);
-    const [disabled,setdisabled] = useState(false);
-    
+
     useEffect(() => {
         client = DataCenter.App.client;
         newclient = DataCenter.App.newclient;
         setfollowed(props.isFollowed);
-        clickinter = setInterval(() => {
-            setclickcount(0);
-        },15000);
-        return () => {
-            if(clickinter) clearInterval(clickinter);
-        }
-    },[])
+    },[props.isFollowed]);
     function followMutate(){
         if(client){
             client.mutate({
@@ -55,55 +47,27 @@ const FollowButton = observer((props:{isFollowed:boolean,streamerid:string}) => 
                 variables:{followed_type: 'users',followed_id:props.streamerid}
             }).then((rs) => {
                 console.log("关注成功",rs);
+                if(rs.data.followToggle == null){
+                    setfollowed(false);
+                }else{
+                    setfollowed(true);
+                }
             }).catch((err:any) => {
                 console.log("关注mutation错误",err)
             })
         }
     }
-    //关注处理函数
-    const followHandler = () => {
-        if(clickcount > 7){
-            if(!disabled)setdisabled(true);
-            return;
-        };
-        let c = clickcount + 1;
-        setclickcount(c);
-        if(clickcount <= 2){
-            setfollowed(true);
-            followMutate();
-        }else if(clickcount <= 6){
-            LiveStore.pushDankamu({name:'你点这么快干嘛啦(╯>д<)╯⁽˙³˙⁾',message:''});
-        }else{
-            LiveStore.pushDankamu({name:' 讨厌鬼!ヽ(｀Д´)ﾉ 不准你点了! ',message:''});
-        }
-    }
-    //取消关注处理函数
-    const unfollowHandler = () => {
-        if(clickcount > 7){
-            if(!disabled)setdisabled(true);
-            return;
-        };
-        let c = clickcount + 1;
-        setclickcount(c);
-        if(clickcount <= 2){
-            setfollowed(false);
-            followMutate();
-        }else if(clickcount <= 6){
-            LiveStore.pushDankamu({name:'你点这么快干嘛啦(╯>д<)╯⁽˙³˙⁾',message:''});
-        }else{
-            LiveStore.pushDankamu({name:' 讨厌鬼!ヽ(｀Д´)ﾉ 不准你点了! ',message:''});
-        }
-    }
+
 
     return (
         <View style={{backgroundColor: '#ffffffee',borderRadius:TOP_WIDGET_FOLLOW_CONTAINER_SIZE/2,height:TOP_WIDGET_FOLLOW_CONTAINER_SIZE,width:TOP_WIDGET_FOLLOW_CONTAINER_SIZE_WIDTH,justifyContent:'center',alignItems:'center',marginEnd:0}}>
             {
                 followed ? (
-                    <TouchableOpacity disabled={disabled} onPress={unfollowHandler}>
+                    <TouchableOpacity onPress={followMutate}>
                         <Image source={require('../../assets/images/ic_liked.png')} style={{height:TOP_FOLLOW_SIZE,width:TOP_FOLLOW_SIZE}} resizeMode='contain'/>
                     </TouchableOpacity>
                 ) : (
-                    <TouchableOpacity disabled={disabled} onPress={followHandler}>
+                    <TouchableOpacity onPress={followMutate}>
                         <Text style={{ fontSize: 12, color: 'red',fontWeight:'bold' }}>关注</Text>
                     </TouchableOpacity>
                 )
@@ -229,7 +193,7 @@ const CloseButton = observer((props:any) => {
     )
 })
 
-const LiveRoomTopWidgets = (props:{navigation:any,streamer:{id:string,name:string,avatar:string,count_audience:number},loadingEnd:boolean}) => {
+const LiveRoomTopWidgets = (props:{navigation:any,streamer:{id:string,name:string,avatar:string,count_audience:number,is_followed},loadingEnd:boolean}) => {
 
     return (
         <View style={[styles.TopWidgetContainer,{marginTop: StatusBarHeight + 12,zIndex:props.loadingEnd ? 22 : 10}]}>
@@ -259,9 +223,6 @@ const LiveRoomTopWidgets = (props:{navigation:any,streamer:{id:string,name:strin
                 <OnlineCount />
             </View>
 
-            {/* <TouchableOpacity activeOpacity={0.9} onPress={MoreLiveHandler} style={{position:'absolute',right:13,bottom:-30,backgroundColor:'#00000033',paddingHorizontal:8,paddingVertical:2,borderRadius:12}}>
-                <Text style={{fontSize:13,color:'white'}}>{'更多直播'}</Text>
-            </TouchableOpacity> */}
         </View>
     )
 }
