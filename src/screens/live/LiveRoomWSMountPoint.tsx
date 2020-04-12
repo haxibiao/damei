@@ -28,7 +28,7 @@ const LiveRoomWSMountPoint = (props:{id:string}) => {
             .listen('.user_come_in',e => {
                 console.log(e);
                 LiveStore.pushDankamu({name:`用户 ${e.user_name} 进入直播间`,message:''});
-                //if(e.count_audience) LiveStore.setCountAudience(e.count_audience);
+                if(e.count_audience) LiveStore.setCountAudience(e.count_audience);
                 let newuser = {
                     user_id: e.user_id,
                     user_name:e.user_name,

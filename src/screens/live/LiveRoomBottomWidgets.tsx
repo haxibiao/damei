@@ -54,7 +54,7 @@ const CloseButton = observer((props: any) => {
         <TouchableOpacity
             activeOpacity={0.9}
             onPress={() => {
-                props.navigation.goBack();
+               
                 //销毁直播
                 LivePullManager.liveStopPull();
                 console.log("停止拉流");
@@ -74,6 +74,7 @@ const CloseButton = observer((props: any) => {
                     console.log("用户离开直播间接口错误", err);
                 });
                 LiveStore.setStreamerLeft(false);
+                props.navigation.goBack();
             }}>
             <Image source={require('./res/close.png')} resizeMode={'contain'} style={{ height: TOP_WIDGET_CLOSE_SIZE, width: TOP_WIDGET_CLOSE_SIZE }} />
         </TouchableOpacity>
