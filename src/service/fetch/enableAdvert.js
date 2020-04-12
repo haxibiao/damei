@@ -12,20 +12,17 @@ export default function(callback: Promise) {
   deviceHeaders.appid = Config.PackageName; // 手动修改的包名
   deviceHeaders.package = Config.PackageName; // 手动修改的包名
 
-  Promise.race([
     fetch(Config.ServerRoot + "/api/app-ad-manage?" + Date.now(), {
       methos: "POST",
       headers: { ...deviceHeaders }
-    }),
-    new Promise((resolve, reject) => {
-      setTimeout(() => reject(new Error("request timeout")), 1500);
     })
-  ])
     .then(response => response.json())
     .then(result => {
+      console.log("manage sResult",result);
       callback(result);
     })
     .catch(err => {
+      console.log('err', err)
       callback({
         enable_splash: false,
         enable_question: true,
