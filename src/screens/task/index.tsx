@@ -5,7 +5,6 @@ import { Theme, PxFit } from 'utils';
 import { observer, app, config } from 'store';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import TaskCenter from './components/TaskCenter';
-import Participation from './components/Participation';
 import ScrollTabBar from './components/ScrollTabBar';
 
 export default observer(props => {
@@ -49,9 +48,6 @@ export default observer(props => {
                     />
                 )}>
                 <TaskCenter tabLabel="任务" />
-                {!config.disableAd && (
-                    <Participation tabLabel="分红" onChangeTab={onChangeTab} inCurrentPage={page === 1} />
-                )}
             </ScrollableTabView>
         </PageContainer>
     );
