@@ -104,8 +104,8 @@ export default observer(props => {
             setPause(true);
         });
         return () => {
-            navWillFocusListener.remove();
-            navWillBlurListener.remove();
+            if(navWillFocusListener) navWillFocusListener.remove();
+            if(navWillBlurListener) navWillBlurListener.remove();
         };
     }, [isIntoView]);
 
