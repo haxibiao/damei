@@ -13,7 +13,7 @@ function dp(want_px: number) {
 const Dimens = {
     x34: dp(34),
     x62: dp(64),
-    BottomTab_borderTop: dp(1),
+    BottomTab_borderTop: 0,
     BottomTab_tabIconSize: dp(28),
     BottomTab_tabHeight: 56,
     BottomTab_paddingTop: 6,
@@ -60,7 +60,7 @@ export default function AppBottomTabNavigation() {
         <BottomTab.Navigator
             initialRouteName={One}
             lazy={false}
-            tabBar={(props: any) => <BottomTabBar {...props} enableShadow/>}>
+            tabBar={(props: any) => <BottomTabBar {...props} />}>
             <BottomTab.Screen name={One} component={TabOne} />
             <BottomTab.Screen name={Two} component={TabTwo} />
 
