@@ -51,7 +51,7 @@ class Player extends Component {
 	}
 
 	componentWillUnmount() {
-		this.willBlurSubscription.remove();
+		if(this.willBlurSubscription) this.willBlurSubscription.remove();
 		// 离开固定竖屏
 		Orientation.lockToPortrait();
 	}
