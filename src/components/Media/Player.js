@@ -4,14 +4,15 @@
  */
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Animated, Easing, TouchableOpacity, BackHandler } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { observer } from 'mobx-react';
+import {DataCenter} from '../../data';
 import Video from 'react-native-video';
 import { Theme, PxFit, Config, SCREEN_WIDTH, ISAndroid, Tools } from '../../utils';
 import Iconfont from '../Iconfont';
 import VideoStatus from './VideoStatus';
 import VideoControl from './VideoControl';
 
-import { observer, Provider, inject } from 'mobx-react';
+import { Provider, inject } from 'mobx-react';
 import { config, app } from 'store';
 import VideoStore from './VideoStore';
 import Orientation from 'react-native-orientation';
@@ -26,7 +27,8 @@ let TestVideo = {
 class Player extends Component {
 	constructor(props) {
 		super(props);
-		let { video, inScreen, navigation } = props;
+		let { video, inScreen } = props;
+		let navigation = DataCenter.navigation;
 		this.videoStore = new VideoStore({ video, inScreen, navigation });
 		this.state = {
 			muted: false
@@ -34,14 +36,18 @@ class Player extends Component {
 	}
 
 	componentDidMount() {
-		let { navigation } = this.props;
+		let navigation = DataCenter.navigation;
 		// let BackHandler = ReactNative.BackHandler ? ReactNative.BackHandler : ReactNative.BackAndroid;
 		if (ISAndroid) {
 			BackHandler.addEventListener('hardwareBackPress', this._backButtonPress);
 		}
+		if(navigation){
+
+		
 		this.willBlurSubscription = navigation.addListener('willBlur', payload => {
 			this.videoStore.paused = true;
 		});
+	}
 	}
 
 	componentWillUnmount() {
@@ -151,4 +157,4 @@ const styles = StyleSheet.create({
 		bottom: 0
 	}
 });
-export default withNavigation(Player);
+export default Player;

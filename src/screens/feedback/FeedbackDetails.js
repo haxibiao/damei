@@ -34,8 +34,8 @@ class FeedbackDetails extends Component {
 	}
 
 	render() {
-		const { navigation } = this.props;
-		let { feedback_id } = navigation.state.params;
+		const { navigation,route } = this.props;
+		let { feedback_id } = route.params;
 		let { isInput, reply, content, waitingVisible } = this.state;
 		return (
 			<PageContainer title="反馈详情" white topInsets={0} autoKeyboardInsets={false}>
@@ -139,8 +139,8 @@ class FeedbackDetails extends Component {
 
 	//评论
 	submitComment = async length => {
-		const { navigation } = this.props;
-		const { feedback_id } = navigation.state.params;
+		const { navigation,route } = this.props;
+		const { feedback_id } = route.params;
 		let { comment_id, content, image } = this.state;
 		let result = {};
 

@@ -17,9 +17,9 @@ class NoticeItemDetail extends Component {
 	}
 
 	render() {
-		const { navigation, user, notification } = this.props;
+		const { navigation,route, user, notification } = this.props;
 
-		let { notice } = navigation.state.params;
+		let { notice } = route.params;
 
 		return (
 			<PageContainer title={notice.title} white>

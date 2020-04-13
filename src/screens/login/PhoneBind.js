@@ -56,8 +56,8 @@ class PhoneBind extends Component {
 	};
 
 	sendCode = async () => {
-		const { navigation } = this.props;
-		let data = navigation.getParam('data');
+		const { navigation,route } = this.props;
+		let data = route.params.data;
 
 		let result = {};
 		this.setState({

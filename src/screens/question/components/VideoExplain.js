@@ -6,16 +6,18 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, TouchableWithoutFeedback } from 'react-native';
-import { observer, Provider, inject } from 'mobx-react';
 import { TouchFeedback, Row, VideoMark } from 'components';
 import { Theme, PxFit, SCREEN_WIDTH } from 'utils';
-import { withNavigation } from 'react-navigation';
+import { observer } from 'mobx-react';
+import {DataCenter} from '../../../data';
 
 const MEDIA_WIDTH = SCREEN_WIDTH - PxFit(Theme.itemSpace) * 2 - PxFit(12) * 2;
 
+@observer
 class VideoExplain extends Component {
 	render() {
-		let { video, navigation } = this.props;
+		let { video } = this.props;
+		let navigation = DataCenter.navigation;
 		if (!video) {
 			return null;
 		}
@@ -27,7 +29,10 @@ class VideoExplain extends Component {
 						<Text style={styles.titleText}>视频解析</Text>
 					</Row>
 				</View>
-				<TouchableWithoutFeedback onPress={() => navigation.navigate('VideoExplanation', { video })}>
+				<TouchableWithoutFeedback onPress={() => {
+					
+					if(navigation) navigation.navigate('VideoExplanation', { video })}
+					}>
 					<View style={styles.mediaWrap}>
 						<Image
 							source={require('../../../assets/images/video_explain.jpg')}
@@ -91,4 +96,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default withNavigation(VideoExplain);
+export default VideoExplain;

@@ -11,12 +11,12 @@ import Footer from './components/Footer';
 import RewardProgress from './components/RewardProgress';
 import VideoStore from './VideoStore';
 import CommentOverlay from '../comment/CommentOverlay';
-import { useNavigation } from 'react-navigation-hooks';
+import { useNavigation } from '@react-navigation/native'
 
 export default observer(props => {
-    const { navigation } = props;
-    const data = navigation.getParam('questions');
-    const activeIndex = navigation.getParam('index');
+    const { navigation,route } = props;
+    const data = route.params?.questions;
+    const activeIndex = route.params?.index;
     // console.log('data', data);
     const [questions, setQuestions] = useState(data);
     const [viewportHeight, setViewportHeight] = useState(SCREEN_HEIGHT);

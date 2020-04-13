@@ -34,7 +34,7 @@ var newclient: ApolloClient<unknown> ;
 const LiveRoom = (props:any) => {
 
     const navigation = props.navigation;
-    const RoomId = navigation.getParam('roomid'); //跳转过来时传递的 房间号ID
+    const RoomId = props.route.params?.roomid ?? 0; //跳转过来时传递的 房间号ID
     const [loading,setloading] = useState(true);
     const [prepared,setprepared] = useState(false);
     const [streamer,setstreamer] = useState({}); //主播信息

@@ -14,10 +14,12 @@ import {
     Animated,
     Dimensions,
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { observer } from 'mobx-react';
+import {DataCenter} from '../../data';
 import Iconfont from '../Iconfont';
 import { PxFit, Theme, NAVBAR_HEIGHT } from '../../utils';
 
+@observer
 class NavigatorBar extends Component {
     // static propTypes = {
     //     ...ViewPropTypes,
@@ -117,11 +119,12 @@ class NavigatorBar extends Component {
     }
 
     backButtonPress = () => {
-        const { backButtonPress, navigation } = this.props;
+        const { backButtonPress } = this.props;
+        let navigation = DataCenter.navigation;
         if (backButtonPress) {
             backButtonPress();
         } else {
-            navigation.goBack();
+            if(navigation) navigation.goBack();
         }
     };
 
@@ -197,4 +200,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default withNavigation(NavigatorBar);
+export default NavigatorBar;

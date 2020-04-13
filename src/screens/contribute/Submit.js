@@ -10,9 +10,9 @@ import { Theme, PxFit, SCREEN_WIDTH } from 'utils';
 
 class Submit extends Component {
 	render() {
-		let { navigation } = this.props;
+		let { navigation,route } = this.props;
 		let status, content, noTicket;
-		noTicket = navigation.getParam('noTicket', false);
+		noTicket = route.params?.noTicket ?? false ;
 		if (noTicket) {
 			status = '暂存成功';
 			content = '您的题目已经保存到草稿箱，可以在“我的出题”中查看。';

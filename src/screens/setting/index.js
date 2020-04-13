@@ -69,10 +69,10 @@ class index extends Component {
     };
 
     render() {
-        const { navigation } = this.props;
+        const { navigation,route } = this.props;
         const { login } = app;
         const { storageSize } = this.state;
-        const user = navigation.getParam('user', {});
+        const user = route.params?.user ?? {};
         return (
             <PageContainer title="设置" white>
                 <ScrollView

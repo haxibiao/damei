@@ -11,11 +11,11 @@ import Footer from './components/Footer';
 import RewardProgress from './components/RewardProgress';
 import VideoStore from './VideoStore';
 import CommentOverlay from '../comment/CommentOverlay';
-import { useNavigation } from 'react-navigation-hooks';
+
+import {DataCenter} from '../../data';
 
 export default observer(props => {
     const client = useApolloClient();
-    const navigation = useNavigation();
     const firstAuthenticationQuery = useRef(false);
     const commentRef = useRef();
     const activeItem = useRef(0);
@@ -23,12 +23,14 @@ export default observer(props => {
         waitForInteraction: true,
         viewAreaCoveragePercentThreshold: 95,
     });
+    let navigation = DataCenter.navigation;
+
 
     VideoStore.showComment = useCallback(() => {
         if (app.login) {
             commentRef.current.slideUp();
         } else {
-            navigation.navigate('Login');
+            if(navigation) navigation.navigate('Login');
         }
         // console.log('commentRef.current', commentRef.current);
     }, [commentRef]);
@@ -93,18 +95,22 @@ export default observer(props => {
 
     useEffect(() => {
         fetchData({ authentication: firstAuthenticationQuery.current });
-        const navWillFocusListener = navigation.addListener('willFocus', () => {
-            // if (VideoStore.viewableItemIndex < 0) {
-            //     VideoStore.viewableItemIndex = 0;
-            // }
-        });
-        const navWillBlurListener = navigation.addListener('willBlur', () => {
-            hideComment();
-        });
+        let navWillBlurListener:any;
+        let navWillFocusListener:any;
+        if(navigation){
+            navWillFocusListener = navigation.addListener('willFocus', () => {
+                // if (VideoStore.viewableItemIndex < 0) {
+                //     VideoStore.viewableItemIndex = 0;
+                // }
+            });
+            navWillBlurListener = navigation.addListener('willBlur', () => {
+                hideComment();
+            });
+        }
 
         return () => {
-            navWillFocusListener.remove();
-            navWillBlurListener.remove();
+            if(navWillFocusListener) navWillFocusListener.remove();
+            if(navWillBlurListener) navWillBlurListener.remove();
         };
     }, []);
 

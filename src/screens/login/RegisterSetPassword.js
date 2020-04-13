@@ -26,8 +26,8 @@ class RegisterSetPassword extends Component {
             Toast.show({ content: '请设置密码' });
             return;
         }
-        const { navigation } = this.props;
-        const { phone } = navigation.state.params;
+        const { navigation,route } = this.props;
+        const { phone } = route.params;
         const deviceId = getUniqueId();
         let result = {};
 
@@ -71,9 +71,9 @@ class RegisterSetPassword extends Component {
     };
 
     render() {
-        const { navigation } = this.props;
+        const { navigation,route} = this.props;
         const { verificationCode, tips, submitting, password } = this.state;
-        const { phone } = navigation.state.params;
+        const { phone } = route.params;
         return (
             <PageContainer title="设置密码" white submitting={submitting} submitTips="注册中...">
                 <View style={styles.container}>

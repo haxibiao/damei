@@ -29,8 +29,8 @@ import AskQuestionItem from '../contribute/components/AskQuestionItem';
 import Placeholder from './components/Placeholder';
 
 const index = (props: Props) => {
-    const { navigation } = props;
-    const user = navigation.getParam('user', {});
+    const { navigation,route } = props;
+    const user = route.params?.user ?? {};
     const [orderByHot, setOrderByHot] = useState(false);
     const [finished, setFinished] = useState(false);
 
@@ -47,7 +47,7 @@ const index = (props: Props) => {
     });
 
     const showOptions = () => {
-        const user = navigation.getParam('user', {});
+        const user = route.params?.user ?? {};
 
         PullChooser.show([
             {

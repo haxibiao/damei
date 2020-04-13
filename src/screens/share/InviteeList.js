@@ -28,9 +28,9 @@ class InviteeList extends Component {
     }
 
     showShareType = () => {
-        let { navigation } = this.props;
+        let { navigation,route } = this.props;
 
-        let { shareInfo } = navigation.state.params;
+        let { shareInfo } = route.params;
         const shareTypeOverlayView = (
             <Overlay.PullView style={{ flexDirection: 'column', justifyContent: 'flex-end' }} animated>
                 <ShareTypeOverlay hide={() => Overlay.hide(ShareTypeOverlayKey)} user={shareInfo} />
@@ -40,9 +40,9 @@ class InviteeList extends Component {
     };
 
     render() {
-        let { navigation } = this.props;
+        let { navigation,route } = this.props;
         let { headerHeight, itemHeight } = this.state;
-        let { shareInfo } = navigation.state.params;
+        let { shareInfo } = route.params;
 
         return (
             <PageContainer title="我的好友" white>

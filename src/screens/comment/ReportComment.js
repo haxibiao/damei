@@ -30,8 +30,8 @@ class ReportComment extends Component {
 	}
 
 	submitError = async () => {
-		const { navigation } = this.props;
-		const { comment_id } = navigation.state.params;
+		const { navigation,route } = this.props;
+		let comment_id = route.params?.comment_id;
 		let { content, type, submitting } = this.state;
 		let result = {};
 		this.setState({

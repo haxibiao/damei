@@ -20,7 +20,7 @@ import { checkLoginInfo } from 'common';
 class AccountSecurity extends Component {
     constructor(props) {
         super(props);
-        const user = this.props.navigation.getParam('user');
+        const user = this.props.route.params?.user ?? {};
 
         this.state = {
             is_bind_wechat: user.is_bind_wechat,
@@ -135,8 +135,8 @@ class AccountSecurity extends Component {
     };
 
     checkAccount = (auto_uuid_user, auto_phone_user) => {
-        const { navigation } = this.props;
-        const user = navigation.getParam('user');
+        const { navigation,route } = this.props;
+        const user = route.params.user;
 
         if (auto_uuid_user || auto_phone_user) {
             TipsOverlay.show({
@@ -383,5 +383,5 @@ const styles = StyleSheet.create({
 
 export default compose(
     graphql(GQL.BindWechatMutation, { name: 'BindWechatMutation' }),
-    graphql(GQL.UserAutoQuery, { options: props => ({ variables: { id: props.navigation.state.params.user.id } }) }),
+    graphql(GQL.UserAutoQuery, { options: props => ({ variables: { id: props.route.params.user.id } }) }),
 )(AccountSecurity);

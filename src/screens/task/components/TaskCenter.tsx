@@ -4,7 +4,7 @@ import { EmptyView } from 'components';
 import { SCREEN_WIDTH, SCREEN_HEIGHT, Tools } from 'utils';
 import { app, observer } from 'store';
 import TaskList from './TaskList';
-import { useNavigation } from 'react-navigation-hooks';
+import { useNavigation } from '@react-navigation/native'
 import { InviteUser } from 'common';
 import { Overlay } from 'teaset';
 import Invite from './Invite';

@@ -14,8 +14,8 @@ class PushNotification extends Component {
 		this.state = {};
 	}
 	render() {
-		const { navigation } = this.props;
-		const { content, name, time } = navigation.state.params;
+		const { navigation,route } = this.props;
+		const { content, name, time } = route.params;
 
 		return (
 			<PageContainer title={name} white>

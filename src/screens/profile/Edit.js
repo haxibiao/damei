@@ -21,7 +21,7 @@ import {Page} from '../../widgets';
 class index extends Component {
 	constructor(props) {
 		super(props);
-		let user = props.navigation.getParam('user', {});
+		let user = props.route.params.user ?? {}; 
 		console.log('edit user', user);
 		this.user = user;
 		this.name = user.name;

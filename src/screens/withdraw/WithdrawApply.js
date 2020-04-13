@@ -90,8 +90,8 @@ class WithdrawApply extends Component {
     };
 
     render() {
-        const { navigation } = this.props;
-        const { amount } = navigation.state.params;
+        const { navigation,route } = this.props;
+        let amount = route.params?.amount;
         return (
             <PageContainer
                 navBarStyle={{

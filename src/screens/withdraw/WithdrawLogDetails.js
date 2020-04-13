@@ -19,8 +19,8 @@ class WithdrawLogDetails extends Component {
     }
 
     render() {
-        const { navigation } = this.props;
-        const { withdraw_id } = navigation.state.params;
+        const { navigation,route } = this.props;
+        const { withdraw_id } = route.params;
         return (
             <PageContainer title="提现详情" white>
                 <Query

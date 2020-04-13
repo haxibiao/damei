@@ -11,15 +11,14 @@ import VideoItem from './components/VideoItem';
 import Footer from './components/Footer';
 import VideoStore from './VideoStore';
 import CommentOverlay from '../comment/CommentOverlay';
-import { useNavigation } from 'react-navigation-hooks';
 
 // TODO: 视频动态查看需重构
 
 export default observer(props => {
-    const { navigation } = props;
-    const data = navigation.getParam('questions') || [];
-    const activeIndex = navigation.getParam('index') || 0;
-    const isComment = navigation.getParam('isComment') || false;
+    const { navigation,route } = props;
+    const data = route.params?.questions ?? [];
+    const activeIndex = route.params?.index ?? 0;
+    const isComment = route.params?.isComment ?? false;
     const activeItem = useRef(0);
     // const [questions, setQuestions] = useState(data);
 

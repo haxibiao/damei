@@ -8,7 +8,6 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Image, Text } from 'react-native';
 import TouchFeedback from '../TouchableView/TouchFeedback';
 import { Theme, PxFit, SCREEN_WIDTH, WPercent } from '../../utils';
-import { withNavigation } from 'react-navigation';
 
 class ErrorBoundary extends React.Component {
     constructor(props) {

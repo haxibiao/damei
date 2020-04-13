@@ -20,7 +20,7 @@ import PlateItem from './components/PlateItem';
 import { observer, app, keys, storage, config } from 'store';
 import { when } from 'mobx';
 import { withApollo, compose, graphql, GQL } from 'apollo';
-import { TouchFeedback } from 'components';
+import {DataCenter} from '../../data';
 
 import JPushModule from 'jpush-react-native';
 import NetInfo from '@react-native-community/netinfo';
@@ -59,6 +59,7 @@ class index extends Component {
 
     async componentDidMount() {
         const { navigation } = this.props;
+        DataCenter.setNavigation(navigation);
         this.resetUser();
 
         this.registerTimer = setTimeout(async () => {

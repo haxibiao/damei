@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { withNavigation } from 'react-navigation';
+
 import { Theme, PxFit, Tools } from '../../utils';
 
 import Iconfont from '../Iconfont';
@@ -18,7 +18,8 @@ import FollowButton from '../TouchableView/FollowButton';
 import UserTitle from './UserTitle';
 import GenderLabel from '../Utils/GenderLabel';
 import { StackActions } from 'react-navigation';
-
+import { observer } from 'mobx-react';
+import {DataCenter} from '../../data';
 type User = {
 	id: number,
 	avatar: any,
@@ -31,10 +32,11 @@ type User = {
 type Props = {
 	user: User
 };
-
+@observer
 class UserItem extends Component<Props> {
 	render() {
-		let { user, style, navigation } = this.props;
+		let { user, style } = this.props;
+		let navigation = DataCenter.navigation;
 		let { id = 1, avatar, name, followed_user_status, profile } = user;
 		const pushAction = StackActions.push({
 			routeName: 'User',
@@ -43,7 +45,9 @@ class UserItem extends Component<Props> {
 			}
 		});
 		return (
-			<TouchFeedback style={[styles.item, style]} onPress={() => navigation.dispatch(pushAction)}>
+			<TouchFeedback style={[styles.item, style]} onPress={() => {
+				if(navigation) navigation.dispatch(pushAction)
+				}}>
 				<Avatar source={avatar} size={PxFit(50)} />
 				<View style={styles.right}>
 					<View style={styles.info}>
@@ -107,4 +111,4 @@ const styles = StyleSheet.create({
 	labelText: { fontSize: PxFit(12), color: '#fff', marginLeft: PxFit(2), lineHeight: PxFit(14) }
 });
 
-export default withNavigation(UserItem);
+export default UserItem;

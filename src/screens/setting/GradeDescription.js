@@ -11,8 +11,8 @@ import { Theme, PxFit, Config, SCREEN_WIDTH } from 'utils';
 
 class GradeDescription extends Component {
 	render() {
-		let { navigation } = this.props;
-		let user = navigation.getParam('user');
+		let { navigation,route } = this.props;
+		let user = route.params?.user ?? {};
 		let progress = (user.exp / user.next_level_exp) * 100 + '%';
 		return (
 			<PageContainer title="等级说明" white loading={!user}>

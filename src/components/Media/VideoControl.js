@@ -6,7 +6,6 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Animated, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
-import { withNavigation } from 'react-navigation';
 import { Theme, PxFit, Config, SCREEN_WIDTH, Tools } from '../../utils';
 import Iconfont from '../Iconfont';
 import { observer, Provider, inject } from 'mobx-react';

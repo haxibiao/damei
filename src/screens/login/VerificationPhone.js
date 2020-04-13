@@ -13,7 +13,7 @@ import { app } from 'store';
 class VerificationPhone extends Component {
 	constructor(props) {
 		super(props);
-		let { time } = this.props.navigation.state.params;
+		let { time } = this.props.route.params;
 		this.time_remaining = time ? time - 1 : 60;
 		this.state = {
 			tips: this.time_remaining + 's后重新发送',
@@ -56,7 +56,7 @@ class VerificationPhone extends Component {
 	resendVerificationCode = async () => {
 		let result = {};
 		this.time_remaining = 59;
-		let { phone } = navigation.state.params;
+		let { phone } = this.props.route.params;
 		this.setState({
 			tips: '59s后重新发送',
 		});
@@ -85,8 +85,8 @@ class VerificationPhone extends Component {
 	//提交密码登录
 	setPassword = async () => {
 		let { verificationCode, password } = this.state;
-		const { navigation } = this.props;
-		const { code, phone, data } = navigation.state.params;
+		const { navigation,route } = this.props;
+		const { code, phone, data } = route.params;
 		let result = {};
 
 		this.setState({
@@ -138,8 +138,8 @@ class VerificationPhone extends Component {
 
 	//绑定微信
 	bindWechat = async () => {
-		const { navigation } = this.props;
-		const { data } = navigation.state.params;
+		const { navigation,route } = this.props;
+		const { data } = route.params;
 		let result = {};
 
 		try {
@@ -167,9 +167,9 @@ class VerificationPhone extends Component {
 	};
 
 	render() {
-		const { navigation } = this.props;
+		const { navigation,route } = this.props;
 		let { verificationCode, tips, submitting, password } = this.state;
-		let { phone } = navigation.state.params;
+		let { phone } = route.params;
 		return (
 			<PageContainer title="验证手机号" white submitting={submitting} submitTips="验证中...">
 				<View style={styles.container}>

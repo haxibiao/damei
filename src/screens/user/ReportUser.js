@@ -34,8 +34,8 @@ class Report extends Component {
 	}
 
 	submitError = async () => {
-		const { navigation } = this.props;
-		const { user } = navigation.state.params;
+		const { navigation,route } = this.props;
+		const { user } = route.params;
 		let { content, type, submitting } = this.state;
 		let result = {};
 		this.setState({

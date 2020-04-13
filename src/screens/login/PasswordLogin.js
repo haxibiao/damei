@@ -25,8 +25,8 @@ class PasswordLogin extends Component {
             return;
         }
 
-        const { navigation } = this.props;
-        const { hasPassword } = navigation.state.params;
+        const { navigation,route } = this.props;
+        const { hasPassword } = route.params;
         const result = {};
 
         this.setState({
@@ -42,8 +42,8 @@ class PasswordLogin extends Component {
 
     // 设置密码登录
     ResetPasswordLogin = async () => {
-        const { navigation } = this.props;
-        const { token } = navigation.state.params;
+        const { navigation,route } = this.props;
+        const { token } = route.params;
         let result = {};
         try {
             result = await this.props.tokenSetPassword({
@@ -72,8 +72,8 @@ class PasswordLogin extends Component {
 
     // 输入密码登录
     PasswordLogin = async () => {
-        const { navigation } = this.props;
-        const { account } = navigation.state.params;
+        const { navigation,route } = this.props;
+        const { account } = route.params;
         let result = {};
         try {
             result = await this.props.signInMutation({
@@ -110,9 +110,9 @@ class PasswordLogin extends Component {
     };
 
     render() {
-        const { navigation } = this.props;
+        const { navigation,route } = this.props;
         const { verificationCode, tips, submitting, password } = this.state;
-        const { phone, hasPassword } = navigation.state.params;
+        const { phone, hasPassword } = route.params;
 
         return (
             <PageContainer
