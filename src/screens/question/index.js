@@ -230,8 +230,8 @@ class index extends Component {
 
     render() {
         const { submitting } = this.state;
-        const { navigation, questionQuery } = this.props;
-        const referrer = navigation.getParam('referrer', null);
+        const { navigation, questionQuery,route } = this.props;
+        const referrer = route.params?.referrer ?? null;
         const bodyStyle = {
             opacity: this._animated,
             transform: [
@@ -405,7 +405,7 @@ export default compose(
         name: 'publishQuestion',
     }),
     graphql(GQL.QuestionQuery, {
-        options: props => ({ variables: { id: props.navigation.getParam('question', {}).id } }),
+        options: props => ({ variables: { id: props.route.params?.question?.id ?? '' } }),
         name: 'questionQuery',
     }),
     graphql(GQL.UserMeansQuery, {

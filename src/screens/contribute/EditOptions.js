@@ -30,7 +30,7 @@ type Props = {
 class EditOptions extends Component<Props> {
 	constructor(props) {
 		super(props);
-		let { answers, options, callBack } = props.navigation.state.params;
+		let { answers, options, callBack } = props.route.params;
 		this.callBack = callBack;
 		this.state = {
 			optionValue: '',

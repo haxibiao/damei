@@ -21,8 +21,8 @@ class CpcTask extends Component {
 	}
 
 	showOptions = () => {
-		let { navigation } = this.props;
-		let { adinfo_url } = navigation.state.params;
+		let { navigation,route } = this.props;
+		let { adinfo_url } = route.params;
 
 		PullChooser.show([
 			{
@@ -33,10 +33,10 @@ class CpcTask extends Component {
 	};
 
 	render() {
-		const { navigation, client } = this.props;
+		const { navigation,route, client } = this.props;
 
 		let { progress } = this.state;
-		let { adinfo_url } = navigation.state.params;
+		let { adinfo_url } = route.params;
 
 		return (
 			<PageContainer

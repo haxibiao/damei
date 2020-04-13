@@ -15,7 +15,7 @@ let countDown = 59;
 class RetrievePassword extends Component {
 	constructor(props) {
 		super(props);
-		let { time } = this.props.navigation.state.params;
+		let { time } = this.props.route.params;
 		this.time_remaining = time ? time - 1 : 60;
 		this.state = {
 			verificationCode: '',
@@ -58,8 +58,8 @@ class RetrievePassword extends Component {
 
 	resendVerificationCode = async () => {
 		let result = {};
-		const { navigation } = this.props;
-		const { account } = navigation.state.params;
+		const { navigation ,route} = this.props;
+		const { account } = route.params;
 		this.setState({
 			submitting: true
 		});
@@ -90,9 +90,9 @@ class RetrievePassword extends Component {
 
 	//重置密码
 	async resetPassword() {
-		const { navigation } = this.props;
+		const { navigation,route } = this.props;
 		let { verificationCode, password, disabled } = this.state;
-		const { account } = navigation.state.params;
+		const { account } = route.params;
 		let result = {};
 		this.setState({
 			submitting: true

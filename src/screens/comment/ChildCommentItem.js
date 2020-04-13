@@ -18,7 +18,7 @@ import {
 import { Theme, PxFit, WPercent, Tools, SCREEN_WIDTH } from 'utils';
 import { compose, graphql, Query, Mutation, GQL } from 'apollo';
 
-import { withNavigation } from 'react-navigation';
+import {observer,DataCenter} from '../../data';
 import { app } from 'store';
 
 type replyComment = { id: string, content: any, user: Object, count_likes: boolean, liked: boolean };
@@ -104,12 +104,13 @@ class CommentItem extends Component<Props> {
     };
 
     showOverlay = (comment, parent_comment_id) => {
-        let { navigation, showCommentModal, replyComment } = this.props;
+        let {  showCommentModal, replyComment } = this.props;
+        let navigation = DataCenter.navigation;
         if (app.userCache && app.userCache.is_admin) {
             PullChooser.show([
                 {
                     title: '举报',
-                    onPress: () => navigation.navigate('ReportComment', { comment_id: comment.id }),
+                    onPress: () => { if(navigation) navigation.navigate('ReportComment', { comment_id: comment.id })},
                 },
                 {
                     title: '回复',
@@ -127,7 +128,7 @@ class CommentItem extends Component<Props> {
             PullChooser.show([
                 {
                     title: '举报',
-                    onPress: () => navigation.navigate('ReportComment', { comment_id: comment.id }),
+                    onPress: () => { if(navigation)navigation.navigate('ReportComment', { comment_id: comment.id })},
                 },
                 {
                     title: '回复',
@@ -141,7 +142,8 @@ class CommentItem extends Component<Props> {
     };
 
     render() {
-        let { comment, navigation, questionId, user, parent_comment_id } = this.props;
+        let { comment,  questionId, user, parent_comment_id } = this.props;
+        let navigation = DataCenter.navigation;
         let { liked, count_likes, bounce, visible, limit, count_replyComment } = this.state;
         let scale = bounce.interpolate({
             inputRange: [1, 1.1, 1.2],
@@ -157,7 +159,9 @@ class CommentItem extends Component<Props> {
                     }}
                     onPress={() => this.showOverlay(comment, parent_comment_id)}>
                     <TouchFeedback
-                        onPress={() => navigation.navigate('User', { user: comment.user })}
+                        onPress={() => {
+                            if(navigation) navigation.navigate('User', { user: comment.user })
+                        }}
                         style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Avatar source={comment.user.avatar} size={PxFit(24)} />
                         <View style={[styles.profile, { marginLeft: PxFit(10) }]}>
@@ -265,7 +269,6 @@ const styles = StyleSheet.create({
 });
 
 export default compose(
-    withNavigation,
     graphql(GQL.toggleLikeMutation, { name: 'toggleLikeMutation' }),
     graphql(GQL.deleteCommentMutation, { name: 'deleteCommentMutation' }),
 )(CommentItem);

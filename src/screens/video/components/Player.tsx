@@ -9,7 +9,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import VideoStore from '../VideoStore';
 import VideoLoading from './VideoLoading';
 import Operation from './Operation';
-import { useNavigation } from 'react-navigation-hooks';
+import { useNavigation } from '@react-navigation/native'
 import { Overlay } from 'teaset';
 
 export default observer(props => {

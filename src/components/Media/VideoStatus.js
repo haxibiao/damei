@@ -12,7 +12,6 @@ import {
 	TouchableWithoutFeedback,
 	ActivityIndicator
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
 import { Theme, PxFit, Config, SCREEN_WIDTH, ISIOS } from '../../utils';
 import Iconfont from '../Iconfont';
 import { observer, Provider, inject } from 'mobx-react';

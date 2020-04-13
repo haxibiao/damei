@@ -1,7 +1,7 @@
 import React, { useMemo, useRef, useEffect, useCallback } from 'react';
 import { StyleSheet, ScrollView, View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import { Theme, SCREEN_WIDTH, Tools, PxFit } from 'utils';
-import { useNavigation } from 'react-navigation-hooks';
+import { useNavigation } from '@react-navigation/native'
 import { GQL, useQuery, useApolloClient } from 'apollo';
 import { syncGetter, exceptionCapture, GetSpecifyDate } from 'common';
 import { app } from 'store';

@@ -19,7 +19,7 @@ import { Theme, PxFit, WPercent, Tools } from 'utils';
 
 import { Query, Mutation, compose, withApollo, graphql, GQL } from 'apollo';
 
-import { withNavigation } from 'react-navigation';
+import {observer,DataCenter} from '../../data';
 
 import ChildCommentItem from './ChildCommentItem';
 
@@ -139,8 +139,8 @@ class CommentItem extends Component<Props> {
     };
 
     showOverlay = comment => {
-        const { navigation, showCommentModal, replyComment, isAnswer, question } = this.props;
-
+        const { showCommentModal, replyComment, isAnswer, question } = this.props;
+        let navigation = DataCenter.navigation;
         const isShowAccept =
             question.user.id === app.me.id &&
             question.form === 2 &&
@@ -151,7 +151,9 @@ class CommentItem extends Component<Props> {
             PullChooser.show([
                 {
                     title: '举报',
-                    onPress: () => navigation.navigate('ReportComment', { comment_id: comment.id }),
+                    onPress: () => {
+                        if(navigation) navigation.navigate('ReportComment', { comment_id: comment.id })
+                    },
                 },
                 {
                     title: '回复',
@@ -175,7 +177,9 @@ class CommentItem extends Component<Props> {
                 },
                 {
                     title: '举报',
-                    onPress: () => navigation.navigate('ReportComment', { comment_id: comment.id }),
+                    onPress: () => {
+                        if(navigation) navigation.navigate('ReportComment', { comment_id: comment.id })
+                    },
                 },
                 {
                     title: '回复',
@@ -189,7 +193,9 @@ class CommentItem extends Component<Props> {
             PullChooser.show([
                 {
                     title: '举报',
-                    onPress: () => navigation.navigate('ReportComment', { comment_id: comment.id }),
+                    onPress: () => {
+                        if(navigation) navigation.navigate('ReportComment', { comment_id: comment.id })
+                    },
                 },
                 {
                     title: '回复',
@@ -234,7 +240,6 @@ class CommentItem extends Component<Props> {
     render() {
         const {
             comment,
-            navigation,
             questionId,
             showCommentModal,
             replyComment,
@@ -242,6 +247,7 @@ class CommentItem extends Component<Props> {
             AnswerCount,
             index,
         } = this.props;
+        let navigation = DataCenter.navigation;
         const { liked, count_likes, bounce, visible, limit, loadingMore } = this.state;
         const scale = bounce.interpolate({
             inputRange: [1, 1.1, 1.2],
@@ -259,7 +265,9 @@ class CommentItem extends Component<Props> {
                             />
                         </View>
                     )}
-                    <TouchFeedback onPress={() => navigation.navigate('User', { user: comment.user })}>
+                    <TouchFeedback onPress={() => {
+                        if(navigation) navigation.navigate('User', { user: comment.user })
+                        }}>
                         <Avatar source={comment.user.avatar} size={PxFit(34)} />
                     </TouchFeedback>
                     <View style={{ flex: 1, marginLeft: PxFit(10) }}>
@@ -485,7 +493,6 @@ const styles = StyleSheet.create({
 });
 
 export default compose(
-    withNavigation,
     graphql(GQL.toggleLikeMutation, { name: 'toggleLikeMutation' }),
     graphql(GQL.deleteCommentMutation, { name: 'deleteCommentMutation' }),
 )(CommentItem);

@@ -38,6 +38,7 @@ import { List } from 'lodash';
 
 type Props = {
     navigation: any;
+    route:any;
 };
 
 const answer = (props: Props) => {
@@ -56,7 +57,7 @@ const answer = (props: Props) => {
 
     const _animated = useRef(new Animated.Value(0));
 
-    const category = props.navigation.getParam('category', {});
+    const category = props.route.params?.category ?? {};
 
     const questionList = useQuery(GQL.QuestionListQuery, {
         variables: { category_id: category.id, limit: 10 },
@@ -271,7 +272,6 @@ const answer = (props: Props) => {
     const renderContent = () => {
         // const { answer, submited, question, finished, auditStatus, error } = this.state;
         // const { navigation } = this.props;
-        // const { category = {} } = this.props.navigation.state.params;
         console.log('renderContent', question);
         if (error) {
             return <StatusView.ErrorView onPress={fetchData} error={error} />;

@@ -11,7 +11,7 @@ import { Theme, PxFit, SCREEN_WIDTH, Tools } from 'utils';
 
 class VideoExplanation extends Component {
 	render() {
-		let video = this.props.navigation.getParam('video', {});
+		let video = this.props.route.params.video ?? {};
 		return (
 			<PageContainer hiddenNavBar>
 				<StatusBar translucent={true} hidden />

@@ -16,7 +16,7 @@ class SetLoginInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            account: props.navigation.state.params.phone,
+            account: props.route.params.phone,
             password: null,
         };
     }
@@ -66,9 +66,9 @@ class SetLoginInfo extends Component {
     };
 
     render() {
-        const { navigation } = this.props;
+        const { navigation,route } = this.props;
         let { verificationCode, tips, submitting, password, account } = this.state;
-        let { phone } = navigation.state.params;
+        let { phone } = route.params;
         return (
             <PageContainer title="设置登录信息" white submitting={submitting} submitTips="注册中...">
                 <View style={styles.container}>

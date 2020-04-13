@@ -13,9 +13,8 @@ import { Mutation, compose, graphql, GQL } from 'apollo';
 class VerificationScreen extends Component {
 	constructor(props) {
 		super(props);
-		console.log(' props.navigation.state.params', props.navigation.state.params);
 		this.state = {
-			account: props.navigation.state.params.account,
+			account: props.route.params.account,
 			isOnpress: true,
 			second: 5000,
 			buttonColor: Theme.primaryColor,
@@ -65,10 +64,10 @@ class VerificationScreen extends Component {
 	};
 
 	render() {
-		const { navigation } = this.props;
+		const { navigation,route } = this.props;
 		let { account, isOnpress, second, buttonColor, submitting } = this.state;
 
-		let { title } = navigation.state.params;
+		let { title } = route.params;
 
 		return (
 			<PageContainer title={title} white submitting={submitting} submitTips="发送中...">

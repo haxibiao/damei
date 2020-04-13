@@ -6,7 +6,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { withNavigation } from 'react-navigation';
+
 
 import { StyleSheet, View, TouchableOpacity, StatusBar, Platform } from 'react-native';
 import { Theme, SCREEN_WIDTH } from '../../utils';
@@ -14,12 +14,18 @@ import { Theme, SCREEN_WIDTH } from '../../utils';
 import Iconfont from '../Iconfont';
 import ScrollTabBar from './ScrollTabBar';
 
+import { observer } from 'mobx-react';
+import {DataCenter} from '../../data';
+@observer
 class TabBarHeader extends Component {
 	render() {
-		let { navigation, width = containerWidth, tabUnderlineWidth } = this.props;
+		let { width = containerWidth, tabUnderlineWidth } = this.props;
+		let navigation = DataCenter.navigation;
 		return (
 			<View style={styles.header}>
-				<TouchableOpacity activeOpacity={1} style={styles.goBack} onPress={() => navigation.goBack()}>
+				<TouchableOpacity activeOpacity={1} style={styles.goBack} onPress={() => {
+					if(navigation) navigation.goBack()
+					}}>
 					<Iconfont name={'left'} size={19} color={Theme.primaryFont} />
 				</TouchableOpacity>
 				<ScrollTabBar
@@ -55,4 +61,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default withNavigation(TabBarHeader);
+export default TabBarHeader;

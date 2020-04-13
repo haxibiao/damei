@@ -100,8 +100,8 @@ class SubmitTaskScreen extends Component {
 
     // 提交任务
     async submitTask(images) {
-        const { navigation } = this.props;
-        const { task } = navigation.state.params;
+        const { navigation,route } = this.props;
+        const { task } = route.params;
         const { appstore, content } = this.state;
         let result = {};
 
@@ -145,8 +145,8 @@ class SubmitTaskScreen extends Component {
 
     render() {
         const { content, pictures, isVisible, appstore } = this.state;
-        const { navigation } = this.props;
-        const { task } = navigation.state.params;
+        const { navigation,route } = this.props;
+        const { task } = route.params;
         return (
             <PageContainer
                 navBarStyle={{

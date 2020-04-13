@@ -13,7 +13,7 @@ import { app } from 'store';
 class VerificationCode extends Component {
 	constructor(props) {
 		super(props);
-		let { time } = this.props.navigation.state.params;
+		let { time } = this.props.route.params;
 		this.time_remaining = time ? time - 1 : 60;
 		this.state = {
 			tips: this.time_remaining + 's后重新发送',
@@ -85,8 +85,8 @@ class VerificationCode extends Component {
 	//提交设置支付宝
 	setPaymentInfo = async () => {
 		let { verificationCode, real_name, pay_account } = this.state;
-		const { navigation } = this.props;
-		const { code } = navigation.state.params;
+		const { navigation,route } = this.props;
+		const { code } = route.params;
 		let result = {};
 
 		if (Tools.regular(this.state.pay_account)) {

@@ -33,7 +33,6 @@ class QuestionShareCard extends Component {
     }
     render() {
         const { navigation, question, shareMiniProgram, user } = this.props;
-        // let { question } = navigation.state.params;
 
         return (
             <ScrollView style={{ flex: 1 }}>

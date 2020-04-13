@@ -53,7 +53,7 @@ class App extends Component {
         });
 
         if (Config.AppStore !== 'huawei') {
-            //ad.Splash.loadSplashAd();
+            ad.Splash.loadSplashAd();
         }
 
         // SplashScreen.hide();
@@ -75,7 +75,7 @@ class App extends Component {
         Orientation.lockToPortrait();
 
         ad.RewardVideo.loadAd().then(data => {
-            // config.rewardVideoAdCache = data;
+            config.rewardVideoAdCache = data;
         });
 
         /**

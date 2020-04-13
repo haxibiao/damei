@@ -48,8 +48,8 @@ class index extends Component {
     };
 
     showOptions = () => {
-        let { navigation } = this.props;
-        let user = navigation.getParam('user', {});
+        let { navigation,route } = this.props;
+        let user = route.params?.user ?? {};
 
         PullChooser.show([
             {
@@ -65,8 +65,9 @@ class index extends Component {
 
     render() {
         let { orderByHot } = this.state;
-        let { navigation } = this.props;
-        let user = navigation.getParam('user', {});
+        let { navigation,route } = this.props;
+        let user = route.params?.user ?? {};
+
         return (
             <Query
                 query={GQL.UserInfoQuery}

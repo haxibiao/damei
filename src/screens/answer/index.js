@@ -54,7 +54,7 @@ class index extends Component {
         this._animated = new Animated.Value(0);
         this.onSubmitOpinion = Tools.throttle(this.onSubmitOpinion, 1500);
         this.onSubmit = Tools.throttle(this.onSubmit, 1500);
-        this.category_id = props.navigation.getParam('category', {}).id;
+        this.category_id = props.route.params?.category.id ?? '';
         this.containerHeight = SCREEN_HEIGHT - PxFit(170);
         this.answer_count = 0;
         this.error_count = 0;
@@ -368,9 +368,9 @@ class index extends Component {
     };
 
     showOptions = () => {
-        const { navigation, data } = this.props;
+        const { navigation, data,route } = this.props;
         const { question } = this.state;
-        const { category = {} } = navigation.state.params;
+        let category = route.params?.category ?? {}
         ISIOS
             ? PullChooser.show([
                   {
@@ -438,7 +438,7 @@ class index extends Component {
     renderContent = () => {
         const { answer, submited, question, finished, auditStatus, error } = this.state;
         const { navigation } = this.props;
-        const { category = {} } = this.props.navigation.state.params;
+        let category = this.props.route.params?.category ?? {};
         if (error) {
             return <StatusView.ErrorView onPress={this.fetchData} error={error} />;
         } else if (!question && finished) {
@@ -569,7 +569,7 @@ class index extends Component {
     };
 
     render() {
-        const { category = {} } = this.props.navigation.state.params;
+        let category = this.props.route.params?.category ?? {};
         return (
             <React.Fragment>
                 <PageContainer

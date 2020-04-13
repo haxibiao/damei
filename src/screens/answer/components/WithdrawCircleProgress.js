@@ -5,7 +5,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, TouchableOpacity, Text } from 'react-native';
 import { Theme, PxFit, ISIOS, ISAndroid } from '../../../utils';
-import { withNavigation } from 'react-navigation';
+import { observer } from 'mobx-react';
+import {DataCenter} from '../../data';
 import * as Progress from 'react-native-progress';
 import { BoxShadow } from 'react-native-shadow';
 
@@ -22,13 +23,16 @@ const shadowOpt = {
 		marginTop: 0
 	}
 };
-
+@observer
 class WithdrawProgress extends Component {
 	render() {
-		const { progress, navigation } = this.props;
+		const { progress } = this.props;
+		let navigation = DataCenter.navigation;
 		return (
 			<BoxShadow setting={shadowOpt}>
-				<TouchableOpacity style={styles.circleProgress} onPress={() => navigation.navigate('Withdraws')}>
+				<TouchableOpacity style={styles.circleProgress} onPress={() => {
+					if(navigation) navigation.navigate('Withdraws')
+					}}>
 					<Progress.Circle
 						progress={progress / 100}
 						size={PxFit(60)}
@@ -67,4 +71,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default withNavigation(WithdrawProgress);
+export default WithdrawProgress;

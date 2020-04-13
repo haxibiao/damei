@@ -5,7 +5,7 @@ import { Theme, PxFit, SCREEN_WIDTH, Tools, Config, ISIOS } from 'utils';
 import { GQL, useMutation, useQuery } from 'apollo';
 import { syncGetter } from 'common';
 import { app, observer } from 'store';
-import { useNavigation } from 'react-navigation-hooks';
+import { useNavigation } from '@react-navigation/native'
 import DongdezhuanIntro from './DongdezhuanIntro';
 import DatizhuanqianIntro from './DatizhuanqianIntro';
 import { AppUtil } from 'native';

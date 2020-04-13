@@ -7,7 +7,7 @@ import { exceptionCapture } from '@src/common';
 import { app } from 'store';
 import { Overlay } from 'teaset';
 import SignedReturn from './components/SignedReturn';
-import { useNavigation } from 'react-navigation-hooks';
+import { useNavigation } from '@react-navigation/native'
 import { BoxShadow } from 'react-native-shadow';
 
 interface Sign {

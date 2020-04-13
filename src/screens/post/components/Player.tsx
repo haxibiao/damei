@@ -6,7 +6,7 @@ import { observer } from 'store';
 import { PxFit, SCREEN_WIDTH, SCREEN_HEIGHT } from 'utils';
 import VideoStore from '../VideoStore';
 import VideoLoading from './VideoLoading';
-import { useNavigation } from 'react-navigation-hooks';
+import { useNavigation } from '@react-navigation/native'
 
 export default observer(props => {
     const { media, index } = props;

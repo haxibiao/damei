@@ -20,11 +20,18 @@ type DATA = number | string | boolean | DMUser;
 class DataCenter {
     @observable public App = new AppStore();
     @observable public User = new UserStore();
+    
+    @observable public navigation:any = null;
 
     constructor(){
         /**
          *  在这初始化相关操作
          */
+    }
+
+    @action.bound
+    public setNavigation(navigation:any){
+        this.navigation = navigation;
     }
 
     /**********************************

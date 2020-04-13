@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import {observer,DataCenter} from '../../data';
 import { PxFit, Theme, Tools } from 'utils';
 import Iconfont from '../Iconfont';
 import { compose } from 'react-apollo';
@@ -23,7 +23,7 @@ type Props = {
     tintColor?: any,
     ...others,
 };
-
+@observer
 class FollowButton extends Component<Props> {
     static defaultProps = {
         activeOpacity: 0.6,
@@ -93,7 +93,7 @@ class FollowButton extends Component<Props> {
         console.log('触发');
         if (!app.login) {
             return () => {
-                this.props.navigation.navigate('Login');
+                if(DataCenter.navigation) DataCenter.navigation.navigate('Login');
             };
         } else {
             console.log('true');
@@ -129,7 +129,4 @@ class FollowButton extends Component<Props> {
 
 const styles = StyleSheet.create({});
 
-export default compose(
-    withNavigation,
-    graphql(GQL.FollowToggbleMutation, { name: 'followUser' }),
-)(FollowButton);
+export default compose( graphql(GQL.FollowToggbleMutation, { name: 'followUser' }) )(FollowButton);

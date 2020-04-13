@@ -9,7 +9,8 @@ import JPushModule from "jpush-react-native";
 import Echo from "laravel-echo";
 import Socketio from "socket.io-client";
 
-import AppRouter from "./routers";
+import AppRouter from "./routers"; //旧版导航路由入口
+import Nav from './routers/new_index'; //新版导航路由入口
 
 import { useCaptureVideo } from "@src/common";
 
@@ -106,7 +107,8 @@ export default observer(props => {
     return (
         <ApolloProvider client={client}>
             <ApolloHooksProvider client={client}>
-                <AppRouter ref={Tools.setRootNavigation} />
+                {/* <AppRouter ref={Tools.setRootNavigation} /> */}
+                <Nav />
             </ApolloHooksProvider>
         </ApolloProvider>
     );

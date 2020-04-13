@@ -5,7 +5,7 @@
 'use strict';
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { NavigationEvents } from 'react-navigation';
+// import { NavigationEvents } from 'react-navigation';
 import { Theme, PxFit, ISIOS, NAVBAR_HEIGHT } from '../../utils';
 import StatusView from '../StatusView';
 import NavigatorBar from '../Header/NavigatorBar';
@@ -109,12 +109,12 @@ class PageContainer extends Component<Props> {
 				{!hiddenNavBar && this.renderNavBar()}
 				<View style={[styles.contentView, { marginTop }, contentViewStyle]}>{this.renderContent()}</View>
 				{autoKeyboardInsets && <KeyboardSpacer topInsets={topInsets} />}
-				<NavigationEvents
+				{/* <NavigationEvents
 					onWillFocus={onWillFocus}
 					onDidFocus={onDidFocus}
 					onWillBlur={onWillBlur}
 					onDidBlur={onDidBlur}
-				/>
+				/> */}
 				<SubmitLoading isVisible={submitting} content={submitTips} />
 			</View>
 		);

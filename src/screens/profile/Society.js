@@ -12,8 +12,8 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 class Society extends Component {
 	render() {
-		let { navigation } = this.props;
-		let follower = navigation.getParam('follower');
+		let { navigation,route} = this.props;
+		let follower = route.params.follower;
 		return (
 			<PageContainer hiddenNavBar contentViewStyle={{ marginTop: Theme.statusBarHeight }}>
 				<ScrollableTabView

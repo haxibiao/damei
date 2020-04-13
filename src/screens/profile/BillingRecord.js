@@ -22,9 +22,9 @@ class BillingRecord extends Component {
     }
 
     render() {
-        const { navigation } = this.props;
+        const { navigation,route } = this.props;
 
-        const initialPage = navigation.getParam('initialPage', 0);
+        const initialPage = route.params?.initialPage ?? 0;
         return (
             <PageContainer white title="我的账单">
                 <View style={styles.container}>

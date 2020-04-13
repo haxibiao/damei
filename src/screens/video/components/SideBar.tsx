@@ -8,7 +8,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { PxFit, Theme, Tools } from 'utils';
 import Like from './Like';
 import VideoStore from '../VideoStore';
-import { useNavigation } from 'react-navigation-hooks';
+import { useNavigation } from '@react-navigation/native'
 import { Overlay } from 'teaset';
 
 export default observer(props => {
