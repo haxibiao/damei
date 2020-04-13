@@ -12,6 +12,7 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		148ECEE324437D510005BEF3 /* fix_swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148ECEE224437D510005BEF3 /* fix_swift.swift */; };
 		2C1340C6231FB996005BD593 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1340C5231FB996005BD593 /* libsqlite3.0.tbd */; };
 		2C90EEB8231E43A700053670 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C90EEB7231E43A700053670 /* StoreKit.framework */; };
 		2C90EEBA231E43AE00053670 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C90EEB9231E43AE00053670 /* MobileCoreServices.framework */; };
@@ -98,6 +99,8 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = damei/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = damei/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = damei/main.m; sourceTree = "<group>"; };
+		148ECEE124437D500005BEF3 /* damei-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "damei-Bridging-Header.h"; sourceTree = "<group>"; };
+		148ECEE224437D510005BEF3 /* fix_swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fix_swift.swift; sourceTree = "<group>"; };
 		2B0CEE7D5A944D69AEA889EA /* iconfont.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = iconfont.ttf; path = ../src/components/Iconfont/fonts/iconfont.ttf; sourceTree = "<group>"; };
 		2C1340C5231FB996005BD593 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		2C90EEB7231E43A700053670 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -268,6 +271,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				148ECEE224437D510005BEF3 /* fix_swift.swift */,
+				148ECEE124437D500005BEF3 /* damei-Bridging-Header.h */,
 			);
 			name = damei;
 			sourceTree = "<group>";
@@ -618,6 +623,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 3W7L7CX92N;
+						LastSwiftMigration = 1140;
 						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -745,7 +751,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-damei/Pods-damei-resources.sh",
 				"${PODS_ROOT}/Bytedance-UnionAD/Bytedance-UnionAd/Frameworks/BUAdSDK.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/QBImagePickerController/QBImagePicker.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/RNImageCropPicker/QBImagePicker.bundle",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
@@ -924,6 +930,7 @@
 				2CAFA7B9233C99F600C20E17 /* VideoUploader.m in Sources */,
 				2CAFA7B5233C99F600C20E17 /* FullScreenVideo.m in Sources */,
 				2CAFA7A5233C99F600C20E17 /* FeedAd.m in Sources */,
+				148ECEE324437D510005BEF3 /* fix_swift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -977,6 +984,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8CE8169102297C04460BC705 /* Pods-dameiTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -1007,6 +1015,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 51C106BE14A40DB408315118 /* Pods-dameiTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -1036,6 +1045,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -1054,6 +1064,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.damei;
 				PRODUCT_NAME = damei;
 				PROVISIONING_PROFILE_SPECIFIER = damei_test;
+				SWIFT_OBJC_BRIDGING_HEADER = "damei-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1064,6 +1077,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1082,6 +1096,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.damei;
 				PRODUCT_NAME = damei;
 				PROVISIONING_PROFILE_SPECIFIER = damei_test;
+				SWIFT_OBJC_BRIDGING_HEADER = "damei-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
