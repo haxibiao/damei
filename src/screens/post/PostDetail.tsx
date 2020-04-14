@@ -108,8 +108,8 @@ export default observer(props => {
         });
 
         return () => {
-            navWillFocusListener.remove();
-            navWillBlurListener.remove();
+            if(navWillFocusListener) navWillFocusListener.remove();
+            if(navWillBlurListener) navWillBlurListener.remove();
             VideoStore.dataSource = [];
             VideoStore.viewableItemIndex = -1;
         };
