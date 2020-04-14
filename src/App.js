@@ -24,8 +24,8 @@ import Apollo from './Apollo';
 import { LicenseUrl,LicenseKey } from '../app.json';
 import { LivePullManager } from 'hxf-tencent-live'; //导入直播
 import { check,request,PERMISSIONS,RESULTS } from 'react-native-permissions';
-import { DataCenter } from './data';
-
+import { DataCenter,observer } from './data';
+@observer
 class App extends Component {
     toast: Toast;
     constructor(props) {
