@@ -71,7 +71,7 @@ class index extends Component {
             }
         }, 3000);
 
-        this.didFocusSubscription = navigation.addListener('didFocus', payload => {
+        this.didFocusSubscription = navigation.addListener('focus', payload => {
             const { client, login } = this.props;
             if (login) {
                 client

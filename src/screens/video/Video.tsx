@@ -98,19 +98,19 @@ export default observer(props => {
         let navWillBlurListener:any;
         let navWillFocusListener:any;
         if(navigation){
-            navWillFocusListener = navigation.addListener('willFocus', () => {
+            navWillFocusListener = navigation.addListener('focus', () => {
                 // if (VideoStore.viewableItemIndex < 0) {
                 //     VideoStore.viewableItemIndex = 0;
                 // }
             });
-            navWillBlurListener = navigation.addListener('willBlur', () => {
+            navWillBlurListener = navigation.addListener('blur', () => {
                 hideComment();
             });
         }
 
         return () => {
-            if(navWillFocusListener) navWillFocusListener.remove();
-            if(navWillBlurListener) navWillBlurListener.remove();
+            navWillFocusListener();
+            navWillBlurListener();
         };
     }, []);
 

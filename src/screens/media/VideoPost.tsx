@@ -98,18 +98,18 @@ export default observer(props => {
         // }
         //TODO: 没有自动唤起评论
 
-        const navWillFocusListener = navigation.addListener('willFocus', () => {
+        const navWillFocusListener = navigation.addListener('focus', () => {
             if (VideoStore.viewableItemIndex < 0) {
                 VideoStore.viewableItemIndex = 0;
             }
         });
-        const navWillBlurListener = navigation.addListener('willBlur', () => {
+        const navWillBlurListener = navigation.addListener('blur', () => {
             hideComment();
         });
 
         return () => {
-            if(navWillFocusListener) navWillFocusListener.remove();
-            if(navWillBlurListener) navWillBlurListener.remove();
+            navWillFocusListener();
+            navWillBlurListener();
             VideoStore.dataSource = [];
             VideoStore.viewableItemIndex = -1;
         };

@@ -44,14 +44,14 @@ class Player extends Component {
 		if(navigation){
 
 		
-		this.willBlurSubscription = navigation.addListener('willBlur', payload => {
+		this.willBlurSubscription = navigation.addListener('blur', payload => {
 			this.videoStore.paused = true;
 		});
 	}
 	}
 
 	componentWillUnmount() {
-		if(this.willBlurSubscription) this.willBlurSubscription.remove();
+		if(this.willBlurSubscription) this.willBlurSubscription();
 		// 离开固定竖屏
 		Orientation.lockToPortrait();
 	}

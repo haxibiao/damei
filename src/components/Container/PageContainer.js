@@ -86,6 +86,23 @@ class PageContainer extends Component<Props> {
 		return navView;
 	}
 
+	componentDidMount(){
+		if(this.props.onWillBlur){
+			if(this.props.navigation){
+				this.props.navigation.addListener('blur',() => {
+					this.props.onWillBlur();
+				})
+			}
+		}
+		if(this.props.onWillFocus){
+			if(this.props.navigation){
+				this.props.navigation.addListener('focus',() => {
+					this.props.onWillFocus();
+				})
+			}
+		}
+	}
+
 	render() {
 		const {
 			style,
