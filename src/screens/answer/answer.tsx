@@ -390,6 +390,7 @@ const answer = (props: Props) => {
                 title={category.name || '答题'}
                 autoKeyboardInsets={false}
                 onWillBlur={hideComment}
+                navigation={props.navigation}
                 rightView={
                     <TouchFeedback disabled={!question} style={styles.optionsButton} onPress={showOptions}>
                         <Iconfont name="more-vertical" color="#fff" size={PxFit(18)} />

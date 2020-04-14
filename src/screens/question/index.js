@@ -274,6 +274,7 @@ class index extends Component {
                     submitting={submitting}
                     submitTips="loading..."
                     onWillBlur={this.hideComment}
+                    navigation={this.props.navigation}
                     error={questionQuery.error}
                     refetch={questionQuery.refetch}
                     rightView={

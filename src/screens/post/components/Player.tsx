@@ -71,15 +71,15 @@ export default observer(props => {
 
     useEffect(() => {
         setPause(!isIntoView);
-        const navWillFocusListener = navigation.addListener('willFocus', () => {
+        const navWillFocusListener = navigation.addListener('focus', () => {
             setPause(!isIntoView);
         });
-        const navWillBlurListener = navigation.addListener('willBlur', () => {
+        const navWillBlurListener = navigation.addListener('blur', () => {
             setPause(true);
         });
         return () => {
-            if(navWillFocusListener) navWillFocusListener.remove();
-            if(navWillBlurListener) navWillBlurListener.remove();
+            navWillFocusListener();
+            navWillBlurListener();
         };
     }, [isIntoView]);
 

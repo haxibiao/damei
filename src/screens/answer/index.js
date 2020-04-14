@@ -577,6 +577,7 @@ class index extends Component {
                     white
                     autoKeyboardInsets={false}
                     onWillBlur={this.hideComment}
+                    navigation={this.props.navigation}
                     rightView={
                         <TouchFeedback
                             disabled={!this.state.question}

@@ -55,7 +55,7 @@ class TaskList extends Component {
             app.updateTaskCache(this.props.TasksQuery.tasks);
         }
         if (nextProps.TasksQuery && nextProps.TasksQuery.tasks) {
-            nextProps.navigation.addListener('didFocus', payload => {
+            nextProps.navigation.addListener('focus', payload => {
                 nextProps.TasksQuery.refetch();
             });
         }

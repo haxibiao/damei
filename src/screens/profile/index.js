@@ -257,7 +257,7 @@ class index extends Component {
                                         variables={{ id: user.id }}
                                         fetchPolicy="network-only">
                                         {({ data, error, refetch }) => {
-                                            navigation.addListener('didFocus', payload => {
+                                            navigation.addListener('focus', payload => {
                                                 refetch();
                                             });
                                             if (data && data.user && data.user.unread_notifications_count) {
