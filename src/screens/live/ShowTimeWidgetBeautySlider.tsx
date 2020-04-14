@@ -33,11 +33,12 @@ const ShowTimeWidgetBeautySlider = React.memo(() => {
                 minimumTrackTintColor='#fff' 
                 onValueChange={BlurHandler}/>
             </View>
-            <Text style={styles.option_title}>美白</Text>
+            <Text style={[styles.option_title,{marginTop:20}]}>美白</Text>
             <View style={styles.slider_wrapper}>
                 <Slider 
                 value={LiveBeautyStore.whiteness} 
                 thumbTintColor='#ffffffdd' 
+                style={{width:'100%'}}
                 minimumTrackTintColor='#fff' 
                 onValueChange={WhiteHandler}/>
             </View>
@@ -57,8 +58,9 @@ const styles = StyleSheet.create({
     },
     slider_wrapper:{ 
         width: sw * 0.5, 
-        height: 18, 
-        borderRadius: 12, 
-        backgroundColor: '#00000066' 
+        height: 30, 
+        borderRadius: 15, 
+        backgroundColor: '#00000066' ,
+        justifyContent:'center',
     },
 })

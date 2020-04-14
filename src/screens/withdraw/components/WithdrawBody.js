@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useRef, useMemo, useEffect, Fragment } from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, ImageBackground, TouchableOpacity, Animated } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, ImageBackground, TouchableOpacity, Animated,Platform } from 'react-native';
 import { Button, Iconfont, SubmitLoading, Row, SafeText, TouchFeedback } from 'components';
 import { Theme, PxFit, SCREEN_WIDTH, Tools, Config, ISIOS } from 'utils';
 import { GQL, useMutation, useQuery } from 'apollo';
@@ -13,7 +13,7 @@ import { AppUtil } from 'native';
 const GOLD_IMAGE_BG = SCREEN_WIDTH - PxFit(Theme.itemSpace * 2);
 const withdrawInfo = [];
 
-const WithdrawalPlatforms = [
+const WithdrawalPlatforms = Platform.OS === 'android' ? [
     {
         type: 'alipay',
         name: '支付宝',
@@ -34,6 +34,12 @@ const WithdrawalPlatforms = [
         name:'微信',
         icon:require('@src/assets/images/wechat_radio.png')
     }
+] :  [
+    {
+        type: 'alipay',
+        name: '支付宝',
+        icon: require('@src/assets/images/alipay.png'),
+    },
 ];
 
 export default observer(() => {
@@ -100,6 +106,7 @@ export default observer(() => {
     };
 
     const CheckApkExist = useCallback(() => {
+
         AppUtil.CheckApkExist('com.dongdezhuan', (data: any) => {
             if (data) {
                 setInstallDDZ(true);
@@ -124,7 +131,7 @@ export default observer(() => {
     };
 
     useEffect(() => {
-        CheckApkExist();
+        if(Platform.OS == 'android') CheckApkExist();
     }, []);
 
     useEffect(() => {
@@ -259,7 +266,8 @@ export default observer(() => {
                     </View>
                     <View style={{ paddingHorizontal: PxFit(Theme.itemSpace) }}>
                         <Row style={{ flexWrap: 'wrap', justifyContent: 'space-between' }}>
-                            {WithdrawalPlatforms.map((data, index) => {
+                            {
+                            WithdrawalPlatforms.map((data, index) => {
                                 return (
                                     <Fragment key={index}>
                                         <TouchFeedback

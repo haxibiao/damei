@@ -56,7 +56,9 @@ const ModalContent = observer((props: any) => {
 
     return (
         <View style={styles.quitModal}>
-            <Text style={styles.quitModalTitle}>是否结束直播 ? </Text>
+            <View style={styles.quitModalTitle}>
+                <Text style={{fontSize:16,color:'#222'}}>是否结束直播 ? </Text>
+            </View>
             <View style={styles.quitModalBtnWrapper}>
                 <TouchableOpacity onPress={() => {
                     hideQuitModal(); //关闭退出浮层
@@ -249,11 +251,9 @@ const styles = StyleSheet.create({
         overflow: 'hidden' 
     },
     quitModalTitle:{ 
-        fontSize: 18, 
-        color: '#333', 
         height: sw * 0.2, 
-        textAlign: 'center', 
-        textAlignVertical: 'center' 
+        justifyContent: 'center', 
+        alignItems: 'center' 
     },
     quitModalBtnWrapper:{ 
         width: '100%', 
