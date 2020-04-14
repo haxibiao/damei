@@ -37,6 +37,8 @@ import TabTwo from '../screens/home'; //答题页
 import TabThree from '../screens/task'; //任务、分红
 import TabFour from '../screens/profile'; //我的页
 
+import * as PublishOption from './PublishOptionModal'; //发布页浮层
+
 const BottomTab = createBottomTabNavigator();
 
 // 底部导航路由名
@@ -102,6 +104,7 @@ function BottomTabBar({ state, descriptors, navigation,enableShadow }:{state:any
                 if (!isFocused && !event.defaultPrevented){
                     if(route.name == PUBLIC){
                         // 点击发布按钮
+                        PublishOption.showPublishOption(navigation);
                     }else{
                         navigation.navigate(route.name);
                     }
@@ -173,9 +176,14 @@ function BottomTabBar({ state, descriptors, navigation,enableShadow }:{state:any
      *  返回自定义底部导航栏组件
      */
     const fullScreen = state.index == -1;
+    const specialMode = state.index == 0;
 
     return (
-        <View style={fullScreen ? styles.fullscreen_Tab : [styles.normal_Tab, enableShadow ? styles.Tab_shadow : {}]}>
+        <View style={fullScreen ? styles.fullscreen_Tab : [
+            styles.normal_Tab, enableShadow ? styles.Tab_shadow : {}, 
+            {backgroundColor: specialMode ? '#191A21' : 'white'}
+            ]
+        }>
             <View style={[{ backgroundColor: Colors.clear }, styles.tabContainer]}>
                 {
                     _tabs()

@@ -5,7 +5,8 @@ import {
   Image,
   StyleSheet,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from "react-native";
 const { width: sw, height: sh } = Dimensions.get("window");
 import { Overlay } from "teaset";
@@ -35,49 +36,93 @@ const PermissionView = observer((props: any) => {
 
   useEffect(() => {
     // 检查相机授权
-    check(PERMISSIONS.ANDROID.CAMERA).then(result => {
-      switch (result) {
-        case RESULTS.UNAVAILABLE:
-          setcamerastatus(UNAVAILABLE);
-          setcameracolor(BAD);
-          //检查麦克风授权
-          MicroCheck();
-          break;
-        case RESULTS.GRANTED:
-          setcamerastatus(GRANT);
-          setcameracolor(GREEN);
-          //检查麦克风授权
-          MicroCheck();
-          break;
-        case RESULTS.DENIED:
-            request(PERMISSIONS.ANDROID.CAMERA)
-                .then(result => {
-                    if(result == RESULTS.GRANTED){
-                        setcamerastatus(GRANT);
-                        setcameracolor(GREEN);
-                    }else if(result == RESULTS.DENIED){
-                        setcamerastatus(DENY);
-                        setcameracolor(BAD);
-                    }else if(result == RESULTS.BLOCKED){
-                        setcamerastatus(BLOCK);
-                        setcameracolor(BAD);
-                    }
-                }).then(
-                    //检查麦克风授权
-                    () => {
-                        MicroCheck();
-                    }
-                );
-          break;
-        case RESULTS.BLOCKED:
-          setcamerastatus(BLOCK);
-          setcameracolor(BAD);
-          break;
-      }
-    });
+    if(Platform.OS == 'android'){
+      check(PERMISSIONS.ANDROID.CAMERA).then(result => {
+        switch (result) {
+          case RESULTS.UNAVAILABLE:
+            setcamerastatus(UNAVAILABLE);
+            setcameracolor(BAD);
+            //检查麦克风授权
+            MicroCheck();
+            break;
+          case RESULTS.GRANTED:
+            setcamerastatus(GRANT);
+            setcameracolor(GREEN);
+            //检查麦克风授权
+            MicroCheck();
+            break;
+          case RESULTS.DENIED:
+              request(PERMISSIONS.ANDROID.CAMERA)
+                  .then(result => {
+                      if(result == RESULTS.GRANTED){
+                          setcamerastatus(GRANT);
+                          setcameracolor(GREEN);
+                      }else if(result == RESULTS.DENIED){
+                          setcamerastatus(DENY);
+                          setcameracolor(BAD);
+                      }else if(result == RESULTS.BLOCKED){
+                          setcamerastatus(BLOCK);
+                          setcameracolor(BAD);
+                      }
+                  }).then(
+                      //检查麦克风授权
+                      () => {
+                          MicroCheck();
+                      }
+                  );
+            break;
+          case RESULTS.BLOCKED:
+            setcamerastatus(BLOCK);
+            setcameracolor(BAD);
+            break;
+        }
+      });
+    }else if(Platform.OS == 'ios'){
+      check(PERMISSIONS.IOS.CAMERA).then(result => {
+        switch (result) {
+          case RESULTS.UNAVAILABLE:
+            setcamerastatus(UNAVAILABLE);
+            setcameracolor(BAD);
+            //检查麦克风授权
+            MicroCheck();
+            break;
+          case RESULTS.GRANTED:
+            setcamerastatus(GRANT);
+            setcameracolor(GREEN);
+            //检查麦克风授权
+            MicroCheck();
+            break;
+          case RESULTS.DENIED:
+              request(PERMISSIONS.IOS.CAMERA)
+                  .then(result => {
+                      if(result == RESULTS.GRANTED){
+                          setcamerastatus(GRANT);
+                          setcameracolor(GREEN);
+                      }else if(result == RESULTS.DENIED){
+                          setcamerastatus(DENY);
+                          setcameracolor(BAD);
+                      }else if(result == RESULTS.BLOCKED){
+                          setcamerastatus(BLOCK);
+                          setcameracolor(BAD);
+                      }
+                  }).then(
+                      //检查麦克风授权
+                      () => {
+                          MicroCheck();
+                      }
+                  );
+            break;
+          case RESULTS.BLOCKED:
+            setcamerastatus(BLOCK);
+            setcameracolor(BAD);
+            break;
+        }
+      });
+    }
   }, []);
 
   function MicroCheck(){
+    if(Platform.OS == 'android'){
       check(PERMISSIONS.ANDROID.RECORD_AUDIO)
         .then(result => {
             switch (result) {
@@ -123,6 +168,53 @@ const PermissionView = observer((props: any) => {
                   break;
               }
         })
+    }else if(Platform.OS == 'ios'){
+      check(PERMISSIONS.IOS.MICROPHONE)
+        .then(result => {
+            switch (result) {
+                case RESULTS.UNAVAILABLE:
+                  setmicrostatus(UNAVAILABLE);
+                  setmicrocolor(BAD);
+                  setcheckdone(true);
+                  break;
+                case RESULTS.GRANTED:
+                  setmicrostatus(GRANT);
+                  setmicrocolor(GREEN);
+                  setcheckdone(true);
+                  DataCenter.AppSetSufficientPermissions(true);
+                  break;
+                case RESULTS.DENIED:
+                    request(PERMISSIONS.IOS.MICROPHONE)
+                        .then(result => {
+                            if(result == RESULTS.GRANTED){
+                                setmicrostatus(GRANT);
+                                setmicrocolor(GREEN);
+                                DataCenter.AppSetSufficientPermissions(true);
+                            }else if(result == RESULTS.DENIED){
+                                setmicrostatus(DENY);
+                                setmicrocolor(BAD);
+                            }else if(result == RESULTS.BLOCKED){
+                                setmicrostatus(BLOCK);
+                                setmicrocolor(BAD);
+                            }
+                        }).then(() => { 
+                            setcheckdone(true);
+                            if(camerastatus == GRANT && microstatus == GRANT){
+                                DataCenter.AppSetSufficientPermissions(true);
+                            }
+                        });
+                  break;
+                case RESULTS.BLOCKED:
+                  setmicrostatus(BLOCK);
+                  setmicrocolor(BAD);
+                  setcheckdone(true);
+                  if(camerastatus == GRANT && microstatus == GRANT){
+                    DataCenter.AppSetSufficientPermissions(true);
+                  }
+                  break;
+              }
+        })
+    }
   }
 
   return (
@@ -164,7 +256,7 @@ const PermissionView = observer((props: any) => {
             activeOpacity={0.88}
             style={styles.done_btn}
           >
-            <Text style={{ color: DataCenter.App.sufficient_permissions ? "green" : "#222", fontSize: 16, backgroundColor: '#f1f1f1',borderRadius:5,paddingHorizontal:10,paddingVertical:5 }}>{DataCenter.App.sufficient_permissions ? '关闭后、前往直播吧' : '关闭'}</Text>
+            <Text style={{ color: DataCenter.App.sufficient_permissions ? "green" : "#222", fontSize: 16, }}>{DataCenter.App.sufficient_permissions ? '关闭后、前往直播吧' : '关闭'}</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -209,8 +301,10 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   done_btn:{
-    width: "100%",
-    height: 30,
+    backgroundColor: '#f1f1f1',
+    borderRadius:5,
+    paddingHorizontal:10,
+    paddingVertical:12,
     justifyContent: "center",
     alignItems: "center"
   },

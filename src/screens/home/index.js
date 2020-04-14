@@ -28,7 +28,6 @@ import NetInfo from '@react-native-community/netinfo';
 import { Util } from 'native';
 import { Overlay } from 'teaset';
 
-import UserRewardOverlay from './components/UserRewardOverlay';
 import TimeReward from './components/TimeReward';
 
 // 监听新用户登录;
@@ -152,24 +151,6 @@ class index extends Component {
 
         console.log('resetUser end >>>>>>>>>>>');
     }
-
-    // 新用户奖励提示
-    loadUserReword = phone => {
-        const overlayView = (
-            <Overlay.View animated>
-                <View style={styles.overlayInner}>
-                    <UserRewardOverlay
-                        hide={() => Overlay.hide(this.OverlayKey)}
-                        navigation={this.props.navigation}
-                        phone={phone}
-                        client={this.props.client}
-                    />
-                </View>
-            </Overlay.View>
-        );
-        this.OverlayKey = Overlay.show(overlayView);
-        // 回调后端
-    };
 
     _renderCategoryList = () => {
         const {

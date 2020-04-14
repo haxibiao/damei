@@ -12,6 +12,8 @@ import {
 import Config from 'react-native-config';
 import DeviceInfo from 'react-native-device-info';
 
+
+
 let AppStore = Config && Config.APP_STORE ? Config.APP_STORE : 'haxibiao'; //应用商店名称
 let ServerRoot = serverRoot; //接口地址
 let UploadServer = Config && Config.UPLOAD_SERVE ? Config.UPLOAD_SERVE : uploadRoot; //视频上传dizhi

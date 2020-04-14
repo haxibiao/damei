@@ -30,7 +30,7 @@ const ContentView = observer(() => {
                         minimumTrackTintColor='#fff'
                         onValueChange={BlurHandler} />
                 </View>
-                <Text style={styles.option_title}>美白</Text>
+                <Text style={[styles.option_title,{marginTop:15}]}>美白</Text>
                 <View style={styles.slider_wrapper}>
                     <Slider
                         value={LiveBeautyStore.whiteness}
@@ -79,9 +79,9 @@ const styles = StyleSheet.create({
     },
     slider_wrapper:{ 
         width: sw * 0.8, 
-        height: 18, 
-        borderRadius: 12, 
+        height: 30, 
+        borderRadius: 15, 
         backgroundColor: '#00000033' ,
-        marginBottom:12
+        justifyContent:'center',
     },
 })

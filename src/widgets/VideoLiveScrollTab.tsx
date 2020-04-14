@@ -1,6 +1,7 @@
 import React,{ useEffect,useState } from 'react';
-import { View,Text, TextStyle, ViewStyle, StyleSheet,StatusBar,TouchableOpacity,Dimensions,Animated } from 'react-native';
+import { View,Text, TextStyle, ViewStyle, StyleSheet,StatusBar,TouchableOpacity,Dimensions,Animated,NativeModules,Platform } from 'react-native';
 const {width:sw,height:sh} = Dimensions.get('window');
+const { StatusBarManager } = NativeModules;
 const STATUSHEIGHT = StatusBar.currentHeight ?? 0;
 const TABBUTTONW = sw * 0.15;
 const TABHEIGHT = 35;
@@ -22,7 +23,24 @@ export default function VideoLiveScrollTab (props:{
     let backgroundColor = props.backgroundColor ?? 'transparent';
     let tabs = props.tabs ?? [];
 
-    
+    /**
+     * 状态栏高度适配 ATag2 ( 返回安全视图高度，和状态栏高度适配合并在这里一起完成)
+     */
+    const [StatusHeight,setStatusHeight] = useState(0);
+    useEffect(() => {
+       
+            if(Platform.OS == 'ios'){
+                // 这里直接适配了IOS刘海屏
+                StatusBarManager.getHeight( h => {
+                    setStatusHeight(h.height);
+                    console.log(h.height);
+                });
+            }else{
+                // 适配Android
+                setStatusHeight(STATUSHEIGHT);
+            }
+        
+    },[])
 
     const renderTab = (name:string, page:number, isTabActive:boolean, onPressHandler:any) => {
 
@@ -43,7 +61,7 @@ export default function VideoLiveScrollTab (props:{
     });
 
     return (
-        <View style={[styles.tabs,{backgroundColor,marginTop:STATUSHEIGHT}]}>
+        <View style={[styles.tabs,{backgroundColor,marginTop:StatusHeight}]}>
             {
                 tabs.map((name:string,page:number) => {
                     const isTabActive = props.activeTab === page;

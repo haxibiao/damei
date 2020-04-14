@@ -4537,7 +4537,7 @@ human-signals@^1.1.1:
 
 "hxf-tencent-live@git+http://auto:hxb332211@code.haxibiao.cn/native/tencentlive.git":
   version "1.0.0"
-  resolved "git+http://auto:hxb332211@code.haxibiao.cn/native/tencentlive.git#62f2145455d6fa442588713699d0de58146a10a0"
+  resolved "git+http://auto:hxb332211@code.haxibiao.cn/native/tencentlive.git#906b12743d73b06701b34904791159c3443dce64"
 
 iconv-lite@0.4.24, iconv-lite@^0.4.17, iconv-lite@^0.4.24, iconv-lite@~0.4.13:
   version "0.4.24"

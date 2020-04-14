@@ -9,7 +9,7 @@ import { Query, withApollo, compose, graphql, GQL } from 'apollo';
 import { app } from 'store';
 import { WeChat } from 'native';
 
-import UserRewardOverlay from '../home/components/UserRewardOverlay';
+
 
 import { BoxShadow } from 'react-native-shadow';
 import { Overlay } from 'teaset';
@@ -222,18 +222,6 @@ class index extends Component {
         });
         this.props.navigation.goBack();
         Toast.show({ content: '登录成功' });
-    };
-
-    //显示邀请奖励
-    loadUserReword = () => {
-        let overlayView = (
-            <Overlay.View animated>
-                <View style={styles.overlayInner}>
-                    <UserRewardOverlay hide={() => Overlay.hide(this.OverlayKey)} />
-                </View>
-            </Overlay.View>
-        );
-        this.OverlayKey = Overlay.show(overlayView);
     };
 
     changeAccount = value => {
