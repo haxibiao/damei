@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { View, Image } from 'react-native-ui-lib';
-import { StatusBar, StyleSheet, Dimensions, ScrollView, Animated, Text, TextStyle, ViewStyle,Platform } from 'react-native';
+import { StatusBar, StyleSheet, Dimensions, ScrollView,View,Image, Animated, Text, TextStyle, ViewStyle,Platform } from 'react-native';
 import HeaderBackButton from '../HeaderBackButton';
 import DeviceInfo from 'react-native-device-info';
 const { width, height } = Dimensions.get('window');
@@ -120,7 +119,7 @@ export default function PagePinned(props: {
     const [scrollY, setScrollY] = useState(new Animated.Value(0))
 
     return (
-        <View flex style={{backgroundColor }}>
+        <View style={{backgroundColor,flex:1 }}>
 
             <AdaptiveStatusBar scrollValue={scrollY} barStyle={barStyle}/>
             
@@ -143,7 +142,7 @@ export default function PagePinned(props: {
                 width: width, 
                 backgroundColor: navBackgroundColor 
                 }}/>
-                <View flex-3 row left centerV style={{height:NavBarHeight}}>
+                <View style={[{height:NavBarHeight},styles.leftWidgetContainer]}>
                     <HeaderBackButton navigation={props.navigation} arrow={props?.arrow ?? false}  color={'#f1f1f1'}/>
                     <Animated.View style={{
                         position:'absolute',left:0,
@@ -168,7 +167,7 @@ export default function PagePinned(props: {
                             outputRange: [0,0, 1]
                         })
                     }}>
-                    <Text style={props?.centerTitleStyle ?? { fontSize: 20, color: '#222' }}>
+                    <Text style={props?.centerTitleStyle ?? { fontSize: 17, color: '#222' }}>
                         {props?.centerTitle ?? ''}
                     </Text>
                 </Animated.View>
@@ -224,4 +223,10 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         backgroundColor: 'transparent'
     },
+    leftWidgetContainer: {
+        flex: 3,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    }
 })
