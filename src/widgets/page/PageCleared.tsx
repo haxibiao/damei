@@ -1,15 +1,15 @@
-import React, { useState, useEffect,useRef } from 'react';
-import { View, Image } from 'react-native-ui-lib';
-import { StatusBar,StatusBarIOS, StyleSheet, Dimensions,NativeModules,TouchableOpacity, Animated,Text, ViewStyle, Platform } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+
+import { StatusBar, View, StatusBarIOS, StyleSheet, Dimensions, NativeModules, TouchableOpacity, Animated, Text, ViewStyle, Platform, TextStyle } from 'react-native';
 import HeaderBackButton from '../HeaderBackButton';
 const { width, height } = Dimensions.get('window');
-import { Icons,SvgIcon } from '../../res';
+import { Icons, SvgIcon } from '../../res';
 
-const {StatusBarManager} = NativeModules;
+const { StatusBarManager } = NativeModules;
 
 const icon = Icons.arrow_left;
-const size = 27;
-const scale = 0.026;
+const size = 23;
+const scale = 0.022;
 
 const PageBackground = '#ffffff';//最外层view的背景色 
 
@@ -31,18 +31,24 @@ export default function PageCleared(props: {
     rightWidget?: JSX.Element;
     enableShadow?: boolean;
     enableBack?: boolean;
+    backBg?: string;
     barStyle?: keyof BarStyle;
     safe?: boolean;
-    containerStyle?:ViewStyle
+    containerStyle?: ViewStyle;
+    fixed?: boolean;
+    centerTitleStyle?: TextStyle;
+    centerTitle?: string;
 }) {
 
     const backgroundColor = props?.backgroundColor ?? PageBackground; //最外层view的背景色 
 
-    
+
     const barStyle = props?.barStyle ?? (backgroundColor == 'white' || '#ffffff') ? 'dark-content' : 'default';
-    const enableShadow = props?.enableShadow  ?? false;
+    const enableShadow = props?.enableShadow ?? false;
     const enableBack = props?.enableBack ?? true;
     const safe = props?.safe ?? null;
+    const fixed = props?.fixed ?? false;
+    const backbg = props?.backBg ?? 'transparent';
 
     /**
      * 导航栏高度适配 ATag1
@@ -52,23 +58,23 @@ export default function PageCleared(props: {
     /**
      * 状态栏高度适配 ATag2 ( 返回安全视图高度，和状态栏高度适配合并在这里一起完成)
      */
-    const [StatusHeight,setStatusHeight] = useState(0);
+    const [StatusHeight, setStatusHeight] = useState(0);
     useEffect(() => {
-       
-            if(!isAndroid()){
-                // 这里直接适配了IOS刘海屏
-                StatusBarManager.getHeight( h => {
-                    setStatusHeight(h.height);
-                    console.log(h.height);
-                });
-            }else{
-                // 适配Android
-                setStatusHeight(StatusBar.currentHeight ?? 0);
-            }
-        
-    },[])
 
-    
+        if (!isAndroid()) {
+            // 这里直接适配了IOS刘海屏
+            StatusBarManager.getHeight(h => {
+                setStatusHeight(h.height);
+                console.log(h.height);
+            });
+        } else {
+            // 适配Android
+            setStatusHeight(StatusBar.currentHeight ?? 0);
+        }
+
+    }, [])
+
+
     // 导航栏绝对定位的样式配置
     let position: ViewStyle = { position: "absolute", top: 0, left: 0, zIndex: 10 };
 
@@ -79,8 +85,8 @@ export default function PageCleared(props: {
                 shadowOpacity: 0.2,
                 shadowRadius: 5,
                 shadowOffset: {
-                    width:0,
-                    height:0
+                    width: 0,
+                    height: 0
                 }
             },
             android: {
@@ -90,7 +96,7 @@ export default function PageCleared(props: {
     } : {};
 
     return (
-        <View flex style={[{ backgroundColor: backgroundColor },props.containerStyle]}>
+        <View style={[{ backgroundColor: backgroundColor,flex:1 }, props.containerStyle]}>
 
             <StatusBar backgroundColor={'transparent'} barStyle={barStyle} />
 
@@ -106,16 +112,19 @@ export default function PageCleared(props: {
                         },
                         position
                     ]}>
-                        <View flex-3 row left centerV style={{ height: NavBarHeight }}>
+                        <View style={[styles.leftWidgetContainer, { height: NavBarHeight }]}>
                             <TouchableOpacity
                                 activeOpacity={0.9}
                                 style={[
                                     styles.backWrapper,
-                                    shadow
+                                    shadow,
+                                    {
+                                        backgroundColor: backbg
+                                    }
                                 ]}
-                                onPress={() => { 
-                                    if(enableBack) props.navigation.goBack(); 
-                                    }}>
+                                onPress={() => {
+                                    if (enableBack) props.navigation.goBack();
+                                }}>
                                 <SvgIcon
                                     name={icon}
                                     color={'#454545'}
@@ -124,7 +133,16 @@ export default function PageCleared(props: {
                                     scale={scale} />
                             </TouchableOpacity>
                         </View>
-                        <View flex-3 row right style={{ height: NavBarHeight }}>
+                        {
+                            fixed && (
+                                <View style={[styles.centerWidgetContainer, { height: NavBarHeight }]}>
+                                    <Text style={props?.centerTitleStyle ?? { fontSize: 17, color: '#222' }}>
+                                        {props?.centerTitle ?? ''}
+                                    </Text>
+                                </View>
+                            )
+                        }
+                        <View style={[styles.rightWidgetContainer, { height: NavBarHeight }]}>
                             {
                                 props?.rightWidget ?? <View />
                             }
@@ -135,7 +153,7 @@ export default function PageCleared(props: {
             {/*  头部导航栏  结束*/}
 
             {/*  安全距离填充视图  */}
-            <View style={{height: safe && StatusHeight ,width:0}}/>
+            <View style={{width:0,height: safe ? StatusHeight : 0}}/>
 
             {/*  主体内容  */}
             {props.children}
@@ -148,7 +166,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'flex-end',
     },
-    backWrapper:{
+    backWrapper: {
         height: 33,
         width: 33,
         borderRadius: 18,
@@ -156,5 +174,23 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: "#ffffff",
+    },
+    rightWidgetContainer: {
+        flex: 3,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center'
+    },
+    centerWidgetContainer: {
+        flex: 2,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent:'center'
+    },
+    leftWidgetContainer: {
+        flex: 3,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
     }
 })

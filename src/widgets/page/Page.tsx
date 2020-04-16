@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image } from 'react-native-ui-lib';
-import { StatusBar, StyleSheet, Dimensions, ScrollView, Animated, Text, TextStyle, ViewStyle, Platform } from 'react-native';
+import { StatusBar, StyleSheet, Dimensions, ScrollView,View, Animated, Text, TextStyle, ViewStyle, Platform } from 'react-native';
 import HeaderBackButton from '../HeaderBackButton';
 import DeviceInfo from 'react-native-device-info';
 const { width, height } = Dimensions.get('window');
@@ -83,7 +82,7 @@ export default function Page(props: {
     }
 
     return (
-        <View flex style={{ backgroundColor: backgroundColor }}>
+        <View style={{ backgroundColor: backgroundColor,flex:1 }}>
 
             <StatusBar backgroundColor={props?.barBackground ?? 'transparent'} barStyle={barStyle}/>
 
@@ -97,16 +96,16 @@ export default function Page(props: {
                 },
                 navBottomBorderStyle
             ]}>
-                <View flex-3 row left centerV style={{ height: NavBarHeight }}>
+                <View style={[styles.leftWidgetContainer,{height: NavBarHeight}]}>
                     <HeaderBackButton arrow={props?.arrow ?? false} color={'#454545'} navigation={props.navigation}/>
                     <Text style={props?.leftTitleStyle ?? { marginStart: 5, fontSize: 18 }}>{props?.leftTitle ?? ''}</Text>
                 </View>
-                <View flex-2 row center style={{ height: NavBarHeight }}>
-                    <Text style={props?.centerTitleStyle ?? { fontSize: 20, color: '#222' }}>
+                <View style={[styles.centerWidgetContainer,{height: NavBarHeight}]}>
+                    <Text style={props?.centerTitleStyle ?? { fontSize: 17, color: '#222' }}>
                         {props?.centerTitle ?? ''}
                     </Text>
                 </View>
-                <View flex-3 row right style={{ height: NavBarHeight }}>
+                <View style={[styles.rightWidgetContainer,{height: NavBarHeight}]}>
                     {
                         props?.rightWidget ?? <View />
                     }
@@ -129,5 +128,22 @@ const styles = StyleSheet.create({
         width: width,
         flexDirection: 'row',
         alignItems: 'flex-end',
+    },
+    rightWidgetContainer: {
+        flex:3,
+        flexDirection:'row',
+        justifyContent:'flex-end',
+        alignItems:'center'
+    },
+    centerWidgetContainer:{
+        flex:2,
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    leftWidgetContainer:{ 
+        flex:3,
+        flexDirection:'row',
+        justifyContent:'flex-start',
+        alignItems:'center'
     }
 })
