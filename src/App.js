@@ -13,6 +13,8 @@ import { checkUpdate } from 'common';
 
 import Apollo from './Apollo';
 
+import SplashScreen from 'react-native-splash-screen';
+
 import { LicenseUrl,LicenseKey } from '../app.json';
 import { LivePullManager } from 'hxf-tencent-live'; //导入直播
 import { check,request,PERMISSIONS,RESULTS } from 'react-native-permissions';
@@ -31,24 +33,25 @@ class App extends Component {
     }
 
     componentDidMount() {
-        //ad.AdManager.init();
+        ad.AdManager.init();
         // 信息流广告先预加载，提速第一次签到时显示的速度
-        //ad.AdManager.loadFeedAd();
+        ad.AdManager.loadFeedAd();
 
         // 获取广告开放状态
-        // service.enableAdvert(data => {
-        //     // 只针对华为检测是否开启开屏广告 （做请求后再加载开屏广告首屏会先露出）
-        //     if (Config.AppStore === 'huawei' && !data.disable[Config.AppStore]) {
-        //     //    if(isAndroid) ad.Splash.loadSplashAd();
-        //     }
-        //     config.saveAdvertConfig(data);
-        // });
+        service.enableAdvert(data => {
+            // 只针对华为检测是否开启开屏广告 （做请求后再加载开屏广告首屏会先露出）
+            console.log('针对华为开屏广告: ',Config.AppStore);
+            if (Config.AppStore === 'huawei' && !data.disable[Config.AppStore]) {
+               if(isAndroid) ad.Splash.loadSplashAd();
+            }
+            config.saveAdvertConfig(data);
+        });
 
-        // if (Config.AppStore !== 'huawei') {
-        //     ad.Splash.loadSplashAd();
-        // }
+        if (Config.AppStore !== 'huawei') {
+            ad.Splash.loadSplashAd();
+        }
 
-        // SplashScreen.hide();
+        SplashScreen.hide();
         // 恢复用户身份信息
         app.recallUser();
         // 恢复缓存
@@ -66,9 +69,9 @@ class App extends Component {
         // 禁止横屏
         Orientation.lockToPortrait();
 
-        // ad.RewardVideo.loadAd().then(data => {
-        //     config.rewardVideoAdCache = data;
-        // });
+        ad.RewardVideo.loadAd().then(data => {
+            config.rewardVideoAdCache = data;
+        });
 
         /**
          *  直播设置licenseKey,url
