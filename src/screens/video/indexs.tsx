@@ -1,41 +1,49 @@
-import React,{useEffect,useState} from 'react';
-import {View,Text} from 'react-native';
-import {Page,VideoLiveScrollTab} from '../../widgets';
+import React, { useEffect, useState } from 'react';
+import { View, Text } from 'react-native';
+import { Page, VideoLiveScrollTab } from '../../widgets';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Video from './Video';
 import LiveList from '../live';
-import {observer,DataCenter} from '../../data';
+import { observer, DataCenter } from '../../data';
 
 import LoginMountPoint from '../../data/LoginMountPoint';
 
 import VideoStore from './VideoStore';
 
-const VideoPlayground = (props:any) => {
+const VideoPlayground = (props: any) => {
 
-    const [currentPage,setcurrentPage] = useState(0);
+    const [currentPage, setcurrentPage] = useState(0);
 
     const tabHandler = e => {
         setcurrentPage(e.i);
-        if(e.i == 1){
+        if (e.i == 1) {
             VideoStore.setOnLiveTab(true);
-        }else{
+        } else {
             VideoStore.setOnLiveTab(false);
         }
     }
 
     return (
         <Page.PageCleared barStyle={'light-content'}>
-            <ScrollableTabView
-            tabBarPosition='overlayTop'
-            onChangeTab={tabHandler}
-            renderTabBar={() => <VideoLiveScrollTab/> }
-            >
-                <Video tabLabel="推荐"/>
-                <LiveList tabLabel='直播' navigation={props.navigation} inCurrent={ currentPage == 1}/>
-            </ScrollableTabView>
-            <LoginMountPoint navigation={props.navigation}/>
+            {
+                DataCenter.App.ad_configs?.disable?.ios ? (
+
+                    <Video tabLabel="推荐" />
+                ) : (
+                        <ScrollableTabView
+                            tabBarPosition='overlayTop'
+                            onChangeTab={tabHandler}
+                            renderTabBar={() => <VideoLiveScrollTab />}
+                        >
+                            <Video tabLabel="推荐" />
+                            <LiveList tabLabel='直播' navigation={props.navigation} inCurrent={currentPage == 1} />
+                        </ScrollableTabView>
+                    )
+            }
+
+            <LoginMountPoint navigation={props.navigation} />
         </Page.PageCleared>
     )
-}
+};
 
 export default observer(VideoPlayground);

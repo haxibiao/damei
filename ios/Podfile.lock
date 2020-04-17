@@ -351,7 +351,7 @@ DEPENDENCIES:
   - appcenter-analytics (from `../node_modules/appcenter-analytics`)
   - appcenter-crashes (from `../node_modules/appcenter-crashes`)
   - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
-  - Bytedance-UnionAD
+  - Bytedance-UnionAD (~> 2.9.0.3)
   - CodePush (from `../node_modules/react-native-code-push`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
@@ -661,6 +661,6 @@ SPEC CHECKSUMS:
   TXLiteAVSDK_Professional: 2eb1d5cb5b80f4debe49d36af58c14924d288c1b
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: d8b991e9aa6a94d0cea2b0775e0e993e3253905d
+PODFILE CHECKSUM: 86ecfe48f3bd393793d4132591242bb8b280cc94
 
 COCOAPODS: 1.9.1

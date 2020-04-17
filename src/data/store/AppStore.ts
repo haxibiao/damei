@@ -17,7 +17,14 @@ class AppStore {
      */
 
     //是否有足够的权限开启直播( 麦克风，摄像头 )
-    @observable sufficient_permissions: boolean = false;
+    @observable public sufficient_permissions: boolean = false;
+
+    /**
+     **********************
+     *  动态开关相关
+     **********************
+     */
+    @observable public ad_configs = {};
 
 }
 
