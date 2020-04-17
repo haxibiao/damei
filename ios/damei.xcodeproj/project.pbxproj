@@ -1391,7 +1391,7 @@
 					"\"${PODS_ROOT}/../../node_modules/jpush-react-native/ios/RCTJPushModule\"",
 					"\"${PODS_ROOT}/../../../../ios/toolkits/sdk\"",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.8;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1504,7 +1504,7 @@
 					"\"${PODS_ROOT}/../../node_modules/jpush-react-native/ios/RCTJPushModule\"",
 					"\"${PODS_ROOT}/../../../../ios/toolkits/sdk\"",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.8;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

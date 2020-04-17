@@ -109,8 +109,8 @@ export default observer(props => {
         }
 
         return () => {
-            navWillFocusListener();
-            navWillBlurListener();
+            if(navWillFocusListener) navWillFocusListener();
+            if(navWillBlurListener) navWillBlurListener();
         };
     }, []);
 

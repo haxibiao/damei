@@ -40,16 +40,24 @@ class App extends Component {
         // 获取广告开放状态
         service.enableAdvert(data => {
             // 只针对华为检测是否开启开屏广告 （做请求后再加载开屏广告首屏会先露出）
-            console.log('针对华为开屏广告: ',Config.AppStore);
+            console.log('针对华为开屏广告: ',data);
             if (Config.AppStore === 'huawei' && !data.disable[Config.AppStore]) {
                if(isAndroid) ad.Splash.loadSplashAd();
             }
+            if(Platform.OS == 'ios'){
+                if(!data.disable.ios){
+                    ad.Splash.loadSplashAd();
+                }
+            }
             config.saveAdvertConfig(data);
+            DataCenter.AppSetAdConfigs(data);
         });
 
-        if (Config.AppStore !== 'huawei') {
-            ad.Splash.loadSplashAd();
+        if (Config.AppStore !== 'huawei' && Platform.OS == 'android') {
+                ad.Splash.loadSplashAd();
         }
+
+
 
         SplashScreen.hide();
         // 恢复用户身份信息

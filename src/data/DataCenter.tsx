@@ -55,6 +55,10 @@ class DataCenter {
     public AppSetNetworkConnection(connected: boolean){
         this.App.network_connected = connected;
     }
+    @action.bound
+    public AppSetAdConfigs(configs: any){
+        this.App.ad_configs = configs;
+    }
 
      /**********************************
      * UserStore 操作模块

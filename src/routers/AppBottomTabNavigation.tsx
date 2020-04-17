@@ -3,6 +3,7 @@ import { sw, Adp } from "../tools";
 import { Animated,Text,View,TouchableOpacity,StyleSheet,Image,Platform,PixelRatio } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icons,SvgIcon } from '../res';
+import {DataCenter,observer} from '../data';
 
 function dp(want_px: number) {
     let fontscale = PixelRatio.getFontScale();
@@ -77,14 +78,32 @@ export default function AppBottomTabNavigation() {
 /**
  * 自定义【文字图标】底部导航条
  */
-function BottomTabBar({ state, descriptors, navigation,enableShadow }:{state:any,descriptors:any,navigation:any,enableShadow:boolean}) {
-    let routes = state.routes; // 底部导航路由数组
+const BottomTabBar = observer(({ state, descriptors, navigation,enableShadow }:{state:any,descriptors:any,navigation:any,enableShadow:boolean}) => {
+    let routes:any[] = state.routes; // 底部导航路由数组
 
     /**
      *  map函数，返回底部导航item数组
      */
-    const _tabs = () =>
-        routes.map((route: any, index: number) => {
+    const _tabs = () =>{
+
+        /**
+         *  根据广告开关动态调整底部导航tab数量
+         */
+        if(DataCenter.App.ad_configs?.disable?.ios){
+            console.log(routes);
+            for(let i = 0; i < routes.length; i++){
+                if(routes[i].name == Three){
+                    routes.splice(i,1)
+                }
+            }
+            for(let i = 0; i < routes.length; i++){
+                if( routes[i].name == PUBLIC){
+                    routes.splice(i,1)
+                }
+            }
+        }
+
+        return routes.map((route: any, index: number) => {
             const { options } = descriptors[route.key]; //每个BottomTab.Screen 的可选属性
 
             const label =
@@ -171,6 +190,7 @@ function BottomTabBar({ state, descriptors, navigation,enableShadow }:{state:any
             )
         }
         );
+    }
 
     /**
      *  返回自定义底部导航栏组件
@@ -191,7 +211,7 @@ function BottomTabBar({ state, descriptors, navigation,enableShadow }:{state:any
             </View>
         </View>
     );
-}
+});
 
 /**
  * 自定义【文字】底部导航条
