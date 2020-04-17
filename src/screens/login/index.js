@@ -9,7 +9,7 @@ import { Query, withApollo, compose, graphql, GQL } from 'apollo';
 import { app } from 'store';
 import { WeChat } from 'native';
 
-
+import DeviceInfo from 'react-native-device-info';
 
 import { BoxShadow } from 'react-native-shadow';
 import { Overlay } from 'teaset';
@@ -296,15 +296,49 @@ class index extends Component {
                 });
             });
     };
+    autoSign = async () => {
+        let result = {};
+        this.setState({
+            submitting: true,
+        });
+        let deviceId = await DeviceInfo.getUniqueId();
+        console.log('uuid: ',deviceId)
+
+        this.props.client.mutate({
+            mutation: GQL.autoSignInMutation,
+            variables: {
+                account: null,
+                uuid: deviceId
+            }
+        }).then(result => {
+            console.log("静默登录接口返回数据： ",result)
+            const user = result.data.autoSignIn;
+            this._saveUserData(user);
+
+            Storage.setItem('manualLogout',false);
+            this.setState({
+                submitting: false,
+            });
+        }).catch(errors => {
+            console.log("静默登录接口返回数据： ",result)
+            let str = result.errors.toString().replace(/Error: GraphQL error: /, '');
+            Toast.show({ content: str, layout: 'top' });
+            this.setState({
+                submitting: false,
+            });
+        });
+        
+    };
 
     //微信已存在，直接登录
     getUserData = user => {
         const { client } = this.props;
-        client
+        if(user?.id != undefined){
+            client
             .query({
                 query: GQL.UserQuery,
                 variables: {
-                    id: user.id,
+                    id: user?.id,
                 },
             })
             .then(result => {
@@ -320,7 +354,11 @@ class index extends Component {
                     submitting: false,
                 });
             });
+        }else{
+            this.autoSign();
+        }
     };
+
 
     render() {
         let { me } = app;
