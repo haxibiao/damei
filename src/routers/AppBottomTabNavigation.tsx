@@ -39,6 +39,8 @@ import TabThree from '../screens/task'; //任务、分红
 import TabFour from '../screens/profile'; //我的页
 
 import * as PublishOption from './PublishOptionModal'; //发布页浮层
+import AppMy from '../screens/appmy';
+import AppHome from '../screens/apphome';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -61,11 +63,11 @@ export default function AppBottomTabNavigation() {
 
     return (
         <BottomTab.Navigator
-            initialRouteName={One}
+            initialRouteName={Two}
             lazy={false}
             tabBar={(props: any) => <BottomTabBar {...props} />}>
             <BottomTab.Screen name={One} component={TabOne} />
-            <BottomTab.Screen name={Two} component={TabTwo} />
+            <BottomTab.Screen name={Two} component={AppHome} />
 
             <BottomTab.Screen name={PUBLIC} component={PublicPlaceHolder} />
 
@@ -89,16 +91,18 @@ const BottomTabBar = observer(({ state, descriptors, navigation,enableShadow }:{
         /**
          *  根据广告开关动态调整底部导航tab数量
          */
-        if(DataCenter.App.ad_configs?.disable?.ios){
-            console.log(routes);
-            for(let i = 0; i < routes.length; i++){
-                if(routes[i].name == Three){
-                    routes.splice(i,1)
+        if(Platform.OS == 'ios' && false){
+            if(DataCenter.App.ad_configs?.disable?.ios){
+                console.log(routes);
+                for(let i = 0; i < routes.length; i++){
+                    if(routes[i].name == Three){
+                        routes.splice(i,1)
+                    }
                 }
-            }
-            for(let i = 0; i < routes.length; i++){
-                if( routes[i].name == PUBLIC){
-                    routes.splice(i,1)
+                for(let i = 0; i < routes.length; i++){
+                    if( routes[i].name == PUBLIC){
+                        routes.splice(i,1)
+                    }
                 }
             }
         }
