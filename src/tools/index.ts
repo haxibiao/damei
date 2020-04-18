@@ -18,5 +18,8 @@ import AppConfig from './AppConfig';
 // 登录工具函数
 import useLogin from './useLogin';
 
+//状态栏高度函数
+import useStatusHeight from './useStatusHeight';
 
-export { sw, sh, Adp, ART,AppConfig,useLogin }
+
+export { sw, sh, Adp, ART,AppConfig,useLogin,useStatusHeight }

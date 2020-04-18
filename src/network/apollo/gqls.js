@@ -15,7 +15,9 @@ import {
 } from './graphql/user.graphql';
 
 import {
-    QuestionQuery
+    QuestionQuery,
+    CategoriesQuery,
+    InterestCategoriesQuery
 } from './graphql/question.graphql';
 
 export { 
@@ -29,5 +31,7 @@ export {
     LeaveLiveRoom,
     ExceptionLiveReport, 
     AutoSignIn,//用户相关
-    QuestionQuery
+    QuestionQuery,
+    CategoriesQuery, //推荐题库查询
+    InterestCategoriesQuery,//兴趣题库查询
 }
