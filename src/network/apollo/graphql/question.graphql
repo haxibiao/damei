@@ -25,6 +25,64 @@ query InterestCategoriesQuery($offset: Int, $limit: Int, $allow_submit: Int) {
     }
 }
 
+#题目列表查询
+query QuestionListQuery($category_id: Int, $offset: Int, $limit: Int) {
+    questions(category_id: $category_id, offset: $offset, limit: $limit) {
+        id
+        description
+        answer
+        status
+        favorite_status
+        gold
+        ticket
+        liked
+        count_likes
+        count_comments
+        selections_array {
+            Text
+            Value
+        }
+        image {
+            id
+          	url
+            width
+            height
+        }
+        video {
+            id
+            url
+            height
+            width
+            duration
+            cover
+        }
+        explanation {
+            id
+            content
+            video {
+                width
+                height
+                cover
+                url
+            }
+            images {
+                url
+            }
+        }
+        type
+        correct_count
+        count
+        wrong_count
+        user {
+            id
+            name
+            avatar
+            followers_count
+            question_count
+        }
+    }
+}
+
 #单条题目查询
 query QuestionQuery($id: Int) {
     question(id: $id) {

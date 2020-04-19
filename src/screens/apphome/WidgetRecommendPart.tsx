@@ -4,10 +4,15 @@ import { sw, sh } from '../../tools';
 import { useTheme } from '@react-navigation/native';
 import { BoxShadow } from 'react-native-shadow';
 import { CoverRadius, CoverSize, BadgeSize, HGap } from './res';
-import { HocStatusWidget } from '../../widgets';
+import { HocStatusWidget, ScaleButton } from '../../widgets';
 import { DataCenter, observer } from '../../data';
 import { GQL } from '../../network';
 import { ApolloClient } from 'apollo-boost';
+
+/**
+ *  引入题库 store
+ */
+import ExerciseStore from '../doexercise/ExerciseStore';
 
 interface Category {
     id: number;
@@ -105,11 +110,11 @@ const LoadingHolder = () => {
 /*****************
  *  推荐专区组件主体
  *****************/
-const RecommendPart = () => {
+const RecommendPart = (props:{navigation:any}) => {
 
     const [data, setData] = useState([]);
     const [loading, setloading] = useState(true);
-    const [error,seterror] = useState();
+    const [error, seterror] = useState();
 
     useEffect(() => {
         let c: ApolloClient<unknown> = DataCenter.App.client;
@@ -131,19 +136,33 @@ const RecommendPart = () => {
         let isOfficial = item.is_official === 1;
 
         return (
-            <View style={[{ marginStart: index === 0 ? 18 : 0 }, s.item_wrapper]}>
-                <BoxShadow setting={CardShadowConfig}>
-                    <View style={s.item}>
-                        <TopBadge official={isOfficial} />
-                        <ImageBackground
-                            source={{ uri: item.icon }}
-                            style={{ height: CoverSize, width: CoverSize }}>
+            <ScaleButton 
+            style={{ marginStart: index === 0 ? 18 : 0 }}
+            callback={() => {
+                console.log('即将跳转的题库ID是: ',item.id);
+                /**
+                 *  跳转前更新ExerciseStore里面的题库ID
+                 *
+                 *  并执行一轮题目查询
+                 */
+                ExerciseStore.setLibraryId(item.id);
+                ExerciseStore.setFetch(true);
 
-                        </ImageBackground>
-                    </View>
-                </BoxShadow>
-                <Text style={s.item_title}>{item.name}</Text>
-            </View>
+                if(props.navigation) props.navigation.navigate('exercise',{id: item.id,libraryName: item.name})
+            }}>
+                <View style={ s.item_wrapper}>
+                    <BoxShadow setting={CardShadowConfig}>
+                        <View style={s.item}>
+                            <TopBadge official={isOfficial} />
+                            <ImageBackground
+                                source={{ uri: item.icon }}
+                                style={{ height: CoverSize, width: CoverSize }}>
+                            </ImageBackground>
+                        </View>
+                    </BoxShadow>
+                    <Text style={s.item_title}>{item.name}</Text>
+                </View>
+            </ScaleButton>
         )
     }
 
@@ -154,31 +173,31 @@ const RecommendPart = () => {
                     <Image source={{ uri: 'hot' }} resizeMode='contain' style={s.head_left_badge} />
                     <Text style={s.head_left_title}>推荐专区</Text>
                 </View>
-                <HocStatusWidget 
-                widget={
-                    <View style={s.head_right}>
-                        <Text style={s.head_right_title}>查看更多</Text>
-                    </View>
-                }
-                loading={loading}
+                <HocStatusWidget
+                    widget={
+                        <View style={s.head_right}>
+                            <Text style={s.head_right_title}>查看更多</Text>
+                        </View>
+                    }
+                    loading={loading}
                 />
             </View>
             <View style={s.list}>
-                <HocStatusWidget 
-                widget={<FlatList
-                    data={data}
-                    keyExtractor={(item, index) => index.toString()}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={RenderItem}
-                />} 
-                loading={loading} 
-                error={error}
-                loadingView={<LoadingHolder/>}
-                errorView={<LoadingHolder/>}
+                <HocStatusWidget
+                    widget={<FlatList
+                        data={data}
+                        keyExtractor={(item, index) => index.toString()}
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        renderItem={RenderItem}
+                    />}
+                    loading={loading}
+                    error={error}
+                    loadingView={<LoadingHolder />}
+                    errorView={<LoadingHolder />}
                 />
             </View>
-            
+
         </View>
     )
 }

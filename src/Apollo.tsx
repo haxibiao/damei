@@ -16,6 +16,11 @@ import { useCaptureVideo } from "@src/common";
 
 import { DataCenter } from "./data";
 
+/**
+ *  引入题目数据挂载点
+ */
+import QuestionDataMountPoint from './screens/doexercise/QuestionDataMountPoint';
+
 export default observer(props => {
     const { checkServer } = props;
 
@@ -109,6 +114,7 @@ export default observer(props => {
             <ApolloHooksProvider client={client}>
                 {/* <AppRouter ref={Tools.setRootNavigation} /> */}
                 <Nav />
+                <QuestionDataMountPoint />
             </ApolloHooksProvider>
         </ApolloProvider>
     );

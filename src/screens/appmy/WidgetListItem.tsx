@@ -10,7 +10,7 @@ const ListItem = (props:{title:string,icon:string,target?:string}) => {
         <View style={s.item}>
             <View style={s.row}>
                 <Image source={{ uri: props.icon }} resizeMode='contain' style={s.img} />
-                <Text style={{ fontSize: 16 }}>{props.title}</Text>
+                <Text style={{ fontSize: 15,color:'#333' }}>{props.title}</Text>
             </View>
             <SvgIcon name={Icons.right_arrow} color={'#999'} size={18} scale={0.018} />
         </View>
