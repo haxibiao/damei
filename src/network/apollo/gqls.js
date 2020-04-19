@@ -16,6 +16,7 @@ import {
 
 import {
     QuestionQuery,
+    QuestionListQuery,
     CategoriesQuery,
     InterestCategoriesQuery
 } from './graphql/question.graphql';
@@ -32,6 +33,7 @@ export {
     ExceptionLiveReport, 
     AutoSignIn,//用户相关
     QuestionQuery,
+    QuestionListQuery,//一组题目查询
     CategoriesQuery, //推荐题库查询
     InterestCategoriesQuery,//兴趣题库查询
 }

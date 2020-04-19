@@ -2,7 +2,7 @@ import React,{ useState,useEffect,useRef } from 'react';
 import { View, Text,Animated,Easing,TouchableOpacity } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import {observer} from 'mobx-react';
-import ExeciseStore from './ExeciseStore';
+import ExerciseStore from './ExerciseStore';
 
 export default observer((props:{
     value:{
@@ -30,7 +30,7 @@ export default observer((props:{
                 }
             ).start();
             //TODO: 更改答题store中当前选中选项值
-            ExeciseStore.setSelectedAnswer(props.value.Value);
+            ExerciseStore.setSelectedAnswer(props.value.Value);
         }else{//取消改选选择状态
             Animated.timing(
                 op,

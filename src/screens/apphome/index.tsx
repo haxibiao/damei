@@ -14,7 +14,7 @@ import SearchBox from './WidgetSearchBox';
 /**
  *  新答题首页
  */
-const AppHome = React.memo(() => {
+const AppHome = React.memo((props:any) => {
 
     let statusHeight = useStatusHeight();
 
@@ -26,7 +26,7 @@ const AppHome = React.memo(() => {
             >
                 <SearchBox />
                 <FindPal />
-                <RecommendPart />
+                <RecommendPart navigation={props.navigation}/>
                 <DayInspiration />
                 <InterestPart />
             </ScrollView>

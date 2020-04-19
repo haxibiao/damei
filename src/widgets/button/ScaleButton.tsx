@@ -11,6 +11,7 @@ export default React.memo((props:{
     const fs = props?.frameStyle ?? {};
 
     const [scale,setscale] = useState(new Animated.Value(1.0));
+    const [pressInTime,setPressInTime] = useState(0);
 
     const pressIn = () => {
         Animated.timing(scale,{
@@ -18,7 +19,9 @@ export default React.memo((props:{
             duration:130,
             easing: Easing.linear,
             useNativeDriver:true
-        }).start()
+        }).start();
+        let t = Date.now();
+        setPressInTime(t);
     }
     const pressOut = () => {
         Animated.timing(scale,{
@@ -34,7 +37,15 @@ export default React.memo((props:{
                 useNativeDriver:true
             }).start()
         })
-        if(props.callback) props.callback();
+        if(props.callback) {
+            let now = Date.now();
+            let diff = now - pressInTime;
+            if(diff < 180){
+                props.callback();
+            }else{//触摸释放时间超过100毫秒，不响应点击
+                console.log('触摸超过100毫秒，不响应')
+            }
+        }
     }
 
     return (

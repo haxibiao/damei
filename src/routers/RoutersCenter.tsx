@@ -96,6 +96,8 @@ import UpdateLogScreen from '../screens/setting/UpdateLog';
 import PrivacyPolicyScreen from '../screens/setting/PrivacyPolicy';
 import SetLoginInfoScreen from '../screens/setting/SetLoginInfo';
 
+// 新答题页面
+import DoExercise from '../screens/doexercise/Answer';
 
 interface Options {
   headerShown: boolean;
@@ -471,6 +473,11 @@ export const Routers: Router[] = [
   {
     name: 'livewatch',
     widget: LiveWatch,
+    options: CommonOption2
+  },
+  {
+    name: 'exercise',
+    widget: DoExercise,
     options: CommonOption2
   }
 ];
