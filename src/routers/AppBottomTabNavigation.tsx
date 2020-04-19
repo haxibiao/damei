@@ -72,7 +72,7 @@ export default function AppBottomTabNavigation() {
             <BottomTab.Screen name={PUBLIC} component={PublicPlaceHolder} />
 
             <BottomTab.Screen name={Three} component={TabThree} />
-            <BottomTab.Screen name={Four} component={TabFour} />
+            <BottomTab.Screen name={Four} component={AppMy} />
         </BottomTab.Navigator>
     );
 }
