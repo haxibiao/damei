@@ -27,7 +27,7 @@ interface SignInReturns {
     contribute_reward: string | number;
 }
 
-export default (props): JSX.Element => {
+const Attendance = (props: any): JSX.Element => {
     const navigation = useNavigation();
     const client = useApolloClient();
     const overlayRef = useRef();
@@ -340,3 +340,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 });
+
+export default Attendance;
