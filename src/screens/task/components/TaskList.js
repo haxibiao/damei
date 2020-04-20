@@ -239,7 +239,7 @@ class TaskList extends Component {
             <View style={{ flex: 1 }}>
                 <Banner />
                 <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
-                    {!config.disableAd && <AttendanceBook />}
+                    {!config.disableAd && <AttendanceBook navigation={navigation} />}
                     {!config.disableAd && (
                         <TaskType
                             tasks={adtasks}
