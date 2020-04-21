@@ -96,7 +96,6 @@
         <Button
             android:id="@+id/btnAction"
             android:layout_width="wrap_content"
-            android:visibility="invisible"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
@@ -104,7 +103,7 @@
             android:background="@drawable/btn_rounded_red"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
-            android:text="点击下载APP"
+            android:text="点击查看"
             android:textColor="#F8F8FA" />
 
     </LinearLayout>
