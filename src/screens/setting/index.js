@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, ScrollView, Linking } from 'react-native';
+import { CommonActions } from '@react-navigation/native';
 import { PageContainer, TouchFeedback, Iconfont, ListItem, ItemSeparator, PopOverlay } from 'components';
 import { Theme, PxFit, Config, ISIOS } from 'utils';
 import { app } from 'store';
 import { withApollo, GQL } from 'apollo';
 import { checkUpdate } from 'common';
 import { Storage } from '../../data';
+
+
+const resetAction = CommonActions.navigate({ name: '学习' });
 
 class index extends Component {
     constructor(props) {
@@ -37,8 +41,8 @@ class index extends Component {
                     leftConfirm: async () => {
                         app.signOut();
                         app.forget();
-                        Storage.setItem('manualLogout',true); //TODO:将该页面用函数重构，并将app store逐步替换为新的全局管理中心
-                        navigation.navigate('Main', null, navigation.navigate({ routeName: '答题' }));
+                        Storage.setItem('manualLogout', true); //TODO:将该页面用函数重构，并将app store逐步替换为新的全局管理中心
+                        navigation.dispatch(resetAction);
                     },
                     onConfirm: () => {
                         navigation.navigate('SetLoginInfo', { phone: null });
@@ -50,8 +54,8 @@ class index extends Component {
                     onConfirm: async () => {
                         app.signOut();
                         app.forget();
-                        Storage.setItem('manualLogout',true);//TODO:将该页面用函数重构，并将app store逐步替换为新的全局管理中心
-                        navigation.navigate('Main', null, navigation.navigate({ routeName: '答题' }));
+                        Storage.setItem('manualLogout', true);//TODO:将该页面用函数重构，并将app store逐步替换为新的全局管理中心
+                        navigation.dispatch(resetAction);
                     },
                 });
             }
@@ -61,15 +65,15 @@ class index extends Component {
                 onConfirm: async () => {
                     app.signOut();
                     app.forget();
-                    Storage.setItem('manualLogout',true); //TODO:将该页面用函数重构，并将app store逐步替换为新的全局管理中心
-                    navigation.navigate('Main', null, navigation.navigate({ routeName: '答题' }));
+                    Storage.setItem('manualLogout', true); //TODO:将该页面用函数重构，并将app store逐步替换为新的全局管理中心
+                    navigation.dispatch(resetAction);
                 },
             });
         }
     };
 
     render() {
-        const { navigation,route } = this.props;
+        const { navigation, route } = this.props;
         const { login } = app;
         const { storageSize } = this.state;
         const user = route.params?.user ?? {};
