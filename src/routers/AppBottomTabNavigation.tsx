@@ -1,9 +1,10 @@
 import React from 'react';
 import { sw, Adp } from "../tools";
-import { Animated,Text,View,TouchableOpacity,StyleSheet,Image,Platform,PixelRatio } from "react-native";
+import { Animated, Text, View, TouchableOpacity, StyleSheet, Image, Platform, PixelRatio } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Icons,SvgIcon } from '../res';
-import {DataCenter,observer} from '../data';
+import { Icons, SvgIcon } from '../res';
+import { DataCenter, observer, } from '../data';
+import { app, } from "../store";
 
 function dp(want_px: number) {
     let fontscale = PixelRatio.getFontScale();
@@ -21,11 +22,11 @@ const Dimens = {
     BottomTab_svgScale: 0.028,
 };
 const Colors = {
-    BottomTab_TopBorder : '#f1f1f1',
-    BottomTab_color : '#ffffff',
-    BottomTab_TextKind_bg : '#ffffff',
-    BottomTab_TextKind_text : '#8d8d8d',
-    BottomTab_TextKind_textSelected : '#000000',
+    BottomTab_TopBorder: '#f1f1f1',
+    BottomTab_color: '#ffffff',
+    BottomTab_TextKind_bg: '#ffffff',
+    BottomTab_TextKind_text: '#8d8d8d',
+    BottomTab_TextKind_textSelected: '#000000',
     clear: 'transparent',
     black22: '#222222'
 }
@@ -51,19 +52,22 @@ const Two = "答题";
 const Three = "任务";
 const Four = "我的";
 const PUBLIC = "DMPUblish";
+
+const NeedLoginTab = [Two, Three, Four];
+
 //发布按钮页占位组件,实际跳转到 StackNavigator 中注册的 导航
 const PublicPlaceHolder = () => <View />
 
 //  底部导航图标模式（png、svg） a.png a_selected.png | Icons.Ant_Home_Fill Icons.Ant_Home
-const icons_unfocused: any[] = ['ic_tab_study','ic_tab_message','ic_tab_task','ic_tab_mine'];
-const icons_focused: any[] = ['ic_tab_study_selected','ic_tab_message_selected','ic_tab_task_selected','ic_tab_mine_selected'];
+const icons_unfocused: any[] = ['ic_tab_study', 'ic_tab_message', 'ic_tab_task', 'ic_tab_mine'];
+const icons_focused: any[] = ['ic_tab_study_selected', 'ic_tab_message_selected', 'ic_tab_task_selected', 'ic_tab_mine_selected'];
 
 
 export default function AppBottomTabNavigation() {
 
     return (
         <BottomTab.Navigator
-            initialRouteName={Two}
+            initialRouteName={One}
             lazy={false}
             tabBar={(props: any) => <BottomTabBar {...props} />}>
             <BottomTab.Screen name={One} component={TabOne} />
@@ -80,28 +84,28 @@ export default function AppBottomTabNavigation() {
 /**
  * 自定义【文字图标】底部导航条
  */
-const BottomTabBar = observer(({ state, descriptors, navigation,enableShadow }:{state:any,descriptors:any,navigation:any,enableShadow:boolean}) => {
-    let routes:any[] = state.routes; // 底部导航路由数组
+const BottomTabBar = observer(({ state, descriptors, navigation, enableShadow }: { state: any, descriptors: any, navigation: any, enableShadow: boolean }) => {
+    let routes: any[] = state.routes; // 底部导航路由数组
 
     /**
      *  map函数，返回底部导航item数组
      */
-    const _tabs = () =>{
+    const _tabs = () => {
 
         /**
          *  根据广告开关动态调整底部导航tab数量
          */
-        if(Platform.OS == 'ios' && false){
-            if(DataCenter.App.ad_configs?.disable?.ios){
+        if (Platform.OS == 'ios' && false) {
+            if (DataCenter.App.ad_configs?.disable?.ios) {
                 console.log(routes);
-                for(let i = 0; i < routes.length; i++){
-                    if(routes[i].name == Three){
-                        routes.splice(i,1)
+                for (let i = 0; i < routes.length; i++) {
+                    if (routes[i].name == Three) {
+                        routes.splice(i, 1)
                     }
                 }
-                for(let i = 0; i < routes.length; i++){
-                    if( routes[i].name == PUBLIC){
-                        routes.splice(i,1)
+                for (let i = 0; i < routes.length; i++) {
+                    if (routes[i].name == PUBLIC) {
+                        routes.splice(i, 1)
                     }
                 }
             }
@@ -124,12 +128,16 @@ const BottomTabBar = observer(({ state, descriptors, navigation,enableShadow }:{
                     type: "tabPress",
                     target: route.key
                 }); // 发送底部tab被点击的事件通知
-                if (!isFocused && !event.defaultPrevented){
-                    if(route.name == PUBLIC){
+                if (!isFocused && !event.defaultPrevented) {
+                    if (route.name == PUBLIC) {
                         // 点击发布按钮
                         PublishOption.showPublishOption(navigation);
-                    }else{
-                        navigation.navigate(route.name);
+                    } else {
+                        if ((NeedLoginTab.indexOf(route.name) != -1) && !app.login) {
+                            navigation.navigate('Login')
+                        } else {
+                            navigation.navigate(route.name);
+                        }
                     }
                 }
             };
@@ -150,7 +158,7 @@ const BottomTabBar = observer(({ state, descriptors, navigation,enableShadow }:{
                         return <SvgIcon name={isFocused ? icons_focused[2] : icons_unfocused[2]} size={Dimens.BottomTab_tabIconSize} scale={Dimens.BottomTab_svgScale} />
                     case Four:
                         return <SvgIcon name={isFocused ? icons_focused[3] : icons_unfocused[3]} size={Dimens.BottomTab_tabIconSize} scale={Dimens.BottomTab_svgScale} />
-                
+
                 }
             }
 
@@ -163,16 +171,16 @@ const BottomTabBar = observer(({ state, descriptors, navigation,enableShadow }:{
                 }
                 switch (route.name) {
                     case One:
-                        return <Image source={{uri: isFocused ? icons_focused[0] : icons_unfocused[0]}} style={{ height: Dimens.x34, width: Dimens.x34 }} resizeMode={"contain"} />
+                        return <Image source={{ uri: isFocused ? icons_focused[0] : icons_unfocused[0] }} style={{ height: Dimens.x34, width: Dimens.x34 }} resizeMode={"contain"} />
                     case Two:
-                        return <Image source={{uri: isFocused ? icons_focused[1] : icons_unfocused[1]}} style={{ height: Dimens.x34, width: Dimens.x34 }} resizeMode={"contain"} />
+                        return <Image source={{ uri: isFocused ? icons_focused[1] : icons_unfocused[1] }} style={{ height: Dimens.x34, width: Dimens.x34 }} resizeMode={"contain"} />
                     case PUBLIC:
                         return <Image source={{ uri: 'ic_ring_menu' }} style={{ height: Dimens.x34 * 1.6, width: Dimens.x34 * 1.6, marginTop: Dimens.x34 * 0.42 }} resizeMode={'contain'} />
                     case Three:
-                        return <Image source={{uri: isFocused ? icons_focused[2] : icons_unfocused[2]}} style={{ height: Dimens.x34, width: Dimens.x34 }} resizeMode={"contain"} />
+                        return <Image source={{ uri: isFocused ? icons_focused[2] : icons_unfocused[2] }} style={{ height: Dimens.x34, width: Dimens.x34 }} resizeMode={"contain"} />
                     case Four:
-                        return <Image source={{uri: isFocused ? icons_focused[3] : icons_unfocused[3]}} style={{ height: Dimens.x34, width: Dimens.x34 }} resizeMode={"contain"} />
-                
+                        return <Image source={{ uri: isFocused ? icons_focused[3] : icons_unfocused[3] }} style={{ height: Dimens.x34, width: Dimens.x34 }} resizeMode={"contain"} />
+
                 }
             }
             return (
@@ -180,14 +188,14 @@ const BottomTabBar = observer(({ state, descriptors, navigation,enableShadow }:{
                     activeOpacity={1.0}
                     key={index}
                     onPress={onPress}
-                    style={{ flex: 1, justifyContent: "center", alignItems: "center",marginTop:-6 }}>
+                    style={{ flex: 1, justifyContent: "center", alignItems: "center", marginTop: -6 }}>
                     {
                         _tabIconPng()
                     }
                     {/* {
                         _tabIconSvg()
                     } */}
-                    <Text style={{ color: isFocused ? '#FAE030' : '#aaa' , fontSize:11 }}>
+                    <Text style={{ color: isFocused ? '#FAE030' : '#aaa', fontSize: 11 }}>
                         {label === PUBLIC ? '' : label}
                     </Text>
                 </TouchableOpacity>
@@ -204,9 +212,9 @@ const BottomTabBar = observer(({ state, descriptors, navigation,enableShadow }:{
 
     return (
         <View style={fullScreen ? styles.fullscreen_Tab : [
-            styles.normal_Tab, enableShadow ? styles.Tab_shadow : {}, 
-            {backgroundColor: specialMode ? '#191A21' : 'white'}
-            ]
+            styles.normal_Tab, enableShadow ? styles.Tab_shadow : {},
+            { backgroundColor: specialMode ? '#191A21' : 'white' }
+        ]
         }>
             <View style={[{ backgroundColor: Colors.clear }, styles.tabContainer]}>
                 {
@@ -220,7 +228,7 @@ const BottomTabBar = observer(({ state, descriptors, navigation,enableShadow }:{
 /**
  * 自定义【文字】底部导航条
  */
-function BottomTabBarPureTextKind({ state, descriptors, navigation,enableShadow }:{state:any,descriptors:any,navigation:any,enableShadow?:boolean}) {
+function BottomTabBarPureTextKind({ state, descriptors, navigation, enableShadow }: { state: any, descriptors: any, navigation: any, enableShadow?: boolean }) {
     let routes = state.routes; // 底部导航路由数组
 
     /**
@@ -259,7 +267,7 @@ function BottomTabBarPureTextKind({ state, descriptors, navigation,enableShadow 
                     onPress={onPress}
                     style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
                     <Text style={{
-                        color: isFocused ? Colors.BottomTab_TextKind_textSelected : Colors.BottomTab_TextKind_text ,
+                        color: isFocused ? Colors.BottomTab_TextKind_textSelected : Colors.BottomTab_TextKind_text,
                         fontSize: 17,
                         fontWeight: 'bold'
                     }}>
@@ -274,7 +282,7 @@ function BottomTabBarPureTextKind({ state, descriptors, navigation,enableShadow 
     const fullScreen = state.index == -1;
 
     return (
-        <View style={fullScreen ? styles.fullscreen_Tab : [styles.normal_Tab_Textkind,enableShadow ? styles.Tab_shadow : {}]}>
+        <View style={fullScreen ? styles.fullscreen_Tab : [styles.normal_Tab_Textkind, enableShadow ? styles.Tab_shadow : {}]}>
             <View style={[
                 { backgroundColor: Colors.clear, paddingTop: Dimens.BottomTab_paddingTop },
                 styles.tabContainer_Textkind]}
@@ -290,7 +298,7 @@ function BottomTabBarPureTextKind({ state, descriptors, navigation,enableShadow 
 /**
  * 自定义【图标】底部导航条
  */
-function BottomTabBarPureImageKind({ state, descriptors, navigation,enableShadow }:{state:any,descriptors:any,navigation:any,enableShadow?:boolean}) {
+function BottomTabBarPureImageKind({ state, descriptors, navigation, enableShadow }: { state: any, descriptors: any, navigation: any, enableShadow?: boolean }) {
     let routes = state.routes; // 底部导航路由数组
 
     /**
@@ -346,13 +354,13 @@ function BottomTabBarPureImageKind({ state, descriptors, navigation,enableShadow
                 }
                 switch (route.name) {
                     case One:
-                        return <Image source={{uri:isFocused ? icons_focused[0] : icons_unfocused[0]}} style={{ height: Dimens.x62, width: Dimens.x62 }} resizeMode={"contain"} />
+                        return <Image source={{ uri: isFocused ? icons_focused[0] : icons_unfocused[0] }} style={{ height: Dimens.x62, width: Dimens.x62 }} resizeMode={"contain"} />
                     case Two:
-                        return <Image source={{uri:isFocused ? icons_focused[1] : icons_unfocused[1]}} style={{ height: Dimens.x62, width: Dimens.x62 }} resizeMode={"contain"} />
+                        return <Image source={{ uri: isFocused ? icons_focused[1] : icons_unfocused[1] }} style={{ height: Dimens.x62, width: Dimens.x62 }} resizeMode={"contain"} />
                     case Three:
-                        return <Image source={{uri:isFocused ? icons_focused[2] : icons_unfocused[2]}} style={{ height: Dimens.x62, width: Dimens.x62 }} resizeMode={"contain"} />
+                        return <Image source={{ uri: isFocused ? icons_focused[2] : icons_unfocused[2] }} style={{ height: Dimens.x62, width: Dimens.x62 }} resizeMode={"contain"} />
                     case Four:
-                        return <Image source={{uri:isFocused ? icons_focused[3] : icons_unfocused[3]}} style={{ height: Dimens.x62, width: Dimens.x62 }} resizeMode={"contain"} />
+                        return <Image source={{ uri: isFocused ? icons_focused[3] : icons_unfocused[3] }} style={{ height: Dimens.x62, width: Dimens.x62 }} resizeMode={"contain"} />
                 }
             }
             return (
@@ -422,7 +430,7 @@ const styles = StyleSheet.create({
                 shadowColor: '#000',
                 shadowOpacity: 0.16,
                 shadowRadius: 10,
-                shadowOffset:{x:0,y:5}
+                shadowOffset: { x: 0, y: 5 }
             },
             android: {
                 elevation: 9
