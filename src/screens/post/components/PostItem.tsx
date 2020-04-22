@@ -8,8 +8,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TouchableWithoutFeedback, Text, Image } from 'react-native';
 import { Iconfont, Row, PlaceholderImage, TouchFeedback, Avatar, UserTitle, GenderLabel, Like } from 'components';
 import { Theme, PxFit, Tools, SCREEN_WIDTH } from 'utils';
-
-import { app } from 'store';
+import { DataCenter } from "../../../data";
 interface User {
     avatar: String;
     name: String;
@@ -45,6 +44,8 @@ interface Props {
 }
 
 const PostItem = (props: Props) => {
+
+    const me = DataCenter.User.me;
     const { video, spiders, activeIndex, navigation, spider } = props;
     const { status, title, remark, reward } = spider;
 
@@ -66,17 +67,17 @@ const PostItem = (props: Props) => {
                     style={
                         isLargeScale
                             ? {
-                                  width: maxWidth,
-                                  height: (maxWidth * videoHeight) / videoWidth,
-                                  borderRadius: PxFit(5),
-                                  backgroundColor: '#000',
-                              }
+                                width: maxWidth,
+                                height: (maxWidth * videoHeight) / videoWidth,
+                                borderRadius: PxFit(5),
+                                backgroundColor: '#000',
+                            }
                             : {
-                                  width: PxFit(240) * (videoWidth / videoHeight),
-                                  height: PxFit(240),
-                                  borderRadius: PxFit(5),
-                                  backgroundColor: '#000',
-                              }
+                                width: PxFit(240) * (videoWidth / videoHeight),
+                                height: PxFit(240),
+                                borderRadius: PxFit(5),
+                                backgroundColor: '#000',
+                            }
                     }
                 />
                 <Iconfont
@@ -86,19 +87,19 @@ const PostItem = (props: Props) => {
                     style={
                         isLargeScale
                             ? {
-                                  position: 'absolute',
-                                  top: ((maxWidth * videoHeight) / videoWidth - PxFit(34)) / 2,
-                                  left: (PxFit(maxWidth) - PxFit(34)) / 2,
-                                  bottom: 0,
-                                  right: 0,
-                              }
+                                position: 'absolute',
+                                top: ((maxWidth * videoHeight) / videoWidth - PxFit(34)) / 2,
+                                left: (PxFit(maxWidth) - PxFit(34)) / 2,
+                                bottom: 0,
+                                right: 0,
+                            }
                             : {
-                                  position: 'absolute',
-                                  top: PxFit(103),
-                                  left: (PxFit(240) * (videoWidth / videoHeight) - PxFit(34)) / 2,
-                                  bottom: 0,
-                                  right: 0,
-                              }
+                                position: 'absolute',
+                                top: PxFit(103),
+                                left: (PxFit(240) * (videoWidth / videoHeight) - PxFit(34)) / 2,
+                                bottom: 0,
+                                right: 0,
+                            }
                     }
                 />
             </View>
@@ -110,12 +111,12 @@ const PostItem = (props: Props) => {
             <View style={styles.container}>
                 <Row style={{ justifyContent: 'space-between' }}>
                     <Row>
-                        <Avatar source={{ uri: app.userCache.avatar }} size={42} />
+                        <Avatar source={{ uri: me.avatar }} size={42} />
                         <View style={{ marginLeft: PxFit(8) }}>
-                            <Text style={styles.userName}>{app.userCache.name}</Text>
+                            <Text style={styles.userName}>{me.name}</Text>
                             <Row>
-                                <GenderLabel user={app.userCache} size={PxFit(8)} />
-                                <UserTitle user={app.userCache} />
+                                <GenderLabel user={me} size={PxFit(8)} />
+                                <UserTitle user={me} />
                             </Row>
                         </View>
                     </Row>
