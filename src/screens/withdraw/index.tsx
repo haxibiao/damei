@@ -328,9 +328,7 @@ const index = (props: any) => {
                     <Text style={styles.ruleText}>
                         4.提现金额分为1元、3元、5元、10元四档，每次提现时会扣除余额，剩余余额可以在下次满足最低提现额度时申请提现。
                     </Text>
-                    <Text style={styles.ruleText}>5.每档提现额度一个月只能用1次。</Text>
-
-                    <Text style={styles.ruleText}>6.提现一般3~5天内到账(如遇提现高峰，提现到账时间会延长)。</Text>
+                    <Text style={styles.ruleText}>5.提现一般3~5天内到账(如遇提现高峰，提现到账时间会延长)。</Text>
                 </View>
 
             </ScrollView>
