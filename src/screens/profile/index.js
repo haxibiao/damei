@@ -147,6 +147,8 @@ class index extends Component {
                         <View style={styles.conditionInfo}>
                             <TouchFeedback
                                 style={styles.conditionItem}
+                                navigation={navigation}
+                                authenticated
                                 onPress={() => {
                                     !config.disableAd && navigation.navigate('BillingRecord');
                                 }}>
