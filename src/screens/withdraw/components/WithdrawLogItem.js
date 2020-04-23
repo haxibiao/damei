@@ -4,12 +4,12 @@
  */
 'use strict';
 import React, { Component } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
 import { Theme, PxFit, SCREEN_WIDTH } from '../../../utils';
 
 function WithdrawLogItem(props) {
     const { style, navigation, item } = props;
-    let statusText, color, withdrawTips;
+    let statusText, color, image_url, withdrawTips, size = 40;
     switch (item.status) {
         case -1:
             statusText = '提现失败';
@@ -26,13 +26,23 @@ function WithdrawLogItem(props) {
     }
 
     switch (item.to_platform) {
+        case 'alipay':
+            image_url = require('../../../assets/images/zhifubao.png');
+            break;
+        case 'wechat':
+            image_url = require('../../../assets/images/wechat.png');
+            break;
         case 'dongdezhuan':
+            image_url = require('../../../assets/images/dongdezhuan.png');
             withdrawTips = '(提现到懂得赚)';
             break;
         case 'datizhuanqian':
+            image_url = require('../../../assets/images/datizhuanqianicon.png');
             withdrawTips = '(提现到答题赚钱)';
             break;
         default:
+            image_url = require('../../../assets/images/money_icon.png');
+            size = 46;
             break;
     }
 
@@ -46,7 +56,8 @@ function WithdrawLogItem(props) {
                     withdraw_id: item.id,
                 })
             }>
-            <View style={{ width: (SCREEN_WIDTH * 5) / 7 }}>
+            <Image source={image_url} style={{ width: size, height: size, marginVertical: PxFit(15) }} />
+            <View style={{ width: (SCREEN_WIDTH * 4) / 7 }}>
                 <Text style={{ fontSize: PxFit(15), color: Theme.defaultTextColor }}>
                     {statusText}
                     {withdrawTips}
