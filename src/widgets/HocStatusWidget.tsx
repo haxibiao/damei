@@ -8,6 +8,7 @@ const HocStatusWidget = React.memo((props:{
     loadingView?:any,
     errorView?:any
 }) => {
+    console.log('状态: ',props.loading,props.error)
     if(props?.loading){
         return props?.loadingView ?? null;
     }

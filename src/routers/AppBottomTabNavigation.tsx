@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { sw, Adp } from "../tools";
 import { Animated, Text, View, TouchableOpacity, StyleSheet, Image, Platform, PixelRatio } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icons, SvgIcon } from '../res';
-import { DataCenter, observer, } from '../data';
-import { app, } from "../store";
+import { DataCenter, observer } from '../data';
 
 function dp(want_px: number) {
     let fontscale = PixelRatio.getFontScale();
@@ -71,12 +70,12 @@ export default function AppBottomTabNavigation() {
             lazy={false}
             tabBar={(props: any) => <BottomTabBar {...props} />}>
             <BottomTab.Screen name={One} component={TabOne} />
-            <BottomTab.Screen name={Two} component={AppHome} />
+            <BottomTab.Screen name={Two} component={TabTwo} />
 
             <BottomTab.Screen name={PUBLIC} component={PublicPlaceHolder} />
 
             <BottomTab.Screen name={Three} component={TabThree} />
-            <BottomTab.Screen name={Four} component={AppMy} />
+            <BottomTab.Screen name={Four} component={TabFour} />
         </BottomTab.Navigator>
     );
 }
@@ -85,7 +84,58 @@ export default function AppBottomTabNavigation() {
  * 自定义【文字图标】底部导航条
  */
 const BottomTabBar = observer(({ state, descriptors, navigation, enableShadow }: { state: any, descriptors: any, navigation: any, enableShadow: boolean }) => {
-    let routes: any[] = state.routes; // 底部导航路由数组
+    //    let routes:any[] = state.routes; // 底部导航路由数组
+
+    const [origin, setorigin] = useState([]);
+    const [routes, setroutes] = useState(state.routes)
+
+
+    useEffect(() => {
+        if (Platform.OS == 'android') {
+            setorigin([...routes]);
+            for (let i = 0; i < routes.length; i++) {
+                if (routes[i].name == Three) {
+                    let temp = routes;
+                    temp.splice(i, 1);
+                    setroutes([...temp]);
+                }
+            }
+            for (let i = 0; i < routes.length; i++) {
+                if (routes[i].name == PUBLIC) {
+                    let temp = routes;
+                    temp.splice(i, 1);
+                    setroutes([...temp]);
+                }
+            }
+        }
+    }, []);
+    console.log(DataCenter.App.ad_configs?.disable?.huawei)
+
+    useEffect(() => {
+        if (Platform.OS == 'android') {
+            if (DataCenter.App.ad_configs?.disable?.huawei != undefined) {
+                if (DataCenter.App.ad_configs?.disable?.huawei) {
+                    for (let i = 0; i < routes.length; i++) {
+                        if (routes[i].name == Three) {
+                            let temp = routes;
+                            temp.splice(i, 1);
+                            setroutes([...temp]);
+                        }
+                    }
+                    for (let i = 0; i < routes.length; i++) {
+                        if (routes[i].name == PUBLIC) {
+                            let temp = routes;
+                            temp.splice(i, 1);
+                            setroutes([...temp]);
+                        }
+                    }
+                } else {
+                    console.log('警用tab', DataCenter.App.ad_configs?.disable?.huawei, origin);
+                    setroutes([...origin]);
+                }
+            }
+        }
+    }, [DataCenter.App.ad_configs?.disable?.huawei, origin])
 
     /**
      *  map函数，返回底部导航item数组
@@ -95,31 +145,21 @@ const BottomTabBar = observer(({ state, descriptors, navigation, enableShadow }:
         /**
          *  根据广告开关动态调整底部导航tab数量
          */
-        if (Platform.OS == 'ios' && false) {
-            if (DataCenter.App.ad_configs?.disable?.ios) {
-                console.log(routes);
-                for (let i = 0; i < routes.length; i++) {
-                    if (routes[i].name == Three) {
-                        routes.splice(i, 1)
-                    }
-                }
-                for (let i = 0; i < routes.length; i++) {
-                    if (routes[i].name == PUBLIC) {
-                        routes.splice(i, 1)
-                    }
-                }
-            }
-        }
+        // if(Platform.OS == 'ios' && false){
+
+
+
+        // }
 
         return routes.map((route: any, index: number) => {
-            const { options } = descriptors[route.key]; //每个BottomTab.Screen 的可选属性
+            const options = descriptors[route.key] ?? {}; //每个BottomTab.Screen 的可选属性
 
             const label =
-                options.tabBarLabel != undefined
-                    ? options.tabBarLabel
-                    : options.title != undefined
-                        ? options.title
-                        : route.name;
+                options?.tabBarLabel != undefined
+                    ? options?.tabBarLabel
+                    : options?.title != undefined
+                        ? options?.title
+                        : route?.name;
 
             const isFocused = state.index === index; //当前tab是否获得焦点
 
@@ -133,11 +173,7 @@ const BottomTabBar = observer(({ state, descriptors, navigation, enableShadow }:
                         // 点击发布按钮
                         PublishOption.showPublishOption(navigation);
                     } else {
-                        if ((NeedLoginTab.indexOf(route.name) != -1) && !app.login) {
-                            navigation.navigate('Login')
-                        } else {
-                            navigation.navigate(route.name);
-                        }
+                        navigation.navigate(route.name);
                     }
                 }
             };

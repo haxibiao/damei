@@ -18,7 +18,8 @@ import {
     QuestionQuery,
     QuestionListQuery,
     CategoriesQuery,
-    InterestCategoriesQuery
+    InterestCategoriesQuery,
+    AnswerMutation, 
 } from './graphql/question.graphql';
 
 export { 
@@ -31,9 +32,10 @@ export {
     CommentLive,
     LeaveLiveRoom,
     ExceptionLiveReport, 
-    AutoSignIn,//用户相关
+    AutoSignIn,                 //用户相关
     QuestionQuery,
-    QuestionListQuery,//一组题目查询
-    CategoriesQuery, //推荐题库查询
-    InterestCategoriesQuery,//兴趣题库查询
+    QuestionListQuery,          //一组题目查询
+    CategoriesQuery,            //推荐题库查询
+    InterestCategoriesQuery,    //兴趣题库查询,
+    AnswerMutation,             //提交题目答案
 }

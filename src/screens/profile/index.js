@@ -110,7 +110,7 @@ class index extends Component {
                                 </TouchFeedback>
                                 <TouchFeedback
                                     navigation={navigation}
-                                    onPress={() => navigation.navigate('Society')}
+                                    onPress={() => navigation.navigate('Society',{follower:false})}
                                     authenticated
                                     activeOpacity={1}
                                     style={styles.metaItem}>

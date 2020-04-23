@@ -19,6 +19,7 @@ export default observer(() => {
     )
     
     function fetchData(id:number,offset:number){
+        console.log('题库挂载点获取数据函数，client: ',client);
         if(client){
             client.query({
                 query: GQL.QuestionListQuery,
@@ -30,9 +31,10 @@ export default observer(() => {
                 console.log('一组题目查询结果: ',rs);
                 let list = rs.data?.questions ?? [];
                 ExerciseStore.setQuestions([...list]);
+                ExerciseStore.setLoadingData(false);
             }).catch((err:any) => {
                 console.log('一组题目查询错误: ',err)
-            });
+            })
         }
     }
     

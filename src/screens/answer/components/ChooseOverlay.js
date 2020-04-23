@@ -45,7 +45,7 @@ class ChooseOverly {
 			
 					</TouchFeedback>
 					<View style={styles.top}>
-						<TouchFeedback
+						{/* <TouchFeedback
 							onPress={async () => {
 								this.popViewRef.close();
 								let result = await this._shareCard.onCapture();
@@ -61,7 +61,7 @@ class ChooseOverly {
 							<Image source={require('../../../assets/images/wechat.png')} style={styles.imageStyle} />
 
 							<Text style={{ color: Theme.grey, fontSize: 12 }}>微信好友</Text>
-						</TouchFeedback>
+						</TouchFeedback> */}
 						<TouchFeedback
 							onPress={async () => {
 								this.popViewRef.close();
