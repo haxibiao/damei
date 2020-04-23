@@ -19,7 +19,7 @@ class WithdrawLogDetails extends Component {
     }
 
     render() {
-        const { navigation,route } = this.props;
+        const { navigation, route } = this.props;
         const { withdraw_id } = route.params;
         return (
             <PageContainer title="提现详情" white>
@@ -35,6 +35,9 @@ class WithdrawLogDetails extends Component {
                         let withdraw = data.withdraw;
                         let withdrawType = '支付宝';
                         switch (withdraw.to_platform) {
+                            case 'wechat':
+                                withdrawType = '微信';
+                                break;
                             case 'dongdezhuan':
                                 withdrawType = '懂得赚';
                                 break;
@@ -76,14 +79,14 @@ class WithdrawLogDetails extends Component {
                                                 交易失败
                                             </Text>
                                         ) : (
-                                            <Text
-                                                style={{
-                                                    fontSize: PxFit(16),
-                                                    color: Theme.weixin,
-                                                }}>
-                                                交易成功
-                                            </Text>
-                                        )}
+                                                <Text
+                                                    style={{
+                                                        fontSize: PxFit(16),
+                                                        color: Theme.weixin,
+                                                    }}>
+                                                    交易成功
+                                                </Text>
+                                            )}
                                     </View>
                                     <View style={styles.row}>
                                         <Text style={styles.textLeft}>提现平台 </Text>
