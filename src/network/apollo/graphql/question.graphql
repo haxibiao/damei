@@ -142,3 +142,11 @@ query QuestionQuery($id: Int) {
         }
     }
 }
+
+
+##################### mutation #######################
+
+#答题
+mutation AnswerMutation($id: Int!, $answer: String!) {
+    answerQuestion(id: $id, answer: $answer)
+}

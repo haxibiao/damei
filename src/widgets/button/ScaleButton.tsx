@@ -40,10 +40,10 @@ export default React.memo((props:{
         if(props.callback) {
             let now = Date.now();
             let diff = now - pressInTime;
-            if(diff < 180){
+            if(diff < 130){
                 props.callback();
             }else{//触摸释放时间超过100毫秒，不响应点击
-                console.log('触摸超过100毫秒，不响应')
+                console.log('触摸超过130毫秒，不响应')
             }
         }
     }
@@ -55,6 +55,7 @@ export default React.memo((props:{
                 {
                     transform:[
                         {scale: scale}
+  
                     ]
                 }
             ]}>
