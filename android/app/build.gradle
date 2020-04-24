@@ -371,6 +371,9 @@ repositories {
 }
 
 dependencies {
+
+    // implementation project(':RCTWeChat') //react-native-wechat
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
@@ -390,7 +393,7 @@ dependencies {
     // implementation project(':share')
     
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.2'
-    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    // implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'   ////微信sdk
 
     if (enableHermes) {
       def hermesPath = "../../node_modules/hermesvm/android/";

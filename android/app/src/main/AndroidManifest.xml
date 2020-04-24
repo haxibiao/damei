@@ -59,12 +59,19 @@
         </activity>
 
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-      <activity android:name="com.damei.wxapi.WXEntryActivity"
+
+        <!-- 微信 -->
+         <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:label="@string/app_name"
+            android:exported="true"
+          />
+      <!-- <activity android:name="com.damei.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
-      </activity>
+      </activity> -->
       <provider
             android:name="com.bytedance.sdk.openadsdk.TTFileProvider"
             android:authorities="${applicationId}.TTFileProvider"

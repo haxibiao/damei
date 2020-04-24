@@ -7,7 +7,8 @@ import { Theme, PxFit, SCREEN_WIDTH, SCREEN_HEIGHT, ISIOS, Config } from 'utils'
 
 import { Query, withApollo, compose, graphql, GQL } from 'apollo';
 import { app } from 'store';
-import { WeChat } from 'native';
+// import { WeChat } from 'native';
+import * as WeChat from "react-native-wechat";
 
 import DeviceInfo from 'react-native-device-info';
 
@@ -17,7 +18,7 @@ import { Overlay } from 'teaset';
 import { Util } from 'native';
 import { getUniqueId } from 'react-native-device-info';
 
-import {Storage} from '../../data';
+import { Storage } from '../../data';
 
 const shadowOpt = {
     width: SCREEN_WIDTH - Theme.itemSpace * 3,
@@ -99,7 +100,7 @@ class index extends Component {
             const user = result.data.autoSignIn;
             this._saveUserData(user);
 
-            Storage.setItem('manualLogout',false);
+            Storage.setItem('manualLogout', false);
         }
         this.setState({
             submitting: false,
@@ -248,26 +249,48 @@ class index extends Component {
     }
 
     // 微信登录
-    // TODO: 微信相关需重构 采用 react-native-wechat
     wechatLogin = () => {
-        WeChat.isSupported()
-            .then(isSupported => {
-                if (isSupported) {
-                    WeChat.wechatLogin().then(code => {
-                        this.setState({
-                            submitting: true,
-                        });
-                        console.log('code', code);
-                        this.getWechatInfo(code);
-                        Storage.setItem('manualLogout',false);
-                    });
+        const scope = 'snsapi_userinfo';
+        const state = 'skit_wx_login';
+        WeChat.isWXAppInstalled()
+            .then(isInstalled => {
+                if (isInstalled) {
+                    WeChat.sendAuthRequest(scope, state)
+                        .then(responseCode => {
+                            this.setState({
+                                submitting: false,
+                            });
+                            this.getWechatInfo(
+                                responseCode.code,
+                                result => {
+                                    if (result.data && result.data.unionid) {
+                                        // 新用户绑定手机号
+                                        this.props.navigation.navigate('PhoneBind', {
+                                            data: result.data,
+                                        });
+                                    } else {
+                                        // 老用户直接登录
+                                        this.getUserData(result.data.user);
+                                    }
+                                },
+                                () => {
+                                    Toast.show({ content: '微信身份信息获取失败，请检查微信是否登录' });
+                                    this.setState({
+                                        submitting: false,
+                                    });
+                                },
+                            )
+                                .catch(err => {
+                                    Toast.show({ content: '登录授权发生错误' });
+                                })
+                        })
                 } else {
                     Toast.show({ content: '未安装微信或当前微信版本较低' });
                 }
             })
             .catch(err => {
-                console.log('err=' + err);
-                Toast.show({ content: '微信请求失败，请使用手机号登录' });
+                console.log('err', err);
+                Toast.show({ content: '微信请求失败，请使用其它方式登录' });
             });
     };
 
@@ -284,9 +307,9 @@ class index extends Component {
             .then(response => response.json())
             .then(result => {
                 console.log('微信登录返回结果: ', result);
-                
+
                 this.getUserData(result.data.user);
-                
+
             })
             .catch(error => {
                 console.log('error', error);
@@ -296,13 +319,15 @@ class index extends Component {
                 });
             });
     };
+
+
     autoSign = async () => {
         let result = {};
         this.setState({
             submitting: true,
         });
         let deviceId = await DeviceInfo.getUniqueId();
-        console.log('uuid: ',deviceId)
+        console.log('uuid: ', deviceId)
 
         this.props.client.mutate({
             mutation: GQL.autoSignInMutation,
@@ -311,50 +336,56 @@ class index extends Component {
                 uuid: deviceId
             }
         }).then(result => {
-            console.log("静默登录接口返回数据： ",result)
+            console.log("静默登录接口返回数据： ", result)
             const user = result.data.autoSignIn;
             this._saveUserData(user);
 
-            Storage.setItem('manualLogout',false);
+            Storage.setItem('manualLogout', false);
             this.setState({
                 submitting: false,
             });
         }).catch(errors => {
-            console.log("静默登录接口返回数据： ",result)
+            console.log("静默登录接口返回数据： ", result)
             let str = result.errors.toString().replace(/Error: GraphQL error: /, '');
             Toast.show({ content: str, layout: 'top' });
             this.setState({
                 submitting: false,
             });
         });
-        
+
     };
 
     //微信已存在，直接登录
     getUserData = user => {
+        this.setState({
+            submitting: true,
+        });
         const { client } = this.props;
-        if(user?.id != undefined){
+        if (user?.id != undefined) {
             client
-            .query({
-                query: GQL.UserQuery,
-                variables: {
-                    id: user?.id,
-                },
-            })
-            .then(result => {
-                console.log('登录query返回数据: ',result)
-                let token = { token: user.api_token };
-                let userLoginInfo = { ...result.data.user, token: user.api_token };
-                this._saveUserData(userLoginInfo);
-            })
-            .catch(error => {
-                let str = rejected.toString().replace(/Error: GraphQL error: /, '');
-                Toast.show({ content: str });
-                this.setState({
-                    submitting: false,
+                .query({
+                    query: GQL.UserQuery,
+                    variables: {
+                        id: user?.id,
+                    },
+                })
+                .then(result => {
+                    console.log('登录query返回数据: ', result)
+                    let token = { token: user.api_token };
+                    let userLoginInfo = { ...result.data.user, token: user.api_token };
+                    this._saveUserData(userLoginInfo);
+                    this.setState({
+                        submitting: false,
+                    });
+                })
+                .catch(error => {
+                    let str = rejected.toString().replace(/Error: GraphQL error: /, '');
+                    Toast.show({ content: str });
+                    this.setState({
+                        submitting: false,
+                    });
                 });
-            });
-        }else{
+        } else {
             this.autoSign();
         }
     };
