@@ -66,7 +66,7 @@ export default observer(props => {
                 {VideoStore.getReward.length < 1 && (
                     <View
                         style={{
-                            bottom: Theme.HOME_INDICATOR_HEIGHT + PxFit(15),
+                            bottom: Theme.HOME_INDICATOR_HEIGHT -4,
                             position: 'absolute',
                             right: PxFit(Theme.itemSpace),
                             flexDirection: 'row',
