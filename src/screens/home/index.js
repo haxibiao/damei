@@ -20,7 +20,7 @@ import PlateItem from './components/PlateItem';
 import { observer, app, keys, storage, config } from 'store';
 import { when } from 'mobx';
 import { withApollo, compose, graphql, GQL } from 'apollo';
-import {DataCenter} from '../../data';
+import { DataCenter } from '../../data';
 
 import JPushModule from 'jpush-react-native';
 import NetInfo from '@react-native-community/netinfo';
@@ -30,17 +30,7 @@ import { Overlay } from 'teaset';
 
 import TimeReward from './components/TimeReward';
 
-// 监听新用户登录;
-when(
-    () => app.me.isNewUser && !config.disableAd,
-    () => {
-        // 新手指导
-        beginnerGuidance({
-            guidanceKey: 'VideoTask',
-            GuidanceView: VideoTaskGuidance,
-        });
-    },
-);
+
 
 @observer
 class index extends Component {
@@ -61,6 +51,22 @@ class index extends Component {
         DataCenter.setNavigation(navigation);
         this.resetUser();
 
+        // 监听新用户登录;
+        when(
+            () => {
+                let isNew = !config.disableAd ? app?.me?.is_old_user : null
+                //新用户（0） 老用户（1）
+                return isNew === 0;
+            },
+            () => {
+                // 新手指导
+                beginnerGuidance({
+                    guidanceKey: 'VideoTask',
+                    GuidanceView: VideoTaskGuidance,
+                });
+            },
+        );
+
         this.registerTimer = setTimeout(async () => {
             // 再次请求权限防止未获取到手机号
             const userCache = await storage.getItem(keys.userCache);
@@ -77,7 +83,7 @@ class index extends Component {
                     .query({
                         query: GQL.UserWithdrawQuery,
                     })
-                    .then(({ data }) => {})
+                    .then(({ data }) => { })
                     .catch(error => {
                         const info = error.toString().indexOf('登录');
                         if (info > -1) {

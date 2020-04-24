@@ -15,6 +15,7 @@ import { Overlay } from 'teaset';
 import { ad } from 'native';
 import { playVideo } from '../../common/ttad/playVideo';
 import { Iconfont, TouchFeedback } from '..';
+import { DataCenter,observer} from '../../data';
 
 const { height, width } = Dimensions.get('window');
 const SCREEN_WIDTH = width;
@@ -34,6 +35,7 @@ interface Props {
     type: 'Any';
 }
 
+@observer
 class RewardTips {
     static OverlayKey: any;
     static show(props: Props) {
@@ -106,7 +108,8 @@ class RewardTips {
                             onPress={() => {
                                 RewardTips.hide();
                                 if (rewardVideo) {
-                                    Tools.navigate('BillingRecord', { initialPage: 1 });
+                                    if(DataCenter.navigation) DataCenter.navigation.navigate('BillingRecord', { initialPage: 1 });
+                                    // Tools.navigate('BillingRecord', { initialPage: 1 });
                                 } else {
                                     playVideo({ type });
                                 }

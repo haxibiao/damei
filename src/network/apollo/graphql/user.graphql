@@ -49,6 +49,7 @@ mutation AutoSignIn($account: String, $uuid: String) {
       total_withdraw_amount
       pay_info_change_count
     }
+    is_old_user
     is_bind_wechat
     is_admin
     verified_at
