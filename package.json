@@ -76,6 +76,7 @@
         "react-native-video": "^4.4.5",
         "react-native-view-shot": "^3.1.2",
         "react-native-webview": "^8.2.0",
+        "react-native-wechat": "^1.9.12",
         "react-navigation": "^3.11.1",
         "react-navigation-hooks": "^1.0.3",
         "recompose": "^0.30.0",

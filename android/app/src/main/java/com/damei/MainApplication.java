@@ -28,8 +28,8 @@ import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
 import com.bytedance.sdk.openadsdk.TTFullScreenVideoAd;
 
-import com.damei.wxapi.WxEntryPackage;
-// import com.theweflex.react.WeChatPackage;
+// import com.damei.wxapi.WxEntryPackage;
+import com.theweflex.react.WeChatPackage;
 import androidx.multidex.MultiDexApplication;
 
 public class MainApplication extends MultiDexApplication implements ReactApplication {
@@ -56,9 +56,9 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
       packages.add(new JPushPackage(true, true));
       packages.add(new AdPackage());
       packages.add(new ToolkitsPackage());
-      packages.add(new WxEntryPackage());
+      // packages.add(new WxEntryPackage());
       packages.add(new ReactVideoPackage());
-      // packages.add(new WeChatPackage());
+      packages.add(new WeChatPackage());
       return packages;
     }
 

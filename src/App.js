@@ -1,12 +1,13 @@
 import React, { Fragment, Component } from 'react';
-import { StyleSheet, YellowBox, View, Image, Text,Platform } from 'react-native';
+import { StyleSheet, YellowBox, View, Image, Text, Platform } from 'react-native';
 import { Toast, ErrorBoundary } from 'components';
 import { app, config } from 'store';
 
 import Orientation from 'react-native-orientation';
 import codePush from 'react-native-code-push';
-import { ad, WeChat } from 'native';
-import { ISIOS,  PxFit, Theme } from 'utils';
+import * as WeChat from 'react-native-wechat';
+import { ad, } from 'native';
+import { ISIOS, PxFit, Theme } from 'utils';
 
 import service from 'service';
 import { checkUpdate } from 'common';
@@ -15,10 +16,10 @@ import Apollo from './Apollo';
 
 import SplashScreen from 'react-native-splash-screen';
 
-import { LicenseUrl,LicenseKey } from '../app.json';
+import { LicenseUrl, LicenseKey } from '../app.json';
 import { LivePullManager } from 'hxf-tencent-live'; //导入直播
-import { check,request,PERMISSIONS,RESULTS } from 'react-native-permissions';
-import { DataCenter,observer } from './data';
+import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
+import { DataCenter, observer } from './data';
 import Config from 'react-native-config';
 @observer
 class App extends Component {
@@ -40,12 +41,12 @@ class App extends Component {
         // 获取广告开放状态
         service.enableAdvert(data => {
             // 只针对华为检测是否开启开屏广告 （做请求后再加载开屏广告首屏会先露出）
-            console.log('针对华为开屏广告: ',data);
+            console.log('针对华为开屏广告: ', data);
             if (Config.AppStore === 'huawei' && !data.disable[Config.AppStore]) {
-               if(isAndroid) ad.Splash.loadSplashAd();
+                if (isAndroid) ad.Splash.loadSplashAd();
             }
-            if(Platform.OS == 'ios'){
-                if(!data.disable.ios){
+            if (Platform.OS == 'ios') {
+                if (!data.disable.ios) {
                     ad.Splash.loadSplashAd();
                 }
             }
@@ -54,7 +55,7 @@ class App extends Component {
         });
 
         if (Config.AppStore !== 'huawei' && Platform.OS == 'android') {
-                ad.Splash.loadSplashAd();
+            ad.Splash.loadSplashAd();
         }
 
 
@@ -84,42 +85,42 @@ class App extends Component {
         /**
          *  直播设置licenseKey,url
          */
-        LivePullManager.liveSetupLicence(LicenseUrl,LicenseKey);
+        LivePullManager.liveSetupLicence(LicenseUrl, LicenseKey);
         //只做直播相关权限检查，获取交由权限浮层
         //this.checkPermission();
     }
 
     //直播权限检查函数
-    checkPermission(){
-        if(Platform.OS === 'android'){
+    checkPermission() {
+        if (Platform.OS === 'android') {
             check(PERMISSIONS.ANDROID.CAMERA)
-            .then(result => {
-                if(result == RESULTS.GRANTED){
-                    //有摄像头权限，下一步检查麦克风权限
-                    check(PERMISSIONS.ANDROID.RECORD_AUDIO)
-                        .then(result => {
-                            if(result == RESULTS.GRANTED) DataCenter.AppSetSufficientPermissions(true);
-                        });
-                }
-            });
-        }else if(Platform.OS === 'ios'){
+                .then(result => {
+                    if (result == RESULTS.GRANTED) {
+                        //有摄像头权限，下一步检查麦克风权限
+                        check(PERMISSIONS.ANDROID.RECORD_AUDIO)
+                            .then(result => {
+                                if (result == RESULTS.GRANTED) DataCenter.AppSetSufficientPermissions(true);
+                            });
+                    }
+                });
+        } else if (Platform.OS === 'ios') {
             check(PERMISSIONS.IOS.CAMERA)
-            .then(result => {
-                if(result == RESULTS.GRANTED){
-                    //有摄像头权限，下一步检查麦克风权限
-                    check(PERMISSIONS.IOS.RECORD_AUDIO)
-                        .then(result => {
-                            if(result == RESULTS.GRANTED) DataCenter.AppSetSufficientPermissions(true);
-                        });
-                }
-            })
+                .then(result => {
+                    if (result == RESULTS.GRANTED) {
+                        //有摄像头权限，下一步检查麦克风权限
+                        check(PERMISSIONS.IOS.RECORD_AUDIO)
+                            .then(result => {
+                                if (result == RESULTS.GRANTED) DataCenter.AppSetSufficientPermissions(true);
+                            });
+                    }
+                })
         }
     }
 
     checkServer = () => {
         fetch(Config.ServerRoot)
             .then(response => {
-                console.log("服务器response: ",response);
+                console.log("服务器response: ", response);
                 if (response.status == 503) {
                     this.setState({ serverMaintenance: response });
                 }
