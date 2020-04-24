@@ -9,6 +9,8 @@ import { app } from 'store';
 import { ad } from 'native';
 import { playVideo } from 'common';
 
+import {observer,DataCenter} from '../../data'
+
 function VideoTaskGuidance({ onDismiss }) {
     const [step, setStep] = useState(0);
     const me = useMemo(() => app.me, [app]);
@@ -17,7 +19,8 @@ function VideoTaskGuidance({ onDismiss }) {
             <TouchableWithoutFeedback
                 key={1}
                 onPress={() => {
-                    Tools.navigate('任务');
+
+                    if(DataCenter.navigation) DataCenter.navigation.navigate('任务');
                     setStep(1);
                 }}>
                 <Image style={styles.userReward} source={require('../../assets/images/new_user_reward.png')} />
@@ -87,4 +90,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default VideoTaskGuidance;
+export default observer(VideoTaskGuidance);

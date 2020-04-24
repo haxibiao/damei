@@ -222,6 +222,7 @@ query UserQuery($id: Int) {
         today_withdraw_left
         exchange_rate
         video_duration
+        is_old_user
         explanation_video_duration
         has_reward_new_user
         is_bind_wechat
@@ -383,6 +384,7 @@ query UserMeansQuery($id: Int!) {
         }
         is_admin
         received
+        is_old_user
         bonusExpirationTime
         totalBonusEarnings
         stockRate
@@ -808,6 +810,7 @@ mutation autoSignUpMutation($account: String, $uuid: String) {
         totalEarnings
         todayUnclaimedBonusEarnings
         is_first_stock
+        is_old_user
         goldTree {
             rmb
             total
@@ -893,6 +896,7 @@ query UserAutoQuery($id: Int) {
         has_reward_new_user
         is_bind_wechat
         is_admin
+        is_old_user
         verified_at
         received
         bonusExpirationTime
