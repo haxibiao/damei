@@ -7,10 +7,13 @@ import VideoStore from '../VideoStore';
 import { GQL, useMutation } from 'apollo';
 import { useBounceAnimation, useLinearAnimation, exceptionCapture } from 'common';
 import { transform } from '@babel/core';
+import { DataCenter } from '../../../data';
 
 const RewardProgress = observer(props => {
     const progress = (VideoStore.rewardProgress / VideoStore.rewardLimit) * 100;
     const me = useMemo(() => app.me, []);
+
+    const navigation = DataCenter.navigation;
 
     const [rewardGold, setReward] = useState();
     const [imageAnimation, startImageAnimation] = useBounceAnimation({ value: 0, toValue: 1 });
@@ -70,9 +73,9 @@ const RewardProgress = observer(props => {
         <TouchableWithoutFeedback
             onPress={() => {
                 if (app.login) {
-                    Tools.navigate('BillingRecord', { initialPage: 1 });
+                    if(navigation) navigation.navigate('BillingRecord',{initialPage: 1})
                 } else {
-                    Tools.navigate('Login');
+                    if(navigation) navigation.navigate('Login');
                 }
             }}>
             <Animated.View style={[styles.circleProgress, { transform: [{ scale: imageScale }] }]}>
