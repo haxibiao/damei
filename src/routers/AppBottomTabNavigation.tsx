@@ -84,73 +84,47 @@ export default function AppBottomTabNavigation() {
  * 自定义【文字图标】底部导航条
  */
 const BottomTabBar = observer(({ state, descriptors, navigation, enableShadow }: { state: any, descriptors: any, navigation: any, enableShadow: boolean }) => {
-    //    let routes:any[] = state.routes; // 底部导航路由数组
-
-    const [origin, setorigin] = useState([]);
-    const [routes, setroutes] = useState(state.routes)
 
 
-    useEffect(() => {
-        if (Platform.OS == 'android') {
-            setorigin([...routes]);
-            for (let i = 0; i < routes.length; i++) {
-                if (routes[i].name == Three) {
-                    let temp = routes;
-                    temp.splice(i, 1);
-                    setroutes([...temp]);
-                }
-            }
-            for (let i = 0; i < routes.length; i++) {
-                if (routes[i].name == PUBLIC) {
-                    let temp = routes;
-                    temp.splice(i, 1);
-                    setroutes([...temp]);
-                }
-            }
-        }
-    }, []);
-    console.log(DataCenter.App.ad_configs?.disable?.huawei)
+
+    const [disable,setdisable] = useState(true);
+
+    //console.log(DataCenter.App.ad_configs?.disable?.huawei)
 
     useEffect(() => {
-        if (Platform.OS == 'android') {
-            if (DataCenter.App.ad_configs?.disable?.huawei != undefined) {
-                if (DataCenter.App.ad_configs?.disable?.huawei) {
-                    for (let i = 0; i < routes.length; i++) {
-                        if (routes[i].name == Three) {
-                            let temp = routes;
-                            temp.splice(i, 1);
-                            setroutes([...temp]);
-                        }
-                    }
-                    for (let i = 0; i < routes.length; i++) {
-                        if (routes[i].name == PUBLIC) {
-                            let temp = routes;
-                            temp.splice(i, 1);
-                            setroutes([...temp]);
-                        }
-                    }
+        if (Platform.OS == 'ios') {
+            if (DataCenter.App.ad_configs?.disable?.ios != undefined) {
+                if (DataCenter.App.ad_configs?.disable?.ios) {
+                    
                 } else {
-                    console.log('警用tab', DataCenter.App.ad_configs?.disable?.huawei, origin);
-                    setroutes([...origin]);
+                    console.log('禁用tab', DataCenter.App.ad_configs?.disable?.ios);
+                    setdisable(false);
                 }
             }
         }
-    }, [DataCenter.App.ad_configs?.disable?.huawei, origin])
+    }, [DataCenter.App.ad_configs?.disable?.ios])
 
     /**
      *  map函数，返回底部导航item数组
      */
     const _tabs = () => {
-
-        /**
-         *  根据广告开关动态调整底部导航tab数量
-         */
-        // if(Platform.OS == 'ios' && false){
-
-
-
-        // }
-
+        let routes:any[] = []; // 底部导航路由数组
+        for(let i of state.routes){
+            routes.push(i);
+        }
+        if (Platform.OS == 'ios') {
+            for (let i = 0; i < routes.length; i++) {
+                if (routes[i].name == Three) {
+                    routes.splice(i, 1);
+                }
+            }
+            for (let i = 0; i < routes.length; i++) {
+                if (routes[i].name == PUBLIC) {
+                    routes.splice(i, 1);
+                }
+            }
+        }
+        console.log('底部导航不完整:',routes,disable);
         return routes.map((route: any, index: number) => {
             const options = descriptors[route.key] ?? {}; //每个BottomTab.Screen 的可选属性
 
@@ -240,6 +214,101 @@ const BottomTabBar = observer(({ state, descriptors, navigation, enableShadow }:
         );
     }
 
+    const _tabs_full = () => {
+        let routes:any[] = []; // 底部导航路由数组
+        
+        for(let i of state.routes){
+            routes.push(i);
+        }
+        console.log('底部导航完整: ',routes,disable);
+        return routes.map((route: any, index: number) => {
+            const options = descriptors[route.key] ?? {}; //每个BottomTab.Screen 的可选属性
+
+            const label =
+                options?.tabBarLabel != undefined
+                    ? options?.tabBarLabel
+                    : options?.title != undefined
+                        ? options?.title
+                        : route?.name;
+
+            const isFocused = state.index === index; //当前tab是否获得焦点
+
+            const onPress = () => {
+                const event = navigation.emit({
+                    type: "tabPress",
+                    target: route.key
+                }); // 发送底部tab被点击的事件通知
+                if (!isFocused && !event.defaultPrevented) {
+                    if (route.name == PUBLIC) {
+                        // 点击发布按钮
+                        PublishOption.showPublishOption(navigation);
+                    } else {
+                        navigation.navigate(route.name);
+                    }
+                }
+            };
+
+            const onLongPress = () => { };
+
+
+            /** 
+             *  使用svg图片的tab icon
+             */
+            const _tabIconSvg = () => {
+                switch (route.name) {
+                    case One:
+                        return <SvgIcon name={isFocused ? icons_focused[0] : icons_unfocused[0]} size={Dimens.BottomTab_tabIconSize} scale={Dimens.BottomTab_svgScale} />
+                    case Two:
+                        return <SvgIcon name={isFocused ? icons_focused[1] : icons_unfocused[1]} size={Dimens.BottomTab_tabIconSize} scale={Dimens.BottomTab_svgScale} />
+                    case Four:
+                        return <SvgIcon name={isFocused ? icons_focused[2] : icons_unfocused[2]} size={Dimens.BottomTab_tabIconSize} scale={Dimens.BottomTab_svgScale} />
+                    case Four:
+                        return <SvgIcon name={isFocused ? icons_focused[3] : icons_unfocused[3]} size={Dimens.BottomTab_tabIconSize} scale={Dimens.BottomTab_svgScale} />
+
+                }
+            }
+
+            /**
+             *  使用图片形式的tab icon
+             */
+            const _tabIconPng = () => {
+                if (icons_focused.length <= 0) {
+                    return;
+                }
+                switch (route.name) {
+                    case One:
+                        return <Image source={{ uri: isFocused ? icons_focused[0] : icons_unfocused[0] }} style={{ height: Dimens.x34, width: Dimens.x34 }} resizeMode={"contain"} />
+                    case Two:
+                        return <Image source={{ uri: isFocused ? icons_focused[1] : icons_unfocused[1] }} style={{ height: Dimens.x34, width: Dimens.x34 }} resizeMode={"contain"} />
+                    case PUBLIC:
+                        return <Image source={{ uri: 'ic_ring_menu' }} style={{ height: Dimens.x34 * 1.6, width: Dimens.x34 * 1.6, marginTop: Dimens.x34 * 0.42 }} resizeMode={'contain'} />
+                    case Three:
+                        return <Image source={{ uri: isFocused ? icons_focused[2] : icons_unfocused[2] }} style={{ height: Dimens.x34, width: Dimens.x34 }} resizeMode={"contain"} />
+                    case Four:
+                        return <Image source={{ uri: isFocused ? icons_focused[3] : icons_unfocused[3] }} style={{ height: Dimens.x34, width: Dimens.x34 }} resizeMode={"contain"} />
+
+                }
+            }
+            return (
+                <TouchableOpacity
+                    activeOpacity={1.0}
+                    key={index}
+                    onPress={onPress}
+                    style={{ flex: 1, justifyContent: "center", alignItems: "center", marginTop: -6 }}>
+                    {
+                        _tabIconPng()
+                    }
+                    {/* {
+                        _tabIconSvg()
+                    } */}
+                    <Text style={{ color: isFocused ? '#FAE030' : '#aaa', fontSize: 11 }}>
+                        {label === PUBLIC ? '' : label}
+                    </Text>
+                </TouchableOpacity>
+            )
+        }
+        );
+    }
     /**
      *  返回自定义底部导航栏组件
      */
@@ -250,11 +319,10 @@ const BottomTabBar = observer(({ state, descriptors, navigation, enableShadow }:
         <View style={fullScreen ? styles.fullscreen_Tab : [
             styles.normal_Tab, enableShadow ? styles.Tab_shadow : {},
             { backgroundColor: specialMode ? '#191A21' : 'white' }
-        ]
-        }>
+        ]}>
             <View style={[{ backgroundColor: Colors.clear }, styles.tabContainer]}>
                 {
-                    _tabs()
+                    disable ? _tabs() : _tabs_full()
                 }
             </View>
         </View>
