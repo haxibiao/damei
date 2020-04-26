@@ -11,7 +11,7 @@ import * as PermissionChecker from './CommonWidgetPermissionChecker';
 import HeaderBackButton from '../../widgets/HeaderBackButton';
 var StatusBarHeight = StatusBar.currentHeight ?? 0;// 状态栏高度
 console.log(StatusBarHeight);
-import {app} from 'store';
+import { app } from 'store';
 const ItemGap = 6;
 const ItemWidth = (sw - ItemGap * 3) / 2;
 
@@ -23,11 +23,11 @@ interface Item {
     id: string,
     cover: string,
     title: string,
-    count_audience: number
+    count_audience: number;
 }
 let newclient: ApolloClient<unknown>;
 
-const Live = (props: {navigation:any,inCurrent:boolean}) => {
+const Live = (props: { navigation: any, inCurrent: boolean; }) => {
     const [page, setpage] = useState(1);
     const [hasmore, sethasmore] = useState(true);
     const [liverooms, setliverooms] = useState([]);
@@ -59,7 +59,7 @@ const Live = (props: {navigation:any,inCurrent:boolean}) => {
                                 title: i.title,
                                 cover: i.cover,
                                 count_audience: i.count_audience
-                            }
+                            };
                             templist.push(room);
                         }
                         setliverooms([...templist]);
@@ -69,7 +69,7 @@ const Live = (props: {navigation:any,inCurrent:boolean}) => {
             }).catch((err: any) => {
                 //TODO: 直播间列表查询错误
                 console.log("直播间列表查询错误: ", err);
-            })
+            });
         }
     }
 
@@ -79,10 +79,10 @@ const Live = (props: {navigation:any,inCurrent:boolean}) => {
 
 
     useEffect(() => {
-        if(props.inCurrent) FetchLiveList(page,true);            
-    },[props.inCurrent])
+        if (props.inCurrent) FetchLiveList(page, true);
+    }, [props.inCurrent]);
 
-    const RenderItem = ({ item, index }: { item: Item, index: number }) => {
+    const RenderItem = ({ item, index }: { item: Item, index: number; }) => {
         // console.log("直播列表item ",item)
         let roomId = item.id;
 
@@ -101,89 +101,89 @@ const Live = (props: {navigation:any,inCurrent:boolean}) => {
                     </View>
                 </ImageBackground>
             </TouchableOpacity>
-        )
-    }
+        );
+    };
 
     const RenderEmpty = (props: any) => {
 
         const GoPushHandler = () => {
-            if(app.login){
-                if(DataCenter.App.sufficient_permissions){
+            if (app.login) {
+                if (DataCenter.App.sufficient_permissions) {
                     props.navigation.navigate("startlive");
-                }else{
+                } else {
                     //权限不够，打开权限窗口
                     PermissionChecker.showPermissionCheck();
                 }
-            }else{
+            } else {
                 props.navigation.navigate("Login");
             }
-        }
+        };
 
         return (
-            <View style={{ flex:1,height:sh - sh * 0.2, justifyContent: 'space-around', alignItems: 'center' }}>
-                <View style={{alignItems:'center'}}>
-                <LottieView source={require('./res/empty_live.json')} style={{ height: sw * 0.23, width: sw * 0.23 }} autoPlay loop />
-                <Text style={{ color: "#777",marginTop: 10}}>啊哦、暂时没有主播在播~</Text>
+            <View style={{ flex: 1, height: sh - sh * 0.2, justifyContent: 'space-around', alignItems: 'center' }}>
+                <View style={{ alignItems: 'center' }}>
+                    <LottieView source={require('./res/empty_live.json')} style={{ height: sw * 0.23, width: sw * 0.23 }} autoPlay loop />
+                    <Text style={{ color: "#777", marginTop: 10 }}>啊哦、暂时没有主播在播~</Text>
                 </View>
                 <TouchableOpacity activeOpacity={0.9} onPress={GoPushHandler}>
-                    <Image source={require('./res/gotopush.png')} style={{width:sw *0.3,height:(sw * 0.3 * 76)/280 }}/>
+                    <Image source={require('./res/gotopush.png')} style={{ width: sw * 0.3, height: (sw * 0.3 * 76) / 280 }} />
                 </TouchableOpacity>
             </View>
-        )
-    }
+        );
+    };
 
     const RenderLoading = () => {
         return (
             <View style={{ height: sh, width: sw, alignItems: 'center', paddingTop: sh * 0.3 }}>
                 <LottieView source={require('./res/loading.json')} style={{ height: sw * 0.23, width: sw * 0.23 }} autoPlay loop />
             </View>
-        )
-    }
+        );
+    };
 
     const NavBarHeight = isAndroid() ? 48 : 44; //安卓对应48，IOS对应44
 
     return (
         <Page.PageCleared safe >
-                {
-                    loading ? RenderLoading() : (
-                        <FlatList
-                            data={liverooms}
-                            contentContainerStyle={{ paddingTop: ItemGap }}
-                            keyExtractor={(item, index) => index.toString()}
-                            renderItem={RenderItem}
-                            showsVerticalScrollIndicator={false}
-                            ListEmptyComponent={() => <RenderEmpty navigation={props.navigation}/>}
-                            ListHeaderComponent={() => {
-                                return <View style={{height:36}}/>
-                            }}
-                            refreshControl={
-                                <RefreshControl
-                                    title={'加载中...'}
-                                    refreshing={refreshing}
-                                    colors={['rgb(255,176,0)', '#ffb100']}
-                                    onRefresh={() => {
-                                        setrefreshing(true);
-                                        FetchLiveList(1, true);
-                                    }}
-                                />
+            {
+                loading ? RenderLoading() : (
+                    <FlatList
+                        data={liverooms}
+                        contentContainerStyle={{ paddingTop: ItemGap }}
+                        keyExtractor={(item, index) => index.toString()}
+                        renderItem={RenderItem}
+                        showsVerticalScrollIndicator={false}
+                        ListEmptyComponent={() => <RenderEmpty navigation={props.navigation} />}
+                        ListHeaderComponent={() => {
+                            return <View style={{ height: 36 }} />;
+                        }}
+                        refreshControl={
+                            <RefreshControl
+                                title={'加载中...'}
+                                refreshing={refreshing}
+                                colors={['rgb(255,176,0)', '#ffb100']}
+                                onRefresh={() => {
+                                    setrefreshing(true);
+                                    FetchLiveList(1, true);
+                                }}
+                            />
+                        }
+                        numColumns={3}
+                        onEndReachedThreshold={0.33}
+                        onEndReached={() => {
+                            //触底加载更多
+                            if (hasmore) {
+                                console.log("触底加载更多");
+                                let nextpage = page + 1;
+                                setpage(nextpage);
+                                FetchLiveList(nextpage, false);
                             }
-                            numColumns={3}
-                            onEndReachedThreshold={0.33}
-                            onEndReached={() => {
-                                //触底加载更多
-                                if(hasmore){
-                                    console.log("触底加载更多")
-                                    let nextpage = page + 1;
-                                    setpage(nextpage);
-                                    FetchLiveList(nextpage, false);
-                                }
-                            }}
-                        />
-                    )
-                }
+                        }}
+                    />
+                )
+            }
         </Page.PageCleared>
-    )
-}
+    );
+};
 export default Live;
 
 const styles = StyleSheet.create({
@@ -202,4 +202,4 @@ const styles = StyleSheet.create({
         paddingHorizontal: 8,
         backgroundColor: '#00000033'
     }
-})
+});

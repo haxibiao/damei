@@ -37,13 +37,13 @@ const EditPage = observer((props) => {
 	const [constellation, setconstellation] = useState('');
 	const [love, setlove] = useState('');
 	const [avatar, setavatar] = useState('default_avatar');
-	
+
 	useEffect(() => {
-		setconstellation(LocalStore?.constellation ?? '')
-	}, [LocalStore.constellation])
+		setconstellation(LocalStore?.constellation ?? '');
+	}, [LocalStore.constellation]);
 	useEffect(() => {
-		setlove(LocalStore?.love ?? '')
-	}, [LocalStore.love])
+		setlove(LocalStore?.love ?? '');
+	}, [LocalStore.love]);
 
 
 	const changeAvatar = () => {
@@ -55,10 +55,10 @@ const EditPage = observer((props) => {
 		})
 			.then(async image => {
 
-				 setavatar( `data:${image.mime};base64,${image.data}`
-				)
+				setavatar(`data:${image.mime};base64,${image.data}`
+				);
 			})
-			.catch(error => {});
+			.catch(error => { });
 	};
 
 
@@ -72,7 +72,7 @@ const EditPage = observer((props) => {
 	function onDatePickerConfirm(value: any, index: any) {
 
 		setage(calcAge(value[0])),
-			setbirthday(value.join(''))
+			setbirthday(value.join(''));
 
 	}
 
@@ -86,12 +86,12 @@ const EditPage = observer((props) => {
 		if (birthday !== undefined) {
 			return birthday.replace(/[年月日]/gi, '-').split('-');
 		}
-	}
+	};
 	const showConstellPicker = () => {
-		ConstellPicker.show()
+		ConstellPicker.show();
 	};
 	const showLovePicker = () => {
-		LovePicker.show()
+		LovePicker.show();
 	};
 
 
@@ -103,9 +103,9 @@ const EditPage = observer((props) => {
 		}>
 			<ScrollView>
 				<View style={styles.Avatar_war}>
-				<TouchFeedback onPress={changeAvatar}>
-				<Avatar uri={avatar} size={sw * 0.23} />
-						</TouchFeedback>
+					<TouchFeedback onPress={changeAvatar}>
+						<Avatar uri={avatar} size={sw * 0.23} />
+					</TouchFeedback>
 
 					<Image source={{ uri: 'camera' }} style={{ height: 25, width: 25, position: 'absolute', right: sw * 0.4, top: sw * 0.25 }} resizeMode='contain' />
 				</View>
@@ -122,12 +122,12 @@ const EditPage = observer((props) => {
 						</TextInput>
 						<Text style={{ color: '#73717F' }}>个性签名：</Text>
 						<View>
-							<TextInput 
-							placeholderTextColor={'#D4D3D3'}
-							autoCorrect={false}
-							placeholder="20个字以内"
-							maxLength={20}
-							style={styles.edittext}>
+							<TextInput
+								placeholderTextColor={'#D4D3D3'}
+								autoCorrect={false}
+								placeholder="20个字以内"
+								maxLength={20}
+								style={styles.edittext}>
 							</TextInput>
 						</View>
 						<Row style={styles.fieldGroup}>
@@ -215,12 +215,12 @@ const EditPage = observer((props) => {
 						</Row>
 
 						<Text style={{ color: '#73717F' }}>兴趣爱好：</Text>
-						<TextInput 
-						placeholderTextColor={'#D4D3D3'}
-						autoCorrect={false}
-						placeholder="10个字以内"
-						maxLength={10}
-						style={styles.edittext}>
+						<TextInput
+							placeholderTextColor={'#D4D3D3'}
+							autoCorrect={false}
+							placeholder="10个字以内"
+							maxLength={10}
+							style={styles.edittext}>
 						</TextInput>
 
 					</View>
@@ -228,7 +228,7 @@ const EditPage = observer((props) => {
 				<View style={{ marginHorizontal: sw * 0.05 }}>
 					<Text style={{ fontSize: 16, marginVertical: 30 }}>隐私资料</Text>
 					<View style={{ marginHorizontal: 20 }}>
-					<Row style={styles.fieldGroup}>
+						<Row style={styles.fieldGroup}>
 							<Text style={styles.field}> 恋爱状态: </Text>
 							<TouchFeedback onPress={showLovePicker} style={styles.ageItem}>
 								<Text
@@ -245,18 +245,18 @@ const EditPage = observer((props) => {
 						</Row>
 						<Text style={{ color: '#73717F' }}>院校专业或从事行业：</Text>
 						<View>
-							<TextInput 
-						    placeholderTextColor={'#D4D3D3'}
-						    autoCorrect={false}
-						    maxLength={20}
-							style={styles.edittext}>
+							<TextInput
+								placeholderTextColor={'#D4D3D3'}
+								autoCorrect={false}
+								maxLength={20}
+								style={styles.edittext}>
 							</TextInput>
 						</View>
 					</View>
 				</View>
 			</ScrollView>
 		</Page.Page>
-	)
+	);
 });
 
 export default EditPage;
@@ -309,4 +309,4 @@ const styles = StyleSheet.create({
 		alignItems: 'center'
 	}
 
-})
+});

@@ -22,13 +22,13 @@ const CardWidth = sw * 0.88;                //卡片宽度
 const CardRadius = sw * 0.06;               //卡片圆角大小
 const CardInnerGap = CardWidth * 0.07;      //卡片水平内边距
 
-const CardInnerGapEnd = CardWidth * 0.05    //卡片水平内边距（右）
+const CardInnerGapEnd = CardWidth * 0.05;    //卡片水平内边距（右）
 
 const ButtonWidth = CardWidth * 0.7; //提交答案按钮宽
 const ButtonHeight = ButtonWidth * 0.17; //按钮高度
 
 const VideoWidth = CardWidth - CardInnerGapEnd * 2;
-const VideoHeight = VideoWidth * 3/4 ;
+const VideoHeight = VideoWidth * 3 / 4;
 
 const AvatarSize = sw * 0.13; //头像大小
 
@@ -50,8 +50,8 @@ const Background = observer(() => {
         return () => {
             //返回上一个页面前重置答题store里的数据
             ExerciseStore.reset();
-        }
-    }, [])
+        };
+    }, []);
 
     return (
         <LinearGradient
@@ -61,7 +61,7 @@ const Background = observer(() => {
             style={{ flex: 1, height: '100%', width: '100%', position: 'absolute', zIndex: -10 }}
             colors={[colors.primaryGradient, colors.secondaryGradient]}
         />
-    )
+    );
 });
 
 
@@ -70,21 +70,21 @@ const Background = observer(() => {
  *****************
  */
 const WisePoint = observer((props: {
-    textcolor: any
+    textcolor: any;
 }) => {
-    return <Text style={{ fontSize: 14, color: props.textcolor ?? '#000', marginStart: 8 }}>智慧点 {DataCenter.User?.me?.gold ?? 0}</Text>
+    return <Text style={{ fontSize: 14, color: props.textcolor ?? '#000', marginStart: 8 }}>智慧点 {DataCenter.User?.me?.gold ?? 0}</Text>;
 });
 const EnergyPoint = observer((props: {
-    textcolor: any
+    textcolor: any;
 }) => {
-    return <Text style={{ fontSize: 14, color: props.textcolor ?? '#000', marginStart: 8 }}>精力点 {DataCenter.User?.me?.ticket ?? 0}</Text>
+    return <Text style={{ fontSize: 14, color: props.textcolor ?? '#000', marginStart: 8 }}>精力点 {DataCenter.User?.me?.ticket ?? 0}</Text>;
 });
 
 /*****************
  * 题目单选、多选标识组件
  *****************
  */
-const TopBadge = React.memo((props: { multi: boolean }) => {
+const TopBadge = React.memo((props: { multi: boolean; }) => {
     return (
         <FadeInWidget>
             <View style={{ width: CardWidth, height: CardHeight * 0.3, position: 'absolute', top: 0, zIndex: -1, overflow: 'hidden' }}>
@@ -105,144 +105,144 @@ const TopBadge = React.memo((props: { multi: boolean }) => {
                 </View>
             </View>
         </FadeInWidget>
-    )
+    );
 });
 
 /**
  * 动画题目主干
  */
-const AnimatedQuestionBody = React.memo((props: { colors: any, text: string }) => {
+const AnimatedQuestionBody = React.memo((props: { colors: any, text: string; }) => {
     return (
         <FadeInWidget>
             <Text style={{ color: props?.colors.secondaryText, fontSize: 15 }}>{props?.text ?? ''}</Text>
         </FadeInWidget>
-    )
+    );
 });
 /**
  * 动画用户姓名
  */
-const AnimatedUserName = React.memo((props: { colors: any, name: string }) => {
+const AnimatedUserName = React.memo((props: { colors: any, name: string; }) => {
     return (
         <FadeInWidget >
             <Text style={{ color: props?.colors?.primaryText ?? '#333', fontSize: 14 }}>{props?.name ?? ''}</Text>
         </FadeInWidget>
-    )
+    );
 });
 /**
  * 动画用户头像
  */
-const AnimatedUserAvatar = React.memo((props: { avatar: string }) => {
+const AnimatedUserAvatar = React.memo((props: { avatar: string; }) => {
     return (
         <FadeInWidget>
             <Avatar uri={props?.avatar ?? 'default_avatar'} size={AvatarSize} frameStyle={{ alignSelf: 'center', marginBottom: 10, marginTop: CardInnerGap }} />
         </FadeInWidget>
-    )
+    );
 });
 
 /**
  *  动画视频题视频组件
  */
-const AnimatedVideo = React.memo((props:{uri:string,frame:{width:number,height:number}}) => {
-    
-    const [pause,setpause] = useState(false);
+const AnimatedVideo = React.memo((props: { uri: string, frame: { width: number, height: number; }; }) => {
+
+    const [pause, setpause] = useState(false);
 
     useEffect(() => {
 
         return () => {
             setpause(true);
-        }
-    },[])
-    
+        };
+    }, []);
+
     let w = props.frame?.width ?? 0;
     let h = props.frame?.height ?? 0;
 
     let s = {};
-    if(w != 0 && h != 0){
-        console.log('宽高都存在',w,h);
+    if (w != 0 && h != 0) {
+        console.log('宽高都存在', w, h);
         let tempw = w;
         w = VideoWidth;
-        h = h * VideoWidth/tempw ;
+        h = h * VideoWidth / tempw;
         s = {
-            width:w,
-            height:h
-        }
-    }else{
-        console.log('宽高不存在')
+            width: w,
+            height: h
+        };
+    } else {
+        console.log('宽高不存在');
         s = {
             width: VideoWidth,
             height: VideoHeight
-        }
+        };
     }
-    console.log('视频样式: ',s);
+    console.log('视频样式: ', s);
     return (
         <FadeInWidget>
-            <TouchableOpacity 
-            activeOpacity={1.0}
-            style={[{
-                marginStart: -(CardInnerGap - CardInnerGapEnd),
-                justifyContent:'center',
-                alignItems:'center'
-            },s]} 
-            onPress={() => {setpause(!pause)}}>
-            {
-                pause && (
-                    <View style={{height:45,width:45,borderRadius:25,backgroundColor:'#ffffff77',justifyContent:'center',alignItems:'center'}}>
-                        <SvgIcon name={Icons.play_button} size={29} color={'#555'} scale={0.029}/>
-                    </View>
-                )
-            }
-            <Video 
-            source={{uri:props.uri}}
-            style={[{
-                backgroundColor: '#333',
-                position:'absolute',
-                zIndex:-1
-            },s]}
-            resizeMode='contain'
-            repeat={true}
-            paused={pause}
-            />
+            <TouchableOpacity
+                activeOpacity={1.0}
+                style={[{
+                    marginStart: -(CardInnerGap - CardInnerGapEnd),
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }, s]}
+                onPress={() => { setpause(!pause); }}>
+                {
+                    pause && (
+                        <View style={{ height: 45, width: 45, borderRadius: 25, backgroundColor: '#ffffff77', justifyContent: 'center', alignItems: 'center' }}>
+                            <SvgIcon name={Icons.play_button} size={29} color={'#555'} scale={0.029} />
+                        </View>
+                    )
+                }
+                <Video
+                    source={{ uri: props.uri }}
+                    style={[{
+                        backgroundColor: '#333',
+                        position: 'absolute',
+                        zIndex: -1
+                    }, s]}
+                    resizeMode='contain'
+                    repeat={true}
+                    paused={pause}
+                />
             </TouchableOpacity>
         </FadeInWidget>
-    )
+    );
 });
 
 /**
  *  图片题自适应图片组件
  */
-const AnimatedAdaptiveImage = React.memo((props:{uri:string,frame:{width:number,height:number}}) => {
+const AnimatedAdaptiveImage = React.memo((props: { uri: string, frame: { width: number, height: number; }; }) => {
 
     let w = props.frame?.width ?? 0;
     let h = props.frame?.height ?? 0;
 
     let s = {};
-    if(w != 0 && h != 0){
+    if (w != 0 && h != 0) {
         let tempw = w;
         w = VideoWidth;
-        h = h * VideoWidth/tempw ;
+        h = h * VideoWidth / tempw;
         s = {
-            width:w,
-            height:h
-        }
-    }else{
+            width: w,
+            height: h
+        };
+    } else {
         s = {
             width: VideoWidth,
             minHeight: VideoHeight
-        }
+        };
     }
     /**
      * 维持宽度不变，高度自适应
      */
     return (
         <FadeInWidget>
-            <Image 
-            source={{uri: props?.uri ?? ''}} 
-            resizeMode='contain'
-            style={s}
+            <Image
+                source={{ uri: props?.uri ?? '' }}
+                resizeMode='contain'
+                style={s}
             />
         </FadeInWidget>
-    )
-})
+    );
+});
 
 
 /**
@@ -252,7 +252,7 @@ const Explaination = React.memo((props: {
     answer: string,
     rate: string,
     explaination: string,
-    count: number
+    count: number;
 }) => {
 
     const [appear, setappear] = useState(new Animated.Value(0));
@@ -262,9 +262,9 @@ const Explaination = React.memo((props: {
             toValue: 1.0,
             duration: 666
         }).start();
-    }, [])
+    }, []);
 
-    const explaination = props?.explaination ?? '本题没有解析'
+    const explaination = props?.explaination ?? '本题没有解析';
 
     return (
         <Animated.View style={{
@@ -292,25 +292,25 @@ const Explaination = React.memo((props: {
                 </View>
             </View>
         </Animated.View>
-    )
+    );
 });
 
 /**
  * 文字类题目
  */
-const TextKindQuestion = (props:{
-    is_multi:boolean,
-    avatar:string,
-    colors:any,
-    name:string,
-    description:string,
-    selections:any[],
-    submitted:boolean,
-    answer:string,
-    count:number,
-    rate:any,
-    explaination:string,
-    ClickHandler:any
+const TextKindQuestion = (props: {
+    is_multi: boolean,
+    avatar: string,
+    colors: any,
+    name: string,
+    description: string,
+    selections: any[],
+    submitted: boolean,
+    answer: string,
+    count: number,
+    rate: any,
+    explaination: string,
+    ClickHandler: any;
 }) => {
     return (
         <>
@@ -331,7 +331,7 @@ const TextKindQuestion = (props:{
                     props?.selections.map((value, index) => {
                         return (
                             <AnimatedAnswerItem value={value} multi={props?.is_multi ?? false} />
-                        )
+                        );
                     })
                 }
 
@@ -349,27 +349,27 @@ const TextKindQuestion = (props:{
                 <Text style={{ fontSize: 16, color: props?.submitted ? props?.colors.secondaryText : 'white' }}>{props?.submitted ? '下一题' : '提交答案'}</Text>
             </ScaleButton>
         </>
-    )
-}
+    );
+};
 
 /**
  * 视频类题目
  */
-const VideoKindQuestion = (props:{
-    is_multi:boolean,
-    avatar:string,
-    frame:{width:number,height:number},
-    colors:any,
-    name:string,
-    description:string,
-    uri:string,
-    selections:any[],
-    submitted:boolean,
-    answer:string,
-    count:number,
-    rate:any,
-    explaination:string,
-    ClickHandler:any
+const VideoKindQuestion = (props: {
+    is_multi: boolean,
+    avatar: string,
+    frame: { width: number, height: number; },
+    colors: any,
+    name: string,
+    description: string,
+    uri: string,
+    selections: any[],
+    submitted: boolean,
+    answer: string,
+    count: number,
+    rate: any,
+    explaination: string,
+    ClickHandler: any;
 }) => {
     return (
         <>
@@ -386,15 +386,15 @@ const VideoKindQuestion = (props:{
                     <AnimatedQuestionBody colors={props.colors} text={props?.description ?? ''} />
                 </View>
 
-                <View style={{marginBottom:15}}>
-                    <AnimatedVideo uri={props.uri} frame={props.frame}/>
+                <View style={{ marginBottom: 15 }}>
+                    <AnimatedVideo uri={props.uri} frame={props.frame} />
                 </View>
 
                 {
                     props?.selections.map((value, index) => {
                         return (
                             <AnimatedAnswerItem value={value} multi={props?.is_multi ?? false} />
-                        )
+                        );
                     })
                 }
 
@@ -412,27 +412,27 @@ const VideoKindQuestion = (props:{
                 <Text style={{ fontSize: 16, color: props?.submitted ? props?.colors.secondaryText : 'white' }}>{props?.submitted ? '下一题' : '提交答案'}</Text>
             </ScaleButton>
         </>
-    )
-}
+    );
+};
 
 /**
  * 图片类题目
  */
-const ImageKindQuestion = (props:{
-    is_multi:boolean,
-    avatar:string,
-    colors:any,
-    name:string,
-    description:string,
-    uri:string,
-    frame:{height:number,width:number},
-    selections:any[],
-    submitted:boolean,
-    answer:string,
-    count:number,
-    rate:any,
-    explaination:string,
-    ClickHandler:any
+const ImageKindQuestion = (props: {
+    is_multi: boolean,
+    avatar: string,
+    colors: any,
+    name: string,
+    description: string,
+    uri: string,
+    frame: { height: number, width: number; },
+    selections: any[],
+    submitted: boolean,
+    answer: string,
+    count: number,
+    rate: any,
+    explaination: string,
+    ClickHandler: any;
 }) => {
     return (
         <>
@@ -449,15 +449,15 @@ const ImageKindQuestion = (props:{
                     <AnimatedQuestionBody colors={props.colors} text={props?.description ?? ''} />
                 </View>
 
-                <View style={{marginBottom:15}}>
-                    <AnimatedAdaptiveImage uri={props.uri} frame={props.frame}/>
+                <View style={{ marginBottom: 15 }}>
+                    <AnimatedAdaptiveImage uri={props.uri} frame={props.frame} />
                 </View>
 
                 {
                     props?.selections.map((value, index) => {
                         return (
                             <AnimatedAnswerItem value={value} multi={props?.is_multi ?? false} />
-                        )
+                        );
                     })
                 }
 
@@ -475,86 +475,86 @@ const ImageKindQuestion = (props:{
                 <Text style={{ fontSize: 16, color: props?.submitted ? props?.colors.secondaryText : 'white' }}>{props?.submitted ? '下一题' : '提交答案'}</Text>
             </ScaleButton>
         </>
-    )
-}
+    );
+};
 
-const MultiKindQuestion = (props:{
-    data:any,
-    colors:any,
-    submitted:boolean,
-    ClickHandler:any
+const MultiKindQuestion = (props: {
+    data: any,
+    colors: any,
+    submitted: boolean,
+    ClickHandler: any;
 }) => {
     let d = props.data;
-    console.log('MultiKindQuestion组件中: type',d.type,' data',d);
+    console.log('MultiKindQuestion组件中: type', d.type, ' data', d);
     const getRate = () => {
         if (d?.correct_count && d?.count) {
             let rate: number = parseFloat((d?.correct_count / d?.count).toFixed(3));
             return (rate * 100).toFixed(1) + '%';
         }
         return '0%';
-    }    
+    };
     let answer = d?.answer ?? '';
     const is_multi = answer.length > 1;                                     //是否是多选题
     const selections = d?.selections_array ?? [];                         //题目选项
 
-    if(d.type == 'text'){
+    if (d.type == 'text') {
         return (
             <TextKindQuestion
-            is_multi = {is_multi}
-            avatar={d?.user?.avatar ?? ''}
-            colors={props.colors}
-            name={d?.user?.name ?? ''}
-            description={d?.description ?? ''}
-            selections={selections}
-            submitted={props.submitted}
-            answer={answer}
-            count={d?.count}
-            rate={getRate()}
-            explaination={d?.explaination}
-            ClickHandler={props.ClickHandler}
+                is_multi={is_multi}
+                avatar={d?.user?.avatar ?? ''}
+                colors={props.colors}
+                name={d?.user?.name ?? ''}
+                description={d?.description ?? ''}
+                selections={selections}
+                submitted={props.submitted}
+                answer={answer}
+                count={d?.count}
+                rate={getRate()}
+                explaination={d?.explaination}
+                ClickHandler={props.ClickHandler}
             />
-        )
-    }else if(d.type == 'video'){
+        );
+    } else if (d.type == 'video') {
         return (
             <VideoKindQuestion
-            is_multi = {is_multi}
-            uri={d?.video?.url ?? ''}
-            frame={{width:d?.video?.width,height:d?.video?.height}}
-            avatar={d?.user?.avatar ?? ''}
-            colors={props.colors}
-            name={d?.user?.name ?? ''}
-            description={d?.description ?? ''}
-            selections={selections}
-            submitted={props.submitted}
-            answer={d?.answer ?? ''}
-            count={d?.count}
-            rate={getRate()}
-            explaination={d?.explaination}
-            ClickHandler={props.ClickHandler}
+                is_multi={is_multi}
+                uri={d?.video?.url ?? ''}
+                frame={{ width: d?.video?.width, height: d?.video?.height }}
+                avatar={d?.user?.avatar ?? ''}
+                colors={props.colors}
+                name={d?.user?.name ?? ''}
+                description={d?.description ?? ''}
+                selections={selections}
+                submitted={props.submitted}
+                answer={d?.answer ?? ''}
+                count={d?.count}
+                rate={getRate()}
+                explaination={d?.explaination}
+                ClickHandler={props.ClickHandler}
             />
-        )
-    }else if(d.type == 'image'){
+        );
+    } else if (d.type == 'image') {
         return (
             <ImageKindQuestion
-            is_multi = {is_multi}
-            uri={d?.image?.url ?? ''}
-            frame={{width:d?.image?.width,height:d?.image?.height}}
-            avatar={d?.user?.avatar ?? ''}
-            colors={props.colors}
-            name={d?.user?.name ?? ''}
-            description={d?.description ?? ''}
-            selections={selections}
-            submitted={props.submitted}
-            answer={d?.answer ?? ''}
-            count={d?.count}
-            rate={getRate()}
-            explaination={d?.explaination}
-            ClickHandler={props.ClickHandler}
+                is_multi={is_multi}
+                uri={d?.image?.url ?? ''}
+                frame={{ width: d?.image?.width, height: d?.image?.height }}
+                avatar={d?.user?.avatar ?? ''}
+                colors={props.colors}
+                name={d?.user?.name ?? ''}
+                description={d?.description ?? ''}
+                selections={selections}
+                submitted={props.submitted}
+                answer={d?.answer ?? ''}
+                count={d?.count}
+                rate={getRate()}
+                explaination={d?.explaination}
+                ClickHandler={props.ClickHandler}
             />
-        )
+        );
     }
     return null;
-}
+};
 
 
 /**
@@ -575,7 +575,7 @@ const QuestionContentBody = observer(() => {
 
     useEffect(() => {
         client = DataCenter.App.client;
-    }, [DataCenter.App.client])
+    }, [DataCenter.App.client]);
 
     console.log('正确答案: ', answer);
 
@@ -599,7 +599,7 @@ const QuestionContentBody = observer(() => {
                 ExerciseStore.switchQuestion();
                 setsubmit(false);
                 setswitching(false);
-            })
+            });
 
         } else { //提交答案
             await ExerciseStore.setCorrectAnswer(answer);
@@ -610,7 +610,7 @@ const QuestionContentBody = observer(() => {
              */
             AnswerMutate();
         }
-    }
+    };
 
     //提交答案 Mutation 函数
     const AnswerMutate = () => {
@@ -631,10 +631,10 @@ const QuestionContentBody = observer(() => {
                 setsubmit(true); //设置提交为true ，更改按钮状态为 "下一题"
             }).catch((err: any) => {
                 //答案提交错误信息
-                console.log('提交答案接口错误: ', err)
+                console.log('提交答案接口错误: ', err);
             });
         }
-    }
+    };
 
     return (
         <>
@@ -648,10 +648,10 @@ const QuestionContentBody = observer(() => {
                         <HocStatusWidget
                             widget={
                                 <MultiKindQuestion
-                                data={data}
-                                submitted={submitted}
-                                colors={colors}
-                                ClickHandler={ClickHandler}
+                                    data={data}
+                                    submitted={submitted}
+                                    colors={colors}
+                                    ClickHandler={ClickHandler}
                                 />
                             }
                             // loading={ExerciseStore?.loading_data}
@@ -662,7 +662,7 @@ const QuestionContentBody = observer(() => {
                 )
             }
         </>
-    )
+    );
 });
 
 
@@ -681,7 +681,7 @@ const Answer = (props: any) => {
     const LibraryName = route.params?.libraryName ?? ''; //题库名
     const LibraryId = route.params?.id ?? '';            //题库ID
 
-    console.log(navigation, LibraryName, LibraryId)
+    console.log(navigation, LibraryName, LibraryId);
 
     /******************************
     *  主题颜色
@@ -690,7 +690,7 @@ const Answer = (props: any) => {
 
     useEffect(() => {
 
-    }, [colors])
+    }, [colors]);
 
     return (
         <Page.PageCleared
@@ -739,8 +739,8 @@ const Answer = (props: any) => {
             <AnswerBottomBar />
 
         </Page.PageCleared>
-    )
-}
+    );
+};
 
 export default Answer;
 
@@ -757,4 +757,4 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     }
-})
+});

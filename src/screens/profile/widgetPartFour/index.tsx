@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Page, StyleSheet, TouchableOpacity, Image } from '../../../widgets';
-import {View, Text,} from 'react-native-ui-lib';
+import { View, Text, } from 'react-native-ui-lib';
 import { sw, sh } from '../../../tools';
 import { observer } from 'mobx-react';
 
@@ -23,13 +23,13 @@ const generalSub = [
 ];
 
 const WidgetPartFour = (props: {
-    navigation: any
+    navigation: any;
 }) => {
 
     return (
         <View style={{ width: sw, height: 'auto' }} paddingH-10 marginT-20>
             {
-                generalSub.map((item: { name: string, icon: string, targetRoute: string }, index: number) => {
+                generalSub.map((item: { name: string, icon: string, targetRoute: string; }, index: number) => {
                     return (
                         <TouchableOpacity
                             activeOpacity={0.9}
@@ -44,11 +44,11 @@ const WidgetPartFour = (props: {
                             </View>
                             <Image source={{ uri: 'right_arrow' }} resizeMode='contain' style={{ height: 18, width: 18 }} />
                         </TouchableOpacity>
-                    )
+                    );
                 })
             }
         </View>
-    )
+    );
 };
 
 export default WidgetPartFour;

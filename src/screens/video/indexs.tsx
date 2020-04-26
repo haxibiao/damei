@@ -21,7 +21,7 @@ const VideoPlayground = (props: any) => {
         } else {
             VideoStore.setOnLiveTab(false);
         }
-    }
+    };
 
     return (
         <Page.PageCleared barStyle={'light-content'}>
@@ -43,7 +43,7 @@ const VideoPlayground = (props: any) => {
 
             <LoginMountPoint navigation={props.navigation} />
         </Page.PageCleared>
-    )
+    );
 };
 
 export default observer(VideoPlayground);
