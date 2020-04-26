@@ -18,7 +18,7 @@ const HeadUserInfo = (props: any) => {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <LevelTag text={me.level?.level} />
             </View>
-        )
+        );
     };
 
     return (
@@ -33,7 +33,7 @@ const HeadUserInfo = (props: any) => {
                 <PersonalTag />
             </View>
         </TouchableOpacity>
-    )
-}
+    );
+};
 
 export default observer(HeadUserInfo);

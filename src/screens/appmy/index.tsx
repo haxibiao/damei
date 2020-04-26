@@ -59,7 +59,7 @@ const AppMy = (props: any) => {
             </ScrollView>
         </Page.PageCleared>
 
-    )
-}
+    );
+};
 
 export default AppMy;

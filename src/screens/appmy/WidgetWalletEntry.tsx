@@ -27,7 +27,7 @@ const WalletEntry = (props: any) => {
             </View>
             <View style={{ width: sw * 0.9, marginStart: sw * 0.05, height: 1, backgroundColor: '#f1f1f1', marginVertical: 20 }} />
         </>
-    )
-}
+    );
+};
 
 export default observer(WalletEntry);

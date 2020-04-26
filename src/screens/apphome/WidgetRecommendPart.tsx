@@ -32,12 +32,12 @@ const CardShadowConfig = {
     opacity: 0.02,
     x: 0,
     y: 0,
-}
+};
 
 /**
  *  官方题库区别标签
  */
-const TopBadge = React.memo((props: { official: boolean }) => {
+const TopBadge = React.memo((props: { official: boolean; }) => {
 
     const { colors } = useTheme();
     if (!props?.official) return;
@@ -65,7 +65,7 @@ const TopBadge = React.memo((props: { official: boolean }) => {
                 <Text style={{ color: 'white', fontSize: 11 }}>官方</Text>
             </View>
         </View>
-    )
+    );
 });
 
 /**
@@ -87,7 +87,7 @@ const LoadingHolder = () => {
                     })
                 ])
             ).start();
-        }, [])
+        }, []);
         return (
             <View style={[{ marginStart: index === 0 ? 18 : 0 }, s.item_wrapper]}>
                 <Animated.View style={[s.item, {
@@ -96,21 +96,21 @@ const LoadingHolder = () => {
                 }]} />
                 <Animated.View />
             </View>
-        )
-    }
+        );
+    };
     return (
         <View style={{ flexDirection: 'row', alignItems: 'center', width: sw }}>
             {
                 [1, 2, 3].map(RenderItem)
             }
         </View>
-    )
-}
+    );
+};
 
 /*****************
  *  推荐专区组件主体
  *****************/
-const RecommendPart = (props:{navigation:any}) => {
+const RecommendPart = (props: { navigation: any; }) => {
 
     const [data, setData] = useState([]);
     const [loading, setloading] = useState(true);
@@ -128,29 +128,29 @@ const RecommendPart = (props:{navigation:any}) => {
         }).catch(err => {
             //console.log('题库查询错误', err);
             seterror(err);
-        })
+        });
     }, [DataCenter.App.client]);
 
     //渲染列表项函数
-    const RenderItem = ({ item, index }: { item: Category, index: number }) => {
+    const RenderItem = ({ item, index }: { item: Category, index: number; }) => {
         let isOfficial = item.is_official === 1;
 
         return (
-            <ScaleButton 
-            style={{ marginStart: index === 0 ? 18 : 0 }}
-            callback={() => {
-                console.log('即将跳转的题库ID是: ',item.id);
-                /**
-                 *  跳转前更新ExerciseStore里面的题库ID
-                 *
-                 *  并执行一轮题目查询
-                 */
-                ExerciseStore.setLibraryId(item.id);
-                ExerciseStore.setFetch(true);
+            <ScaleButton
+                style={{ marginStart: index === 0 ? 18 : 0 }}
+                callback={() => {
+                    console.log('即将跳转的题库ID是: ', item.id);
+                    /**
+                     *  跳转前更新ExerciseStore里面的题库ID
+                     *
+                     *  并执行一轮题目查询
+                     */
+                    ExerciseStore.setLibraryId(item.id);
+                    ExerciseStore.setFetch(true);
 
-                if(props.navigation) props.navigation.navigate('exercise',{id: item.id,libraryName: item.name})
-            }}>
-                <View style={ s.item_wrapper}>
+                    if (props.navigation) props.navigation.navigate('exercise', { id: item.id, libraryName: item.name });
+                }}>
+                <View style={s.item_wrapper}>
                     <BoxShadow setting={CardShadowConfig}>
                         <View style={s.item}>
                             <TopBadge official={isOfficial} />
@@ -163,8 +163,8 @@ const RecommendPart = (props:{navigation:any}) => {
                     <Text style={s.item_title}>{item.name}</Text>
                 </View>
             </ScaleButton>
-        )
-    }
+        );
+    };
 
     return (
         <View style={{ width: sw }}>
@@ -199,8 +199,8 @@ const RecommendPart = (props:{navigation:any}) => {
             </View>
 
         </View>
-    )
-}
+    );
+};
 
 export default observer(RecommendPart);
 
@@ -259,4 +259,4 @@ const s = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around'
     }
-})
+});

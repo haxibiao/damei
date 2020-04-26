@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Page, StyleSheet, TouchableOpacity, Image } from '../../../widgets';
-import {View, Text,} from 'react-native-ui-lib';
+import { View, Text, } from 'react-native-ui-lib';
 import { sw, sh } from '../../../tools';
 import { observer } from 'mobx-react';
 
@@ -52,26 +52,26 @@ const subviewItemWidth = (sw - subviewsPadding * 2 - containerMarginH * 2) / 4;
 
 
 const WidgetPartThree = (props: {
-    navigation: any
+    navigation: any;
 }) => {
 
     return (
         <View style={[{ paddingHorizontal: subviewsPadding, backgroundColor: '#FFFBFC' }, styles.container]}>
             {
-                subviews.map((item: { name: string, icon: string, targetRoute: string }, index: number) => {
+                subviews.map((item: { name: string, icon: string, targetRoute: string; }, index: number) => {
                     return (
                         <TouchableOpacity onPress={() => {
-                            props.navigation.navigate(item.targetRoute)
+                            props.navigation.navigate(item.targetRoute);
                         }} key={index} style={{ height: subviewItemWidth, width: subviewItemWidth, justifyContent: 'center', alignItems: 'center' }} >
                             <Image source={{ uri: item.icon }} resizeMode='contain' style={{ height: 30, width: 30 }} />
                             <Text text90 marginT-10>{item.name}</Text>
                         </TouchableOpacity>
-                    )
+                    );
                 })
             }
         </View>
-    )
-}
+    );
+};
 
 export default WidgetPartThree;
 
@@ -85,4 +85,4 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingVertical: 8
     }
-})
+});

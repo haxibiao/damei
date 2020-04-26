@@ -9,23 +9,23 @@ import WidgetPartOne from './widgetPartOne';
 import WidgetPartTwo from './widgetPartTwo';
 import WidgetPartThree from './widgetPartThree';
 import WidgetPartFour from './widgetPartFour';
-import {View} from "react-native";
+import { View } from "react-native";
 
 
 const Profile = (props: any) => {
 
     useEffect(() => {
 
-    }, [])
+    }, []);
 
 
     return (
         <Page.PageCleared safe >
-            <View style={{flex:1,alignItems:'center'}}>
+            <View style={{ flex: 1, alignItems: 'center' }}>
 
-                <WidgetPartOne navigation={props.navigation}/>
+                <WidgetPartOne navigation={props.navigation} />
 
-                <WidgetPartTwo navigation={props.navigation}/>
+                <WidgetPartTwo navigation={props.navigation} />
 
                 <WidgetPartThree navigation={props.navigation} />
 
@@ -33,7 +33,7 @@ const Profile = (props: any) => {
 
             </View>
         </Page.PageCleared>
-    )
-}
+    );
+};
 
 export default Profile;

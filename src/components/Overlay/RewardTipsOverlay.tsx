@@ -15,11 +15,14 @@ import { Overlay } from 'teaset';
 import { ad } from 'native';
 import { playVideo } from '../../common/ttad/playVideo';
 import { Iconfont, TouchFeedback } from '..';
-import { DataCenter,observer} from '../../data';
+
+import { DataCenter, observer } from '../../data';
 
 const { height, width } = Dimensions.get('window');
 const SCREEN_WIDTH = width;
 const SCREEN_HEIGHT = height;
+
+//FIXME: 重构1 import 需要全部走package,不走path，全部补充types.d.ts
 
 interface Reward {
     gold: Number;
@@ -108,7 +111,7 @@ class RewardTips {
                             onPress={() => {
                                 RewardTips.hide();
                                 if (rewardVideo) {
-                                    if(DataCenter.navigation) DataCenter.navigation.navigate('BillingRecord', { initialPage: 1 });
+                                    if (DataCenter.navigation) DataCenter.navigation.navigate('BillingRecord', { initialPage: 1 });
                                     // Tools.navigate('BillingRecord', { initialPage: 1 });
                                 } else {
                                     playVideo({ type });

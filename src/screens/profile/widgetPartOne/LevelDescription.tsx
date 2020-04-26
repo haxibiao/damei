@@ -4,7 +4,7 @@ import { Page } from '../../../widgets';
 import { observer } from 'mobx-react';
 
 
-const GradeDescription = (props:{navigation:any}) => {
+const GradeDescription = (props: { navigation: any; }) => {
     return (
         <Page.Page navigation={props.navigation} centerTitle={"等级说明"}>
             <View style={{

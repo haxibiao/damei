@@ -133,7 +133,7 @@ const index = (props: any) => {
                             textDecorationLine: 'underline',
                         }}>{`已绑定`}</Text>
                 </TouchableOpacity>
-            )
+            );
         }
         if (withdrawType === 'dongdezhuan') {
             return (
@@ -181,11 +181,11 @@ const index = (props: any) => {
 
 
     const WisdomValue = observer(() =>
-        <Text style={styles.cardItemBoldNum}>{me.gold}</Text>)
+        <Text style={styles.cardItemBoldNum}>{me.gold}</Text>);
     const Balance = observer(() =>
-        <Text style={styles.cardItemBoldNum}>{me.wallet?.available_balance || 0}</Text>)
+        <Text style={styles.cardItemBoldNum}>{me.wallet?.available_balance || 0}</Text>);
     const Contribution = observer(() =>
-        <Text style={{ fontWeight: "bold" }}>{me.profile?.total_contributes}</Text>)
+        <Text style={{ fontWeight: "bold" }}>{me.profile?.total_contributes}</Text>);
 
     return (
         <Page.PageCleared
@@ -262,7 +262,7 @@ const index = (props: any) => {
                                             <Image source={data.icon} style={styles.withdrawTypeText} />
                                             <Text>{data.name}</Text>
                                         </TouchFeedback>
-                                    )
+                                    );
                                 })
                             }
                         </Row>
@@ -294,7 +294,7 @@ const index = (props: any) => {
                                             ¥{option.amount}.00元
                                     </Text>
                                     </TouchableOpacity>
-                                )
+                                );
                             })
                         }
 
@@ -343,8 +343,8 @@ const index = (props: any) => {
 
             </View>
         </Page.PageCleared >
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
 
