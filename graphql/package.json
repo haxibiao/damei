@@ -1,0 +1,5 @@
+{
+  "name": "gqls"
+}
+
+//FIXME: 重构5: graphql 的统一都放到这里来
