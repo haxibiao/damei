@@ -55,7 +55,13 @@ export default observer(props => {
                 <Like media={media} />
             </View>
             <View style={styles.itemWrap}>
-                <TouchableOpacity onPress={VideoStore.showComment}>
+                <TouchableOpacity onPress={() => {
+                        if(app.me?.id){
+                            VideoStore.showComment
+                        }else{
+                            navigation.navigate('Login');
+                        }
+                    }}>
                     <Image source={require('@src/assets/images/comment_item.png')} style={styles.imageStyle} />
                     <SafeText style={styles.countText} shadowText={true}>
                         {Tools.NumberFormat(Tools.syncGetter('question.count_comments', media))}
@@ -63,7 +69,13 @@ export default observer(props => {
                 </TouchableOpacity>
             </View>
             <View style={styles.itemWrap}>
-                <TouchableOpacity onPress={showMoreOperation}>
+                <TouchableOpacity onPress={() => {
+                    if(app.me?.id){
+                        showMoreOperation();
+                    }else{
+                        navigation.navigate('Login');
+                    }
+                }}>
                     <Image source={require('@src/assets/images/more_item.png')} style={styles.imageStyle} />
                 </TouchableOpacity>
             </View>
