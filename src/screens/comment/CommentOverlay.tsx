@@ -41,7 +41,7 @@ const CommentOverlay = React.forwardRef((props, ref) => {
     const [visible, setVisible] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const [finished, setFinished] = useState(false);
-    const [count_comments, setCount_comments] = useState(question && question.count_comments);
+    // const [count_comments, setCount_comments] = useState(question && question.count_comments);
     const [reply, setReply] = useState(null);
     const [comment_id, setComment_id] = useState(null);
     const [childLimit, setChildLimit] = useState(1);
@@ -50,6 +50,8 @@ const CommentOverlay = React.forwardRef((props, ref) => {
 
     const isAskQuestion = Tools.syncGetter('form', question) === 2 && !Tools.syncGetter('is_resolved', question);
     console.log('comment isAskQuestion', isAskQuestion);
+    console.log("app:", app);
+
     // 显示动画;
     const slideUp = () => {
         setVisible(true);
@@ -125,13 +127,17 @@ const CommentOverlay = React.forwardRef((props, ref) => {
                 animated: true,
             });
 
-        setCount_comments(count_comments + 1);
+        // setCount_comments(count_comments + 1);
+        question.count_comments++;
     };
 
     const _renderCommentHeader = comments => {
         return (
             <View style={styles.header}>
-                <Text style={styles.headerText}>{count_comments > 0 && count_comments + ' 条'}评论</Text>
+                <Text style={styles.headerText}>
+                    {question.count_comments > 0 && question.count_comments + ' 条'}评论
+                </Text>
+                {/* <Text style={styles.headerText}>{count_comments > 0 && count_comments + ' 条'}评论</Text> */}
                 <TouchFeedback style={styles.close} onPress={slideDown}>
                     <Iconfont name="close" size={PxFit(20)} color={Theme.defaultTextColor} />
                 </TouchFeedback>
@@ -261,14 +267,17 @@ const CommentOverlay = React.forwardRef((props, ref) => {
                             <View style={styles.commentContainer}>
                                 {_renderCommentHeader(comments)}
                                 <View style={{ flex: 1 }}>{renderContent(comments, fetchMore, loading)}</View>
-                                <TouchableOpacity style={styles.inputContainer} onPress={showCommentModal}>
-                                    <Iconfont name={'write'} size={16} color={'#C0CBD4'} />
-                                    <View style={styles.textInput}>
-                                        <Text style={{ fontSize: PxFit(14), color: '#C0CBD4' }}>
-                                            {isAskQuestion ? '写回答...' : '写评论...'}
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
+                                {
+                                    !modalVisible && <TouchableOpacity style={styles.inputContainer} onPress={showCommentModal}>
+                                        <Iconfont name={'write'} size={16} color={'#C0CBD4'} />
+                                        <View style={styles.textInput}>
+                                            <Text style={{ fontSize: PxFit(14), color: '#C0CBD4' }}>
+                                                {isAskQuestion ? '写回答...' : '写评论...'}
+                                            </Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                }
+
                             </View>
                         </BoxShadow>
                     </Animated.View>
@@ -282,7 +291,7 @@ const CommentOverlay = React.forwardRef((props, ref) => {
                     comment_id={comment_id}
                     parent_comment_id={parent_comment_id}
                     switchReplyType={switchReplyType}
-                    count_comments={count_comments}
+                    count_comments={question.count_comments}
                     isPost={isPost}
                 />
             </ScrollView>
