@@ -15,10 +15,13 @@ query feedbacksQuery($user_id: Int, $offset: Int, $limit: Int) {
         }
         user {
             id
-            name
+            name          
             avatar
             is_admin
             gender
+            profile {              
+                age
+            }
             level {
                 id
                 level
@@ -56,6 +59,9 @@ query feedbackCommentsQuery($commentable_type: CommentTableEnum!, $commentable_i
             avatar
             is_admin
             gender
+            profile {              
+                age
+            }
             level {
                 id
                 level
@@ -85,6 +91,9 @@ query feedbackQuery($id: Int!) {
             avatar
             gender
             is_admin
+            profile {              
+                age
+            }
             level {
                 id
                 level
