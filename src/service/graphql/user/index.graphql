@@ -29,6 +29,7 @@ mutation signUpMutation($account: String!, $password: String!, $uuid: String) {
         is_admin
         verified_at
         received
+        is_old_user
         bonusExpirationTime
         totalBonusEarnings
         stockRate
@@ -126,6 +127,7 @@ mutation signToken($token: String) {
             total_contributes
         }
         gender
+        is_old_user
         received
         bonusExpirationTime
         totalBonusEarnings
@@ -722,6 +724,7 @@ mutation autoSignInMutation($account: String, $uuid: String) {
         }
         gender
         is_admin
+        is_old_user
         verified_at
         auto_uuid_user
         auto_phone_user
