@@ -41,7 +41,7 @@ class index extends Component {
   render() {
     const { navigation } = this.props;
     return (
-      <Page.PageCleared safe>
+      <Page.PageCleared enableBack safe navigation={this.props.navigation}>
         <ScrollableTabView
           renderTabBar={(props) => (
             <ScrollTabBar
@@ -56,20 +56,7 @@ class index extends Component {
             <FeedbackList navigation={navigation} tabLabel="问题中心" />
           )}
         </ScrollableTabView>
-        <View
-          style={[
-            styles.backButton,
-            { top: Page.CONSTANTS.StatusBarHeight + 2 },
-          ]}
-        >
-          <TouchFeedback activeOpacity={1} onPress={() => navigation.goBack()}>
-            <Iconfont
-              name="left"
-              color={Theme.defaultTextColor}
-              size={PxFit(21)}
-            />
-          </TouchFeedback>
-        </View>
+
       </Page.PageCleared>
     );
   }

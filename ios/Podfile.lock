@@ -61,19 +61,19 @@ PODS:
   - lottie-react-native (3.3.2):
     - lottie-ios (~> 3.1.3)
     - React
-  - Permission-Camera (2.1.0):
+  - Permission-Camera (2.1.3):
     - RNPermissions
-  - Permission-Contacts (2.1.0):
+  - Permission-Contacts (2.1.3):
     - RNPermissions
-  - Permission-LocationAlways (2.1.0):
+  - Permission-LocationAlways (2.1.3):
     - RNPermissions
-  - Permission-LocationWhenInUse (2.1.0):
+  - Permission-LocationWhenInUse (2.1.3):
     - RNPermissions
-  - Permission-MediaLibrary (2.1.0):
+  - Permission-MediaLibrary (2.1.3):
     - RNPermissions
-  - Permission-Microphone (2.1.0):
+  - Permission-Microphone (2.1.3):
     - RNPermissions
-  - Permission-PhotoLibrary (2.1.0):
+  - Permission-PhotoLibrary (2.1.3):
     - RNPermissions
   - Picker (4.3.7):
     - Picker/Core (= 4.3.7)
@@ -85,6 +85,8 @@ PODS:
     - Folly (= 2018.10.22.00)
     - RCTRequired (= 0.61.5)
     - React-Core (= 0.61.5)
+  - RCTWeChat (1.9.12):
+    - React
   - React (0.61.5):
     - React-Core (= 0.61.5)
     - React-Core/DevSupport (= 0.61.5)
@@ -331,7 +333,7 @@ PODS:
     - React-Core
     - React-RCTImage
     - RSKImageCropper
-  - RNPermissions (2.1.0):
+  - RNPermissions (2.1.3):
     - React
   - RNReanimated (1.8.0):
     - React
@@ -374,6 +376,7 @@ DEPENDENCIES:
   - Picker (from `../node_modules/react-native-picker`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
+  - RCTWeChat (from `../node_modules/react-native-wechat`)
   - React (from `../node_modules/react-native/`)
   - React-Core (from `../node_modules/react-native/`)
   - React-Core/DevSupport (from `../node_modules/react-native/`)
@@ -488,6 +491,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
     :path: "../node_modules/react-native/Libraries/TypeSafety"
+  RCTWeChat:
+    :path: "../node_modules/react-native-wechat"
   React:
     :path: "../node_modules/react-native/"
   React-Core:
@@ -602,16 +607,17 @@ SPEC CHECKSUMS:
   JWT: 9b5c05abbcc1a0e69c3c91e1655b3387fc7e581d
   lottie-ios: 496ac5cea1bbf1a7bd1f1f472f3232eb1b8d744b
   lottie-react-native: 2a1a82bb326ae51331a5520de0cf706733c6db69
-  Permission-Camera: 1e569ca13fe65357c0ad22776b1f3ce81586c488
-  Permission-Contacts: 080e6be8b2ce9d0754775d6d8f04763e51c3c10e
-  Permission-LocationAlways: 9e4b9178bc0fa140d91a9f3aaa0d583945fbeb8a
-  Permission-LocationWhenInUse: c189fa01a57ba2b6db7a256411f1ddb69da066f0
-  Permission-MediaLibrary: b213416690891309f5422076acc48b63fe249955
-  Permission-Microphone: 9cddaaf3b9c097126fe4a2e29f29cb06e6437a7c
-  Permission-PhotoLibrary: 8791df0255cb31825f051b7f5826dac21b9c21fd
+  Permission-Camera: cbbed5d193641837e9a32592dd71292eabd11827
+  Permission-Contacts: 6614da1d2d6a847b38a0b771c82a816abb23e86e
+  Permission-LocationAlways: 4c98224af7815d666913ba75f7cd723952fbc4a4
+  Permission-LocationWhenInUse: bb552f0e7ba0fce1514fe7708f6210bf1aec0b83
+  Permission-MediaLibrary: d9411b36808af67ee0aa0d5d652aa52346865d97
+  Permission-Microphone: a0e752099eb9e5761e210d11e4616d47badea097
+  Permission-PhotoLibrary: 5d46f0cd1ecfee59a5453f1063dbb2a99439aaa2
   Picker: 37554355aef82a532ea95b71b6eeba66bc86182b
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
+  RCTWeChat: edb02d76aaf9b2e698e515e3c57bf143a290d9d7
   React: b6a59ef847b2b40bb6e0180a97d0ca716969ac78
   React-Core: 688b451f7d616cc1134ac95295b593d1b5158a04
   React-CoreModules: d04f8494c1a328b69ec11db9d1137d667f916dcb
@@ -651,7 +657,7 @@ SPEC CHECKSUMS:
   RNDeviceInfo: 6a3d16fce033f6979c4a6a41e62244d183e8c765
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNImageCropPicker: cf129d17e042ce3e96fb9ada967c28f21f977c82
-  RNPermissions: 48da5fbe2d85ed8d29c7e623576fc4632054f800
+  RNPermissions: 6772df08e03565f718f7e140d9fccae441b8ca8b
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
   RNScreens: b5c0e1b2b04512919e78bd3898e144a157ce2363
   RNSVG: ff9b094e39dd4a437ebe17d1c7ceed286e75f426
