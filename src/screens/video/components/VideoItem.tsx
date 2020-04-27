@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image,TouchableOpacity,Dimensions } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { PxFit, Theme, ISIOS, Tools } from 'utils';
 import { TouchFeedback, Row, SafeText } from 'components';
 import { ad } from 'native';
@@ -12,7 +12,7 @@ import { GQL, useMutation } from 'apollo';
 import { exceptionCapture } from 'common';
 import { NavigationActions } from 'react-navigation';
 
-const {width:sw,height:sh} = Dimensions.get('window');
+const { width: sw, height: sh } = Dimensions.get('window');
 
 export default observer(props => {
     const { media, index, navigation } = props;
@@ -63,7 +63,7 @@ export default observer(props => {
                     }}
                     onAdClick={() => getReward(media)}
                 />
-                {VideoStore.getReward.length < 1 && (
+                {/* {VideoStore.getReward.length < 1 && (
                     <View
                         style={{
                             bottom: Theme.HOME_INDICATOR_HEIGHT -4,
@@ -85,7 +85,8 @@ export default observer(props => {
                             戳一戳，获取更多奖励
                         </Text>
                     </View>
-                )}
+               
+               )} */}
             </View>
         );
 
