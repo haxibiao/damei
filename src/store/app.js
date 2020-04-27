@@ -25,6 +25,7 @@ class app {
     @observable config: object = {
         max_signs_day: 31,
     };
+    @observable createUserAgreement: boolean = true; // 用户协议观看记录,默认已看
 
     @action.bound
     setFetching(isFetching) {
@@ -213,6 +214,14 @@ class app {
             this.config = systemConfig;
         }
     }
+
+    @action.bound
+    async recall() {
+        this.createUserAgreement = await Storage.getItem(keys.createUserAgreement) || false;
+        console.log('是否阅读用户：', this.createUserAgreement);
+
+    }
+    
 }
 
 export default new app();

@@ -15,6 +15,7 @@ import Nav from './routers/new_index'; //新版导航路由入口
 import { useCaptureVideo } from "@src/common";
 
 import { DataCenter } from "./data";
+import { UserAgreementOverlay } from '@src/components';
 
 /**
  *  引入题目数据挂载点
@@ -52,7 +53,7 @@ export default observer(props => {
 
     useEffect(() => {
         app.systemConfig();
-        setAndroidStatusBarClear(); 
+        setAndroidStatusBarClear();
     }, []);
 
     const mountWebSocket = (user: { token: string | undefined; id: string }) => {
@@ -108,6 +109,14 @@ export default observer(props => {
     useEffect(() => {
         mountWebSocket(app.me);
     }, [app.me]);
+
+    useEffect(() => {
+        // 判断是否阅读用户协议
+        console.log('是否阅读：', app.createUserAgreement);
+        if (!app.createUserAgreement) {
+            UserAgreementOverlay(true);
+        }
+    }, [app.createUserAgreement]);
 
     return (
         <ApolloProvider client={client}>

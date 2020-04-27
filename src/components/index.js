@@ -41,6 +41,7 @@ import OverlayViewer from './Overlay/OverlayViewer';
 import UpdateOverlay from './Overlay/UpdateOverlay';
 import TipsOverlay from './Overlay/TipsOverlay';
 import RewardTipsOverlay from './Overlay/RewardTipsOverlay';
+import UserAgreementOverlay from './Overlay/UserAgreementOverlay';
 // Layout
 import MasonryList from './Layout/MasonryList';
 // List
@@ -113,6 +114,7 @@ export {
     UpdateOverlay,
     TipsOverlay,
     RewardTipsOverlay,
+    UserAgreementOverlay,
     MasonryList,
     PullList,
     ListFooter,

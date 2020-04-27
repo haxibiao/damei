@@ -17,6 +17,7 @@ export const keys = {
 	BeginnerGuidance_Answer: 'BeginnerGuidance_Answer',
 	BeginnerGuidance_InputQuestion: 'BeginnerGuidance_InputQuestion',
 	BeginnerGuidance_SubmitQuestion: 'BeginnerGuidance_SubmitQuestion',
+	createUserAgreement: 'createUserAgreement',
 };
 
 async function removeItem(key) {
