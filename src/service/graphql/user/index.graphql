@@ -691,9 +691,8 @@ query IsInviteUser($account: String!) {
 mutation autoSignInMutation($account: String, $uuid: String) {
     autoSignIn(account: $account, uuid: $uuid) {
         id
-        account
         token
-        avatar
+        account
         name
         withdrawInfo {
             amount
@@ -708,14 +707,6 @@ mutation autoSignInMutation($account: String, $uuid: String) {
             available_balance
             balance
         }
-        level {
-            id
-            name
-            ticket_max
-            level
-            exp
-        }
-        next_level_exp
         profile {
             introduction
             birthday
@@ -723,9 +714,76 @@ mutation autoSignInMutation($account: String, $uuid: String) {
             total_contributes
         }
         gender
-        is_admin
+        avatar
+        gold
+        ticket
+        exp
+        next_level_exp
+        follow_users_count
+        followers_count
+        adinfo {
+            tt_appid
+            tt_codeid
+            cpc_ad_id
+            cpc_ad_url
+            bannerAd {
+                appid
+                codeid
+            }
+            fullScreenVideoAd {
+                appid
+                codeid
+            }
+        }
+        level {
+            id
+            name
+            ticket_max
+            level
+            exp
+        }
+        week_contributes
+        today_contributes
+        today_new_questions_count
+        today_left_questions_count
+        today_withdraw_left
+        exchange_rate
+        video_duration
         is_old_user
+        explanation_video_duration
+        has_reward_new_user
+        is_bind_wechat
+        is_admin
         verified_at
+        received
+        bonusExpirationTime
+        totalBonusEarnings
+        stockRate
+        stockNumber
+        perStockPrice
+        yesterdayEarnings
+        totalEarnings
+        todayUnclaimedBonusEarnings
+        is_first_stock
+        goldTree {
+            rmb
+            total
+            balance
+            received_at
+        }
+        invitations_success_count
+        reward_video_click
+        is_bind_dongdezhuan
+        dongdezhuanUser {
+            id
+            name
+            account
+        }
+        DZUser {
+            id
+            name
+            account
+        }
         auto_uuid_user
         auto_phone_user
     }

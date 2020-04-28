@@ -24,6 +24,7 @@ const generalSub = [
 
 const WidgetPartFour = (props: {
     navigation: any;
+    userinfo:any;
 }) => {
 
     return (
@@ -35,7 +36,11 @@ const WidgetPartFour = (props: {
                             activeOpacity={0.9}
                             style={styles.itemContainer}
                             onPress={() => {
-                                props.navigation.navigate(item.targetRoute);
+                                if(item.name == '设置'){
+                                    props.navigation.navigate(item.targetRoute,{'user': props?.userinfo ?? {}});
+                                }else{
+                                    props.navigation.navigate(item.targetRoute);
+                                }
                             }}
                         >
                             <View style={{ width: sw * 0.5 }} row centerV>

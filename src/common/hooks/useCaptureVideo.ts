@@ -29,9 +29,9 @@ export const useCaptureVideo = (props: Props) => {
     const stateChangeHandle = useCallback(
         async event => {
             if (event === 'active') {
-                console.log('====================================');
-                console.log('active');
-                console.log('====================================');
+                // console.log('====================================');
+                // console.log('active');
+                // console.log('====================================');
                 const path = await Clipboard.getString();
                 if (
                     TOKEN &&
@@ -40,19 +40,19 @@ export const useCaptureVideo = (props: Props) => {
                     (String(path).indexOf('douyin') !== -1 || String(path).indexOf('chenzhongtech') !== -1)
                 ) {
                     clipboardString.current = path;
-                    console.log('====================================');
-                    console.log('clipboardString', path);
-                    console.log('====================================');
+                    // console.log('====================================');
+                    // console.log('clipboardString', path);
+                    // console.log('====================================');
 
                     // const UrlReg = /[a-zA-z]+://[^\z]*/;
 
                     // CaptureVideoOverlay.show({ path });
-                    console.log('app.userCache.ticket', app.userCache.ticket);
+
 
                     const [error, result] = await exceptionCapture(() => captureVideo(path));
-                    console.log('====================================');
-                    console.log('error:', error, 'result:', result);
-                    console.log('====================================');
+                    // console.log('====================================');
+                    // console.log('error:', error, 'result:', result);
+                    // console.log('====================================');
                     if (error && onFailed) {
                         onFailed(error);
                         Clipboard.setString('');

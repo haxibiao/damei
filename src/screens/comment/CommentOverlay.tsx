@@ -49,8 +49,8 @@ const CommentOverlay = React.forwardRef((props, ref) => {
     const flatListRef = useRef();
 
     const isAskQuestion = Tools.syncGetter('form', question) === 2 && !Tools.syncGetter('is_resolved', question);
-    console.log('comment isAskQuestion', isAskQuestion);
-    console.log("app:", app);
+    // console.log('comment isAskQuestion', isAskQuestion);
+    // console.log("app:", app);
 
     // 显示动画;
     const slideUp = () => {
@@ -235,7 +235,7 @@ const CommentOverlay = React.forwardRef((props, ref) => {
     });
 
     const comments = Tools.syncGetter('comments', data);
-    console.log('show overlay', question, visible, error);
+    // console.log('show overlay', question, visible, error);
 
     if (!visible || !question || error) {
         return <View />;
