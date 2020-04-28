@@ -40,7 +40,7 @@ import SubmitLoading from './Overlay/SubmitLoading';
 import OverlayViewer from './Overlay/OverlayViewer';
 import UpdateOverlay from './Overlay/UpdateOverlay';
 import TipsOverlay from './Overlay/TipsOverlay';
-import RewardTipsOverlay from './Overlay/RewardTipsOverlay';
+import * as RewardTipsOverlay from './Overlay/RewardTipsOverlay';
 import UserAgreementOverlay from './Overlay/UserAgreementOverlay';
 // Layout
 import MasonryList from './Layout/MasonryList';
