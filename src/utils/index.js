@@ -8,7 +8,7 @@ import Config from './Config';
 import Theme from './Theme';
 import Tools from './Tools';
 import { WPercent, HPercent, PxFit, FontSize } from './Scale';
-
+import wechatAuth from './wechatAuth';
 const { height, width } = Dimensions.get('window');
 
 const ISIOS = Platform.OS === 'ios';
@@ -47,4 +47,6 @@ export {
     PxFit,
     // 字体适配
     FontSize,
+    //微信授权
+    wechatAuth,
 };
