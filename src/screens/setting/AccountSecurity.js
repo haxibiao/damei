@@ -6,12 +6,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { PageContainer, TouchFeedback, Iconfont, Row, ListItem, Avatar, ItemSeparator, TipsOverlay } from 'components';
-import { Theme, PxFit, Config, ISIOS, Tools } from 'utils';
+import { Theme, PxFit, Config, ISIOS, Tools, getWechatAuthCode } from 'utils';
 
 import UserPanel from './components/UserPanel';
-import { WeChat } from 'native';
-
-import { app } from 'store';
+import { app, me } from 'store';
 import { DataCenter } from '../../data';
 
 import { compose, graphql, GQL } from 'apollo';
@@ -21,7 +19,6 @@ class AccountSecurity extends Component {
     constructor(props) {
         super(props);
         const user = this.props.route.params?.user ?? {};
-
         this.state = {
             is_bind_wechat: user.is_bind_wechat,
             is_bind_dongdezhuan: Tools.syncGetter('is_bind_dongdezhuan', user) || false,
@@ -30,51 +27,30 @@ class AccountSecurity extends Component {
         };
     }
 
+
     bindWechat = () => {
-        WeChat.isSupported()
-            .then(isSupported => {
-                if (isSupported) {
-                    WeChat.wechatLogin().then(code => {
-                        // let data = new FormData();
-                        // data.append('code', code);
-                        // fetch(Config.ServerRoot + '/api/v1/wechat/app/auth', {
-                        //     method: 'POST',
-                        //     body: data,
-                        // })
-                        //     .then(response => response.json())
-                        //     .then(result => {
-                        //         if (result.data && result.data.unionid) {
-                        //             this.bindWx(result.data);
-                        //         } else {
-                        //             Toast.show({
-                        //                 content: '当前登录微信已绑定账号' + result.data.user.account,
-                        //             });
-                        //         }
-                        //     })
-
-                        //     .catch(error => {
-                        //         Toast.show({
-                        //             content: '微信账号获取失败',
-                        //         });
-                        //     });
-                        console.log('微信授权码: ',code);
-                        this.bindWx({code:code});
-                    });
-                } else {
-                    Toast.show({ content: '未安装微信或当前微信版本较低' });
-                }
-            })
-            .catch(() => {
-                Toast.show({ content: '绑定失败' });
+        if (this.is_bind_wechat) {
+            Toast.show({
+                content: '已绑定微信',
             });
-    };
+        } else {
+            this.setState({
+                submitting: true,
+            });
+            getWechatAuthCode({
+                callback: (code) => {
+                    this.bindWx(code);
+                },
+            })
+        }
+    }
 
-    bindWx = async data => {
+    bindWx = async code => {
 
         DataCenter.App.client.mutate({
             mutation: GQL.BindWechatMutation,
-            variables:{
-                code:data.code
+            variables: {
+                code: code
             },
             errorPolicy: 'all',
             fetchPolicy: 'no-cache',
@@ -86,18 +62,18 @@ class AccountSecurity extends Component {
                 },
             ]
         }).then(rs => {
-            if(rs?.errors){
+            if (rs?.errors) {
                 //console.log("返回了错误>>>>>>>.",rs.errors[0].message)
-                Toast.show({content: rs?.errors[0]?.message ?? '',duration:2000});
+                Toast.show({ content: rs?.errors[0]?.message ?? '', duration: 2000 });
                 this.setState({
                     submitting: false,
                 });
-            }else{
+            } else {
                 //console.log("绑定微信成功>>>>>>>>>>>");
                 this.setState({
                     is_bind_wechat: true,
                 });
-                Toast.show({ content: '绑定成功',duration:2000});
+                Toast.show({ content: '绑定成功', duration: 2000 });
             }
         })
 
@@ -135,7 +111,7 @@ class AccountSecurity extends Component {
     };
 
     checkAccount = (auto_uuid_user, auto_phone_user) => {
-        const { navigation,route } = this.props;
+        const { navigation, route } = this.props;
         const user = route.params.user;
 
         if (auto_uuid_user || auto_phone_user) {
@@ -256,11 +232,11 @@ class AccountSecurity extends Component {
                                     <Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />
                                 </View>
                             ) : (
-                                <View style={styles.rightWrap}>
-                                    <Text style={styles.linkText}>去绑定</Text>
-                                    <Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />
-                                </View>
-                            )
+                                    <View style={styles.rightWrap}>
+                                        <Text style={styles.linkText}>去绑定</Text>
+                                        <Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />
+                                    </View>
+                                )
                         }
                     />
                     <ListItem
