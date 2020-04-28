@@ -121,10 +121,16 @@ class NavigatorBar extends Component {
     backButtonPress = () => {
         const { backButtonPress } = this.props;
         let navigation = DataCenter.navigation;
+        console.log('PageContainer 返回 : ',backButtonPress,navigation);
         if (backButtonPress) {
             backButtonPress();
         } else {
-            if(navigation) navigation.goBack();
+            console.log('backButtonPress为undefined, 返回',navigation)
+            if(navigation.goBack != undefined) {
+                navigation.goBack();
+            }else{
+                console.log('navigation是undefined',navigation)
+            }
         }
     };
 
