@@ -5,7 +5,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Video from './Video';
 import LiveList from '../live';
 import { observer, DataCenter } from '../../data';
-
+import {config} from 'store';
 import LoginMountPoint from '../../data/LoginMountPoint';
 
 import VideoStore from './VideoStore';
@@ -26,7 +26,7 @@ const VideoPlayground = (props: any) => {
     return (
         <Page.PageCleared barStyle={'light-content'}>
             {
-                DataCenter.App.ad_configs?.disable?.ios ? (
+                config.disableAd ? (
 
                     <Video tabLabel="推荐" />
                 ) : (

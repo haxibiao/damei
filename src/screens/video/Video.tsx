@@ -154,7 +154,7 @@ export default observer(props => {
                 onViewableItemsChanged={getVisibleRows}
                 viewabilityConfig={config.current}
             />
-            {!configStore.disableAd && (
+            { !configStore.disableAd && (
                 <View style={styles.rewardProgress}>
                     <RewardProgress />
                 </View>
