@@ -27,7 +27,7 @@ class config {
     @observable enableReward: boolean = false; // 开启激励视频
     @observable enableFeed: boolean = false; // 开启信息流广告
     @observable enableBanner: boolean = false; // 开启Banner广告
-    @observable disableAd: boolean = false;
+    @observable disableAd: boolean = true;
     @observable rewardVideoAdCache: boolean = false; //激励视频广告cache 过期时间60min
     @observable fullScreenVideoAdCache: boolean = false;
 
