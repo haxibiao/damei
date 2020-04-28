@@ -20,6 +20,7 @@ class FooterBar extends Component {
             liked: props.question.liked,
             count_likes: props.question.count_likes,
             count_comments: props.question.count_comments,
+            lastclick: Date.now()
         };
     }
 
@@ -77,6 +78,17 @@ class FooterBar extends Component {
         navigation.navigate('Reward', { question });
     };
 
+    preventMultiClickEvent(callback) {
+        let diff = Date.now() - this.state.lastclick;
+        console.log('间隔时间: ', diff);
+        if (diff > 500) {
+            //响应点击事件
+            console.log('response click')
+            if (callback) callback();
+            this.setState({ lastclick: Date.now() })
+        }
+    }
+
     render() {
         let { navigation, question, submited, answer, showComment, oSubmit, audit } = this.props;
         let { favorited, liked, count_likes, count_comments } = this.state;
@@ -88,6 +100,7 @@ class FooterBar extends Component {
             inputRange: [1, 1.1, 1.2],
             outputRange: [1, 1.25, 1],
         });
+        console.log('tools----------:' + Tools.throttle());
         return (
             <View style={styles.container}>
                 <View style={styles.footerBar}>
@@ -135,7 +148,7 @@ class FooterBar extends Component {
                             </Animated.View>
                         </TouchableWithoutFeedback>
                     </View>
-                    <TouchFeedback style={[styles.button, buttonStyle]} onPress={oSubmit}>
+                    <TouchFeedback style={[styles.button, buttonStyle]} onPress={() => { this.preventMultiClickEvent(oSubmit) }}>
                         <Text style={styles.buttonText}>{submited || audit || !answer ? '下一题' : '提交答案'}</Text>
                     </TouchFeedback>
                 </View>
