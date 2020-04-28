@@ -46,10 +46,22 @@ class index extends Component {
         return user;
     }
 
+    countFormat(count){
+        if(count == undefined) return '0';
+        let temp = count;
+        if(temp >= 10000){
+            temp = (temp/10000).toFixed(1)
+            return temp+'万'
+        }
+        return temp+'';
+    }
+
     render() {
         const { navigation, data } = this.props;
         const { login, me, userCache } = app;
         let user = me;
+
+        console.log('我的页用户信息: ',{...user});
 
         if (login && data && data.user) {
             data.user.avatar = user.avatar;
@@ -115,7 +127,7 @@ class index extends Component {
                                     activeOpacity={1}
                                     style={styles.metaItem}>
                                     <Text style={styles.metaCount} numberOfLines={1}>
-                                        {Tools.NumberFormat(user.follow_users_count) || 0}
+                                        {this.countFormat(user.follow_users_count)}
                                     </Text>
                                     <Text style={styles.metaLabel} numberOfLines={1}>
                                         关注
@@ -128,7 +140,7 @@ class index extends Component {
                                     activeOpacity={1}
                                     style={styles.metaItem}>
                                     <Text style={styles.metaCount} numberOfLines={1}>
-                                        {Tools.NumberFormat(user.followers_count) || 0}
+                                        {this.countFormat(user.followers_count)}
                                     </Text>
                                     <Text style={styles.metaLabel} numberOfLines={1}>
                                         粉丝
