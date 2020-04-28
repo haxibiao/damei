@@ -4,6 +4,7 @@ import { sw, sh } from '../../../tools';
 import { View, Text, } from 'react-native-ui-lib';
 import { observer, DataCenter } from '../../../data';
 import { Config } from '../../../utils';
+import { app } from 'store';
 
 const Item = (props: { name: string, icon: string, value: number, marginR?: number, callback?: any; }) => {
 
@@ -18,18 +19,22 @@ const Item = (props: { name: string, icon: string, value: number, marginR?: numb
     );
 };
 
-const WidgetPartTwo = (props: { navigation: any; }) => {
+const WidgetPartTwo = (props: { navigation: any; userinfo:any }) => {
 
     const GoldHandler = () => {
         if (props.navigation) {
-            props.navigation.navigate('BillingRecord');
+            if(app.login) {
+                props.navigation.navigate('BillingRecord');
+            }else{
+                props.navigation.navigate('Login');
+            }
         }
     };
 
     return (
         <View row style={{ width: sw, height: 96 }} centerH centerV marginT-10>
-            <Item name='智慧点' icon='diamond' callback={GoldHandler} value={DataCenter.User?.me?.gold ?? 0} marginR={10} />
-            <Item name='精力点' icon='heart' value={DataCenter.User?.me?.ticket ?? 0} />
+            <Item name='智慧点' icon='diamond' callback={GoldHandler} value={props?.userinfo?.gold ?? 0} marginR={10} />
+            <Item name='精力点' icon='heart' value={props?.userinfo?.ticket ?? 0} />
         </View>
     );
 };

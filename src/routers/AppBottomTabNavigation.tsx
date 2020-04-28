@@ -4,6 +4,7 @@ import { Animated, Text, View, TouchableOpacity, StyleSheet, Image, Platform, Pi
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icons, SvgIcon } from '../res';
 import { DataCenter, observer } from '../data';
+import {app} from 'store';
 
 function dp(want_px: number) {
     let fontscale = PixelRatio.getFontScale();
@@ -36,7 +37,7 @@ const Colors = {
 import TabOne from '../screens/video/indexs'; //视频刷、直播
 import TabTwo from '../screens/home'; //答题页
 import TabThree from '../screens/task'; //任务、分红
-import TabFour from '../screens/profile'; //我的页
+import TabFour from '../screens/profile/new_index'; //我的页
 
 import * as PublishOption from './PublishOptionModal'; //发布页浮层
 import AppMy from '../screens/appmy';
@@ -97,7 +98,7 @@ const BottomTabBar = observer(({ state, descriptors, navigation, enableShadow }:
                 if (DataCenter.App.ad_configs?.disable?.ios) {
                     
                 } else {
-                    console.log('禁用tab', DataCenter.App.ad_configs?.disable?.ios);
+                    // console.log('禁用tab', DataCenter.App.ad_configs?.disable?.ios);
                     setdisable(false);
                 }
             }
@@ -124,7 +125,7 @@ const BottomTabBar = observer(({ state, descriptors, navigation, enableShadow }:
                 }
             }
         }
-        console.log('底部导航不完整:',routes,disable);
+        // console.log('底部导航不完整:',routes,disable);
         return routes.map((route: any, index: number) => {
             const options = descriptors[route.key] ?? {}; //每个BottomTab.Screen 的可选属性
 
@@ -143,11 +144,25 @@ const BottomTabBar = observer(({ state, descriptors, navigation, enableShadow }:
                     target: route.key
                 }); // 发送底部tab被点击的事件通知
                 if (!isFocused && !event.defaultPrevented) {
-                    if (route.name == PUBLIC) {
-                        // 点击发布按钮
-                        PublishOption.showPublishOption(navigation);
-                    } else {
-                        navigation.navigate(route.name);
+
+                    if(!app.login){ //未登录状态下除了视频刷，其它tab都跳转到登录页
+                        if(route.name != One){
+                            navigation.navigate('Login')
+                        }else{
+                            if (route.name == PUBLIC) {
+                                // 点击发布按钮
+                                PublishOption.showPublishOption(navigation);
+                            } else {
+                                navigation.navigate(route.name);
+                            }
+                        }
+                    }else{//登录状态下点击事件正常响应
+                        if (route.name == PUBLIC) {
+                            // 点击发布按钮
+                            PublishOption.showPublishOption(navigation);
+                        } else {
+                            navigation.navigate(route.name);
+                        }
                     }
                 }
             };
@@ -220,7 +235,7 @@ const BottomTabBar = observer(({ state, descriptors, navigation, enableShadow }:
         for(let i of state.routes){
             routes.push(i);
         }
-        console.log('底部导航完整: ',routes,disable);
+        // console.log('底部导航完整: ',routes,disable);
         return routes.map((route: any, index: number) => {
             const options = descriptors[route.key] ?? {}; //每个BottomTab.Screen 的可选属性
 
