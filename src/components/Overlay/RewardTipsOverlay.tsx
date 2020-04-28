@@ -1,7 +1,3 @@
-/*
- * @Author: Gaoxuan
- * @Date:   2019-03-21 16:28:10
- */
 import React, { Fragment } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Dimensions, Image } from 'react-native';
 
@@ -37,17 +33,12 @@ interface Props {
     rewardVideo: boolean;
     type: 'Any';
 }
-
-@observer
-class RewardTips {
-    static OverlayKey: any;
-    static show(props: Props) {
-        const { reward, title, rewardVideo, type } = props;
-        const body = reward.gold && (reward.ticket || reward.contribute) ? '同时奖励' : '领取奖励成功';
-
-        const overlayView = (
-            <Overlay.View animated>
-                <View style={styles.container}>
+let key:any = null;
+const Content = observer((props:any) => {
+    const { reward, title, rewardVideo, type } = props.props;
+    const body = reward.gold && (reward.ticket || reward.contribute) ? '同时奖励' : '领取奖励成功';
+    return (
+        <View style={styles.container}>
                     <View style={styles.content}>
                         <TouchFeedback
                             style={{
@@ -56,7 +47,7 @@ class RewardTips {
                                 paddingRight: PxFit(10),
                                 paddingTop: PxFit(10),
                             }}
-                            onPress={() => RewardTips.hide()}>
+                            onPress={() => props.hide()}>
                             <Iconfont name={'close'} size={16} color={Theme.grey} />
                         </TouchFeedback>
                         <View style={styles.header}>
@@ -109,7 +100,7 @@ class RewardTips {
                         <Button
                             title={'立即查看'}
                             onPress={() => {
-                                RewardTips.hide();
+                                props.hide();
                                 if (rewardVideo) {
                                     if (DataCenter.navigation) DataCenter.navigation.navigate('BillingRecord', { initialPage: 1 });
                                     // Tools.navigate('BillingRecord', { initialPage: 1 });
@@ -123,14 +114,20 @@ class RewardTips {
                         />
                     </View>
                 </View>
-            </Overlay.View>
-        );
-        this.OverlayKey = Overlay.show(overlayView);
-    }
+    )
+});
 
-    static hide() {
-        Overlay.hide(this.OverlayKey);
-    }
+const show = (props:any) => {
+    const view = (
+        <Overlay.View animated>
+            <Content props={props} hide={hide}/>
+        </Overlay.View>
+    );
+    key = Overlay.show(view);
+}
+
+const hide = () => {
+    Overlay.hide(key);
 }
 
 const styles = StyleSheet.create({
@@ -236,4 +233,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default RewardTips;
+export {show,hide};
