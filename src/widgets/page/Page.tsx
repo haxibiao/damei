@@ -3,7 +3,8 @@ import { StatusBar, StyleSheet, Dimensions, ScrollView,View, Animated, Text, Tex
 import HeaderBackButton from '../HeaderBackButton';
 import DeviceInfo from 'react-native-device-info';
 const { width, height } = Dimensions.get('window');
-const StatusBarHeight = StatusBar.currentHeight ?? 0;// 状态栏高度
+import {useStatusHeight} from '../../tools';
+var StatusBarHeight = StatusBar.currentHeight ?? 0;// 状态栏高度
 
 const PageBackground = '#ffffff';//最外层view的背景色 
 const NavBackgroundColor = '#ffffff';// 导航栏的背景色
@@ -80,6 +81,8 @@ export default function Page(props: {
         }
         return StatusBarHeight;
     }
+
+    StatusBarHeight = useStatusHeight();
 
     return (
         <View style={{ backgroundColor: backgroundColor,flex:1 }}>
