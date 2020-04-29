@@ -10,7 +10,7 @@ import {
 } from "react-native";
 const { width: sw, height: sh } = Dimensions.get("window");
 import { Overlay } from "teaset";
-import {observer,appStore} from '@src/store';
+import {observer,app} from '@src/store';
 import { check, request, PERMISSIONS, RESULTS } from "react-native-permissions";
 
 const BOXWIDTH = sw * 0.86;
@@ -135,7 +135,7 @@ const PermissionView = observer((props: any) => {
                   setmicrostatus(GRANT);
                   setmicrocolor(GREEN);
                   setcheckdone(true);
-                  appStore.AppSetSufficientPermissions(true);
+                  app.AppSetSufficientPermissions(true);
                   break;
                 case RESULTS.DENIED:
                     request(PERMISSIONS.ANDROID.RECORD_AUDIO)
@@ -143,7 +143,7 @@ const PermissionView = observer((props: any) => {
                             if(result == RESULTS.GRANTED){
                                 setmicrostatus(GRANT);
                                 setmicrocolor(GREEN);
-                                appStore.AppSetSufficientPermissions(true);
+                                app.AppSetSufficientPermissions(true);
                             }else if(result == RESULTS.DENIED){
                                 setmicrostatus(DENY);
                                 setmicrocolor(BAD);
@@ -154,7 +154,7 @@ const PermissionView = observer((props: any) => {
                         }).then(() => { 
                             setcheckdone(true);
                             if(camerastatus == GRANT && microstatus == GRANT){
-                                appStore.AppSetSufficientPermissions(true);
+                                app.AppSetSufficientPermissions(true);
                             }
                         });
                   break;
@@ -163,7 +163,7 @@ const PermissionView = observer((props: any) => {
                   setmicrocolor(BAD);
                   setcheckdone(true);
                   if(camerastatus == GRANT && microstatus == GRANT){
-                    appStore.AppSetSufficientPermissions(true);
+                    app.AppSetSufficientPermissions(true);
                   }
                   break;
               }
@@ -181,7 +181,7 @@ const PermissionView = observer((props: any) => {
                   setmicrostatus(GRANT);
                   setmicrocolor(GREEN);
                   setcheckdone(true);
-                  appStore.AppSetSufficientPermissions(true);
+                  app.AppSetSufficientPermissions(true);
                   break;
                 case RESULTS.DENIED:
                     request(PERMISSIONS.IOS.MICROPHONE)
@@ -189,7 +189,7 @@ const PermissionView = observer((props: any) => {
                             if(result == RESULTS.GRANTED){
                                 setmicrostatus(GRANT);
                                 setmicrocolor(GREEN);
-                                appStore.AppSetSufficientPermissions(true);
+                                app.AppSetSufficientPermissions(true);
                             }else if(result == RESULTS.DENIED){
                                 setmicrostatus(DENY);
                                 setmicrocolor(BAD);
@@ -200,7 +200,7 @@ const PermissionView = observer((props: any) => {
                         }).then(() => { 
                             setcheckdone(true);
                             if(camerastatus == GRANT && microstatus == GRANT){
-                                appStore.AppSetSufficientPermissions(true);
+                                app.AppSetSufficientPermissions(true);
                             }
                         });
                   break;
@@ -209,7 +209,7 @@ const PermissionView = observer((props: any) => {
                   setmicrocolor(BAD);
                   setcheckdone(true);
                   if(camerastatus == GRANT && microstatus == GRANT){
-                    appStore.AppSetSufficientPermissions(true);
+                    app.AppSetSufficientPermissions(true);
                   }
                   break;
               }
@@ -248,7 +248,7 @@ const PermissionView = observer((props: any) => {
           <Text style={{ color: microcolor, fontSize: 16 }}>{microstatus}</Text>
         </View>
 
-        { (checkdone || appStore.sufficient_permissions) && (
+        { (checkdone || app.sufficient_permissions) && (
           <TouchableOpacity
             onPress={() => {
               hidePermissionCheck();
@@ -256,7 +256,7 @@ const PermissionView = observer((props: any) => {
             activeOpacity={0.88}
             style={styles.done_btn}
           >
-            <Text style={{ color: appStore.sufficient_permissions ? "green" : "#222", fontSize: 16, }}>{appStore.sufficient_permissions ? '关闭后、前往直播吧' : '关闭'}</Text>
+            <Text style={{ color: app.sufficient_permissions ? "green" : "#222", fontSize: 16, }}>{app.sufficient_permissions ? '关闭后、前往直播吧' : '关闭'}</Text>
           </TouchableOpacity>
         )}
       </View>
