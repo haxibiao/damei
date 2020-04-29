@@ -57,7 +57,7 @@ export default observer(props => {
             <View style={styles.itemWrap}>
                 <TouchableOpacity onPress={() => {
                         if(app.me?.id){
-                            VideoStore.showComment
+                            VideoStore.showComment()
                         }else{
                             navigation.navigate('Login');
                         }
