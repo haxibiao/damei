@@ -94,8 +94,8 @@ const Content = observer((props:any) => {
                             </View>
                         </View>
 
-                        <View>
-                            <ad.FeedAd adWidth={SCREEN_WIDTH - PxFit(40)} />
+                        <View style={{justifyContent:'center',alignItems:'center',width:SCREEN_WIDTH - 40}}>
+                            <ad.FeedAd adWidth={SCREEN_WIDTH/1.6} />
                         </View>
                         <Button
                             title={'立即查看'}
@@ -149,8 +149,8 @@ const styles = StyleSheet.create({
         paddingTop: 5,
     },
     content: {
-        width: SCREEN_WIDTH - PxFit(40),
-        borderRadius: PxFit(10),
+        width: SCREEN_WIDTH - 40,
+        borderRadius: 10,
         backgroundColor: Theme.white,
         padding: 0,
         // alignItems: 'center',
