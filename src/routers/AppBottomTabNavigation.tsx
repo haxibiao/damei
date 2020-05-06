@@ -332,8 +332,11 @@ const BottomTabBar = observer(({ state, descriptors, navigation, enableShadow }:
 
     return (
         <View style={fullScreen ? styles.fullscreen_Tab : [
-            styles.normal_Tab, enableShadow ? styles.Tab_shadow : {},
-            { backgroundColor: specialMode ? '#191A21' : 'white' }
+            styles.normal_Tab, 
+            enableShadow ? styles.Tab_shadow : {},
+            { 
+                backgroundColor: specialMode ? '#191A21' : 'white' ,
+            }
         ]}>
             <View style={[{ backgroundColor: Colors.clear }, styles.tabContainer]}>
                 {

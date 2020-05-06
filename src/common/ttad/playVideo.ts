@@ -92,7 +92,6 @@ function startRewardVideo(props: Props) {
     console.log('startRward', props);
     ad.RewardVideo.startAd()
         .then(result => {
-            console.log('result', result, reward);
             if (ISAndroid) {
                 if (result) {
                     video = JSON.parse(result);
@@ -148,7 +147,6 @@ function loadFullScreenVideo(props: Props) {
 function startFullScreenVideo(props: Props) {
     ad.FullScreenVideo.startFullScreenVideoAd()
         .then((result: string) => {
-            console.log('result', result);
             if (result) {
                 getReward(props);
             } else {
@@ -288,7 +286,6 @@ function dataReport(type: string | undefined, playType: number) {
         name,
     };
     const data = JSON.stringify({ ...reportContent, ...mergeData });
-    console.log('data', data);
     service.dataReport(data, result => {
         console.warn('result', result);
     }); // 数据上报

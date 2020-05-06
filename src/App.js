@@ -87,7 +87,7 @@ class App extends Component {
          */
         LivePullManager.liveSetupLicence(LicenseUrl, LicenseKey);
         //只做直播相关权限检查，获取交由权限浮层
-        //this.checkPermission();
+        this.checkPermission();
     }
 
     //直播权限检查函数
@@ -99,7 +99,7 @@ class App extends Component {
                         //有摄像头权限，下一步检查麦克风权限
                         check(PERMISSIONS.ANDROID.RECORD_AUDIO)
                             .then(result => {
-                                if (result == RESULTS.GRANTED) DataCenter.AppSetSufficientPermissions(true);
+                                if (result == RESULTS.GRANTED) app.AppSetSufficientPermissions(true);
                             });
                     }
                 });
@@ -110,7 +110,7 @@ class App extends Component {
                         //有摄像头权限，下一步检查麦克风权限
                         check(PERMISSIONS.IOS.RECORD_AUDIO)
                             .then(result => {
-                                if (result == RESULTS.GRANTED) DataCenter.AppSetSufficientPermissions(true);
+                                if (result == RESULTS.GRANTED) app.AppSetSufficientPermissions(true);
                             });
                     }
                 })

@@ -44,7 +44,7 @@
         "lottie-ios": "3.1.3",
         "lottie-react-native": "^3.3.2",
         "mobx": "^5.15.4",
-        "mobx-react": "^6.1.8",
+        "mobx-react": "^6.2.2",
         "react": "^16.13.0",
         "react-apollo": "^2.5.8",
         "react-native": "^0.61.5",

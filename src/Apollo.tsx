@@ -123,7 +123,6 @@ export default observer(props => {
             <ApolloHooksProvider client={client}>
                 {/* <AppRouter ref={Tools.setRootNavigation} /> */}
                 <Nav />
-                <QuestionDataMountPoint />
             </ApolloHooksProvider>
         </ApolloProvider>
     );
