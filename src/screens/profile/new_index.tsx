@@ -1,6 +1,6 @@
 import React, { useEffect ,useState } from 'react';
 import { Page } from '../../widgets';
-import {app} from 'store';
+import {app,config} from 'store';
 import {GQL} from '@src/apollo';
 import {observer} from 'mobx-react';
 
@@ -31,13 +31,11 @@ const Profile = (props: any) => {
     }, [app.client]);
 
     function getData(){
-        console.log('我的页')
         if(client && app.me.id){
             client.query({
                 query: GQL.UserQuery,
                 variables: app.me.id
             }).then(rs => {
-                console.log('我的页查询到的数据',rs);
                 let user = rs.data.user ?? {};
                 setuserinfo({...user})
             }).catch(err => {

@@ -26,6 +26,12 @@ class app {
         max_signs_day: 31,
     };
     @observable createUserAgreement: boolean = true; // 用户协议观看记录,默认已看
+    @observable sufficient_permissions:boolean = false;
+
+    @action.bound
+    AppSetSufficientPermissions(sufficent){
+        this.sufficient_permissions = sufficent;
+    }
 
     @action.bound
     setFetching(isFetching) {
