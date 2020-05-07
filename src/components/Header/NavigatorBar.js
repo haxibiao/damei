@@ -1,8 +1,3 @@
-/*
- * @flow
- * created by wyk made in 2018-12-06 10:00:20
- */
-'use strict';
 import React, { Component } from 'react';
 import {
     StyleSheet,
@@ -14,30 +9,40 @@ import {
     Animated,
     Dimensions,
 } from 'react-native';
-import { observer } from 'mobx-react';
-import {DataCenter} from '../../data';
+import { useNavigation } from '@react-navigation/native';
 import Iconfont from '../Iconfont';
+import {observer} from 'mobx-react';
 import { PxFit, Theme, NAVBAR_HEIGHT } from '../../utils';
+
+
+const TouchButton = (props) => {
+
+    const navigation = useNavigation();
+
+    function backButtonPress(){
+        const backButtonPress  = props.backButtonPress;
+        if (backButtonPress) {
+            backButtonPress();
+        } else {
+            if (navigation) navigation.goBack();
+        }
+    };
+    return (
+        <TouchableOpacity
+            activeOpacity={1}
+            onPress={backButtonPress}
+            style={{
+                flex: 1,
+                width: Theme.navBarContentHeight,
+                justifyContent: 'center',
+            }}>
+            <Iconfont name="zuojiantou" color={'#333'} size={PxDp(22)} />
+        </TouchableOpacity>
+    )
+}
 
 @observer
 class NavigatorBar extends Component {
-    // static propTypes = {
-    //     ...ViewPropTypes,
-    //     isTopNavigator: PropTypes.bool, //whether the page is initialized
-    //     title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-    //     titleStyle: PropTypes.object,
-    //     titleViewStyle: PropTypes.object,
-    //     backButtonPress: PropTypes.func,
-    //     backButtonColor: PropTypes.string,
-    //     leftView: PropTypes.element,
-    //     rightView: PropTypes.element,
-    //     sideViewStyle: PropTypes.object,
-    //     hidden: PropTypes.bool, //bar hidden
-    //     animated: PropTypes.bool, //hide or show bar with animation
-    //     statusBarStyle: PropTypes.oneOf(['default', 'light-content', 'dark-content']),
-    //     statusBarColor: PropTypes.string,
-    //     statusBarHidden: PropTypes.bool, //status bar hidden
-    // };
 
     static defaultProps = {
         ...View.defaultProps,
@@ -45,6 +50,7 @@ class NavigatorBar extends Component {
         hidden: false,
         animated: true,
         statusBarStyle: 'dark-content',
+        statusBarColor: 'rgba(0,0,0,0)',
     };
 
     constructor(props) {
@@ -56,50 +62,56 @@ class NavigatorBar extends Component {
     }
 
     buildProps() {
-        let { style, title, titleStyle, titleViewStyle, statusBarColor, sideViewStyle, ...others } = this.props;
+        let { isTopNavigator, navBarStyle, title, titleStyle, titleViewStyle, sideViewStyle, ...others } = this.props;
 
-        //build style
-        style = {
+        // build style
+        navBarStyle = {
             backgroundColor: Theme.navBarBackground,
             position: 'absolute',
             left: 0,
             right: 0,
-            height: PxFit(NAVBAR_HEIGHT),
-            paddingTop: PxFit(Theme.statusBarHeight),
-            paddingLeft: PxFit(Theme.itemSpace),
-            paddingRight: PxFit(Theme.itemSpace),
-            borderBottomWidth: PxFit(0.5),
+            height: PxDp(Theme.NAVBAR_HEIGHT + Theme.statusBarHeight),
+            paddingTop: PxDp(Theme.statusBarHeight),
+            paddingLeft: PxDp(Theme.itemSpace),
+            paddingRight: PxDp(Theme.itemSpace),
+            borderBottomWidth: Theme.minimumPixel,
             borderBottomColor: Theme.navBarSeparatorColor,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
-            ...style,
+            ...navBarStyle,
         };
 
-        if (!statusBarColor) statusBarColor = 'transparent';
-
-        //build titleViewStyle
+        // build titleViewStyle
         titleViewStyle = {
             position: 'absolute',
-            top: PxFit(Theme.statusBarHeight),
-            left: PxFit(Theme.itemSpace),
-            right: PxFit(Theme.itemSpace),
+            top: PxDp(Theme.statusBarHeight),
+            left: PxDp(Theme.itemSpace),
+            right: PxDp(Theme.itemSpace),
             bottom: 0,
             opacity: this.state.barOpacity,
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'center',
             ...titleViewStyle,
         };
 
-        //build leftView and rightView style
+        // build leftView and rightView style
         sideViewStyle = {
             opacity: this.state.barOpacity,
             alignSelf: 'stretch',
+            justifyContent: 'center',
             ...sideViewStyle,
         };
 
-        //convert string title to NavigatorBar.Title
+        if (isTopNavigator) {
+            titleStyle = {
+                fontWeight: 'bold',
+                textAlign: 'left',
+                ...titleStyle,
+            };
+        }
+
+        // convert string title to NavigatorBar.Title
         if (typeof title === 'string') {
             title = (
                 <Text style={[styles.titleText, titleStyle]} numberOfLines={1}>
@@ -109,30 +121,14 @@ class NavigatorBar extends Component {
         }
 
         return {
-            style,
+            isTopNavigator,
+            navBarStyle,
             title,
             titleViewStyle,
-            statusBarColor,
             sideViewStyle,
             ...others,
         };
     }
-
-    backButtonPress = () => {
-        const { backButtonPress } = this.props;
-        let navigation = DataCenter.navigation;
-        console.log('PageContainer 返回 : ',backButtonPress,navigation);
-        if (backButtonPress) {
-            backButtonPress();
-        } else {
-            console.log('backButtonPress为undefined, 返回',navigation)
-            if(navigation.goBack != undefined) {
-                navigation.goBack();
-            }else{
-                console.log('navigation是undefined',navigation)
-            }
-        }
-    };
 
     renderLeftView = () => {
         const { isTopNavigator, leftView, backButtonColor } = this.props;
@@ -140,18 +136,7 @@ class NavigatorBar extends Component {
         if (isTopNavigator || leftView) {
             left = leftView;
         } else {
-            left = (
-                <TouchableOpacity
-                    activeOpacity={1}
-                    onPress={this.backButtonPress}
-                    style={{
-                        flex: 1,
-                        width: Theme.navBarContentHeight,
-                        justifyContent: 'center',
-                    }}>
-                    <Iconfont name="left" color={backButtonColor || Theme.navBarTitleColor} size={PxFit(21)} />
-                </TouchableOpacity>
-            );
+            left = <TouchButton backButtonPress={this.props.backButtonPress}/>;
         }
         return left;
     };
@@ -160,7 +145,7 @@ class NavigatorBar extends Component {
         if (e.nativeEvent.layout.height != this.barHeight) {
             this.barHeight = e.nativeEvent.layout.height;
         }
-        let { width } = Dimensions.get('window');
+        const { width } = Dimensions.get('window');
         if (width != this.screenWidth) {
             this.screenWidth = width;
             this.forceUpdate();
@@ -169,8 +154,8 @@ class NavigatorBar extends Component {
     }
 
     render() {
-        let {
-            style,
+        const {
+            navBarStyle,
             animated,
             statusBarStyle,
             statusBarColor,
@@ -179,10 +164,15 @@ class NavigatorBar extends Component {
             titleViewStyle,
             sideViewStyle,
             rightView,
+            showShadow,
             ...others
         } = this.buildProps();
         return (
-            <Animated.View style={style} {...others} onLayout={e => this.onLayout(e)}>
+            <Animated.View
+                style={[navBarStyle, showShadow && styles.shadow]}
+                {...others}
+                onLayout={e => this.onLayout(e)}
+                elevation={showShadow ? 10 : 0}>
                 <StatusBar
                     translucent={true}
                     backgroundColor={statusBarColor}
@@ -199,10 +189,20 @@ class NavigatorBar extends Component {
 }
 
 const styles = StyleSheet.create({
+    shadow: {
+        shadowColor: '#b4b4b4',
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 1,
+    },
     titleText: {
-        fontSize: PxFit(17),
+        color: '#666',
+        flex: 1,
+        fontSize: PxDp(19),
         textAlign: 'center',
-        color: Theme.navBarTitleColor,
     },
 });
 

@@ -18,8 +18,9 @@ import FollowButton from '../TouchableView/FollowButton';
 import UserTitle from './UserTitle';
 import GenderLabel from '../Utils/GenderLabel';
 import { StackActions } from 'react-navigation';
-import { observer } from 'mobx-react';
-import {DataCenter} from '../../data';
+import { useNavigation } from '@react-navigation/native';
+
+
 type User = {
 	id: number,
 	avatar: any,
@@ -29,55 +30,49 @@ type User = {
 	introduction?: string
 };
 
-type Props = {
-	user: User
-};
-@observer
-class UserItem extends Component<Props> {
-	render() {
-		let { user, style } = this.props;
-		let navigation = DataCenter.navigation;
-		let { id = 1, avatar, name, followed_user_status, profile } = user;
-		const pushAction = StackActions.push({
-			routeName: 'User',
-			params: {
+const UserItem = (props:any) => {
+
+	let { user, style } = props;
+	const navigation = useNavigation();
+	let { id = 1, avatar, name, followed_user_status, profile } = user;
+
+
+	return (
+		<TouchFeedback style={[styles.item, style]} onPress={() => {
+			if(navigation) navigation.navigate('User',{
 				user
-			}
-		});
-		return (
-			<TouchFeedback style={[styles.item, style]} onPress={() => {
-				if(navigation) navigation.dispatch(pushAction)
-				}}>
-				<Avatar source={avatar} size={PxFit(50)} />
-				<View style={styles.right}>
-					<View style={styles.info}>
-						<Row>
-							<SafeText style={styles.nameText}>{name}</SafeText>
-							<GenderLabel user={user} />
-							<UserTitle user={user} />
-						</Row>
-						{!!profile.introduction && (
-							<View style={{ flex: 1 }}>
-								<SafeText style={styles.introduction} numberOfLines={1}>
-									{profile.introduction}
-								</SafeText>
-							</View>
-						)}
-					</View>
-					<FollowButton
-						id={id}
-						followedStatus={followed_user_status}
-						style={{
-							width: PxFit(70),
-							height: PxFit(30),
-							borderRadius: PxFit(15)
-						}}
-					/>
+			})
+			}}>
+			<Avatar source={avatar} size={PxFit(50)} />
+			<View style={styles.right}>
+				<View style={styles.info}>
+					<Row>
+						<SafeText style={styles.nameText}>{name}</SafeText>
+						<GenderLabel user={user} />
+						<UserTitle user={user} />
+					</Row>
+					{!!profile.introduction && (
+						<View style={{ flex: 1 }}>
+							<SafeText style={styles.introduction} numberOfLines={1}>
+								{profile.introduction}
+							</SafeText>
+						</View>
+					)}
 				</View>
-			</TouchFeedback>
-		);
-	}
-}
+				<FollowButton
+					id={id}
+					navigation={navigation}
+					followedStatus={followed_user_status}
+					style={{
+						width: PxFit(70),
+						height: PxFit(30),
+						borderRadius: PxFit(15)
+					}}
+				/>
+			</View>
+		</TouchFeedback>
+	);
+};
 
 const styles = StyleSheet.create({
 	item: {

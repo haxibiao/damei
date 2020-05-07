@@ -5,6 +5,7 @@ import { GQL, useQuery, useLazyQuery, useMutation, useApolloClient } from 'apoll
 import { observer, app, config as configStore } from 'store';
 import { exceptionCapture } from 'common';
 import { Config, SCREEN_WIDTH, SCREEN_HEIGHT, PxFit, Tools, Theme } from 'utils';
+import { useNavigation } from '@react-navigation/native';
 
 import VideoItem from './components/VideoItem';
 import Footer from './components/Footer';
@@ -23,7 +24,7 @@ export default observer(props => {
         waitForInteraction: true,
         viewAreaCoveragePercentThreshold: 95,
     });
-    let navigation = DataCenter.navigation;
+    const navigation = useNavigation();
 
 
     VideoStore.showComment = useCallback(() => {

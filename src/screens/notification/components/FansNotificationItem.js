@@ -48,6 +48,7 @@ class FansNotificationItem extends Component {
 				</View>
 
 				<FollowButton
+					navigation={navigation}
 					id={Tools.syncGetter('id', user)}
 					followedStatus={Tools.syncGetter('followed_user_status', user)}
 					style={{
