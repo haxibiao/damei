@@ -10,35 +10,33 @@ import React, { Component } from 'react';
 
 import { StyleSheet, View, TouchableOpacity, StatusBar, Platform } from 'react-native';
 import { Theme, SCREEN_WIDTH } from '../../utils';
+import { useNavigation } from '@react-navigation/native';
 
 import Iconfont from '../Iconfont';
 import ScrollTabBar from './ScrollTabBar';
 
-import { observer } from 'mobx-react';
-import {DataCenter} from '../../data';
-@observer
-class TabBarHeader extends Component {
-	render() {
-		let { width = containerWidth, tabUnderlineWidth } = this.props;
-		let navigation = DataCenter.navigation;
-		return (
-			<View style={styles.header}>
-				<TouchableOpacity activeOpacity={1} style={styles.goBack} onPress={() => {
-					if(navigation) navigation.goBack()
-					}}>
-					<Iconfont name={'left'} size={19} color={Theme.primaryFont} />
-				</TouchableOpacity>
-				<ScrollTabBar
-					tabUnderlineWidth={50}
-					{...this.props}
-					containerWidth={width}
-					style={{
-						width: SCREEN_WIDTH - 100
-					}}
-				/>
-			</View>
-		);
-	}
+const TabBarHeader = (props:any) => {
+	
+	let { width = containerWidth, tabUnderlineWidth } = props;
+	const navigation = useNavigation();
+	
+	return (
+		<View style={styles.header}>
+			<TouchableOpacity activeOpacity={1} style={styles.goBack} onPress={() => {
+				if(navigation) navigation.goBack()
+				}}>
+				<Iconfont name={'left'} size={19} color={Theme.primaryFont} />
+			</TouchableOpacity>
+			<ScrollTabBar
+				tabUnderlineWidth={50}
+				{...this.props}
+				containerWidth={width}
+				style={{
+					width: SCREEN_WIDTH - 100
+				}}
+			/>
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({

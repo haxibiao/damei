@@ -5,10 +5,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, TouchableOpacity, Text } from 'react-native';
 import { Theme, PxFit, ISIOS, ISAndroid } from '../../../utils';
-import { observer } from 'mobx-react';
-import {DataCenter} from '../../data';
 import * as Progress from 'react-native-progress';
 import { BoxShadow } from 'react-native-shadow';
+import { useNavigation } from '@react-navigation/native';
 
 const shadowOpt = {
 	width: PxFit(60),
@@ -23,31 +22,31 @@ const shadowOpt = {
 		marginTop: 0
 	}
 };
-@observer
-class WithdrawProgress extends Component {
-	render() {
-		const { progress } = this.props;
-		let navigation = DataCenter.navigation;
-		return (
-			<BoxShadow setting={shadowOpt}>
-				<TouchableOpacity style={styles.circleProgress} onPress={() => {
-					if(navigation) navigation.navigate('Withdraws')
-					}}>
-					<Progress.Circle
-						progress={progress / 100}
-						size={PxFit(60)}
-						borderWidth={0}
-						color="#ff5644"
-						fill="#fff"
-						thickness={PxFit(4)}
-						endAngle={1}
-						strokeCap={'round'}
-					/>
-					<Image source={require('../../../assets/images/red_envelope.png')} style={styles.redEnvelope} />
-				</TouchableOpacity>
-			</BoxShadow>
-		);
-	}
+
+const WithdrawProgress = (props:any) => {
+
+	const { progress } = props;
+	const navigation = useNavigation();
+
+	return (
+		<BoxShadow setting={shadowOpt}>
+			<TouchableOpacity style={styles.circleProgress} onPress={() => {
+				if(navigation) navigation.navigate('Withdraws')
+				}}>
+				<Progress.Circle
+					progress={progress / 100}
+					size={PxFit(60)}
+					borderWidth={0}
+					color="#ff5644"
+					fill="#fff"
+					thickness={PxFit(4)}
+					endAngle={1}
+					strokeCap={'round'}
+				/>
+				<Image source={require('../../../assets/images/red_envelope.png')} style={styles.redEnvelope} />
+			</TouchableOpacity>
+		</BoxShadow>
+	);
 }
 
 const styles = StyleSheet.create({

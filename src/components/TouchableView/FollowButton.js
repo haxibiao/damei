@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
-import {observer,DataCenter} from '../../data';
+import {observer} from 'mobx-react';
 import { PxFit, Theme, Tools } from 'utils';
 import Iconfont from '../Iconfont';
 import { compose } from 'react-apollo';
@@ -93,7 +93,7 @@ class FollowButton extends Component<Props> {
         console.log('触发');
         if (!app.login) {
             return () => {
-                if(DataCenter.navigation) DataCenter.navigation.navigate('Login');
+                if(this.props.navigation) this.props.navigation.navigate('Login');
             };
         } else {
             console.log('true');

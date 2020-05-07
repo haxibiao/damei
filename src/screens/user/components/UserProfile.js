@@ -71,6 +71,7 @@ class UserProfile extends Component {
                         ) : (
                             <FollowButton
                                 id={user.id}
+                                navigation={this.props.navigation}
                                 followedStatus={user.followed_user_status}
                                 style={styles.button}
                                 titleStyle={{ fontSize: PxFit(15), letterSpacing: 5 }}

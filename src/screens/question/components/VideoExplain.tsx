@@ -8,43 +8,38 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import { TouchFeedback, Row, VideoMark } from 'components';
 import { Theme, PxFit, SCREEN_WIDTH } from 'utils';
-import { observer } from 'mobx-react';
-import {DataCenter} from '../../../data';
-
+import { useNavigation } from '@react-navigation/native';
 const MEDIA_WIDTH = SCREEN_WIDTH - PxFit(Theme.itemSpace) * 2 - PxFit(12) * 2;
 
-@observer
-class VideoExplain extends Component {
-	render() {
-		let { video } = this.props;
-		let navigation = DataCenter.navigation;
-		if (!video) {
-			return null;
-		}
-		return (
-			<View style={styles.shadowView} elevation={10}>
-				<View style={styles.shadowTitle}>
-					<Row>
-						<View style={styles.yellowDot} />
-						<Text style={styles.titleText}>视频解析</Text>
-					</Row>
-				</View>
-				<TouchableWithoutFeedback onPress={() => {
-					
-					if(navigation) navigation.navigate('VideoExplanation', { video })}
-					}>
-					<View style={styles.mediaWrap}>
-						<Image
-							source={require('../../../assets/images/video_explain.jpg')}
-							style={styles.pictureStyle}
-						/>
-						<VideoMark size={PxFit(60)} />
-					</View>
-				</TouchableWithoutFeedback>
-			</View>
-		);
+const VideoExplain = (props: any) => {
+	let { video } = props;
+	let navigation = useNavigation();
+	if (!video) {
+		return null;
 	}
+	return (
+		<View style={styles.shadowView} elevation={10}>
+			<View style={styles.shadowTitle}>
+				<Row>
+					<View style={styles.yellowDot} />
+					<Text style={styles.titleText}>视频解析</Text>
+				</Row>
+			</View>
+			<TouchableWithoutFeedback onPress={() => {
+				if (navigation) navigation.navigate('VideoExplanation', { video })
+			}}>
+				<View style={styles.mediaWrap}>
+					<Image
+						source={require('../../../assets/images/video_explain.jpg')}
+						style={styles.pictureStyle}
+					/>
+					<VideoMark size={PxFit(60)} />
+				</View>
+			</TouchableWithoutFeedback>
+		</View>
+	);
 }
+
 
 const styles = StyleSheet.create({
 	shadowView: {

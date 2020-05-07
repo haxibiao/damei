@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Dimensions, Image } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
 import Button from '../TouchableView/Button';
 
 import Theme from '../../utils/Theme';
@@ -11,8 +11,6 @@ import { Overlay } from 'teaset';
 import { ad } from 'native';
 import { playVideo } from '../../common/ttad/playVideo';
 import { Iconfont, TouchFeedback } from '..';
-
-import { DataCenter, observer } from '../../data';
 
 const { height, width } = Dimensions.get('window');
 const SCREEN_WIDTH = width;
@@ -34,9 +32,10 @@ interface Props {
     type: 'Any';
 }
 let key:any = null;
-const Content = observer((props:any) => {
+const Content = (props:any) => {
     const { reward, title, rewardVideo, type } = props.props;
     const body = reward.gold && (reward.ticket || reward.contribute) ? '同时奖励' : '领取奖励成功';
+    const navigation = useNavigation();
     return (
         <View style={styles.container}>
                     <View style={styles.content}>
@@ -102,7 +101,7 @@ const Content = observer((props:any) => {
                             onPress={() => {
                                 props.hide();
                                 if (rewardVideo) {
-                                    if (DataCenter.navigation) DataCenter.navigation.navigate('BillingRecord', { initialPage: 1 });
+                                    if (navigation) navigation.navigate('BillingRecord', { initialPage: 1 });
                                     // Tools.navigate('BillingRecord', { initialPage: 1 });
                                 } else {
                                     playVideo({ type });
@@ -115,7 +114,7 @@ const Content = observer((props:any) => {
                     </View>
                 </View>
     )
-});
+};
 
 const show = (props:any) => {
     const view = (

@@ -7,13 +7,13 @@ import VideoStore from '../VideoStore';
 import { GQL, useMutation } from 'apollo';
 import { useBounceAnimation, useLinearAnimation, exceptionCapture } from 'common';
 import { transform } from '@babel/core';
-import { DataCenter } from '../../../data';
+import { useNavigation } from '@react-navigation/native';
 
 const RewardProgress = observer(props => {
     const progress = (VideoStore.rewardProgress / VideoStore.rewardLimit) * 100;
     const me = useMemo(() => app.me, []);
 
-    const navigation = DataCenter.navigation;
+    const navigation = useNavigation();
 
     const [rewardGold, setReward] = useState();
     const [imageAnimation, startImageAnimation] = useBounceAnimation({ value: 0, toValue: 1 });
