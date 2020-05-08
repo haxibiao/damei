@@ -12,7 +12,7 @@ import WidgetPartOne from './widgetPartOne';
 import WidgetPartTwo from './widgetPartTwo';
 import WidgetPartThree from './widgetPartThree';
 import WidgetPartFour from './widgetPartFour';
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 import { ApolloClient } from 'apollo-boost';
 
 let client:ApolloClient<unknown>; //旧后端client
@@ -47,7 +47,7 @@ const Profile = (props: any) => {
 
     return (
         <Page.PageCleared safe >
-            <View style={{ flex: 1, alignItems: 'center' }}>
+            <ScrollView>
 
                 <WidgetPartOne navigation={props.navigation} userinfo={userinfo}/>
 
@@ -57,7 +57,7 @@ const Profile = (props: any) => {
 
                 <WidgetPartFour navigation={props.navigation} userinfo={userinfo}/>
 
-            </View>
+            </ScrollView>
         </Page.PageCleared>
     );
 };
