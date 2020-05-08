@@ -13,6 +13,7 @@ import { Theme, PxFit, SCREEN_WIDTH, ISIOS, Api } from '../../../utils';
 import { Share } from 'native';
 import QuestionShareCard from '../../share/components/QuestionShareCard';
 import QuestionShareCardOverlay from '../../share/components/QuestionShareCardOverlay';
+import * as WeChat from 'react-native-wechat';
 
 type ChooserItem = {
 	title: string,
@@ -45,15 +46,21 @@ class ChooseOverly {
 			
 					</TouchFeedback>
 					<View style={styles.top}>
-						{/* <TouchFeedback
+						<TouchFeedback
 							onPress={async () => {
 								this.popViewRef.close();
 								let result = await this._shareCard.onCapture();
-								let callback = await Share.shareWechat(result);
-								if (callback == false) {
+								try {
+									await WeChat.shareToSession({
+										type: 'imageFile',
+                                        title: '我在答妹发现一道有意思的题目，快来试试吧',
+                                        description: question.description,
+										imageUrl: result.image,
+									})
+								} catch (e) {
 									Toast.show({
-										content: '请先安装微信客户端'
-									});
+										content: '未安装微信或当前微信版本较低'
+									})
 								}
 							}}
 							style={{ alignItems: 'center' }}
@@ -61,12 +68,12 @@ class ChooseOverly {
 							<Image source={require('../../../assets/images/wechat.png')} style={styles.imageStyle} />
 
 							<Text style={{ color: Theme.grey, fontSize: 12 }}>微信好友</Text>
-						</TouchFeedback> */}
+						</TouchFeedback>
 						<TouchFeedback
 							onPress={async () => {
 								this.popViewRef.close();
 								let result = await this._shareCard.onCapture();
-								let callback = await Share.shareWechatMoment(result);
+								let callback = await Share.shareWechatMoment(result.result);
 
 								if (callback == false) {
 									Toast.show({
@@ -83,7 +90,7 @@ class ChooseOverly {
 							onPress={async () => {
 								this.popViewRef.close();
 								let result = await this._shareCard.onCapture();
-								let callback = await Share.shareImageToQQ(result);
+								let callback = await Share.shareImageToQQ(result.result);
 								if (callback == false) {
 									Toast.show({
 										content: '请先安装QQ客户端'
@@ -99,7 +106,7 @@ class ChooseOverly {
 							onPress={async () => {
 								this.popViewRef.close();
 								let result = await this._shareCard.onCapture();
-								let callback = await Share.shareToSinaFriends(result);
+								let callback = await Share.shareToSinaFriends(result.result);
 								if (callback == false) {
 									Toast.show({
 										content: '请先安装微博客户端'
@@ -115,7 +122,7 @@ class ChooseOverly {
 							onPress={async () => {
 								this.popViewRef.close();
 								let result = await this._shareCard.onCapture();
-								let callback = await Share.shareImageToQQZone(result);
+								let callback = await Share.shareImageToQQZone(result.result);
 								if (callback == false) {
 									Toast.show({
 										content: '请先安装QQ空间客户端'
