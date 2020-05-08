@@ -8,18 +8,18 @@ import { PxFit, Theme, SCREEN_WIDTH, NAVBAR_HEIGHT, SCREEN_HEIGHT, Tools } from 
 import { app } from 'store';
 import { ad } from 'native';
 import { playVideo } from 'common';
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 
 function VideoTaskGuidance({ onDismiss }) {
     const [step, setStep] = useState(0);
     const me = useMemo(() => app.me, [app]);
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
     const guidesView = useMemo(() => {
         return [
             <TouchableWithoutFeedback
                 key={1}
                 onPress={() => {
-                    if(navigation) navigation.navigate('任务');
+                    // if(navigation) navigation.navigate('任务');
                     setStep(1);
                 }}>
                 <Image style={styles.userReward} source={require('../../assets/images/new_user_reward.png')} />
