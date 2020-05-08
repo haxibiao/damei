@@ -126,10 +126,10 @@ project.ext.envConfigFiles = [
     tencent:".env.tencent",
     other:'.env.other'
 ]
-apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
-
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 
 /**
@@ -192,7 +192,7 @@ android {
                 JPUSH_APPKEY: "107f7c14ec52e52a48f49506", //在此替换你的APPKey
                 APP_CHANNEL: "developer-default"    //应用渠道号
         ]
-        resValue "string", "build_config_package", "com.datizhuanqian"
+        resValue "string", "build_config_package", "com.damei"
 
         // react-native-blur 配置
         renderscriptTargetApi 23
