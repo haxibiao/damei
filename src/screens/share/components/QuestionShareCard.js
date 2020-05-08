@@ -180,7 +180,7 @@ class QuestionShareCard extends Component {
         let result = await Api.viewShotUtil.saveImage(image, isShow);
         console.log('Api.viewShotUtil.saveImage(image);', result);
         // this.props.navigation.goBack();
-        return result;
+        return {result, image};
     };
 }
 
