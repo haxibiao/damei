@@ -18,7 +18,7 @@ import {
 import { Theme, PxFit, WPercent, Tools, SCREEN_WIDTH } from 'utils';
 import { compose, graphql, Query, Mutation, GQL } from 'apollo';
 
-import {observer,DataCenter} from '../../data';
+import { useNavigation } from '@react-navigation/native';
 import { app } from 'store';
 
 type replyComment = { id: string, content: any, user: Object, count_likes: boolean, liked: boolean };
@@ -105,7 +105,7 @@ class CommentItem extends Component<Props> {
 
     showOverlay = (comment, parent_comment_id) => {
         let {  showCommentModal, replyComment } = this.props;
-        let navigation = DataCenter.navigation;
+        let navigation = useNavigation();
         if (app.userCache && app.userCache.is_admin) {
             PullChooser.show([
                 {
@@ -143,7 +143,7 @@ class CommentItem extends Component<Props> {
 
     render() {
         let { comment,  questionId, user, parent_comment_id } = this.props;
-        let navigation = DataCenter.navigation;
+        let navigation = useNavigation();
         let { liked, count_likes, bounce, visible, limit, count_replyComment } = this.state;
         let scale = bounce.interpolate({
             inputRange: [1, 1.1, 1.2],

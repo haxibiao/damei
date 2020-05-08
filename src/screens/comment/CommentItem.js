@@ -19,7 +19,7 @@ import { Theme, PxFit, WPercent, Tools } from 'utils';
 
 import { Query, Mutation, compose, withApollo, graphql, GQL } from 'apollo';
 
-import {observer,DataCenter} from '../../data';
+import { useNavigation } from '@react-navigation/native';
 
 import ChildCommentItem from './ChildCommentItem';
 
@@ -140,7 +140,7 @@ class CommentItem extends Component<Props> {
 
     showOverlay = comment => {
         const { showCommentModal, replyComment, isAnswer, question } = this.props;
-        let navigation = DataCenter.navigation;
+        let navigation = useNavigation();
         const isShowAccept =
             question.user.id === app.me.id &&
             question.form === 2 &&
@@ -247,7 +247,7 @@ class CommentItem extends Component<Props> {
             AnswerCount,
             index,
         } = this.props;
-        let navigation = DataCenter.navigation;
+        let navigation = useNavigation();
         const { liked, count_likes, bounce, visible, limit, loadingMore } = this.state;
         const scale = bounce.interpolate({
             inputRange: [1, 1.1, 1.2],
