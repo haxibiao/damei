@@ -35,6 +35,7 @@ const WidgetPartFour = (props: {
                         <TouchableOpacity
                             activeOpacity={0.9}
                             style={styles.itemContainer}
+                            key={index}
                             onPress={() => {
                                 if(item.name == '设置'){
                                     props.navigation.navigate(item.targetRoute,{'user': props?.userinfo ?? {}});
