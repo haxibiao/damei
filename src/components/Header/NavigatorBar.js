@@ -36,7 +36,7 @@ const TouchButton = (props) => {
                 width: Theme.navBarContentHeight,
                 justifyContent: 'center',
             }}>
-            <Iconfont name="zuojiantou" color={'#333'} size={PxDp(22)} />
+            <Iconfont name="zuojiantou" color={'#333'} size={22} />
         </TouchableOpacity>
     )
 }
@@ -70,10 +70,10 @@ class NavigatorBar extends Component {
             position: 'absolute',
             left: 0,
             right: 0,
-            height: PxDp(Theme.NAVBAR_HEIGHT + Theme.statusBarHeight),
-            paddingTop: PxDp(Theme.statusBarHeight),
-            paddingLeft: PxDp(Theme.itemSpace),
-            paddingRight: PxDp(Theme.itemSpace),
+            height: Theme.NAVBAR_HEIGHT + Theme.statusBarHeight,
+            paddingTop: Theme.statusBarHeight,
+            paddingLeft: Theme.itemSpace,
+            paddingRight: Theme.itemSpace,
             borderBottomWidth: Theme.minimumPixel,
             borderBottomColor: Theme.navBarSeparatorColor,
             flexDirection: 'row',
@@ -85,9 +85,9 @@ class NavigatorBar extends Component {
         // build titleViewStyle
         titleViewStyle = {
             position: 'absolute',
-            top: PxDp(Theme.statusBarHeight),
-            left: PxDp(Theme.itemSpace),
-            right: PxDp(Theme.itemSpace),
+            top: Theme.statusBarHeight,
+            left: Theme.itemSpace,
+            right: Theme.itemSpace,
             bottom: 0,
             opacity: this.state.barOpacity,
             flexDirection: 'row',
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     titleText: {
         color: '#666',
         flex: 1,
-        fontSize: PxDp(19),
+        fontSize: 19,
         textAlign: 'center',
     },
 });
