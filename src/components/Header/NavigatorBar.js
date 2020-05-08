@@ -1,32 +1,21 @@
 import React, { Component } from 'react';
-import {
-    StyleSheet,
-    Platform,
-    StatusBar,
-    View,
-    Text,
-    TouchableOpacity,
-    Animated,
-    Dimensions,
-} from 'react-native';
+import { StyleSheet, Platform, StatusBar, View, Text, TouchableOpacity, Animated, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Iconfont from '../Iconfont';
-import {observer} from 'mobx-react';
+import { observer } from 'mobx-react';
 import { PxFit, Theme, NAVBAR_HEIGHT } from '../../utils';
 
-
 const TouchButton = (props) => {
-
     const navigation = useNavigation();
 
-    function backButtonPress(){
-        const backButtonPress  = props.backButtonPress;
+    function backButtonPress() {
+        const backButtonPress = props.backButtonPress;
         if (backButtonPress) {
             backButtonPress();
         } else {
             if (navigation) navigation.goBack();
         }
-    };
+    }
     return (
         <TouchableOpacity
             activeOpacity={1}
@@ -35,15 +24,15 @@ const TouchButton = (props) => {
                 flex: 1,
                 width: Theme.navBarContentHeight,
                 justifyContent: 'center',
-            }}>
-            <Iconfont name="zuojiantou" color={'#333'} size={22} />
+            }}
+        >
+            <Iconfont name='left' color={'#333'} size={22} />
         </TouchableOpacity>
-    )
-}
+    );
+};
 
 @observer
 class NavigatorBar extends Component {
-
     static defaultProps = {
         ...View.defaultProps,
         isTopNavigator: false,
@@ -136,7 +125,7 @@ class NavigatorBar extends Component {
         if (isTopNavigator || leftView) {
             left = leftView;
         } else {
-            left = <TouchButton backButtonPress={this.props.backButtonPress}/>;
+            left = <TouchButton backButtonPress={this.props.backButtonPress} />;
         }
         return left;
     };
@@ -171,8 +160,9 @@ class NavigatorBar extends Component {
             <Animated.View
                 style={[navBarStyle, showShadow && styles.shadow]}
                 {...others}
-                onLayout={e => this.onLayout(e)}
-                elevation={showShadow ? 10 : 0}>
+                onLayout={(e) => this.onLayout(e)}
+                elevation={showShadow ? 10 : 0}
+            >
                 <StatusBar
                     translucent={true}
                     backgroundColor={statusBarColor}
