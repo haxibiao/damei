@@ -71,7 +71,7 @@ function playRewardVideo(props: Props) {
 
 //加载激励视频缓存
 function loadRewardVideo(props: Props) {
-    ad.RewardVideo.loadAd().then(result => {
+    ad.RewardVideo.loadAd().then((result) => {
         config.rewardVideoAdCache = result; //更新缓存
         if (result) {
             startRewardVideo(props);
@@ -91,17 +91,16 @@ function startRewardVideo(props: Props) {
     };
     console.log('startRward', props);
     ad.RewardVideo.startAd()
-        .then(result => {
+        .then((result) => {
             if (ISAndroid) {
                 if (result) {
                     video = JSON.parse(result);
-                    if (video.video_play) {
-                        if (type === 'Task' && reward) {
-                            oldGetReward(video, reward, refresh);
-                            callback && callback();
-                        } else {
-                            getReward(props);
-                        }
+
+                    if (type === 'Task' && reward) {
+                        oldGetReward(video, reward, refresh);
+                        callback && callback();
+                    } else {
+                        getReward(props);
                     }
                 } else {
                     Toast.show({
@@ -116,7 +115,7 @@ function startRewardVideo(props: Props) {
                 }
             }
         })
-        .catch(error => {
+        .catch((error) => {
             console.log('加载奖励视频出错:', error);
         });
 }
@@ -133,7 +132,7 @@ function playFullScreenVideo(props: Props) {
 
 //加载全屏视频缓存
 function loadFullScreenVideo(props: Props) {
-    ad.FullScreenVideo.loadFullScreenVideoAd().then(result => {
+    ad.FullScreenVideo.loadFullScreenVideoAd().then((result) => {
         config.fullScreenVideoAdCache = result; //更新缓存
         if (result) {
             startFullScreenVideo(props);
@@ -155,16 +154,16 @@ function startFullScreenVideo(props: Props) {
                 });
             }
         })
-        .catch(error => {
+        .catch((error) => {
             console.log('加载奖励视频出错:', error);
         });
 }
 
 //兼容任务老接口看视频奖励方法
 function oldGetReward(video: Video, reward: Reward, refresh: () => void) {
-    const task_id = video.ad_click && video.video_play ? -2 : 0;
-    const title = video.ad_click && video.video_play ? '查看详情' : '仅看完视频';
-    const rewardContent = video.ad_click && video.video_play ? reward : { ticket: 10 };
+    const task_id = video.ad_click ? -2 : 0;
+    const title = video.ad_click ? '查看详情' : '仅看完视频';
+    const rewardContent = video.ad_click ? reward : { ticket: 10, contribute: 2 };
 
     app.client
         .mutate({
@@ -286,7 +285,7 @@ function dataReport(type: string | undefined, playType: number) {
         name,
     };
     const data = JSON.stringify({ ...reportContent, ...mergeData });
-    service.dataReport(data, result => {
+    service.dataReport(data, (result) => {
         console.warn('result', result);
     }); // 数据上报
 }
