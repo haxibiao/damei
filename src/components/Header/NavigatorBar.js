@@ -55,8 +55,9 @@ class NavigatorBar extends Component {
 
         // build style
         style = {
-            backgroundColor: '#F00',
+            // backgroundColor: '#F00',
             position: 'absolute',
+
             left: 0,
             right: 0,
             height: Theme.navBarContentHeight + Theme.statusBarHeight,
@@ -182,6 +183,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.3,
         shadowRadius: 1,
+
     },
     titleText: {
         color: '#666',

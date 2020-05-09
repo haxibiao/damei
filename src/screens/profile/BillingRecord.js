@@ -22,11 +22,11 @@ class BillingRecord extends Component {
     }
 
     render() {
-        const { navigation,route } = this.props;
+        const { navigation, route } = this.props;
 
         const initialPage = route.params?.initialPage ?? 0;
         return (
-            <PageContainer white title="我的账单">
+            <PageContainer title="我的账单" white>
                 <View style={styles.container}>
                     <ScrollableTabView
                         renderTabBar={props => <ScrollTabBar {...props} tabUnderlineWidth={PxFit(30)} />}
