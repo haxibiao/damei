@@ -25,7 +25,7 @@ class QuestionItem extends Component {
             return (
                 <View style={[styles.image, { backgroundColor: '#201e33' }]}>
                     <Image source={{ uri: video.cover }} style={{ width: PxFit(60), height: PxFit(60) }} />
-                    <Iconfont name="paused" size={PxFit(24)} color="#fff" style={styles.fullScreen} />
+                    <Iconfont name='paused' size={PxFit(24)} color='#fff' style={styles.fullScreen} />
                 </View>
             );
         } else {
@@ -37,7 +37,7 @@ class QuestionItem extends Component {
         let { question, navigation } = this.props;
         let { category, image, description } = question;
         const pushAction = StackActions.push({
-            routeName: 'Question',
+            name: 'Question',
             params: {
                 question,
                 referrer: 'user',
@@ -45,7 +45,7 @@ class QuestionItem extends Component {
         });
 
         const pushVideoAction = StackActions.push({
-            routeName: 'VideoPost',
+            name: 'VideoPost',
             params: {
                 questions: [question],
                 // referrer: 'user',
