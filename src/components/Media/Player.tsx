@@ -54,10 +54,7 @@ const Player = (props: any) => {
             });
 
             return () => {
-                if (willBlurSubscription) {
-                    willBlurSubscription.remove();
-                    willBlurSubscription = null;
-                }
+                willBlurSubscription && willBlurSubscription();
                 // 离开固定竖屏
                 Orientation.lockToPortrait();
             };

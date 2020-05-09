@@ -86,13 +86,13 @@ class index extends Component {
             });
 
         fetch(Config.ServerRoot + '/api/app/task/user-config?api_token=' + me.token)
-            .then(response => response.json())
-            .then(result => {
+            .then((response) => response.json())
+            .then((result) => {
                 this.setState({
                     min_level: result.chuti.min_level,
                 });
             })
-            .catch(err => {
+            .catch((err) => {
                 console.warn('加载task config err', err);
             });
 
@@ -165,7 +165,7 @@ class index extends Component {
     }
 
     // 提交审核
-    onSubmitOpinion = async status => {
+    onSubmitOpinion = async (status) => {
         this.setState({ auditStatus: status }, () => {
             this.showResultsOverlay();
         });
@@ -291,7 +291,7 @@ class index extends Component {
         }
     }
 
-    onContainerLayout = event => {
+    onContainerLayout = (event) => {
         if (event) {
             const { x, y, width, height } = event.nativeEvent.layout;
             this.containerHeight = height;
@@ -309,7 +309,7 @@ class index extends Component {
     // 切换题目,重置UI状态
     resetState() {
         this.setState(
-            preState => ({
+            (preState) => ({
                 question: this.questions.shift(),
                 submited: false,
                 answer: null,
@@ -321,7 +321,7 @@ class index extends Component {
                     toValue: 1,
                     duration: 400,
                 }).start();
-            },
+            }
         );
     }
 
@@ -368,9 +368,9 @@ class index extends Component {
     };
 
     showOptions = () => {
-        const { navigation, data,route } = this.props;
+        const { navigation, data, route } = this.props;
         const { question } = this.state;
-        let category = route.params?.category ?? {}
+        let category = route.params?.category ?? {};
         ISIOS
             ? PullChooser.show([
                   {
@@ -429,9 +429,9 @@ class index extends Component {
     loadAd() {
         const { data } = this.props;
         if (data && data.user && !ISIOS && config.enableQuestion) {
-            ad.FullScreenVideo.loadFullScreenVideoAd().then(result => {});
+            ad.FullScreenVideo.loadFullScreenVideoAd().then((result) => {});
 
-            ad.RewardVideo.loadAd().then(result => {});
+            ad.RewardVideo.loadAd().then((result) => {});
         }
     }
 
@@ -486,11 +486,12 @@ class index extends Component {
                             paddingBottom: audit ? SCREEN_WIDTH / 3 : 0,
                         },
                     ]}
-                    keyboardShouldPersistTaps="always"
+                    keyboardShouldPersistTaps='always'
                     showsVerticalScrollIndicator={false}
                     bounces={false}
                     scrollEnabled={!config.isFullScreen}
-                    onScroll={this.onScroll}>
+                    onScroll={this.onScroll}
+                >
                     <View style={styles.content}>
                         <Animated.View style={[{ marginHorizontal: PxFit(Theme.itemSpace) }, bodyStyle]}>
                             <UserInfo
@@ -518,7 +519,8 @@ class index extends Component {
                     </View>
                     <View
                         style={{ marginHorizontal: PxFit(Theme.itemSpace), zIndex: -1 }}
-                        ref={ref => (this.markView = ref)}>
+                        ref={(ref) => (this.markView = ref)}
+                    >
                         {audit ? (
                             <AuditTitle navigation={navigation} />
                         ) : (
@@ -561,7 +563,7 @@ class index extends Component {
                     </Animated.View>
                 )}
                 <UpwardImage
-                    ref={ref => (this._upwardImage = ref)}
+                    ref={(ref) => (this._upwardImage = ref)}
                     style={{ bottom: PxFit(48) + Theme.HOME_INDICATOR_HEIGHT }}
                 />
             </React.Fragment>
@@ -582,8 +584,9 @@ class index extends Component {
                         <TouchFeedback
                             disabled={!this.state.question}
                             style={styles.optionsButton}
-                            onPress={this.showOptions}>
-                            <Iconfont name="more-vertical" color="#000" size={PxFit(18)} />
+                            onPress={this.showOptions}
+                        >
+                            <Iconfont name='more-vertical' color='#000' size={PxFit(18)} />
                         </TouchFeedback>
                     }
                     hiddenNavBar={config.isFullScreen}
@@ -594,11 +597,12 @@ class index extends Component {
                         borderBottomColor: '#fff',
                         backgroundColor: '#fff',
                     }}
-                    backButtonColor={Theme.defaultTextColor}>
+                    backButtonColor={Theme.defaultTextColor}
+                >
                     {config.isFullScreen && <StatusBar translucent={true} hidden />}
                     <View style={styles.container}>{this.renderContent()}</View>
                 </PageContainer>
-                <CommentOverlay ref={ref => (this._commentOverlay = ref)} question={this.state.question} />
+                <CommentOverlay ref={(ref) => (this._commentOverlay = ref)} question={this.state.question} />
             </React.Fragment>
         );
     }
@@ -646,7 +650,7 @@ export default compose(
     graphql(GQL.QuestionAnswerMutation, { name: 'QuestionAnswerMutation' }),
     graphql(GQL.auditMutation, { name: 'auditMutation' }),
     graphql(GQL.UserMeansQuery, {
-        options: props => ({ variables: { id: app.me.id } }),
+        options: (props) => ({ variables: { id: app.me.id } }),
     }),
-    graphql(GQL.UserRewardMutation, { name: 'UserReward' }),
+    graphql(GQL.UserRewardMutation, { name: 'UserReward' })
 )(index);

@@ -33,6 +33,7 @@ const Theme = {
     HAS_NOTCH,
     HAS_HOME_INDICATOR,
     HOME_INDICATOR_HEIGHT,
+    // statusBarHeight: statusBarHeight,
 
     get isLandscape() {
         return Dimensions.get('window').width > Dimensions.get('window').height;
@@ -42,7 +43,7 @@ const Theme = {
         if (Platform.OS === 'ios') {
             return this.isLandscape ? 0 : HAS_NOTCH ? 34 : 20;
         } else if (Platform.OS === 'android') {
-            return StatusBar.currentHeight;
+            return StatusBar.currentHeight || 48;
         }
         return this.isLandscape ? 0 : 20;
     },
