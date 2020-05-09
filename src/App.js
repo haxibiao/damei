@@ -62,6 +62,7 @@ class App extends Component {
         // 恢复用户身份信息
         app.recallUser();
         // 恢复缓存
+        console.log('recallUser');
         app.recallCache();
         // 检查更新
         checkUpdate('autoCheck');
@@ -203,4 +204,4 @@ const styles = StyleSheet.create({
 const codePushOptions = {
     checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
 };
-export default (Config.AppStore == 'tencent' ? App : codePush(codePushOptions)(App));
+export default Config.AppStore == 'tencent' ? App : codePush(codePushOptions)(App);

@@ -55,7 +55,7 @@ class TaskList extends Component {
             app.updateTaskCache(this.props.TasksQuery.tasks);
         }
         if (nextProps.TasksQuery && nextProps.TasksQuery.tasks) {
-            nextProps.navigation.addListener('focus', payload => {
+            nextProps.navigation.addListener('focus', (payload) => {
                 nextProps.TasksQuery.refetch();
             });
         }
@@ -64,8 +64,8 @@ class TaskList extends Component {
     componentDidMount() {
         const { token } = app.me;
         fetch(Config.ServerRoot + '/api/app/task/user-config?api_token=' + token)
-            .then(response => response.json())
-            .then(data => {
+            .then((response) => response.json())
+            .then((data) => {
                 console.log('data', data);
                 this.setState({
                     // 后端出题配置
@@ -90,7 +90,7 @@ class TaskList extends Component {
                     invitationContribute: data.invitation.contribute,
                 });
             })
-            .catch(err => {
+            .catch((err) => {
                 console.log('加载task config err', err);
             });
 
@@ -248,8 +248,8 @@ class TaskList extends Component {
                             name={'激励任务'}
                             adinfo={adinfo}
                             min_level={this.state.min_level}
-                            goTask={task => {
-                                if (UserQuery.user.reward_video_click) {
+                            goTask={(task) => {
+                                if (Tools.syncGetter('user.reward_video_click', UserQuery)) {
                                     const reward = {
                                         gold: rewardGold,
                                         ticket: rewardTicket,
@@ -315,14 +315,14 @@ class TaskList extends Component {
 
 export default compose(
     graphql(GQL.TasksQuery, {
-        options: props => ({ variables: { offest: 0, limit: 20 } }),
+        options: (props) => ({ variables: { offest: 0, limit: 20 } }),
         name: 'TasksQuery',
     }),
     graphql(GQL.UserQuery, {
-        options: props => ({ variables: { id: app.me.id } }),
+        options: (props) => ({ variables: { id: app.me.id } }),
         name: 'UserQuery',
     }),
     graphql(GQL.TaskRewardMutation, {
         name: 'taskReward',
-    }),
+    })
 )(withApollo(TaskList));

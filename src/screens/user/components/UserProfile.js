@@ -16,7 +16,7 @@ class UserProfile extends Component {
     navigationAction = (bool: false) => {
         let { user } = this.props;
         return StackActions.push({
-            routeName: 'UserSociety',
+            name: 'UserSociety',
             params: {
                 user,
                 follower: bool,
@@ -43,7 +43,8 @@ class UserProfile extends Component {
                             </View>
                             <TouchFeedback
                                 style={styles.metaItem}
-                                onPress={() => navigation.dispatch(this.navigationAction())}>
+                                onPress={() => navigation.dispatch(this.navigationAction())}
+                            >
                                 <Text style={styles.metaCount} numberOfLines={1}>
                                     {user.follow_users_count || 0}
                                 </Text>
@@ -53,7 +54,8 @@ class UserProfile extends Component {
                             </TouchFeedback>
                             <TouchFeedback
                                 style={styles.metaItem}
-                                onPress={() => navigation.dispatch(this.navigationAction(true))}>
+                                onPress={() => navigation.dispatch(this.navigationAction(true))}
+                            >
                                 <Text style={styles.metaCount} numberOfLines={1}>
                                     {user.followers_count || 0}
                                 </Text>
@@ -65,7 +67,8 @@ class UserProfile extends Component {
                         {isSelf ? (
                             <Button
                                 style={StyleSheet.flatten([styles.button, { borderWidth: PxFit(1) }])}
-                                onPress={() => navigation.navigate('EditProfile', { user })}>
+                                onPress={() => navigation.navigate('EditProfile', { user })}
+                            >
                                 <Text style={styles.editText}>编辑资料</Text>
                             </Button>
                         ) : (
@@ -119,7 +122,7 @@ class UserProfile extends Component {
                                     {orderByHot ? '热门' : '最新'}
                                 </Text>
                                 <Iconfont
-                                    name="sort"
+                                    name='sort'
                                     size={PxFit(15)}
                                     style={{ marginTop: PxFit(1) }}
                                     color={orderByHot ? Theme.secondaryColor : Theme.correctColor}

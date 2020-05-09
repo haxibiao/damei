@@ -26,10 +26,10 @@ class app {
         max_signs_day: 31,
     };
     @observable createUserAgreement: boolean = true; // 用户协议观看记录,默认已看
-    @observable sufficient_permissions:boolean = false;
+    @observable sufficient_permissions: boolean = false;
 
     @action.bound
-    AppSetSufficientPermissions(sufficent){
+    AppSetSufficientPermissions(sufficent) {
         this.sufficient_permissions = sufficent;
     }
 
@@ -40,9 +40,11 @@ class app {
 
     @action.bound
     async recallUser() {
+        console.log('recallUser222');
         const json = await storage.getItem(keys.me);
         const resetVersion = await storage.getItem(keys.resetVersion);
-
+        console.log('json', json);
+        console.log('resetVersion', resetVersion, Config.AppVersionNumber);
         if (json && resetVersion == Config.AppVersionNumber) {
             runInAction(() => {
                 // this.me = new user(json.id, json.name, json.avatar, json.token);
@@ -223,11 +225,9 @@ class app {
 
     @action.bound
     async recall() {
-        this.createUserAgreement = await Storage.getItem(keys.createUserAgreement) || false;
+        this.createUserAgreement = (await Storage.getItem(keys.createUserAgreement)) || false;
         console.log('是否阅读用户：', this.createUserAgreement);
-
     }
-    
 }
 
 export default new app();

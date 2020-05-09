@@ -1,11 +1,21 @@
 import React, { useCallback, useState, useRef, useMemo, useEffect, Fragment } from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, ImageBackground, TouchableOpacity, Animated,Platform } from 'react-native';
+import {
+    StyleSheet,
+    View,
+    Text,
+    Image,
+    ScrollView,
+    ImageBackground,
+    TouchableOpacity,
+    Animated,
+    Platform,
+} from 'react-native';
 import { Button, Iconfont, SubmitLoading, Row, SafeText, TouchFeedback } from 'components';
 import { Theme, PxFit, SCREEN_WIDTH, Tools, Config, ISIOS } from 'utils';
 import { GQL, useMutation, useQuery } from 'apollo';
 import { syncGetter } from 'common';
 import { app, observer } from 'store';
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
 import DongdezhuanIntro from './DongdezhuanIntro';
 import DatizhuanqianIntro from './DatizhuanqianIntro';
 import { AppUtil } from 'native';
@@ -13,41 +23,44 @@ import { AppUtil } from 'native';
 const GOLD_IMAGE_BG = SCREEN_WIDTH - PxFit(Theme.itemSpace * 2);
 const withdrawInfo = [];
 
-const WithdrawalPlatforms = Platform.OS === 'android' ? [
-    {
-        type: 'alipay',
-        name: '支付宝',
-        icon: require('@src/assets/images/alipay.png'),
-    },
-    {
-        type: 'datizhuanqian',
-        name: '答题赚钱',
-        icon: require('@src/assets/images/datizhuanqian.png'),
-    },
-    {
-        type: 'dongdezhuan',
-        name: '懂得赚',
-        icon: require('@src/assets/images/dongdezhuan.png'),
-    },
-    {
-        type:'wechat',
-        name:'微信',
-        icon:require('@src/assets/images/wechat_radio.png')
-    }
-] :  [
-    {
-        type: 'alipay',
-        name: '支付宝',
-        icon: require('@src/assets/images/alipay.png'),
-    },
-];
+const WithdrawalPlatforms =
+    Platform.OS === 'android'
+        ? [
+              {
+                  type: 'wechat',
+                  name: '微信',
+                  icon: require('@src/assets/images/wechat_radio.png'),
+              },
+              {
+                  type: 'alipay',
+                  name: '支付宝',
+                  icon: require('@src/assets/images/alipay.png'),
+              },
+              {
+                  type: 'datizhuanqian',
+                  name: '答题赚钱',
+                  icon: require('@src/assets/images/datizhuanqian.png'),
+              },
+              {
+                  type: 'dongdezhuan',
+                  name: '懂得赚',
+                  icon: require('@src/assets/images/dongdezhuan.png'),
+              },
+          ]
+        : [
+              {
+                  type: 'alipay',
+                  name: '支付宝',
+                  icon: require('@src/assets/images/alipay.png'),
+              },
+          ];
 
 export default observer(() => {
     const { me } = app;
     const navigation = useNavigation();
     const [amount, setAmount] = useState(0);
     const [description, setDescription] = useState('');
-    const [withdrawType, setWithdrawType] = useState('alipay');
+    const [withdrawType, setWithdrawType] = useState('wechat');
     const [installDDZ, setInstallDDZ] = useState(false);
     const [installDTZQ, setInstallDTZQ] = useState(false);
     const walletAdapterData = useRef({
@@ -63,7 +76,7 @@ export default observer(() => {
         },
         skip: !me.id,
     });
-    console.log("钱包页面run")
+    console.log('钱包页面run');
 
     const user = useMemo(() => {
         const userData = syncGetter('user', UserMeans) || { withdrawInfo };
@@ -91,12 +104,12 @@ export default observer(() => {
         ],
     });
 
-    const selectionAmount = useCallback(option => {
+    const selectionAmount = useCallback((option) => {
         setAmount(option.amount);
         setDescription(option.description);
     }, []);
 
-    const handleWithdraws = value => {
+    const handleWithdraws = (value) => {
         if (myWallet.balance < value) {
             Toast.show({ content: `您的提现余额不足` });
         } else {
@@ -106,7 +119,6 @@ export default observer(() => {
     };
 
     const CheckApkExist = useCallback(() => {
-
         AppUtil.CheckApkExist('com.dongdezhuan', (data: any) => {
             if (data) {
                 setInstallDDZ(true);
@@ -120,7 +132,6 @@ export default observer(() => {
     }, []);
 
     const checkWithdrawType = () => {
-
         if (withdrawType === 'dongdezhuan' && !installDDZ) {
             DongdezhuanIntro.show();
         } else if (withdrawType === 'datizhuanqian' && !installDTZQ) {
@@ -131,11 +142,11 @@ export default observer(() => {
     };
 
     useEffect(() => {
-        if(Platform.OS == 'android') CheckApkExist();
+        if (Platform.OS == 'android') CheckApkExist();
     }, []);
 
     useEffect(() => {
-        console.log("提现请求结果: ",withdrawData)
+        console.log('提现请求结果: ', withdrawData);
         if (withdrawData) {
             navigation.navigate('WithdrawApply', {
                 amount,
@@ -144,7 +155,7 @@ export default observer(() => {
     }, [withdrawData, amount, navigation]);
 
     useEffect(() => {
-        console.log("提现请求错误: ",error);
+        console.log('提现请求错误: ', error);
         if (error) {
             Toast.show({ content: String(error).replace('Error: GraphQL error: ', '') || '提现失败' });
         }
@@ -161,11 +172,12 @@ export default observer(() => {
                             color: '#363636',
                             fontSize: PxFit(14),
                             textDecorationLine: 'underline',
-                        }}>{`已绑定`}</Text>
+                        }}
+                    >{`已绑定`}</Text>
                 </TouchableOpacity>
             );
         }
-        if(withdrawType === 'wechat' && Tools.syncGetter('is_bind_wechat',user)){
+        if (withdrawType === 'wechat' && Tools.syncGetter('is_bind_wechat', user)) {
             return (
                 <TouchableOpacity onPress={navigationAction}>
                     <Text
@@ -173,9 +185,10 @@ export default observer(() => {
                             color: '#363636',
                             fontSize: PxFit(14),
                             textDecorationLine: 'underline',
-                        }}>{`已绑定`}</Text>
+                        }}
+                    >{`已绑定`}</Text>
                 </TouchableOpacity>
-            )
+            );
         }
         if (withdrawType === 'dongdezhuan') {
             return (
@@ -185,7 +198,8 @@ export default observer(() => {
                             color: '#363636',
                             fontSize: PxFit(14),
                             textDecorationLine: 'underline',
-                        }}>{`已绑定`}</Text>
+                        }}
+                    >{`已绑定`}</Text>
                 </TouchableOpacity>
             );
         }
@@ -198,7 +212,8 @@ export default observer(() => {
                             color: '#363636',
                             fontSize: PxFit(14),
                             textDecorationLine: 'underline',
-                        }}>{`已绑定`}</Text>
+                        }}
+                    >{`已绑定`}</Text>
                 </TouchableOpacity>
             );
         }
@@ -208,7 +223,7 @@ export default observer(() => {
             navigation.navigate('ModifyAliPay');
         };
 
-        return (    
+        return (
             <TouchableOpacity onPress={navigationAction}>
                 <Row>
                     <Image source={require('@src/assets/images/broad_tips.png')} style={styles.broadTipsImage} />
@@ -229,7 +244,8 @@ export default observer(() => {
                     <View style={styles.statistics}>
                         <ImageBackground
                             source={require('../../../assets/images/yellow_bg.png')}
-                            style={styles.goldImage}>
+                            style={styles.goldImage}
+                        >
                             <View style={styles.currentGold}>
                                 <View style={styles.cardItem}>
                                     <View>
@@ -247,7 +263,7 @@ export default observer(() => {
                                 </View>
                                 <View style={styles.cardItem}>
                                     <View style={styles.withdrawLimit}>
-                                        <Iconfont name="tixian" size={PxFit(17)} color={Theme.defaultTextColor} />
+                                        <Iconfont name='tixian' size={PxFit(17)} color={Theme.defaultTextColor} />
                                         <SafeText style={styles.blackText2}>{` ${exchangeRate}智慧点/1元`}</SafeText>
                                     </View>
                                     <View style={styles.withdrawLimit}>
@@ -266,8 +282,7 @@ export default observer(() => {
                     </View>
                     <View style={{ paddingHorizontal: PxFit(Theme.itemSpace) }}>
                         <Row style={{ flexWrap: 'wrap', justifyContent: 'space-between' }}>
-                            {
-                            WithdrawalPlatforms.map((data, index) => {
+                            {WithdrawalPlatforms.map((data, index) => {
                                 return (
                                     <Fragment key={index}>
                                         <TouchFeedback
@@ -277,7 +292,8 @@ export default observer(() => {
                                             ]}
                                             onPress={() => {
                                                 setWithdrawType(data.type);
-                                            }}>
+                                            }}
+                                        >
                                             <Image source={data.icon} style={styles.withdrawTypeText} />
                                             <Text>{data.name}</Text>
                                         </TouchFeedback>
@@ -290,7 +306,7 @@ export default observer(() => {
                         <Text style={styles.withdrawTitle}>提现金额</Text>
                         <Row>
                             <Iconfont
-                                name="book"
+                                name='book'
                                 size={PxFit(16)}
                                 color={Theme.linkColor}
                                 style={{ marginRight: PxFit(4), marginBottom: PxFit(1) }}
@@ -313,7 +329,8 @@ export default observer(() => {
                                             (index + 1) % 2 === 0 && { marginLeft: PxFit(Theme.itemSpace) },
                                         ]}
                                         key={index}
-                                        onPress={() => selectionAmount(option)}>
+                                        onPress={() => selectionAmount(option)}
+                                    >
                                         <SafeText style={[styles.moneyText, selected && { color: Theme.primaryColor }]}>
                                             ¥{option.amount}.00元
                                         </SafeText>
@@ -353,7 +370,8 @@ export default observer(() => {
                 <TouchableOpacity
                     disabled={amount <= 0}
                     onPress={handleWithdraws}
-                    style={[styles.withdrawBtn, amount <= 0 && { backgroundColor: Theme.subTextColor }]}>
+                    style={[styles.withdrawBtn, amount <= 0 && { backgroundColor: Theme.subTextColor }]}
+                >
                     <Text style={styles.withdrawBtnText}>立即提现</Text>
                 </TouchableOpacity>
             </View>
