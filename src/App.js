@@ -6,8 +6,8 @@ import { app, config } from 'store';
 import Orientation from 'react-native-orientation';
 import codePush from 'react-native-code-push';
 import * as WeChat from 'react-native-wechat';
-import { ad, } from 'native';
-import { ISIOS, PxFit, Theme } from 'utils';
+import { ad } from 'native';
+import { ISIOS, PxFit, Theme, Config } from 'utils';
 
 import service from 'service';
 import { checkUpdate } from 'common';
@@ -20,7 +20,7 @@ import { LicenseUrl, LicenseKey } from '../app.json';
 import { LivePullManager } from 'hxf-tencent-live'; //导入直播
 import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import { DataCenter, observer } from './data';
-import Config from 'react-native-config';
+
 @observer
 class App extends Component {
     toast: Toast;
@@ -39,7 +39,7 @@ class App extends Component {
         ad.AdManager.loadFeedAd();
 
         // 获取广告开放状态
-        service.enableAdvert(data => {
+        service.enableAdvert((data) => {
             // 只针对华为检测是否开启开屏广告 （做请求后再加载开屏广告首屏会先露出）
             console.log('针对华为开屏广告: ', data);
             if (Config.AppStore === 'huawei' && !data.disable[Config.AppStore]) {
@@ -57,8 +57,6 @@ class App extends Component {
         if (Config.AppStore !== 'huawei' && Platform.OS == 'android') {
             ad.Splash.loadSplashAd();
         }
-
-
 
         SplashScreen.hide();
         // 恢复用户身份信息
@@ -78,7 +76,7 @@ class App extends Component {
         // 禁止横屏
         Orientation.lockToPortrait();
 
-        ad.RewardVideo.loadAd().then(data => {
+        ad.RewardVideo.loadAd().then((data) => {
             config.rewardVideoAdCache = data;
         });
 
@@ -93,45 +91,41 @@ class App extends Component {
     //直播权限检查函数
     checkPermission() {
         if (Platform.OS === 'android') {
-            check(PERMISSIONS.ANDROID.CAMERA)
-                .then(result => {
-                    if (result == RESULTS.GRANTED) {
-                        //有摄像头权限，下一步检查麦克风权限
-                        check(PERMISSIONS.ANDROID.RECORD_AUDIO)
-                            .then(result => {
-                                if (result == RESULTS.GRANTED) app.AppSetSufficientPermissions(true);
-                            });
-                    }
-                });
+            check(PERMISSIONS.ANDROID.CAMERA).then((result) => {
+                if (result == RESULTS.GRANTED) {
+                    //有摄像头权限，下一步检查麦克风权限
+                    check(PERMISSIONS.ANDROID.RECORD_AUDIO).then((result) => {
+                        if (result == RESULTS.GRANTED) app.AppSetSufficientPermissions(true);
+                    });
+                }
+            });
         } else if (Platform.OS === 'ios') {
-            check(PERMISSIONS.IOS.CAMERA)
-                .then(result => {
-                    if (result == RESULTS.GRANTED) {
-                        //有摄像头权限，下一步检查麦克风权限
-                        check(PERMISSIONS.IOS.RECORD_AUDIO)
-                            .then(result => {
-                                if (result == RESULTS.GRANTED) app.AppSetSufficientPermissions(true);
-                            });
-                    }
-                })
+            check(PERMISSIONS.IOS.CAMERA).then((result) => {
+                if (result == RESULTS.GRANTED) {
+                    //有摄像头权限，下一步检查麦克风权限
+                    check(PERMISSIONS.IOS.RECORD_AUDIO).then((result) => {
+                        if (result == RESULTS.GRANTED) app.AppSetSufficientPermissions(true);
+                    });
+                }
+            });
         }
     }
 
     checkServer = () => {
         fetch(Config.ServerRoot)
-            .then(response => {
-                console.log("服务器response: ", response);
+            .then((response) => {
+                console.log('服务器response: ', response);
                 if (response.status == 503) {
                     this.setState({ serverMaintenance: response });
                 }
                 return response.text();
             })
-            .then(responseText => {
+            .then((responseText) => {
                 this.setState({
                     responseText: responseText,
                 });
             })
-            .catch(error => {
+            .catch((error) => {
                 console.warn('server error', error);
             });
     };
@@ -160,7 +154,7 @@ class App extends Component {
                         <Apollo checkServer={this.checkServer} />
                     </ErrorBoundary>
                     {this._showMaintenance()}
-                    <Toast ref={ref => (this.toast = ref)} />
+                    <Toast ref={(ref) => (this.toast = ref)} />
                 </View>
             </Fragment>
         );
@@ -209,5 +203,4 @@ const styles = StyleSheet.create({
 const codePushOptions = {
     checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
 };
-
-export default codePush(codePushOptions)(App);
+export default (Config.AppStore == 'tencent' ? App : codePush(codePushOptions)(App));
