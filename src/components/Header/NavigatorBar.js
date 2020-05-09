@@ -26,7 +26,7 @@ const TouchButton = (props) => {
                 justifyContent: 'center',
             }}
         >
-            <Iconfont name='left' color={'#333'} size={22} />
+            <Iconfont name='left' color={'#333'} size={21} />
         </TouchableOpacity>
     );
 };
@@ -51,24 +51,24 @@ class NavigatorBar extends Component {
     }
 
     buildProps() {
-        let { isTopNavigator, navBarStyle, title, titleStyle, titleViewStyle, sideViewStyle, ...others } = this.props;
+        let { isTopNavigator, style, title, titleStyle, titleViewStyle, sideViewStyle, ...others } = this.props;
 
         // build style
-        navBarStyle = {
-            backgroundColor: Theme.navBarBackground,
+        style = {
+            backgroundColor: '#F00',
             position: 'absolute',
             left: 0,
             right: 0,
-            height: Theme.NAVBAR_HEIGHT + Theme.statusBarHeight,
+            height: Theme.navBarContentHeight + Theme.statusBarHeight,
             paddingTop: Theme.statusBarHeight,
             paddingLeft: Theme.itemSpace,
             paddingRight: Theme.itemSpace,
-            borderBottomWidth: Theme.minimumPixel,
+            borderBottomWidth: PxFit(0.2),
             borderBottomColor: Theme.navBarSeparatorColor,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
-            ...navBarStyle,
+            ...style,
         };
 
         // build titleViewStyle
@@ -111,7 +111,7 @@ class NavigatorBar extends Component {
 
         return {
             isTopNavigator,
-            navBarStyle,
+            style,
             title,
             titleViewStyle,
             sideViewStyle,
@@ -144,7 +144,7 @@ class NavigatorBar extends Component {
 
     render() {
         const {
-            navBarStyle,
+            style,
             animated,
             statusBarStyle,
             statusBarColor,
@@ -153,16 +153,11 @@ class NavigatorBar extends Component {
             titleViewStyle,
             sideViewStyle,
             rightView,
-            showShadow,
             ...others
         } = this.buildProps();
+        console.log('Theme', Theme);
         return (
-            <Animated.View
-                style={[navBarStyle, showShadow && styles.shadow]}
-                {...others}
-                onLayout={(e) => this.onLayout(e)}
-                elevation={showShadow ? 10 : 0}
-            >
+            <Animated.View style={style} {...others} onLayout={(e) => this.onLayout(e)}>
                 <StatusBar
                     translucent={true}
                     backgroundColor={statusBarColor}
@@ -191,7 +186,7 @@ const styles = StyleSheet.create({
     titleText: {
         color: '#666',
         flex: 1,
-        fontSize: 19,
+        fontSize: 17,
         textAlign: 'center',
     },
 });
