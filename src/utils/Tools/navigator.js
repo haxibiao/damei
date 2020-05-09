@@ -3,18 +3,20 @@
  * created by wyk made in 2019-02-02 09:25:09
  */
 import { NavigationActions } from 'react-navigation';
+import { CommonActions } from '@react-navigation/native';
 
 let rootNavigation = null;
 
 export function setRootNavigation(navigation: any) {
-	rootNavigation = navigation;
+    console.log('setRootNavigation navigation', navigation);
+    rootNavigation = navigation;
 }
 
-export const navigate = (routeName: string, params?: object, action?: any) => {
-	const navigateAction = NavigationActions.navigate({
-		routeName,
-		params,
-		action
-	});
-	rootNavigation.dispatch(navigateAction);
+export const navigate = (name: string, params?: object, action?: any) => {
+    const navigateAction = CommonActions.navigate({
+        name,
+        params,
+        action,
+    });
+    rootNavigation.dispatch(navigateAction);
 };

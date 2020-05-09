@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Dimensions, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import Button from '../TouchableView/Button';
 
 import Theme from '../../utils/Theme';
@@ -31,103 +30,102 @@ interface Props {
     rewardVideo: boolean;
     type: 'Any';
 }
-let key:any = null;
-const Content = (props:any) => {
+let key: any = null;
+const Content = (props: any) => {
     const { reward, title, rewardVideo, type } = props.props;
     const body = reward.gold && (reward.ticket || reward.contribute) ? '同时奖励' : '领取奖励成功';
-    const navigation = useNavigation();
     return (
         <View style={styles.container}>
-                    <View style={styles.content}>
-                        <TouchFeedback
-                            style={{
-                                flexDirection: 'row',
-                                justifyContent: 'flex-end',
-                                paddingRight: PxFit(10),
-                                paddingTop: PxFit(10),
-                            }}
-                            onPress={() => props.hide()}>
-                            <Iconfont name={'close'} size={16} color={Theme.grey} />
-                        </TouchFeedback>
-                        <View style={styles.header}>
-                            <Image source={require('../../assets/images/money_old.png')} style={styles.headerImage} />
+            <View style={styles.content}>
+                <TouchFeedback
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'flex-end',
+                        paddingRight: PxFit(10),
+                        paddingTop: PxFit(10),
+                    }}
+                    onPress={() => props.hide()}
+                >
+                    <Iconfont name={'close'} size={16} color={Theme.grey} />
+                </TouchFeedback>
+                <View style={styles.header}>
+                    <Image source={require('../../assets/images/money_old.png')} style={styles.headerImage} />
 
-                            <View style={{ marginLeft: PxFit(15) }}>
-                                {reward.gold && (
-                                    <Text style={styles.title}>
-                                        恭喜获得<Text style={{ color: Theme.themeRed }}>{reward.gold}智慧点</Text>
-                                    </Text>
-                                )}
-                                {!reward.gold && reward.ticket && (
-                                    <Text style={styles.title}>
-                                        恭喜获得<Text style={{ color: Theme.themeRed }}>{reward.ticket}精力点</Text>
-                                    </Text>
-                                )}
-                                {reward.rmb && (
-                                    <Text style={styles.title}>
-                                        恭喜获得<Text style={{ color: Theme.themeRed }}>{reward.rmb}元</Text>
-                                    </Text>
-                                )}
+                    <View style={{ marginLeft: PxFit(15) }}>
+                        {reward.gold && (
+                            <Text style={styles.title}>
+                                恭喜获得<Text style={{ color: Theme.themeRed }}>{reward.gold}智慧点</Text>
+                            </Text>
+                        )}
+                        {!reward.gold && reward.ticket && (
+                            <Text style={styles.title}>
+                                恭喜获得<Text style={{ color: Theme.themeRed }}>{reward.ticket}精力点</Text>
+                            </Text>
+                        )}
+                        {reward.rmb && (
+                            <Text style={styles.title}>
+                                恭喜获得<Text style={{ color: Theme.themeRed }}>{reward.rmb}元</Text>
+                            </Text>
+                        )}
 
-                                <View style={styles.rewardContainer}>
-                                    <Text style={{ color: Theme.grey }}>{title ? title : body}</Text>
-                                    {reward.ticket && reward.gold ? (
-                                        <Fragment>
-                                            <Image
-                                                source={require('../../assets/images/heart.png')}
-                                                style={styles.ticketImage}
-                                            />
-                                            <Text>+{reward.ticket}</Text>
-                                        </Fragment>
-                                    ) : null}
-                                    {reward.contribute ? (
-                                        <Fragment>
-                                            <Image
-                                                source={require('../../assets/images/gongxian.png')}
-                                                style={styles.contributeImage}
-                                            />
-                                            <Text>+{reward.contribute}</Text>
-                                        </Fragment>
-                                    ) : null}
-                                </View>
-                            </View>
+                        <View style={styles.rewardContainer}>
+                            <Text style={{ color: Theme.grey }}>{title ? title : body}</Text>
+                            {reward.ticket && reward.gold ? (
+                                <Fragment>
+                                    <Image
+                                        source={require('../../assets/images/heart.png')}
+                                        style={styles.ticketImage}
+                                    />
+                                    <Text>+{reward.ticket}</Text>
+                                </Fragment>
+                            ) : null}
+                            {reward.contribute ? (
+                                <Fragment>
+                                    <Image
+                                        source={require('../../assets/images/gongxian.png')}
+                                        style={styles.contributeImage}
+                                    />
+                                    <Text>+{reward.contribute}</Text>
+                                </Fragment>
+                            ) : null}
                         </View>
-
-                        <View style={{justifyContent:'center',alignItems:'center',width:SCREEN_WIDTH - 40}}>
-                            <ad.FeedAd adWidth={SCREEN_WIDTH/1.6} />
-                        </View>
-                        <Button
-                            title={'立即查看'}
-                            onPress={() => {
-                                props.hide();
-                                if (rewardVideo) {
-                                    if (navigation) navigation.navigate('BillingRecord', { initialPage: 1 });
-                                    // Tools.navigate('BillingRecord', { initialPage: 1 });
-                                } else {
-                                    playVideo({ type });
-                                }
-                            }}
-                            FontSize={14}
-                            textColor={Theme.themeRed}
-                            style={styles.buttonStyle}
-                        />
                     </View>
                 </View>
-    )
+
+                <View style={{ justifyContent: 'center', alignItems: 'center', width: SCREEN_WIDTH - 40 }}>
+                    <ad.FeedAd adWidth={SCREEN_WIDTH / 1.6} />
+                </View>
+                <Button
+                    title={'立即查看'}
+                    onPress={() => {
+                        props.hide();
+                        if (rewardVideo) {
+                            Tools.navigate('BillingRecord', { initialPage: 1 });
+                        } else {
+                            playVideo({ type });
+                        }
+                    }}
+                    FontSize={14}
+                    textColor={Theme.themeRed}
+                    style={styles.buttonStyle}
+                />
+            </View>
+        </View>
+    );
 };
 
-const show = (props:any) => {
+const show = (props: any) => {
     const view = (
         <Overlay.View animated>
-            <Content props={props} hide={hide}/>
+            <Content props={props} hide={hide} />
         </Overlay.View>
     );
     key = Overlay.show(view);
-}
+};
 
 const hide = () => {
     Overlay.hide(key);
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -232,4 +230,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export {show,hide};
+export { show, hide };
