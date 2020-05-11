@@ -28,6 +28,7 @@ interface Question {
     image: any;
     count: Number;
     submit: any;
+
 }
 
 interface Props {
@@ -36,10 +37,11 @@ interface Props {
     questions: any;
     activeIndex: Number;
     navigation: any;
+    userInfo?: any;
 }
 
 const AskQuestionItem = (props: Props) => {
-    const { question, questions, activeIndex, navigation } = props;
+    const { question, questions, activeIndex, navigation, userInfo } = props;
 
     const navigationAction = () => {
         if (question.form === 0) {
@@ -69,17 +71,17 @@ const AskQuestionItem = (props: Props) => {
                     style={
                         isLargeScale
                             ? {
-                                  width: maxWidth,
-                                  height: (maxWidth * videoHeight) / videoWidth,
-                                  borderRadius: PxFit(5),
-                                  backgroundColor: '#000',
-                              }
+                                width: maxWidth,
+                                height: (maxWidth * videoHeight) / videoWidth,
+                                borderRadius: PxFit(5),
+                                backgroundColor: '#000',
+                            }
                             : {
-                                  width: PxFit(240) * (videoWidth / videoHeight),
-                                  height: PxFit(240),
-                                  borderRadius: PxFit(5),
-                                  backgroundColor: '#000',
-                              }
+                                width: PxFit(240) * (videoWidth / videoHeight),
+                                height: PxFit(240),
+                                borderRadius: PxFit(5),
+                                backgroundColor: '#000',
+                            }
                     }
                 />
                 <Iconfont
@@ -89,19 +91,19 @@ const AskQuestionItem = (props: Props) => {
                     style={
                         isLargeScale
                             ? {
-                                  position: 'absolute',
-                                  top: ((maxWidth * videoHeight) / videoWidth - PxFit(34)) / 2,
-                                  left: (PxFit(maxWidth) - PxFit(34)) / 2,
-                                  bottom: 0,
-                                  right: 0,
-                              }
+                                position: 'absolute',
+                                top: ((maxWidth * videoHeight) / videoWidth - PxFit(34)) / 2,
+                                left: (PxFit(maxWidth) - PxFit(34)) / 2,
+                                bottom: 0,
+                                right: 0,
+                            }
                             : {
-                                  position: 'absolute',
-                                  top: PxFit(103),
-                                  left: (PxFit(240) * (videoWidth / videoHeight) - PxFit(34)) / 2,
-                                  bottom: 0,
-                                  right: 0,
-                              }
+                                position: 'absolute',
+                                top: PxFit(103),
+                                left: (PxFit(240) * (videoWidth / videoHeight) - PxFit(34)) / 2,
+                                bottom: 0,
+                                right: 0,
+                            }
                     }
                 />
             </View>
@@ -127,24 +129,27 @@ const AskQuestionItem = (props: Props) => {
                     style={
                         isLargeScale
                             ? {
-                                  width: PxFit(maxWidth),
-                                  height: (maxWidth * imageHeight) / imageWidth,
-                                  borderRadius: PxFit(5),
-                                  backgroundColor: '#000',
-                              }
+                                width: PxFit(maxWidth),
+                                height: (maxWidth * imageHeight) / imageWidth,
+                                borderRadius: PxFit(5),
+                                backgroundColor: '#000',
+                            }
                             : {
-                                  width: PxFit(240) * (imageWidth / imageHeight),
-                                  height: PxFit(240),
-                                  borderRadius: PxFit(5),
-                                  backgroundColor: '#000',
-                              }
+                                width: PxFit(240) * (imageWidth / imageHeight),
+                                height: PxFit(240),
+                                borderRadius: PxFit(5),
+                                backgroundColor: '#000',
+                            }
                     }
                 />
             </View>
         );
     };
 
+
+    console.log('userinfo:', userInfo);
     const { gold, is_resolved, form, video, user, image, count, submit } = question;
+    console.log('userhh:', user);
     console.log('question', question);
 
     return (
@@ -156,7 +161,7 @@ const AskQuestionItem = (props: Props) => {
                         <View style={{ marginLeft: PxFit(8) }}>
                             <Text style={styles.userName}>{user.name}</Text>
                             <Row>
-                                <GenderLabel user={user} size={PxFit(8)} />
+                                <GenderLabel user={userInfo} size={PxFit(8)} />
                                 <UserTitle user={user} />
                             </Row>
                         </View>

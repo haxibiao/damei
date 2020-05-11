@@ -29,7 +29,7 @@ import AskQuestionItem from '../contribute/components/AskQuestionItem';
 import Placeholder from './components/Placeholder';
 
 const index = (props: Props) => {
-    const { navigation,route } = props;
+    const { navigation, route } = props;
     const user = route.params?.user ?? {};
     const [orderByHot, setOrderByHot] = useState(false);
     const [finished, setFinished] = useState(false);
@@ -107,6 +107,7 @@ const index = (props: Props) => {
                 renderItem={({ item, index }) => (
                     <View style={{ paddingHorizontal: PxFit(Theme.itemSpace) }}>
                         <AskQuestionItem
+                            userInfo={dataUser}
                             question={item}
                             user={user}
                             questions={dataUser.questions}
