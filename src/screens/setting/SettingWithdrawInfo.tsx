@@ -25,22 +25,23 @@ const SettingWithdrawInfo = (props) => {
     //绑定真实姓名
     const bindRealName = () => {
         setSubmitting(true);
-        app.mutationClient
+        console.log('app', app.newClient);
+        app.newClient
             .mutate({
-                mutation: GQL.SetWalletInfoMutation,
+                mutation: GQL.SetRealNameMutation,
                 variables: {
-                    data: {
-                        real_name: realName,
-                    },
+                    real_name: realName,
                 },
                 refetchQueries: () => [
                     {
                         query: GQL.UserMeansQuery,
                         variables: { id: app.me.id },
+                        client: app.client,
                     },
                     {
                         query: GQL.UserQuery,
                         variables: { id: app.me.id },
+                        client: app.client,
                     },
                 ],
             })
@@ -59,6 +60,7 @@ const SettingWithdrawInfo = (props) => {
                 }
             })
             .catch((error: { toString: () => string }) => {
+                console.log('error', error);
                 setSubmitting(false);
                 Toast.show({
                     content: error.toString().replace(/Error: GraphQL error: /, ''),

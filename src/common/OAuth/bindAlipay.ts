@@ -27,7 +27,7 @@ export const getAlipayAuthCode = (props: { callback: Function }) => {
 
 export const bindAlipay = (props: { authCode: any; onFaild: Function }) => {
     const { authCode, onFaild } = props;
-    app.mutationClient
+    app.newClient
         .mutate({
             mutation: GQL.OAuthBindMutation,
             variables: {
@@ -46,7 +46,7 @@ export const bindAlipay = (props: { authCode: any; onFaild: Function }) => {
             ],
         })
         .then((data: any) => {
-            Loading.hide();
+            // Loading.hide();
             Toast.show({
                 content: '绑定成功',
             });
@@ -54,7 +54,8 @@ export const bindAlipay = (props: { authCode: any; onFaild: Function }) => {
             Helper.middlewareNavigate('Main', null, Helper.middlewareNavigate({ routeName: '提现' }));
         })
         .catch((error: { toString?: any; error?: any }) => {
-            Loading.hide();
+            console.log('error', error);
+            // Loading.hide();
             onFaild && onFaild();
             Toast.show({
                 content: error.toString().replace(/Error: GraphQL error: /, ''),
