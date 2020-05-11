@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { StyleSheet, YellowBox, View, Image, Text, Platform } from 'react-native';
 import { Toast, ErrorBoundary } from 'components';
-import { app, config } from 'store';
+import { app, config, observer } from 'store';
 
 import Orientation from 'react-native-orientation';
 import codePush from 'react-native-code-push';
@@ -19,7 +19,6 @@ import SplashScreen from 'react-native-splash-screen';
 import { LicenseUrl, LicenseKey } from '../app.json';
 import { LivePullManager } from 'hxf-tencent-live'; //导入直播
 import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
-import { DataCenter, observer } from './data';
 
 @observer
 class App extends Component {
@@ -41,7 +40,7 @@ class App extends Component {
         // 获取广告开放状态
         service.enableAdvert((data) => {
             // 只针对华为检测是否开启开屏广告 （做请求后再加载开屏广告首屏会先露出）
-            console.log('针对华为开屏广告: ', data);
+
             if (Config.AppStore === 'huawei' && !data.disable[Config.AppStore]) {
                 if (isAndroid) ad.Splash.loadSplashAd();
             }
@@ -51,7 +50,6 @@ class App extends Component {
                 }
             }
             config.saveAdvertConfig(data);
-            DataCenter.AppSetAdConfigs(data);
         });
 
         if (Config.AppStore !== 'huawei' && Platform.OS == 'android') {
@@ -204,4 +202,4 @@ const styles = StyleSheet.create({
 const codePushOptions = {
     checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
 };
-export default Config.AppStore == 'tencent' ? App : codePush(codePushOptions)(App);
+export default (Config.AppStore == 'tencent' ? App : codePush(codePushOptions)(App));

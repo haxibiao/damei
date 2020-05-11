@@ -155,7 +155,6 @@ class NavigatorBar extends Component {
             rightView,
             ...others
         } = this.buildProps();
-        console.log('Theme', Theme);
         return (
             <Animated.View style={style} {...others} onLayout={(e) => this.onLayout(e)}>
                 <StatusBar

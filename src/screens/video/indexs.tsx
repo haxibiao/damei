@@ -4,7 +4,7 @@ import { Page, VideoLiveScrollTab } from '../../widgets';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Video from './Video';
 import LiveList from '../live';
-import { observer, DataCenter } from '../../data';
+import { observer } from 'store';
 import { config } from 'store';
 import LoginMountPoint from '../../data/LoginMountPoint';
 

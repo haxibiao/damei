@@ -13,9 +13,7 @@ import RewardProgress from './components/RewardProgress';
 import VideoStore from './VideoStore';
 import CommentOverlay from '../comment/CommentOverlay';
 
-import {DataCenter} from '../../data';
-
-export default observer(props => {
+export default observer((props) => {
     const client = useApolloClient();
     const firstAuthenticationQuery = useRef(false);
     const commentRef = useRef();
@@ -26,12 +24,11 @@ export default observer(props => {
     });
     const navigation = useNavigation();
 
-
     VideoStore.showComment = useCallback(() => {
         if (app.login) {
             commentRef.current.slideUp();
         } else {
-            if(navigation) navigation.navigate('Login');
+            if (navigation) navigation.navigate('Login');
         }
         // console.log('commentRef.current', commentRef.current);
     }, [commentRef]);
@@ -40,7 +37,7 @@ export default observer(props => {
         commentRef.current.slideDown();
     }, [commentRef]);
 
-    const onLayout = useCallback(event => {
+    const onLayout = useCallback((event) => {
         const { height } = event.nativeEvent.layout;
         VideoStore.viewportHeight = height;
     }, []);
@@ -75,10 +72,10 @@ export default observer(props => {
             }
             VideoStore.isLoadMore = false;
         },
-        [VideosQuery],
+        [VideosQuery]
     );
 
-    const getVisibleRows = useCallback(info => {
+    const getVisibleRows = useCallback((info) => {
         if (info.viewableItems[0]) {
             activeItem.current = info.viewableItems[0].index;
             VideoStore.viewableItemIndex = activeItem.current;
@@ -86,19 +83,19 @@ export default observer(props => {
     }, []);
 
     const onMomentumScrollEnd = useCallback(
-        event => {
+        (event) => {
             if (VideoStore.dataSource.length - activeItem.current <= 3) {
                 fetchData({ authentication: firstAuthenticationQuery.current });
             }
         },
-        [fetchData],
+        [fetchData]
     );
 
     useEffect(() => {
         fetchData({ authentication: firstAuthenticationQuery.current });
-        let navWillBlurListener:any;
-        let navWillFocusListener:any;
-        if(navigation){
+        let navWillBlurListener: any;
+        let navWillFocusListener: any;
+        if (navigation) {
             navWillFocusListener = navigation.addListener('focus', () => {
                 // if (VideoStore.viewableItemIndex < 0) {
                 //     VideoStore.viewableItemIndex = 0;
@@ -110,8 +107,8 @@ export default observer(props => {
         }
 
         return () => {
-            if(navWillFocusListener) navWillFocusListener();
-            if(navWillBlurListener) navWillBlurListener();
+            if (navWillFocusListener) navWillFocusListener();
+            if (navWillBlurListener) navWillBlurListener();
         };
     }, []);
 
@@ -135,7 +132,7 @@ export default observer(props => {
                 bounces={false}
                 scrollsToTop={false}
                 showsVerticalScrollIndicator={false}
-                keyboardShouldPersistTaps="always"
+                keyboardShouldPersistTaps='always'
                 pagingEnabled={true}
                 removeClippedSubviews={true}
                 keyExtractor={(item, index) => index.toString()}
@@ -155,7 +152,7 @@ export default observer(props => {
                 onViewableItemsChanged={getVisibleRows}
                 viewabilityConfig={config.current}
             />
-            { !configStore.disableAd && (
+            {!configStore.disableAd && (
                 <View style={styles.rewardProgress}>
                     <RewardProgress />
                 </View>

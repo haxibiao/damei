@@ -4,8 +4,6 @@
  */
 import React, { Component, useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Animated, Easing, TouchableOpacity, BackHandler } from 'react-native';
-import { observer } from 'mobx-react';
-import { DataCenter } from '../../data';
 import Video from 'react-native-video';
 import { Theme, PxFit, Config, SCREEN_WIDTH, ISAndroid, Tools } from '../../utils';
 import Iconfont from '../Iconfont';

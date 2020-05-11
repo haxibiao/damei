@@ -28,7 +28,6 @@ mutation signUpMutation($account: String!, $password: String!, $uuid: String) {
         gender
         is_admin
         verified_at
-        received
         is_old_user
         bonusExpirationTime
         totalBonusEarnings
@@ -39,12 +38,6 @@ mutation signUpMutation($account: String!, $password: String!, $uuid: String) {
         totalEarnings
         todayUnclaimedBonusEarnings
         is_first_stock
-        goldTree {
-            rmb
-            total
-            balance
-            received_at
-        }
         invitations_success_count
     }
 }
@@ -79,7 +72,6 @@ mutation signInMutation($account: String!, $password: String, $code: String) {
         gender
         is_admin
         verified_at
-        received
         bonusExpirationTime
         totalBonusEarnings
         stockRate
@@ -89,12 +81,6 @@ mutation signInMutation($account: String!, $password: String, $code: String) {
         totalEarnings
         todayUnclaimedBonusEarnings
         is_first_stock
-        goldTree {
-            rmb
-            total
-            balance
-            received_at
-        }
         invitations_success_count
     }
 }
@@ -128,7 +114,6 @@ mutation signToken($token: String) {
         }
         gender
         is_old_user
-        received
         bonusExpirationTime
         totalBonusEarnings
         stockRate
@@ -138,12 +123,6 @@ mutation signToken($token: String) {
         totalEarnings
         todayUnclaimedBonusEarnings
         is_first_stock
-        goldTree {
-            rmb
-            total
-            balance
-            received_at
-        }
         invitations_success_count
     }
 }
@@ -229,7 +208,6 @@ query UserQuery($id: Int) {
         is_bind_wechat
         is_admin
         verified_at
-        received
         bonusExpirationTime
         totalBonusEarnings
         stockRate
@@ -239,12 +217,6 @@ query UserQuery($id: Int) {
         totalEarnings
         todayUnclaimedBonusEarnings
         is_first_stock
-        goldTree {
-            rmb
-            total
-            balance
-            received_at
-        }
         invitations_success_count
         reward_video_click
         is_bind_dongdezhuan
@@ -384,7 +356,6 @@ query UserMeansQuery($id: Int!) {
             }
         }
         is_admin
-        received
         bonusExpirationTime
         totalBonusEarnings
         stockRate
@@ -394,12 +365,6 @@ query UserMeansQuery($id: Int!) {
         totalEarnings
         todayUnclaimedBonusEarnings
         is_first_stock
-        goldTree {
-            rmb
-            total
-            balance
-            received_at
-        }
         invitations_success_count
         invitation {
             reward_total_amount
@@ -752,7 +717,6 @@ mutation autoSignInMutation($account: String, $uuid: String) {
         is_bind_wechat
         is_admin
         verified_at
-        received
         bonusExpirationTime
         totalBonusEarnings
         stockRate
@@ -762,12 +726,6 @@ mutation autoSignInMutation($account: String, $uuid: String) {
         totalEarnings
         todayUnclaimedBonusEarnings
         is_first_stock
-        goldTree {
-            rmb
-            total
-            balance
-            received_at
-        }
         invitations_success_count
         reward_video_click
         is_bind_dongdezhuan
@@ -858,7 +816,6 @@ mutation autoSignUpMutation($account: String, $uuid: String) {
         verified_at
         auto_uuid_user
         auto_phone_user
-        received
         bonusExpirationTime
         totalBonusEarnings
         stockRate
@@ -868,12 +825,6 @@ mutation autoSignUpMutation($account: String, $uuid: String) {
         totalEarnings
         todayUnclaimedBonusEarnings
         is_first_stock
-        goldTree {
-            rmb
-            total
-            balance
-            received_at
-        }
         invitations_success_count
     }
 }
@@ -954,7 +905,6 @@ query UserAutoQuery($id: Int) {
         is_bind_wechat
         is_admin
         verified_at
-        received
         bonusExpirationTime
         totalBonusEarnings
         stockRate
@@ -964,12 +914,6 @@ query UserAutoQuery($id: Int) {
         totalEarnings
         todayUnclaimedBonusEarnings
         is_first_stock
-        goldTree {
-            rmb
-            total
-            balance
-            received_at
-        }
         invitations_success_count
     }
 }

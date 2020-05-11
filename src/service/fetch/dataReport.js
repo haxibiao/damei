@@ -4,16 +4,16 @@ import { Config } from 'utils';
 export default function(data?: JSON, callback?: Promise) {
     let body = new FormData();
     body.append('data', data);
-
     fetch(Config.ServerRoot + '/api/app/report/matomo', {
         method: 'POST',
         body: body,
     })
-        .then(response => response.json())
-        .then(result => {
-            callback(result);
+        .then((response) => response.json())
+        .then((result) => {
+            callback && callback(result);
         })
-        .catch(err => {
-            callback(err);
+        .catch((err) => {
+            console.log('dataReport error', err);
+            callback && callback(err);
         });
 }

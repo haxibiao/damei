@@ -18,12 +18,8 @@ const adArgs = {
 
 const module = NativeModules.Splash;
 export const loadSplashAd = () => {
-    service.dataReport({
-        data: { category: '广告点击', action: 'user_show_splash_ad', name: '开屏广告展示' },
-        callback: result => {
-            console.warn('result', result);
-        },
-    });
+    const data = JSON.stringify({ category: '广告点击', action: 'user_show_splash_ad', name: '开屏广告展示' });
+    service.dataReport(data);
     return module.loadSplashAd(adArgs);
 };
 

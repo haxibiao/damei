@@ -9,7 +9,6 @@ import RuleDescription from './components/RuleDescription';
 
 import { Overlay } from 'teaset';
 import { app, observer } from 'store';
-import { ad, config } from 'native';
 import { syncGetter } from 'common';
 import { GQL, useMutation, useQuery } from 'apollo';
 
@@ -19,7 +18,6 @@ import Row from '../../components/Container/Row';
 import { LoneAnonymousOperation } from 'graphql/validation/rules/LoneAnonymousOperation';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { DataCenter } from "../../data";
 
 const WithdrawalPlatforms = Platform.OS === 'android' ? [
     {
@@ -56,7 +54,7 @@ const { height, width } = Dimensions.get('window');
 
 const index = (props: any) => {
     const { navigation } = props;
-    const me = DataCenter.User.me;
+    const {me} = app;
 
     const [amount, setAmount] = useState(0);
     const [withdrawType, setWithdrawType] = useState('alipay');

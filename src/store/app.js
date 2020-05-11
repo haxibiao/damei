@@ -4,6 +4,7 @@ import { keys, storage } from './storage';
 import Config from '../utils/Config';
 import exceptionCapture from '../common/helper/exceptionCapture';
 import { syncGetter } from '../common/helper/adapter';
+import { GQL } from '../service/graphql';
 class app {
     @observable me = {};
     @observable login = false;
@@ -215,7 +216,7 @@ class app {
                 query: GQL.systemConfigQuery,
             });
         });
-
+        console.log('err', err);
         const systemConfig = syncGetter('data.systemConfig', res);
 
         if (systemConfig) {

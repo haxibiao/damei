@@ -20,7 +20,6 @@ import PlateItem from './components/PlateItem';
 import { observer, app, keys, storage, config } from 'store';
 import { when } from 'mobx';
 import { withApollo, compose, graphql, GQL } from 'apollo';
-import { DataCenter } from '../../data';
 
 import JPushModule from 'jpush-react-native';
 import NetInfo from '@react-native-community/netinfo';
@@ -48,7 +47,6 @@ class index extends Component {
 
     async componentDidMount() {
         const { navigation } = this.props;
-        DataCenter.setNavigation(navigation);
         this.resetUser();
 
         // 监听新用户登录;
@@ -71,7 +69,6 @@ class index extends Component {
             if (!app.login && !userCache && !config.disableAd) {
                 this.loadUserReword(phone);
             }
-            this.loadUserReword(phone);
         }, 3000);
 
         this.didFocusSubscription = navigation.addListener('focus', (payload) => {

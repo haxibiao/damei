@@ -6,7 +6,7 @@ import { Routers } from './RoutersCenter';
 import { Config, Tools } from 'utils';
 const Stack = createStackNavigator();
 
-import { DataCenter, observer } from '../data';
+import { observer } from 'store';
 // import SplashPage from './SplashPage';
 // import LoginPage from '../screen/login/LoginPage';
 

@@ -10,7 +10,6 @@ import { Theme, PxFit, Config, ISIOS, Tools } from 'utils';
 
 import UserPanel from './components/UserPanel';
 import { app, me } from 'store';
-import { DataCenter } from '../../data';
 
 import { compose, graphql, GQL } from 'apollo';
 import { checkLoginInfo, getWechatAuthCode } from 'common';
@@ -46,7 +45,7 @@ class AccountSecurity extends Component {
     };
 
     bindWx = async (code) => {
-        DataCenter.App.client
+        app.client
             .mutate({
                 mutation: GQL.BindWechatMutation,
                 variables: {

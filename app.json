@@ -2,7 +2,7 @@
     "name": "damei",
     "AppName": "答妹",
     "Version": "2.8.2",
-    "ServerRoot": "http://staging.xiaodamei.com",
+    "ServerRoot": "http://gql.xiaodamei.com",
     "UploadServer": "http://video.xiaodamei.com",
     "SocketServer": "ws://socket.xiaodamei.com:6002",
     "devSocketServer": "http://192.168.1.132:6001",

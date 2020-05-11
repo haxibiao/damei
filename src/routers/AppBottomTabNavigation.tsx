@@ -3,8 +3,9 @@ import { sw, Adp } from "../tools";
 import { Animated, Text, View, TouchableOpacity, StyleSheet, Image, Platform, PixelRatio } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icons, SvgIcon } from '../res';
-import { DataCenter, observer } from '../data';
-import {app} from 'store';
+
+import { app, config, observer } from 'store';
+
 
 function dp(want_px: number) {
     let fontscale = PixelRatio.getFontScale();
@@ -92,18 +93,18 @@ const BottomTabBar = observer(({ state, descriptors, navigation, enableShadow }:
 
     //console.log(DataCenter.App.ad_configs?.disable?.huawei)
 
-    useEffect(() => {
-        if (Platform.OS == 'ios') {
-            if (DataCenter.App.ad_configs?.disable?.ios != undefined) {
-                if (DataCenter.App.ad_configs?.disable?.ios) {
+    // useEffect(() => {
+    //     if (Platform.OS == 'ios') {
+    //         if (DataCenter.App.ad_configs?.disable?.ios != undefined) {
+    //             if (DataCenter.App.ad_configs?.disable?.ios) {
                     
-                } else {
-                    // console.log('禁用tab', DataCenter.App.ad_configs?.disable?.ios);
-                    setdisable(false);
-                }
-            }
-        }
-    }, [DataCenter.App.ad_configs?.disable?.ios])
+    //             } else {
+    //                 // console.log('禁用tab', DataCenter.App.ad_configs?.disable?.ios);
+    //                 setdisable(false);
+    //             }
+    //         }
+    //     }
+    // }, [DataCenter.App.ad_configs?.disable?.ios])
 
     /**
      *  map函数，返回底部导航item数组
@@ -340,7 +341,7 @@ const BottomTabBar = observer(({ state, descriptors, navigation, enableShadow }:
         ]}>
             <View style={[{ backgroundColor: Colors.clear }, styles.tabContainer]}>
                 {
-                    disable ? _tabs() : _tabs_full()
+                    config.disabled ? _tabs() : _tabs_full()
                 }
             </View>
         </View>

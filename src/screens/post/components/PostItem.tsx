@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TouchableWithoutFeedback, Text, Image } from 'react-native';
 import { Iconfont, Row, PlaceholderImage, TouchFeedback, Avatar, UserTitle, GenderLabel, Like } from 'components';
 import { Theme, PxFit, Tools, SCREEN_WIDTH } from 'utils';
-import { DataCenter } from "../../../data";
+import { app } from 'store';
 interface User {
     avatar: String;
     name: String;
@@ -44,8 +44,7 @@ interface Props {
 }
 
 const PostItem = (props: Props) => {
-
-    const me = DataCenter.User.me;
+    const { me } = app;
     const { video, spiders, activeIndex, navigation, spider } = props;
     const { status, title, remark, reward } = spider;
 
@@ -67,39 +66,39 @@ const PostItem = (props: Props) => {
                     style={
                         isLargeScale
                             ? {
-                                width: maxWidth,
-                                height: (maxWidth * videoHeight) / videoWidth,
-                                borderRadius: PxFit(5),
-                                backgroundColor: '#000',
-                            }
+                                  width: maxWidth,
+                                  height: (maxWidth * videoHeight) / videoWidth,
+                                  borderRadius: PxFit(5),
+                                  backgroundColor: '#000',
+                              }
                             : {
-                                width: PxFit(240) * (videoWidth / videoHeight),
-                                height: PxFit(240),
-                                borderRadius: PxFit(5),
-                                backgroundColor: '#000',
-                            }
+                                  width: PxFit(240) * (videoWidth / videoHeight),
+                                  height: PxFit(240),
+                                  borderRadius: PxFit(5),
+                                  backgroundColor: '#000',
+                              }
                     }
                 />
                 <Iconfont
-                    name="paused"
+                    name='paused'
                     size={PxFit(34)}
-                    color="#fff"
+                    color='#fff'
                     style={
                         isLargeScale
                             ? {
-                                position: 'absolute',
-                                top: ((maxWidth * videoHeight) / videoWidth - PxFit(34)) / 2,
-                                left: (PxFit(maxWidth) - PxFit(34)) / 2,
-                                bottom: 0,
-                                right: 0,
-                            }
+                                  position: 'absolute',
+                                  top: ((maxWidth * videoHeight) / videoWidth - PxFit(34)) / 2,
+                                  left: (PxFit(maxWidth) - PxFit(34)) / 2,
+                                  bottom: 0,
+                                  right: 0,
+                              }
                             : {
-                                position: 'absolute',
-                                top: PxFit(103),
-                                left: (PxFit(240) * (videoWidth / videoHeight) - PxFit(34)) / 2,
-                                bottom: 0,
-                                right: 0,
-                            }
+                                  position: 'absolute',
+                                  top: PxFit(103),
+                                  left: (PxFit(240) * (videoWidth / videoHeight) - PxFit(34)) / 2,
+                                  bottom: 0,
+                                  right: 0,
+                              }
                     }
                 />
             </View>
@@ -126,7 +125,8 @@ const PostItem = (props: Props) => {
                             style={[
                                 styles.rewardTitle,
                                 { color: status === 'FAILED_STATUS' ? Theme.themeRed : Theme.grey },
-                            ]}>
+                            ]}
+                        >
                             {remark}
                         </Text>
                     </View>
@@ -141,7 +141,7 @@ const PostItem = (props: Props) => {
                     </View>
                     <Like
                         media={{ count_likes: 0, liked: false }}
-                        type="icon"
+                        type='icon'
                         iconSize={PxFit(22)}
                         containerStyle={{ flexDirection: 'row', alignItems: 'center' }}
                         textStyle={{ color: '#CCD5E0', fontSize: 14, marginStart: 5, marginEnd: 23 }}
@@ -195,7 +195,7 @@ const PostItem = (props: Props) => {
                 </TouchFeedback>
                 <Like
                     media={video}
-                    type="icon"
+                    type='icon'
                     iconSize={PxFit(22)}
                     containerStyle={{ flexDirection: 'row', alignItems: 'center' }}
                     textStyle={{ color: '#CCD5E0', fontSize: 14, marginStart: 5, marginEnd: 23 }}

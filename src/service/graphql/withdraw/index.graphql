@@ -50,4 +50,4 @@ query TransactionsQuery($limit: Int, $offset: Int) {
 }
 
 #import './OAuthBindMutation.gql'
-#import './SetWalletInfoMutation.gql'
+#import './SetRealNameMutation.gql'
