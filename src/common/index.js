@@ -8,6 +8,9 @@ export * from './animation';
 export * from './ttad';
 
 export * from './hooks';
+
+export * from './OAuth';
+
 // import { checkUpdate } from './app';
 
 // console.log('app', checkUpdate);

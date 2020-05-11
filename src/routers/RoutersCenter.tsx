@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleProp, TextStyle } from 'react-native'
+import { StyleProp, TextStyle } from 'react-native';
 
 //直播
 import Live from '../screens/live';
@@ -95,389 +95,396 @@ import AboutUsScreen from '../screens/setting/AboutUs';
 import UpdateLogScreen from '../screens/setting/UpdateLog';
 import PrivacyPolicyScreen from '../screens/setting/PrivacyPolicy';
 import SetLoginInfoScreen from '../screens/setting/SetLoginInfo';
+import SettingWithdrawInfoScreen from '../screens/setting/SettingWithdrawInfo';
 
 // 新答题页面
 import DoExercise from '../screens/doexercise/Answer';
 
 interface Options {
-  headerShown: boolean;
-  headerLeft?: () => JSX.Element;
-  headerTitleStyle?: StyleProp<TextStyle>;
-  headerBackTitle?: string;
-  headerBackTitleStyle?: StyleProp<TextStyle>;
-  headerBackImage?: (props: { tintColor: string; }) => React.ReactNode;
-  headerStyle?: any;
+    headerShown: boolean;
+    headerLeft?: () => JSX.Element;
+    headerTitleStyle?: StyleProp<TextStyle>;
+    headerBackTitle?: string;
+    headerBackTitleStyle?: StyleProp<TextStyle>;
+    headerBackImage?: (props: { tintColor: string }) => React.ReactNode;
+    headerStyle?: any;
 }
 interface Router {
-  name: string;
-  widget: any;
-  options?: any;
+    name: string;
+    widget: any;
+    options?: any;
 }
 
 const CommonOption2: Options = {
-  headerShown: false,
-}
+    headerShown: false,
+};
 
 export const Routers: Router[] = [
-  // 登录验证
-  {
-    name: 'Login',
-    widget: LoginScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'ForgetPassword',
-    widget: ForgetPasswordScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'RetrievePassword',
-    widget: RetrievePasswordScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'PhoneBind',
-    widget: PhoneBindScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'VerificationPhone',
-    widget: VerificationPhoneScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'RegisterSetPassword',
-    widget: RegisterSetPasswordScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'PasswordLogin',
-    widget: PasswordLoginScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'Answer',
-    widget: AnswerScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'VideoPost',
-    widget: VideoPostScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'PostDetail',
-    widget: PostDetailScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'Question',
-    widget: QuestionScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'VideoExplanation',
-    widget: VideoExplanationScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'Rank',
-    widget: RankScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'Withdraws',
-    widget: WithdrawsScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'withdrawLogDetails',
-    widget: WithdrawLogDetailScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'WithdrawApply',
-    widget: WithdrawApplyScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'Balance',
-    widget: BalanceScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'CpcTask',
-    widget: CpcTaskScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'SubmitTask',
-    widget: SubmitTaskScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'Attendance',
-    widget: AttendanceScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'Contribute',
-    widget: ContributeScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'Contributes',
-    widget: ContributesScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'ContributeRule',
-    widget: ContributeRuleScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'ContributeSubmited',
-    widget: ContributeSubmitedScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'EditCategory',
-    widget: ContributeEditCategoryScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'EditOptions',
-    widget: ContributeEditOptionsScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'EditExplain',
-    widget: ContributeEditExplainScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'AskQuestion',
-    widget: AskQuestionScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'Share',
-    widget: ShareScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'InviteeList',
-    widget: InviteeListScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'AppShareCard',
-    widget: AppShareCardScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'EditProfile',
-    widget: EditScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'FavoritesLog',
-    widget: FavoritesLogScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'AnswerLog',
-    widget: AnswerLogScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'CommonIssue',
-    widget: CommonIssueScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'ModifyAliPay',
-    widget: ModifyAliPayScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'ModifyPassword',
-    widget: ModifyPasswordScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'ModifyAccount',
-    widget: ModifyAccountScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'VerificationCode',
-    widget: VerificationCodeScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'BillingRecord',
-    widget: BillingRecordScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'Introduce',
-    widget: IntroduceScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'Society',
-    widget: SocietyScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'Recruit',
-    widget: RecruitScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'MakeMoenyManual',
-    widget: MakeMoenyManualScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'MyPublish',
-    widget: MyPublishScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'Notification',
-    widget: NotificationScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'SystemNotification',
-    widget: SystemNotificationScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'OfficialNotice',
-    widget: OfficialNoticeScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'CommentNotification',
-    widget: CommentNotificationScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'FansNotification',
-    widget: FansNotificationScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'PushNotification',
-    widget: PushNotificationScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'LikeNotification',
-    widget: LikeNotificationScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'NoticeItemDetail',
-    widget: NoticeItemDetailScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'Feedback',
-    widget: FeedbackScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'FeedbackDetails',
-    widget: FeedbackDetails,
-    options: CommonOption2
-  },
-  {
-    name: 'ReportUser',
-    widget: ReportUserScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'ReportComment',
-    widget: ReportCommentScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'ReportQuestion',
-    widget: ReportQuestionScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'User',
-    widget: UserScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'Setting',
-    widget: SettingScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'AccountSecurity',
-    widget: AccountSecurityScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'GradeDescription',
-    widget: GradeDescriptionScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'UserProtocol',
-    widget: UserProtocolScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'ShareApp',
-    widget: ShareAppScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'AboutUs',
-    widget: AboutUsScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'UpdateLog',
-    widget: UpdateLogScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'PrivacyPolicy',
-    widget: PrivacyPolicyScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'SetLoginInfo',
-    widget: SetLoginInfoScreen,
-    options: CommonOption2
-  },
-  {
-    name: 'liveroom',
-    widget: Live,
-    options: CommonOption2
-  },
-  {
-    name: 'startlive',
-    widget: StartLive,
-    options: CommonOption2
-  },
-  {
-    name: 'livewatch',
-    widget: LiveWatch,
-    options: CommonOption2
-  },
-  {
-    name: 'exercise',
-    widget: DoExercise,
-    options: CommonOption2
-  }
+    // 登录验证
+    {
+        name: 'Login',
+        widget: LoginScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'ForgetPassword',
+        widget: ForgetPasswordScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'RetrievePassword',
+        widget: RetrievePasswordScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'PhoneBind',
+        widget: PhoneBindScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'VerificationPhone',
+        widget: VerificationPhoneScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'RegisterSetPassword',
+        widget: RegisterSetPasswordScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'PasswordLogin',
+        widget: PasswordLoginScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'Answer',
+        widget: AnswerScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'VideoPost',
+        widget: VideoPostScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'PostDetail',
+        widget: PostDetailScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'Question',
+        widget: QuestionScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'VideoExplanation',
+        widget: VideoExplanationScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'Rank',
+        widget: RankScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'Withdraws',
+        widget: WithdrawsScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'withdrawLogDetails',
+        widget: WithdrawLogDetailScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'WithdrawApply',
+        widget: WithdrawApplyScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'Balance',
+        widget: BalanceScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'CpcTask',
+        widget: CpcTaskScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'SubmitTask',
+        widget: SubmitTaskScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'Attendance',
+        widget: AttendanceScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'Contribute',
+        widget: ContributeScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'Contributes',
+        widget: ContributesScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'ContributeRule',
+        widget: ContributeRuleScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'ContributeSubmited',
+        widget: ContributeSubmitedScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'EditCategory',
+        widget: ContributeEditCategoryScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'EditOptions',
+        widget: ContributeEditOptionsScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'EditExplain',
+        widget: ContributeEditExplainScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'AskQuestion',
+        widget: AskQuestionScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'Share',
+        widget: ShareScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'InviteeList',
+        widget: InviteeListScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'AppShareCard',
+        widget: AppShareCardScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'EditProfile',
+        widget: EditScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'FavoritesLog',
+        widget: FavoritesLogScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'AnswerLog',
+        widget: AnswerLogScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'CommonIssue',
+        widget: CommonIssueScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'ModifyAliPay',
+        widget: ModifyAliPayScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'ModifyPassword',
+        widget: ModifyPasswordScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'ModifyAccount',
+        widget: ModifyAccountScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'VerificationCode',
+        widget: VerificationCodeScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'BillingRecord',
+        widget: BillingRecordScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'Introduce',
+        widget: IntroduceScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'Society',
+        widget: SocietyScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'Recruit',
+        widget: RecruitScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'MakeMoenyManual',
+        widget: MakeMoenyManualScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'MyPublish',
+        widget: MyPublishScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'Notification',
+        widget: NotificationScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'SystemNotification',
+        widget: SystemNotificationScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'OfficialNotice',
+        widget: OfficialNoticeScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'CommentNotification',
+        widget: CommentNotificationScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'FansNotification',
+        widget: FansNotificationScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'PushNotification',
+        widget: PushNotificationScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'LikeNotification',
+        widget: LikeNotificationScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'NoticeItemDetail',
+        widget: NoticeItemDetailScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'Feedback',
+        widget: FeedbackScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'FeedbackDetails',
+        widget: FeedbackDetails,
+        options: CommonOption2,
+    },
+    {
+        name: 'ReportUser',
+        widget: ReportUserScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'ReportComment',
+        widget: ReportCommentScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'ReportQuestion',
+        widget: ReportQuestionScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'User',
+        widget: UserScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'Setting',
+        widget: SettingScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'AccountSecurity',
+        widget: AccountSecurityScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'GradeDescription',
+        widget: GradeDescriptionScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'UserProtocol',
+        widget: UserProtocolScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'ShareApp',
+        widget: ShareAppScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'AboutUs',
+        widget: AboutUsScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'UpdateLog',
+        widget: UpdateLogScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'PrivacyPolicy',
+        widget: PrivacyPolicyScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'SetLoginInfo',
+        widget: SetLoginInfoScreen,
+        options: CommonOption2,
+    },
+    {
+        name: 'SettingWithdrawInfo',
+        widget: SettingWithdrawInfoScreen,
+        options: CommonOption2,
+    },
+    //
+    {
+        name: 'liveroom',
+        widget: Live,
+        options: CommonOption2,
+    },
+    {
+        name: 'startlive',
+        widget: StartLive,
+        options: CommonOption2,
+    },
+    {
+        name: 'livewatch',
+        widget: LiveWatch,
+        options: CommonOption2,
+    },
+    {
+        name: 'exercise',
+        widget: DoExercise,
+        options: CommonOption2,
+    },
 ];

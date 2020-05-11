@@ -72,6 +72,14 @@
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
       </activity> -->
+      <activity android:name="com.alipay.sdk.app.AlipayResultActivity" tools:node="merge">
+        <intent-filter tools:node="replace">
+            <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.DEFAULT"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+            <data android:scheme="damei"/>
+        </intent-filter>
+      </activity>
       <provider
             android:name="com.bytedance.sdk.openadsdk.TTFileProvider"
             android:authorities="${applicationId}.TTFileProvider"

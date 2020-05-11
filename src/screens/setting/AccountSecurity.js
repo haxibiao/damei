@@ -6,14 +6,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { PageContainer, TouchFeedback, Iconfont, Row, ListItem, Avatar, ItemSeparator, TipsOverlay } from 'components';
-import { Theme, PxFit, Config, ISIOS, Tools, getWechatAuthCode } from 'utils';
+import { Theme, PxFit, Config, ISIOS, Tools } from 'utils';
 
 import UserPanel from './components/UserPanel';
 import { app, me } from 'store';
 import { DataCenter } from '../../data';
 
 import { compose, graphql, GQL } from 'apollo';
-import { checkLoginInfo } from 'common';
+import { checkLoginInfo, getWechatAuthCode } from 'common';
 
 class AccountSecurity extends Component {
     constructor(props) {
@@ -21,12 +21,12 @@ class AccountSecurity extends Component {
         const user = this.props.route.params?.user ?? {};
         this.state = {
             is_bind_wechat: user.is_bind_wechat,
+            is_bind_alipay: Tools.syncGetter('wallet.bind_platforms.alipay', user),
             is_bind_dongdezhuan: Tools.syncGetter('is_bind_dongdezhuan', user) || false,
             dongdezhuanUser: Tools.syncGetter('dongdezhuanUser', user) || {},
             DZUser: Tools.syncGetter('DZUser', user) || {},
         };
     }
-
 
     bindWechat = () => {
         if (this.is_bind_wechat) {
@@ -41,41 +41,42 @@ class AccountSecurity extends Component {
                 callback: (code) => {
                     this.bindWx(code);
                 },
-            })
+            });
         }
-    }
+    };
 
-    bindWx = async code => {
-
-        DataCenter.App.client.mutate({
-            mutation: GQL.BindWechatMutation,
-            variables: {
-                code: code
-            },
-            errorPolicy: 'all',
-            fetchPolicy: 'no-cache',
-            refetchQueries: () => [
-                {
-                    query: GQL.UserAutoQuery,
-                    variables: { id: app.me.id },
-                    fetchPolicy: 'network-only',
+    bindWx = async (code) => {
+        DataCenter.App.client
+            .mutate({
+                mutation: GQL.BindWechatMutation,
+                variables: {
+                    code: code,
                 },
-            ]
-        }).then(rs => {
-            if (rs?.errors) {
-                //console.log("返回了错误>>>>>>>.",rs.errors[0].message)
-                Toast.show({ content: rs?.errors[0]?.message ?? '', duration: 2000 });
-                this.setState({
-                    submitting: false,
-                });
-            } else {
-                //console.log("绑定微信成功>>>>>>>>>>>");
-                this.setState({
-                    is_bind_wechat: true,
-                });
-                Toast.show({ content: '绑定成功', duration: 2000 });
-            }
-        })
+                errorPolicy: 'all',
+                fetchPolicy: 'no-cache',
+                refetchQueries: () => [
+                    {
+                        query: GQL.UserAutoQuery,
+                        variables: { id: app.me.id },
+                        fetchPolicy: 'network-only',
+                    },
+                ],
+            })
+            .then((rs) => {
+                if (rs?.errors) {
+                    //console.log("返回了错误>>>>>>>.",rs.errors[0].message)
+                    Toast.show({ content: rs?.errors[0]?.message ?? '', duration: 2000 });
+                    this.setState({
+                        submitting: false,
+                    });
+                } else {
+                    //console.log("绑定微信成功>>>>>>>>>>>");
+                    this.setState({
+                        is_bind_wechat: true,
+                    });
+                    Toast.show({ content: '绑定成功', duration: 2000 });
+                }
+            });
 
         // let result = {};
         // try {
@@ -123,7 +124,8 @@ class AccountSecurity extends Component {
                         onPress={() => {
                             navigation.navigate('Share');
                             TipsOverlay.hide();
-                        }}>
+                        }}
+                    >
                         <Text style={{ fontSize: 13, color: Theme.theme }}>完善登录信息后即可绑定支付宝</Text>
                     </TouchFeedback>
                 ),
@@ -137,7 +139,7 @@ class AccountSecurity extends Component {
 
     render() {
         const { navigation, data } = this.props;
-        const { is_bind_wechat, is_bind_dongdezhuan, dongdezhuanUser, DZUser } = this.state;
+        const { is_bind_wechat, is_bind_alipay, is_bind_dongdezhuan, dongdezhuanUser, DZUser } = this.state;
         const { loading, user } = data;
 
         if (loading) {
@@ -153,7 +155,7 @@ class AccountSecurity extends Component {
 
         console.log('getParam user', user);
         return (
-            <PageContainer title="账号与安全" white loading={!user}>
+            <PageContainer title='账号与安全' white loading={!user}>
                 <View style={styles.container}>
                     <ItemSeparator />
                     <UserPanel user={user} />
@@ -170,7 +172,7 @@ class AccountSecurity extends Component {
                             onPress={() => navigation.navigate('SetLoginInfo', { account: null })}
                             style={styles.listItem}
                             leftComponent={<Text style={styles.itemText}>设置手机/密码</Text>}
-                            rightComponent={<Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />}
+                            rightComponent={<Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />}
                         />
                     )}
 
@@ -179,7 +181,7 @@ class AccountSecurity extends Component {
                             onPress={() => navigation.navigate('SetLoginInfo', { phone: user.account })}
                             style={styles.listItem}
                             leftComponent={<Text style={styles.itemText}>设置密码</Text>}
-                            rightComponent={<Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />}
+                            rightComponent={<Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />}
                         />
                     )}
                     {!auto_uuid_user && !auto_phone_user && (
@@ -187,7 +189,7 @@ class AccountSecurity extends Component {
                             onPress={() => navigation.navigate('ModifyPassword')}
                             style={styles.listItem}
                             leftComponent={<Text style={styles.itemText}>修改密码</Text>}
-                            rightComponent={<Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />}
+                            rightComponent={<Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />}
                         />
                     )}
 
@@ -208,7 +210,7 @@ class AccountSecurity extends Component {
                             rightComponent={
                                 <View style={styles.rightWrap}>
                                     <Text style={styles.linkText}>{is_bind_wechat ? '已绑定' : '去绑定'}</Text>
-                                    <Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />
+                                    <Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />
                                 </View>
                             }
                         />
@@ -218,25 +220,21 @@ class AccountSecurity extends Component {
                             if (user.wallet && user.wallet.pay_info_change_count === -1) {
                                 Toast.show({ content: '支付宝信息更改次数已达上限' });
                             } else {
-                                checkLoginInfo(auto_uuid_user, auto_phone_user, navigation, user);
+                                // checkLoginInfo(auto_uuid_user, auto_phone_user, navigation, user);
+                                navigation.navigate('SettingWithdrawInfo');
                             }
                         }}
                         style={styles.listItem}
                         leftComponent={<Text style={styles.itemText}>支付宝账号</Text>}
                         rightComponent={
-                            user.wallet && user.wallet.pay_account ? (
-                                <View style={styles.rightWrap}>
-                                    <Text style={styles.rightText}>
-                                        {user.wallet.pay_account + '(' + user.wallet.real_name + ')'}
-                                    </Text>
-                                    <Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />
-                                </View>
-                            ) : (
-                                    <View style={styles.rightWrap}>
-                                        <Text style={styles.linkText}>去绑定</Text>
-                                        <Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />
-                                    </View>
-                                )
+                            <View style={styles.rightWrap}>
+                                <Text style={[styles.linkText, { color: is_bind_alipay ? Theme.grey : '#407FCF' }]}>
+                                    {is_bind_alipay
+                                        ? `已绑定（${Tools.syncGetter('wallet.real_name', user)}）`
+                                        : '去绑定'}
+                                </Text>
+                                <Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />
+                            </View>
                         }
                     />
                     <ListItem
@@ -248,7 +246,7 @@ class AccountSecurity extends Component {
                                 <Text style={is_bind_dongdezhuan ? styles.rightText : styles.linkText}>
                                     {is_bind_dongdezhuan ? `已绑定(${dongdezhuanUser.name})` : '去绑定'}
                                 </Text>
-                                <Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />
+                                <Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />
                             </View>
                         }
                     />
@@ -261,7 +259,7 @@ class AccountSecurity extends Component {
                                 <Text style={is_bind_dongdezhuan ? styles.rightText : styles.linkText}>
                                     {DZUser ? `已绑定(${DZUser.name})` : '去绑定'}
                                 </Text>
-                                <Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />
+                                <Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />
                             </View>
                         }
                     />
@@ -359,5 +357,5 @@ const styles = StyleSheet.create({
 
 export default compose(
     graphql(GQL.BindWechatMutation, { name: 'BindWechatMutation' }),
-    graphql(GQL.UserAutoQuery, { options: props => ({ variables: { id: props.route.params.user.id } }) }),
+    graphql(GQL.UserAutoQuery, { options: (props) => ({ variables: { id: props.route.params.user.id } }) })
 )(AccountSecurity);

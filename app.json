@@ -27,5 +27,8 @@
     "CodeIdRewardVideoIOS": "917553284",
 
     "LicenseUrl": "http://license.vod2.myqcloud.com/license/v1/d7f838e6d9a8f966bf740eda738a1511/TXLiveSDK.licence",
-    "LicenseKey": "f6a65ffa0a5e6b39451e5e4cb666e4ee"
+    "LicenseKey": "f6a65ffa0a5e6b39451e5e4cb666e4ee",
+
+    "AlipayAppID": "2021001160677587",
+    "Scheme": "damei"
 }

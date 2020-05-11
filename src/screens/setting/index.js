@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, ScrollView, Linking } from 'react-native';
+import { StyleSheet, Text, ScrollView, Linking, NativeModules } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
 import { PageContainer, TouchFeedback, Iconfont, ListItem, ItemSeparator, PopOverlay } from 'components';
 import { Theme, PxFit, Config, ISIOS } from 'utils';
@@ -7,7 +7,6 @@ import { app } from 'store';
 import { withApollo, GQL } from 'apollo';
 import { checkUpdate } from 'common';
 import { Storage } from '../../data';
-
 
 const resetAction = CommonActions.navigate({ name: '学习' });
 
@@ -54,7 +53,7 @@ class index extends Component {
                     onConfirm: async () => {
                         app.signOut();
                         app.forget();
-                        Storage.setItem('manualLogout', true);//TODO:将该页面用函数重构，并将app store逐步替换为新的全局管理中心
+                        Storage.setItem('manualLogout', true); //TODO:将该页面用函数重构，并将app store逐步替换为新的全局管理中心
                         navigation.dispatch(resetAction);
                     },
                 });
@@ -78,13 +77,14 @@ class index extends Component {
         const { storageSize } = this.state;
         const user = route.params?.user ?? {};
         return (
-            <PageContainer title="设置" white>
+            <PageContainer title='设置' white>
                 <ScrollView
                     style={styles.container}
                     contentContainerStyle={{ paddingBottom: PxFit(20) }}
                     bounces={false}
                     removeClippedSubviews={true}
-                    showsVerticalScrollIndicator={false}>
+                    showsVerticalScrollIndicator={false}
+                >
                     {login && (
                         <ListItem
                             onPress={() => {
@@ -96,7 +96,7 @@ class index extends Component {
                             }}
                             style={styles.listItem}
                             leftComponent={<Text style={styles.itemText}>账号安全</Text>}
-                            rightComponent={<Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />}
+                            rightComponent={<Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />}
                         />
                     )}
                     {login && <ItemSeparator />}
@@ -104,21 +104,21 @@ class index extends Component {
                         onPress={() => navigation.navigate('UserProtocol')}
                         style={styles.listItem}
                         leftComponent={<Text style={styles.itemText}>用户协议</Text>}
-                        rightComponent={<Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />}
+                        rightComponent={<Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />}
                     />
                     <ItemSeparator />
                     <ListItem
                         onPress={() => navigation.navigate('PrivacyPolicy')}
                         style={styles.listItem}
                         leftComponent={<Text style={styles.itemText}>隐私政策</Text>}
-                        rightComponent={<Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />}
+                        rightComponent={<Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />}
                     />
                     <ItemSeparator />
                     <ListItem
                         onPress={() => navigation.navigate('AboutUs')}
                         style={styles.listItem}
                         leftComponent={<Text style={styles.itemText}>关于{Config.AppName}</Text>}
-                        rightComponent={<Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />}
+                        rightComponent={<Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />}
                     />
                     <ItemSeparator />
                     <ListItem
@@ -126,13 +126,13 @@ class index extends Component {
                             Linking.openURL(
                                 ISIOS
                                     ? 'itms-apps://itunes.apple.com/app/id1462854524'
-                                    : 'market://details?id=com.damei',
+                                    : 'market://details?id=com.damei'
                             )
                         }
                         //  id  答妹上架后的itunes的id  itms-apps://itunes.apple.com/app/id1462854524
                         style={styles.listItem}
                         leftComponent={<Text style={styles.itemText}>鼓励一下{Config.AppName}</Text>}
-                        rightComponent={<Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />}
+                        rightComponent={<Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />}
                     />
 
                     <ItemSeparator />
@@ -140,7 +140,7 @@ class index extends Component {
                         onPress={() => navigation.navigate('UpdateLog')}
                         style={styles.listItem}
                         leftComponent={<Text style={styles.itemText}>更新日志</Text>}
-                        rightComponent={<Iconfont name="right" size={PxFit(14)} color={Theme.subTextColor} />}
+                        rightComponent={<Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />}
                     />
                     <ItemSeparator />
                     <ListItem

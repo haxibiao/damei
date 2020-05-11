@@ -1,0 +1,6 @@
+#真实姓名绑定
+mutation SetRealNameMutation($real_name: String!) {
+    setRealName(real_name: $real_name) {
+        real_name
+    }
+}

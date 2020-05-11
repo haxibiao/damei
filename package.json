@@ -48,6 +48,7 @@
         "react": "^16.13.0",
         "react-apollo": "^2.5.8",
         "react-native": "^0.61.5",
+        "react-native-alipay-auth": "git+http://code.haxibiao.cn/native/react-native-alipay-auth.git",
         "react-native-appearance": "^0.3.3",
         "react-native-code-push": "^5.6.1",
         "react-native-config": "luggit/react-native-config",

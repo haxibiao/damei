@@ -367,6 +367,7 @@ android {
 repositories {
     flatDir {
         dirs 'libs', project(':toolkits').file('libs')
+        dirs 'libs',"$rootDir/../node_modules/react-native-alipay-auth/android/libs"
     }
 }
 
@@ -377,7 +378,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
-    compile project(':react-native-video')
 
     implementation project(':jpush-react-native')  // 添加 jpush 依赖
     implementation project(':jcore-react-native')  // 添加 jcore 依赖
