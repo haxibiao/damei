@@ -8,7 +8,7 @@ import { Theme, PxFit, SCREEN_WIDTH, SCREEN_HEIGHT, ISIOS, Config } from 'utils'
 import { Query, withApollo, compose, graphql, GQL } from 'apollo';
 import { app } from 'store';
 // import { WeChat } from 'native';
-import * as WeChat from "react-native-wechat";
+import * as WeChat from 'react-native-wechat';
 
 import DeviceInfo from 'react-native-device-info';
 
@@ -105,7 +105,6 @@ class index extends Component {
         this.setState({
             submitting: false,
         });
-
     };
 
     signIn = async () => {
@@ -216,7 +215,7 @@ class index extends Component {
     };
 
     //保存用户信息
-    _saveUserData = user => {
+    _saveUserData = (user) => {
         app.signIn(user);
         this.setState({
             submitting: false,
@@ -225,16 +224,16 @@ class index extends Component {
         Toast.show({ content: '登录成功' });
     };
 
-    changeAccount = value => {
+    changeAccount = (value) => {
         this.setState({ account: value });
     };
 
-    changePassword = value => {
+    changePassword = (value) => {
         this.setState({ password: value });
     };
 
     toggleMutation = () => {
-        this.setState(prevState => ({
+        this.setState((prevState) => ({
             signIn: !prevState.signIn,
             // account: null,
             password: null,
@@ -253,49 +252,47 @@ class index extends Component {
         const scope = 'snsapi_userinfo';
         const state = 'skit_wx_login';
         WeChat.isWXAppInstalled()
-            .then(isInstalled => {
+            .then((isInstalled) => {
                 if (isInstalled) {
-                    WeChat.sendAuthRequest(scope, state)
-                        .then(responseCode => {
-                            this.setState({
-                                submitting: false,
-                            });
-                            this.getWechatInfo(
-                                responseCode.code,
-                                result => {
-                                    if (result.data && result.data.unionid) {
-                                        // 新用户绑定手机号
-                                        this.props.navigation.navigate('PhoneBind', {
-                                            data: result.data,
-                                        });
-                                    } else {
-                                        // 老用户直接登录
-                                        this.getUserData(result.data.user);
-                                    }
-                                },
-                                () => {
-                                    Toast.show({ content: '微信身份信息获取失败，请检查微信是否登录' });
-                                    this.setState({
-                                        submitting: false,
+                    WeChat.sendAuthRequest(scope, state).then((responseCode) => {
+                        this.setState({
+                            submitting: false,
+                        });
+                        this.getWechatInfo(
+                            responseCode.code,
+                            (result) => {
+                                if (result.data && result.data.unionid) {
+                                    // 新用户绑定手机号
+                                    this.props.navigation.navigate('PhoneBind', {
+                                        data: result.data,
                                     });
-                                },
-                            )
-                                .catch(err => {
-                                    Toast.show({ content: '登录授权发生错误' });
-                                })
-                        })
+                                } else {
+                                    // 老用户直接登录
+                                    this.getUserData(result.data.user);
+                                }
+                            },
+                            () => {
+                                Toast.show({ content: '微信身份信息获取失败，请检查微信是否登录' });
+                                this.setState({
+                                    submitting: false,
+                                });
+                            }
+                        ).catch((err) => {
+                            Toast.show({ content: '登录授权发生错误' });
+                        });
+                    });
                 } else {
                     Toast.show({ content: '未安装微信或当前微信版本较低' });
                 }
             })
-            .catch(err => {
+            .catch((err) => {
                 console.log('err', err);
                 Toast.show({ content: '微信请求失败，请使用其它方式登录' });
             });
     };
 
     //获取微信身份信息
-    getWechatInfo = code => {
+    getWechatInfo = (code) => {
         var data = new FormData();
         data.append('code', code);
 
@@ -304,14 +301,13 @@ class index extends Component {
             method: 'POST',
             body: data,
         })
-            .then(response => response.json())
-            .then(result => {
+            .then((response) => response.json())
+            .then((result) => {
                 console.log('微信登录返回结果: ', result);
 
                 this.getUserData(result.data.user);
-
             })
-            .catch(error => {
+            .catch((error) => {
                 console.log('error', error);
                 Toast.show({ content: '授权失败' });
                 this.setState({
@@ -320,43 +316,44 @@ class index extends Component {
             });
     };
 
-
     autoSign = async () => {
         let result = {};
         this.setState({
             submitting: true,
         });
         let deviceId = await DeviceInfo.getUniqueId();
-        console.log('uuid: ', deviceId)
+        console.log('uuid: ', deviceId);
 
-        this.props.client.mutate({
-            mutation: GQL.autoSignInMutation,
-            variables: {
-                account: null,
-                uuid: deviceId
-            }
-        }).then(result => {
-            console.log("静默登录接口返回数据： ", result)
-            const user = result.data.autoSignIn;
-            this._saveUserData(user);
+        this.props.client
+            .mutate({
+                mutation: GQL.autoSignInMutation,
+                variables: {
+                    account: null,
+                    uuid: deviceId,
+                },
+            })
+            .then((result) => {
+                console.log('静默登录接口返回数据： ', result);
+                const user = result.data.autoSignIn;
+                this._saveUserData(user);
 
-            Storage.setItem('manualLogout', false);
-            this.setState({
-                submitting: false,
+                Storage.setItem('manualLogout', false);
+                this.setState({
+                    submitting: false,
+                });
+            })
+            .catch((errors) => {
+                console.log('静默登录errors： ', errors);
+                let str = errors.toString().replace(/Error: GraphQL error: /, '');
+                Toast.show({ content: str, layout: 'top' });
+                this.setState({
+                    submitting: false,
+                });
             });
-        }).catch(errors => {
-            console.log("静默登录接口返回数据： ", result)
-            let str = result.errors.toString().replace(/Error: GraphQL error: /, '');
-            Toast.show({ content: str, layout: 'top' });
-            this.setState({
-                submitting: false,
-            });
-        });
-
     };
 
     //微信已存在，直接登录
-    getUserData = user => {
+    getUserData = (user) => {
         this.setState({
             submitting: true,
         });
@@ -369,8 +366,8 @@ class index extends Component {
                         id: user?.id,
                     },
                 })
-                .then(result => {
-                    console.log('登录query返回数据: ', result)
+                .then((result) => {
+                    console.log('登录query返回数据: ', result);
                     let token = { token: user.api_token };
                     let userLoginInfo = { ...result.data.user, token: user.api_token };
                     this._saveUserData(userLoginInfo);
@@ -378,7 +375,7 @@ class index extends Component {
                         submitting: false,
                     });
                 })
-                .catch(error => {
+                .catch((error) => {
                     let str = rejected.toString().replace(/Error: GraphQL error: /, '');
                     Toast.show({ content: str });
                     this.setState({
@@ -389,7 +386,6 @@ class index extends Component {
             this.autoSign();
         }
     };
-
 
     render() {
         let { me } = app;
@@ -405,10 +401,11 @@ class index extends Component {
                 navBarStyle={{ zIndex: 1, backgroundColor: 'transparent' }}
                 leftView={
                     <TouchFeedback onPress={() => this.props.navigation.pop()}>
-                        <Iconfont name="close" size={PxFit(24)} color={Theme.primaryColor} />
+                        <Iconfont name='close' size={PxFit(24)} color={Theme.primaryColor} />
                     </TouchFeedback>
                 }
-                autoKeyboardInsets>
+                autoKeyboardInsets
+            >
                 <View style={styles.container} bounces={false}>
                     <View style={styles.formContainer}>
                         <View style={{ alignItems: 'center' }}>
@@ -423,12 +420,13 @@ class index extends Component {
                                         showThumb == showThumbType[0] && {
                                             borderBottomColor: Theme.primaryColor,
                                         },
-                                    ]}>
+                                    ]}
+                                >
                                     <Iconfont name={'phone'} color={'#D0D0D0'} size={17} style={{ paddingRight: 10 }} />
                                     <CustomTextInput
                                         placeholderTextColor={Theme.subTextColor}
                                         autoCorrect={false}
-                                        placeholder="请输入手机号"
+                                        placeholder='请输入手机号'
                                         autoFocus={true}
                                         style={styles.inputStyle}
                                         value={account}
@@ -462,7 +460,8 @@ class index extends Component {
                                 style={{
                                     marginBottom: 55,
                                     width: SCREEN_WIDTH,
-                                }}>
+                                }}
+                            >
                                 <Row style={styles.rowCenter}>
                                     <View style={styles.line} />
                                     <Text style={{ marginHorizontal: 20 }}>其他登录方式</Text>
@@ -471,7 +470,8 @@ class index extends Component {
                                 <Row
                                     style={{
                                         alignItems: 'stretch',
-                                    }}>
+                                    }}
+                                >
                                     {!ISIOS && (
                                         <TouchFeedback style={styles.otherLogin} onPress={this.wechatLogin}>
                                             <Image
@@ -497,7 +497,8 @@ class index extends Component {
                                         this.setState({
                                             readed: !readed,
                                         });
-                                    }}>
+                                    }}
+                                >
                                     {readed ? (
                                         <View style={styles.bage}>
                                             <Iconfont name={'correct'} color={Theme.white} size={10} />
@@ -508,7 +509,8 @@ class index extends Component {
                                 <Text style={styles.bottomInfoText}>同意</Text>
                                 <View
                                     onPress={() => navigation.navigate('UserProtocol')}
-                                    style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    style={{ flexDirection: 'row', alignItems: 'center' }}
+                                >
                                     <TouchFeedback onPress={() => navigation.navigate('UserProtocol')}>
                                         <Text style={{ fontSize: PxFit(12), color: Theme.theme }}> 用户协议</Text>
                                     </TouchFeedback>
@@ -660,5 +662,5 @@ export default compose(
     withApollo,
     graphql(GQL.signInMutation, { name: 'signInMutation' }),
     graphql(GQL.autoSignInMutation, { name: 'autoSignInMutation' }),
-    graphql(GQL.SendVerificationCodeMutation, { name: 'SendVerificationCodeMutation' }),
+    graphql(GQL.SendVerificationCodeMutation, { name: 'SendVerificationCodeMutation' })
 )(index);

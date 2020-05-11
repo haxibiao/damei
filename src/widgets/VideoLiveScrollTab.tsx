@@ -46,7 +46,8 @@ export default function VideoLiveScrollTab (props:{
 
         return (
             <TouchableOpacity
-            activeOpacity={1} 
+                activeOpacity={1} 
+                key={page}
             style={{width:TABBUTTONW,height:TABHEIGHT,paddingTop:5,alignItems:'center'}}
             onPress={() => {onPressHandler(page)}}
             >

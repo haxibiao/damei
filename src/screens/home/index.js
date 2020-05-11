@@ -30,7 +30,7 @@ import { Overlay } from 'teaset';
 
 import TimeReward from './components/TimeReward';
 
-
+import UserRewardOverlay from './components/UserRewardOverlay';
 
 @observer
 class index extends Component {
@@ -53,38 +53,36 @@ class index extends Component {
 
         // 监听新用户登录;
         when(
-            () => {
-                let isNew = !config.disableAd ? app?.me?.is_old_user : null
-                //新用户（0） 老用户（1）
-                return isNew === 0;
-            },
+            () => app.me.isNewUser,
             () => {
                 // 新手指导
                 beginnerGuidance({
                     guidanceKey: 'VideoTask',
                     GuidanceView: VideoTaskGuidance,
                 });
-            },
+            }
         );
 
         this.registerTimer = setTimeout(async () => {
             // 再次请求权限防止未获取到手机号
             const userCache = await storage.getItem(keys.userCache);
             const phone = ISIOS ? '' : await Util.getPhoneNumber();
+            console.log('!app.login', !app.login, !userCache, !config.disableAd);
             if (!app.login && !userCache && !config.disableAd) {
                 this.loadUserReword(phone);
             }
+            this.loadUserReword(phone);
         }, 3000);
 
-        this.didFocusSubscription = navigation.addListener('focus', payload => {
+        this.didFocusSubscription = navigation.addListener('focus', (payload) => {
             const { client, login } = this.props;
             if (login) {
                 client
                     .query({
                         query: GQL.UserWithdrawQuery,
                     })
-                    .then(({ data }) => { })
-                    .catch(error => {
+                    .then(({ data }) => {})
+                    .catch((error) => {
                         const info = error.toString().indexOf('登录');
                         if (info > -1) {
                             app.forget();
@@ -92,7 +90,7 @@ class index extends Component {
                         }
                     });
             }
-            NetInfo.fetch().then(state => {
+            NetInfo.fetch().then((state) => {
                 if (!state.isConnected) {
                     Toast.show({ content: '网络不可用' });
                 }
@@ -101,7 +99,7 @@ class index extends Component {
 
         // 当有用户seesion 过期时 ,清空redux 强制重新登录。
 
-        this.receiveNotificationListener = message => {
+        this.receiveNotificationListener = (message) => {
             this.setState({
                 content: message.alertContent,
                 type: JSON.parse(message.extras).type,
@@ -111,7 +109,7 @@ class index extends Component {
         JPushModule.addReceiveNotificationListener(this.receiveNotificationListener);
         // 监听推送通知
 
-        this.openNotificationListener = map => {
+        this.openNotificationListener = (map) => {
             const { type, content, time } = this.state;
             // if (type == 'maintenance') {
             //  this.props.navigation.navigate('推送通知', { content: content, name: '系统维护', time: time });
@@ -137,7 +135,6 @@ class index extends Component {
 
     // 每个版本静默重新登录一次
     async resetUser() {
-        console.log('resetUser starting >>>>>>>>');
         const resetVersion = await storage.getItem(keys.resetVersion);
         const me = (await storage.getItem(keys.me)) || (await storage.getItem(keys.user));
 
@@ -148,15 +145,26 @@ class index extends Component {
                         token: me.token,
                     },
                 })
-                .then(result => {
+                .then((result) => {
                     app.signIn(result.data.signInWithToken);
                     app.updateResetVersion(Config.AppVersionNumber);
                     app.updateUserCache(result.data.signInWithToken);
                 });
         }
-
-        console.log('resetUser end >>>>>>>>>>>');
     }
+
+    // 新用户奖励提示
+    loadUserReword = (phone) => {
+        const { navigation } = this.props;
+        let overlayRef;
+        Overlay.show(
+            <Overlay.View animated ref={(ref) => (overlayRef = ref)}>
+                <View style={styles.overlayInner}>
+                    <UserRewardOverlay hide={() => overlayRef.close()} navigation={navigation} phone={phone} />
+                </View>
+            </Overlay.View>
+        );
+    };
 
     _renderCategoryList = () => {
         const {
@@ -172,7 +180,7 @@ class index extends Component {
                 return Array(10)
                     .fill(0)
                     .map((elem, index) => {
-                        return <Placeholder key={index} type="list" />;
+                        return <Placeholder key={index} type='list' />;
                     });
             }
         }
@@ -236,7 +244,6 @@ class index extends Component {
 
     menuPress = () => {
         const { navigation } = this.props;
-        console.log('app', app.userCache);
         if (app.userCache.level.level < 2) {
             Toast.show({
                 content: `达到${2}级才可以出题哦`,
@@ -254,15 +261,6 @@ class index extends Component {
                     <Text style={styles.title}>所有题库</Text>
                 </View>
                 {this._renderCategoryList()}
-                {/*
-                     <View style={{ position: 'absolute', right: PxFit(Theme.itemSpace), bottom: PxFit(20) }}>
-                    <TouchFeedback authenticated navigation={this.props.navigation} onPress={this.menuPress}>
-                        <Image
-                            source={require('../../assets/images/ic_ring_menu.png')}
-                            style={{ width: PxFit(60), height: PxFit(60) }}
-                        />
-                    </TouchFeedback>
-                </View>*/}
             </PageContainer>
         );
     }
@@ -299,6 +297,6 @@ const styles = StyleSheet.create({
 });
 
 export default compose(
-    graphql(GQL.CategoriesQuery, { options: props => ({ variables: { limit: 10 } }) }),
-    graphql(GQL.signToken, { name: 'signToken' }),
+    graphql(GQL.CategoriesQuery, { options: (props) => ({ variables: { limit: 10 } }) }),
+    graphql(GQL.signToken, { name: 'signToken' })
 )(withApollo(index));

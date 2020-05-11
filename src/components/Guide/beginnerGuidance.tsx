@@ -44,7 +44,8 @@ const beginnerGuidance = (props: Props) => {
         <Overlay.View
             animated={false}
             onAppearCompleted={onAppearCompleted}
-            onDisappearCompleted={onDisappearCompleted}>
+            onDisappearCompleted={onDisappearCompleted}
+        >
             <TouchableWithoutFeedback disabled={!dismissEnabled} onPress={handleDismiss}>
                 <View style={styles.container}>
                     <GuidanceView onDismiss={handleDismiss} />
@@ -83,7 +84,7 @@ const beginnerGuidance = (props: Props) => {
 
     function skipGuidance() {
         if (recordable) {
-            skipGuidanceKeys.forEach(skipGuidanceKey => {
+            skipGuidanceKeys.forEach((skipGuidanceKey) => {
                 storage.setItem(`BeginnerGuidance_${skipGuidanceKey}`, JSON.stringify({}));
             });
         }

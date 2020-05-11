@@ -35,13 +35,13 @@ class UserRewardOverlay extends Component {
     componentDidMount() {
         const data = JSON.stringify(this.state.reportContent);
 
-        service.dataReport(data, result => {
+        service.dataReport(data, (result) => {
             console.warn('result', result);
         });
     }
 
     handleLogin = async () => {
-        const { navigation, phone, client } = this.props;
+        const { navigation, phone } = this.props;
         const deviceId = getUniqueId();
 
         let phoneNumber = null;
@@ -51,7 +51,7 @@ class UserRewardOverlay extends Component {
 
         if (phoneNumber || deviceId) {
             // 静默注册
-            client
+            app.client
                 .mutate({
                     mutation: GQL.autoSignInMutation,
                     variables: {
@@ -59,7 +59,7 @@ class UserRewardOverlay extends Component {
                         uuid: deviceId,
                     },
                 })
-                .then(result => {
+                .then((result) => {
                     const canSignIn = result && result.data && result.data.autoSignIn;
                     if (canSignIn) {
                         const user = result.data.autoSignIn;
@@ -76,7 +76,7 @@ class UserRewardOverlay extends Component {
                         navigation.navigate('Login');
                     }
                 })
-                .catch(error => {
+                .catch((error) => {
                     console.warn('err', error);
                     Toast.show({ content: error.toString() });
                     navigation.navigate('Login');
@@ -94,7 +94,8 @@ class UserRewardOverlay extends Component {
                 onPress={() => {
                     this.props.hide();
                     this.handleLogin();
-                }}>
+                }}
+            >
                 <Image
                     source={require('../../../assets/images/new_user_red_packet.png')}
                     style={{ width: (SCREEN_WIDTH * 4) / 5, height: (((SCREEN_WIDTH * 4) / 5) * 640) / 519 }}

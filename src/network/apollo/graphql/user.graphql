@@ -1,111 +1,111 @@
-query Testme{
-  user(id:2){
-    id
-    name
-    token
-  }
+query Testme {
+    user(id: 2) {
+        id
+        name
+        token
+    }
 }
 
 #----------------- mutation below -------------------------
 
 #静默登录
 mutation AutoSignIn($account: String, $uuid: String) {
-  autoSignIn(account: $account, uuid: $uuid) {
-    id
-    token
-    account
-    name
-    withdrawInfo {
-        amount
-        description
-    }
-    wallet {
+    autoSignIn(account: $account, uuid: $uuid) {
         id
-        real_name
-        pay_account
-        pay_info_change_count
-        total_withdraw_amount
-        available_balance
-        balance
-    }
-    profile {
-        introduction
-        birthday
-        age
-        total_contributes
-    }
-    gender
-    avatar
-    gold
-    ticket
-    exp
-    next_level_exp
-    follow_users_count
-    followers_count
-    adinfo {
-        tt_appid
-        tt_codeid
-        cpc_ad_id
-        cpc_ad_url
-        bannerAd {
-            appid
-            codeid
-        }
-        fullScreenVideoAd {
-            appid
-            codeid
-        }
-    }
-    level {
-        id
+        token
+        account
         name
-        ticket_max
-        level
+        withdrawInfo {
+            amount
+            description
+        }
+        wallet {
+            id
+            real_name
+            pay_account
+            pay_info_change_count
+            total_withdraw_amount
+            available_balance
+            balance
+        }
+        profile {
+            introduction
+            birthday
+            age
+            total_contributes
+        }
+        gender
+        avatar
+        gold
+        ticket
         exp
+        next_level_exp
+        follow_users_count
+        followers_count
+        adinfo {
+            tt_appid
+            tt_codeid
+            cpc_ad_id
+            cpc_ad_url
+            bannerAd {
+                appid
+                codeid
+            }
+            fullScreenVideoAd {
+                appid
+                codeid
+            }
+        }
+        level {
+            id
+            name
+            ticket_max
+            level
+            exp
+        }
+        week_contributes
+        today_contributes
+        today_new_questions_count
+        today_left_questions_count
+        today_withdraw_left
+        exchange_rate
+        video_duration
+        # is_old_user   TOTO:不是老用户的意思!! 是以前为了兼容答题赚钱老数据库尸体的字段
+        explanation_video_duration
+        has_reward_new_user
+        is_bind_wechat
+        is_admin
+        verified_at
+        received
+        bonusExpirationTime
+        totalBonusEarnings
+        stockRate
+        stockNumber
+        perStockPrice
+        yesterdayEarnings
+        totalEarnings
+        todayUnclaimedBonusEarnings
+        is_first_stock
+        goldTree {
+            rmb
+            total
+            balance
+            received_at
+        }
+        invitations_success_count
+        reward_video_click
+        is_bind_dongdezhuan
+        dongdezhuanUser {
+            id
+            name
+            account
+        }
+        DZUser {
+            id
+            name
+            account
+        }
+        auto_uuid_user
+        auto_phone_user
     }
-    week_contributes
-    today_contributes
-    today_new_questions_count
-    today_left_questions_count
-    today_withdraw_left
-    exchange_rate
-    video_duration
-    is_old_user
-    explanation_video_duration
-    has_reward_new_user
-    is_bind_wechat
-    is_admin
-    verified_at
-    received
-    bonusExpirationTime
-    totalBonusEarnings
-    stockRate
-    stockNumber
-    perStockPrice
-    yesterdayEarnings
-    totalEarnings
-    todayUnclaimedBonusEarnings
-    is_first_stock
-    goldTree {
-        rmb
-        total
-        balance
-        received_at
-    }
-    invitations_success_count
-    reward_video_click
-    is_bind_dongdezhuan
-    dongdezhuanUser {
-        id
-        name
-        account
-    }
-    DZUser {
-        id
-        name
-        account
-    }
-    auto_uuid_user
-    auto_phone_user
-  }
 }

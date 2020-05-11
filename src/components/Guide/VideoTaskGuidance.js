@@ -19,9 +19,10 @@ function VideoTaskGuidance({ onDismiss }) {
             <TouchableWithoutFeedback
                 key={1}
                 onPress={() => {
-                    // if(navigation) navigation.navigate('任务');
+                    Tools.navigate('任务');
                     setStep(1);
-                }}>
+                }}
+            >
                 <Image style={styles.userReward} source={require('../../assets/images/new_user_reward.png')} />
             </TouchableWithoutFeedback>,
 
@@ -29,13 +30,14 @@ function VideoTaskGuidance({ onDismiss }) {
                 key={3}
                 onPress={() => {
                     onDismiss();
-                }}>
+                }}
+            >
                 <View style={styles.flexCenter}>
                     <TouchableWithoutFeedback
                         onPress={() => {
-                            playVideo({ type: 'Task' });
                             onDismiss();
-                        }}>
+                        }}
+                    >
                         <Image
                             style={styles.stimulateVideo}
                             source={require('../../assets/images/stimulate_video.png')}
@@ -53,10 +55,10 @@ const withdrawGuideTop = PxFit(30) + PxFit(Theme.itemSpace) * 2 + PxFit(NAVBAR_H
 const withdrawGuideRight = (SCREEN_WIDTH / 2 - 120) / 2;
 const withdrawGuideWidth = ((SCREEN_WIDTH - PxFit(Theme.itemSpace * 3)) / 2) * (746 / 450);
 
-const videoTaskGuideWidth = PxFit(88) * (800 / 252);
+const videoTaskGuideWidth = (PxFit(Theme.statusBarHeight) + PxFit(54)) * (800 / 252);
 const videoTaskGuideHeight = (videoTaskGuideWidth * 423) / 800;
 const videoTaskGuideTop =
-    PxFit(245) + PxFit(NAVBAR_HEIGHT) + PxFit(Theme.statusBarHeight) - (videoTaskGuideHeight * 326) / 423;
+    PxFit(280) + PxFit(NAVBAR_HEIGHT) + PxFit(Theme.statusBarHeight) - (videoTaskGuideHeight * 326) / 423;
 
 const styles = StyleSheet.create({
     flexCenter: {
