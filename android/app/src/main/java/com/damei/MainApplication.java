@@ -23,6 +23,7 @@ import cn.jpush.android.api.JPushInterface;
 // 
 import com.haxibiao.ad.AdPackage;
 import com.haxibiao.toolkits.ToolkitsPackage;
+import com.haxibiao.vodupload.VodUploadPackage;
 
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
@@ -56,6 +57,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
       packages.add(new JPushPackage(true, true));
       packages.add(new AdPackage());
       packages.add(new ToolkitsPackage());
+      packages.add(new VodUploadPackage());
       // packages.add(new WxEntryPackage());
       packages.add(new ReactVideoPackage());
       packages.add(new WeChatPackage());

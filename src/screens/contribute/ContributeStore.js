@@ -5,7 +5,7 @@
 import { View, Image, Keyboard } from 'react-native';
 import { observable, action, runInAction, autorun, computed, when } from 'mobx';
 import { ProgressOverlay, beginnerGuidance, SetQuestionGuidance } from 'components';
-import { Api } from '../../utils';
+import * as common from 'common';
 
 const ANSWERS = ['A', 'B', 'C', 'D'];
 
@@ -43,7 +43,7 @@ class ContributeStore {
                     guidanceKey: 'SubmitQuestion',
                     GuidanceView: SetQuestionGuidance.submitGuidance,
                 });
-            },
+            }
         );
         return ContributeStore.instance;
     }
@@ -134,7 +134,7 @@ class ContributeStore {
     @action.bound
     imagePicke(type: target = '') {
         Api.imagePicker(
-            image => {
+            (image) => {
                 image = `data:${image.mime};base64,${image.data}`;
                 runInAction(() => {
                     this[type + 'picture'] = image;
@@ -143,14 +143,14 @@ class ContributeStore {
             {
                 multiple: false,
                 includeBase64: true,
-            },
+            }
         );
     }
 
     @action.bound
     videoPicke(type: target = '', uploadType: String) {
-        Api.videoPicker(
-            video => {
+        common.videoPicker(
+            (video) => {
                 runInAction(() => {
                     this[type + 'video'] = video;
                     this[type + 'video_path'] = video.path;
@@ -158,7 +158,7 @@ class ContributeStore {
                 });
             },
             {
-                onBeforeUpload: metadata => {
+                onBeforeUpload: (metadata) => {
                     if (metadata.duration > this[type + 'video_duration']) {
                         this[type + 'video'] = null;
                         this[type + 'video_path'] = null;
@@ -176,28 +176,20 @@ class ContributeStore {
                         throw `视频时长需在5秒以上`;
                     }
                 },
-                onStarted: uploadId => {
+                onStarted: (uploadId) => {
                     ProgressOverlay.show('正在上传视频');
                     this.uploading = true;
                 },
-                onProcess: progress => {
+                onProcess: (progress) => {
                     console.log('progress', progress);
                     ProgressOverlay.progress(progress);
                 },
                 onCancelled: () => {
                     console.log('onCancelled');
                 },
-                onCompleted: data => {
+                onCompleted: (video) => {
                     if (this.uploading) {
-                        console.log('data', data);
-                        let video = {};
-                        try {
-                            video = JSON.parse(data.responseBody);
-                        } catch (error) {
-                            Toast.show({
-                                content: '视频上传失败',
-                            });
-                        }
+                        console.log('video', video);
 
                         if (video.id) {
                             ProgressOverlay.hide();
@@ -214,7 +206,7 @@ class ContributeStore {
                 },
                 onError: () => this.onUploadError(type),
             },
-            uploadType,
+            uploadType
         );
     }
 

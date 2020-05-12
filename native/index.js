@@ -11,5 +11,6 @@ import ad from './ad';
 import WeChat from './WeChat';
 import Util from './Util';
 import AppUtil from './AppUtil';
+import VodUploader from './VodUploader';
 
-export { Share, VideoUploader, WeChat, Util, ad, AppUtil };
+export { Share, VideoUploader, WeChat, Util, ad, AppUtil, VodUploader };
