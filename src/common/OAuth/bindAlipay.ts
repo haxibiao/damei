@@ -32,7 +32,7 @@ export const bindAlipay = (props: { authCode: any; onFaild: Function }) => {
             mutation: GQL.OAuthBindMutation,
             variables: {
                 code: authCode,
-                oauth_type: 'ALIPAY',
+                oauth_type: 'alipay',
             },
             refetchQueries: () => [
                 {

@@ -69,14 +69,13 @@ export default observer(() => {
         real_name: '',
         balance: 0,
     }).current;
-    const { data: UserMeans } = useQuery(GQL.UserMeansQuery, {
-        fetchPolicy: 'network-only',
+    const { data: UserMeans, error: UserWithdrawError } = useQuery(GQL.UserWalletQuery, {
         variables: {
             id: me.id,
         },
-        skip: !me.id,
+        client: app.newClient,
+        fetchPolicy: 'network-only',
     });
-    console.log('钱包页面run');
 
     const user = useMemo(() => {
         const userData = syncGetter('user', UserMeans) || { withdrawInfo };
@@ -332,7 +331,7 @@ export default observer(() => {
                                         onPress={() => selectionAmount(option)}
                                     >
                                         <SafeText style={[styles.moneyText, selected && { color: Theme.primaryColor }]}>
-                                            ¥{option.amount}.00元
+                                            ¥{option.amount} 元
                                         </SafeText>
                                     </TouchableOpacity>
                                 );

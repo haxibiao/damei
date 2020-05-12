@@ -34,14 +34,8 @@ const SettingWithdrawInfo = (props) => {
                 },
                 refetchQueries: () => [
                     {
-                        query: GQL.UserMeansQuery,
+                        query: GQL.UserAccountSecurityQuery,
                         variables: { id: app.me.id },
-                        client: app.client,
-                    },
-                    {
-                        query: GQL.UserQuery,
-                        variables: { id: app.me.id },
-                        client: app.client,
                     },
                 ],
             })

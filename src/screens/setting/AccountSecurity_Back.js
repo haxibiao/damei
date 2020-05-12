@@ -17,10 +17,12 @@ import { checkLoginInfo, getWechatAuthCode } from 'common';
 class AccountSecurity extends Component {
     constructor(props) {
         super(props);
+        const { data } = this.props;
         const user = this.props.route.params?.user ?? {};
+
         this.state = {
             is_bind_wechat: user.is_bind_wechat,
-            is_bind_alipay: Tools.syncGetter('wallet.bind_platforms.alipay', user),
+            is_bind_alipay: Tools.syncGetter('user.wallet.bind_platforms.alipay', data) || false,
             is_bind_dongdezhuan: Tools.syncGetter('is_bind_dongdezhuan', user) || false,
             dongdezhuanUser: Tools.syncGetter('dongdezhuanUser', user) || {},
             DZUser: Tools.syncGetter('DZUser', user) || {},
@@ -108,32 +110,6 @@ class AccountSecurity extends Component {
         //     });
         //     Toast.show({ content: '绑定成功' });
         // }
-    };
-
-    checkAccount = (auto_uuid_user, auto_phone_user) => {
-        const { navigation, route } = this.props;
-        const user = route.params.user;
-
-        if (auto_uuid_user || auto_phone_user) {
-            TipsOverlay.show({
-                title: '您还未完善登录信息',
-                content: (
-                    <TouchFeedback
-                        style={{ alignItems: 'center', paddingTop: 15 }}
-                        onPress={() => {
-                            navigation.navigate('Share');
-                            TipsOverlay.hide();
-                        }}
-                    >
-                        <Text style={{ fontSize: 13, color: Theme.theme }}>完善登录信息后即可绑定支付宝</Text>
-                    </TouchFeedback>
-                ),
-                onConfirm: () => navigation.navigate('SetLoginInfo', { phone: user.account }),
-                confirmContent: '去绑定',
-            });
-        } else {
-            navigation.navigate('ModifyAliPay');
-        }
     };
 
     render() {
@@ -356,5 +332,10 @@ const styles = StyleSheet.create({
 
 export default compose(
     graphql(GQL.BindWechatMutation, { name: 'BindWechatMutation' }),
-    graphql(GQL.UserAutoQuery, { options: (props) => ({ variables: { id: props.route.params.user.id } }) })
+    graphql(GQL.UserAccountSecurityQuery, {
+        options: (props) => ({
+            variables: { id: props.route.params.user.id },
+            client: app.newClient,
+        }),
+    })
 )(AccountSecurity);
