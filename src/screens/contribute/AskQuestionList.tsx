@@ -59,6 +59,7 @@ const AskQuestionList = (props: any) => {
                         questions={questions}
                         navigation={props.navigation}
                         activeIndex={index}
+                        userInfo={user}
                     />
                 )}
                 refreshControl={<CustomRefreshControl onRefresh={refetch} reset={() => setFinished(false)} />}
