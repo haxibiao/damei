@@ -325,14 +325,33 @@ export default observer(() => {
                                         style={[
                                             styles.valueItem,
                                             selected && styles.selectedItem,
-                                            (index + 1) % 2 === 0 && { marginLeft: PxFit(Theme.itemSpace) },
+                                            (index + 1) % 2 === 0 && {
+                                                marginLeft: PxFit(Theme.itemSpace),
+                                            },
                                         ]}
                                         key={index}
                                         onPress={() => selectionAmount(option)}
                                     >
-                                        <SafeText style={[styles.moneyText, selected && { color: Theme.primaryColor }]}>
+                                        <SafeText
+                                            style={[
+                                                styles.moneyText,
+                                                selected && {
+                                                    color: Theme.primaryColor,
+                                                },
+                                            ]}
+                                        >
                                             ¥{option.amount} 元
                                         </SafeText>
+                                        <View
+                                            style={[
+                                                styles.badge,
+                                                {
+                                                    backgroundColor: option.disable ? Theme.grey : Theme.theme,
+                                                },
+                                            ]}
+                                        >
+                                            <Text style={styles.badgeText}>{option.tips}</Text>
+                                        </View>
                                     </TouchableOpacity>
                                 );
                             })}
@@ -565,5 +584,22 @@ const styles = StyleSheet.create({
         color: Theme.link,
         fontSize: PxFit(14),
         textDecorationLine: 'underline',
+    },
+    badge: {
+        alignItems: 'center',
+        borderBottomRightRadius: PxFit(9),
+        borderTopLeftRadius: PxFit(4),
+        borderTopRightRadius: PxFit(9),
+        height: 18,
+        justifyContent: 'center',
+        left: 0,
+        position: 'absolute',
+        top: 0,
+        width: PxFit(50),
+    },
+    badgeText: {
+        color: '#FFF',
+        fontSize: PxFit(11),
+        fontWeight: '500',
     },
 });

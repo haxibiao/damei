@@ -12,8 +12,10 @@ query UserWalletQuery($id: Int!) {
             exp
         }
         withdrawInfo {
+            tips
             amount
             description
+            disable
         }
         wallet {
             id
