@@ -10,8 +10,9 @@ import { Theme, PxFit } from 'utils';
 
 import { Query, ApolloClient, withApollo } from 'react-apollo';
 import { StackActions } from 'react-navigation';
-import { app } from 'store';
+import { app, observer } from 'store';
 
+@observer
 class UserProfile extends Component {
     navigationAction = (bool: false) => {
         let { user } = this.props;
@@ -27,6 +28,7 @@ class UserProfile extends Component {
     render() {
         let { user, orderByHot, switchOrder, hasQuestion, navigation } = this.props;
         let isSelf = app.me.id === user.id;
+        user.avatar = app.me.avatar + "?t=" + Date.now();
         return (
             <View style={styles.userInfoContainer}>
                 <View style={styles.main}>

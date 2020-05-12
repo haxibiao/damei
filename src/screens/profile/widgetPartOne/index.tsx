@@ -94,12 +94,12 @@ const MemoAvatar = observer((props: { navigation: any; user?: any }) => {
     const onPressHandler = () => {
         props.navigation.navigate('User', { user: props?.user ?? {} });
     };
-
+    const avatar  = props.user?.avatar ?? '';
     return (
         <>
             {app.login ? (
                 <TouchFeedback onPress={onPressHandler}>
-                    <Avatar uri={props.user?.avatar ?? ''} size={sw * 0.23} />
+                    <Avatar uri={avatar + "?t=" + Date.now()} size={sw * 0.23} />
                 </TouchFeedback>
             ) : (
                 <TouchFeedback onPress={onPressHandler}>
