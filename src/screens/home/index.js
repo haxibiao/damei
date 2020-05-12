@@ -13,6 +13,7 @@ import {
     Banner,
     beginnerGuidance,
     VideoTaskGuidance,
+    UserAgreementOverlay
 } from 'components';
 import { Config, SCREEN_WIDTH, SCREEN_HEIGHT, Theme, PxFit, NAVBAR_HEIGHT, ISIOS } from 'utils';
 import PlateItem from './components/PlateItem';
@@ -58,6 +59,8 @@ class index extends Component {
                     guidanceKey: 'VideoTask',
                     GuidanceView: VideoTaskGuidance,
                 });
+                // 阅读用户协议与隐私政策
+                UserAgreementOverlay();
             }
         );
 
