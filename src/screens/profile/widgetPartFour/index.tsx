@@ -5,6 +5,7 @@ import { sw, sh } from '../../../tools';
 import { observer,app } from 'store';
 
 import { TouchFeedback } from "components"
+import { PxFit } from "utils";
 
 const generalSub = [
     {
@@ -50,7 +51,7 @@ const WidgetPartFour = observer((props: {
                         >
                             <View style={{ width: sw * 0.5 }} row centerV>
                                 <Image source={{ uri: item.icon }} style={{ height: 25, width: 25 }} resizeMode='contain' />
-                                <Text marginL-16>{item.name}</Text>
+                                <Text marginL-16 style={{  fontSize: PxFit(16)}}> {item.name}</Text>
                             </View>
                             <Image source={{ uri: 'right_arrow' }} resizeMode='contain' style={{ height: 18, width: 18 }} />
                         </TouchFeedback>
@@ -65,7 +66,7 @@ export default WidgetPartFour;
 
 const styles = StyleSheet.create({
     itemContainer: {
-        height: 50,
+        height: PxFit(62),
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
