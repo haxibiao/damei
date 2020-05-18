@@ -13,7 +13,7 @@ import {
     Banner,
     beginnerGuidance,
     VideoTaskGuidance,
-    UserAgreementOverlay
+    UserAgreementOverlay,
 } from 'components';
 import { Config, SCREEN_WIDTH, SCREEN_HEIGHT, Theme, PxFit, NAVBAR_HEIGHT, ISIOS } from 'utils';
 import PlateItem from './components/PlateItem';
@@ -59,8 +59,6 @@ class index extends Component {
                     guidanceKey: 'VideoTask',
                     GuidanceView: VideoTaskGuidance,
                 });
-                // 阅读用户协议与隐私政策
-                UserAgreementOverlay();
             }
         );
 
@@ -70,7 +68,13 @@ class index extends Component {
             const phone = ISIOS ? '' : await Util.getPhoneNumber();
             console.log('!app.login', !app.login, !userCache, !config.disableAd);
             if (!app.login && !userCache && !config.disableAd) {
-                this.loadUserReword(phone);
+                if (!app.createUserAgreement && Config.AppStore == 'tencent') {
+                    UserAgreementOverlay.show({
+                        callback: () => this.loadUserReword(phone),
+                    });
+                } else {
+                    this.loadUserReword(phone);
+                }
             }
         }, 3000);
 
