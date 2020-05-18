@@ -7443,7 +7443,7 @@ react-lifecycles-compat@^3.0.2:
 
 "react-native-alipay-auth@git+http://code.haxibiao.cn/native/react-native-alipay-auth.git":
   version "1.0.0"
-  resolved "git+http://code.haxibiao.cn/native/react-native-alipay-auth.git#1924ebd283276569cfcd1d73503b576f19adec02"
+  resolved "git+http://code.haxibiao.cn/native/react-native-alipay-auth.git#bea151eab3cfd8d09bc5439acb7046fbe73abd6d"
 
 react-native-animatable@1.3.3, react-native-animatable@^1.1.0:
   version "1.3.3"

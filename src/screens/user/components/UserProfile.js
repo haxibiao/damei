@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, ScrollView, Image } from 'react-native';
 
 import { Avatar, Iconfont, FollowButton, Button, TouchFeedback, Row } from 'components';
-import { Theme, PxFit } from 'utils';
+import { Theme, PxFit, Tools } from 'utils';
 
 import { Query, ApolloClient, withApollo } from 'react-apollo';
 import { StackActions } from 'react-navigation';
@@ -28,7 +28,7 @@ class UserProfile extends Component {
     render() {
         let { user, orderByHot, switchOrder, hasQuestion, navigation } = this.props;
         let isSelf = app.me.id === user.id;
-        user.avatar = app.me.avatar + "?t=" + Date.now();
+        user.avatar = isSelf ? Tools.syncGetter('me.avatar', app) + '?t=' + Date.now() : user.avatar;
         return (
             <View style={styles.userInfoContainer}>
                 <View style={styles.main}>
@@ -86,7 +86,14 @@ class UserProfile extends Component {
                 </View>
                 <View style={styles.bottom}>
                     {user.is_admin ? (
-                        <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: -6, paddingBottom: 10 }}>
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                marginLeft: -6,
+                                paddingBottom: 10,
+                            }}
+                        >
                             <Image
                                 source={require('../../../assets/images/admin.png')}
                                 style={{ height: PxFit(13), width: PxFit(13), marginHorizontal: PxFit(5) }}
@@ -98,7 +105,14 @@ class UserProfile extends Component {
                     ) : null}
 
                     {user.profile && user.profile.sub_name ? (
-                        <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: -6, paddingBottom: 10 }}>
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                marginLeft: -6,
+                                paddingBottom: 10,
+                            }}
+                        >
                             <Image
                                 source={require('../../../assets/images/official.png')}
                                 style={{ height: PxFit(13), width: PxFit(13), marginHorizontal: PxFit(5) }}

@@ -14,7 +14,7 @@ import { NavigationActions } from 'react-navigation';
 
 const { width: sw, height: sh } = Dimensions.get('window');
 
-export default observer(props => {
+export default observer((props) => {
     const { media, index, navigation } = props;
     const [adShow, setAdShow] = useState(true);
     const isAskQuestion =
@@ -63,15 +63,16 @@ export default observer(props => {
                     }}
                     onAdClick={() => getReward(media)}
                 />
-                {/* {VideoStore.getReward.length < 1 && (
+                {VideoStore.getReward.length < 1 && (
                     <View
                         style={{
-                            bottom: Theme.HOME_INDICATOR_HEIGHT -4,
+                            bottom: Theme.HOME_INDICATOR_HEIGHT - 4,
                             position: 'absolute',
                             right: PxFit(Theme.itemSpace),
                             flexDirection: 'row',
                             alignItems: 'center',
-                        }}>
+                        }}
+                    >
                         <Image
                             source={require('../../../assets/images/click_tips.png')}
                             style={{ width: (20 * 208) / 118, height: 20 }}
@@ -81,25 +82,25 @@ export default observer(props => {
                                 color: '#C0CBD4',
                                 fontSize: PxFit(12),
                                 marginHorizontal: PxFit(10),
-                            }}>
+                            }}
+                        >
                             戳一戳，获取更多奖励
                         </Text>
                     </View>
-               
-               )} */}
+                )}
             </View>
         );
 
     const JumpLiveRoomHandler = () => {
         props.navigation.navigate('liveroom');
         // showLiveList();
-    }
+    };
 
     return (
         <View style={{ height: VideoStore.viewportHeight }}>
             {media.cover && (
                 <View style={styles.cover}>
-                    <Image style={styles.curtain} source={{ uri: media.cover }} resizeMode="cover" blurRadius={4} />
+                    <Image style={styles.curtain} source={{ uri: media.cover }} resizeMode='cover' blurRadius={4} />
                     <View style={styles.mask} />
                 </View>
             )}
@@ -126,7 +127,8 @@ export default observer(props => {
                                     question_id: null,
                                 })
                             }
-                            style={{ fontWeight: 'bold', color: Theme.white }}>
+                            style={{ fontWeight: 'bold', color: Theme.white }}
+                        >
                             #{Tools.syncGetter('question.category.name', media)}
                         </Text>
                     </SafeText>
@@ -143,7 +145,8 @@ export default observer(props => {
                         bottom: PxFit(355 + Theme.HOME_INDICATOR_HEIGHT),
                         alignItems: 'center',
                         justifyContent: 'center',
-                    }}>
+                    }}
+                >
                     <Image
                         source={require('../../../assets/images/tips_bg.png')}
                         style={{ width: 86, height: (86 * 125) / 210 }}
@@ -156,7 +159,8 @@ export default observer(props => {
                             left: PxFit(3),
                             fontSize: PxFit(12),
                             marginHorizontal: PxFit(10),
-                        }}>
+                        }}
+                    >
                         参与评论回答有奖~
                     </Text>
                 </View>

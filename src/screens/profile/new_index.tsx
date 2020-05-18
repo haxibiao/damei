@@ -17,6 +17,7 @@ import { ApolloClient } from 'apollo-boost';
 let client: ApolloClient<unknown>; //旧后端client
 
 const Profile = observer((props: any) => {
+    console.log('app.me', app.me)
     const [userinfo, setuserinfo] = useState({ ...app.me });
 
     useEffect(() => {
@@ -40,9 +41,11 @@ const Profile = observer((props: any) => {
                     setuserinfo({ ...user });
                 })
                 .catch((err) => {});
+        } else {
+            setuserinfo({})
         }
     }
-    console.log('Profile app.login', app.login)
+    console.log('Profile app.login', userinfo)
     return (
         <Page.PageCleared safe>
             <ScrollView>

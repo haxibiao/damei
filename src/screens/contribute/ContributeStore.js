@@ -133,7 +133,7 @@ class ContributeStore {
 
     @action.bound
     imagePicke(type: target = '') {
-        Api.imagePicker(
+        common.imagePicker(
             (image) => {
                 image = `data:${image.mime};base64,${image.data}`;
                 runInAction(() => {

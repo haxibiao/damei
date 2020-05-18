@@ -184,8 +184,8 @@ android {
         applicationId rootProject.ext.applicationId 
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 31
-        versionName "2.8.1"
+        versionCode 32
+        versionName "2.8.2"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         manifestPlaceholders = [

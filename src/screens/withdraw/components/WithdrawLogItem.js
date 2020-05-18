@@ -9,7 +9,11 @@ import { Theme, PxFit, SCREEN_WIDTH } from '../../../utils';
 
 function WithdrawLogItem(props) {
     const { style, navigation, item } = props;
-    let statusText, color, image_url, withdrawTips, size = 40;
+    let statusText,
+        color,
+        image_url,
+        withdrawTips,
+        size = 40;
     switch (item.status) {
         case -1:
             statusText = '提现失败';
@@ -55,7 +59,8 @@ function WithdrawLogItem(props) {
                 navigation.navigate('withdrawLogDetails', {
                     withdraw_id: item.id,
                 })
-            }>
+            }
+        >
             <Image source={image_url} style={{ width: size, height: size, marginVertical: PxFit(15) }} />
             <View style={{ width: (SCREEN_WIDTH * 4) / 7 }}>
                 <Text style={{ fontSize: PxFit(15), color: Theme.defaultTextColor }}>
@@ -68,7 +73,7 @@ function WithdrawLogItem(props) {
                 </Text>
             </View>
             <View>
-                <Text style={{ fontSize: PxFit(20), color }}>￥{item.amount.toFixed(0)}.00</Text>
+                <Text style={{ fontSize: PxFit(20), color }}>￥{item.amount}</Text>
             </View>
         </TouchableOpacity>
     );

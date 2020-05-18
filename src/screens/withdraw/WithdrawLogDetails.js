@@ -22,12 +22,13 @@ class WithdrawLogDetails extends Component {
         const { navigation, route } = this.props;
         const { withdraw_id } = route.params;
         return (
-            <PageContainer title="提现详情" white>
+            <PageContainer title='提现详情' white>
                 <Query
                     query={GQL.WithdrawQuery}
                     variables={{
                         id: withdraw_id,
-                    }}>
+                    }}
+                >
                     {({ data, error, loading, refetch }) => {
                         if (error) return <ErrorView onPress={refetch} />;
                         if (loading) return <LoadingSpinner />;
@@ -51,11 +52,13 @@ class WithdrawLogDetails extends Component {
                             <View
                                 style={{
                                     backgroundColor: Theme.white,
-                                }}>
+                                }}
+                            >
                                 <View
                                     style={{
                                         paddingHorizontal: PxFit(15),
-                                    }}>
+                                    }}
+                                >
                                     <View style={styles.header}>
                                         <Avatar
                                             size={38}
@@ -66,27 +69,26 @@ class WithdrawLogDetails extends Component {
                                         <Text style={styles.name}> {app.me.name} </Text>
                                     </View>
                                     <View style={styles.info}>
-                                        <Text style={styles.money}>
-                                            {withdraw.amount}
-                                            .00
-                                        </Text>
+                                        <Text style={styles.money}>￥{withdraw.amount}</Text>
                                         {withdraw.status == -1 ? (
                                             <Text
                                                 style={{
                                                     fontSize: PxFit(16),
                                                     color: Theme.errorColor,
-                                                }}>
+                                                }}
+                                            >
                                                 交易失败
                                             </Text>
                                         ) : (
-                                                <Text
-                                                    style={{
-                                                        fontSize: PxFit(16),
-                                                        color: Theme.weixin,
-                                                    }}>
-                                                    交易成功
-                                                </Text>
-                                            )}
+                                            <Text
+                                                style={{
+                                                    fontSize: PxFit(16),
+                                                    color: Theme.weixin,
+                                                }}
+                                            >
+                                                交易成功
+                                            </Text>
+                                        )}
                                     </View>
                                     <View style={styles.row}>
                                         <Text style={styles.textLeft}>提现平台 </Text>
@@ -108,7 +110,8 @@ class WithdrawLogDetails extends Component {
                                                 {
                                                     paddingBottom: PxFit(15),
                                                 },
-                                            ]}>
+                                            ]}
+                                        >
                                             <Text style={styles.textLeft}>收款账户 </Text>
                                             <Text style={styles.textRight}>{app.me.wallet.real_name}</Text>
                                         </View>
@@ -127,7 +130,8 @@ class WithdrawLogDetails extends Component {
                                             {
                                                 paddingBottom: PxFit(15),
                                             },
-                                        ]}>
+                                        ]}
+                                    >
                                         <Text style={styles.textLeft}>订单号 </Text>
                                         <Text style={styles.text}> {withdraw.trade_no} </Text>
                                     </View>
@@ -137,7 +141,8 @@ class WithdrawLogDetails extends Component {
                                         paddingHorizontal: PxFit(15),
                                         borderTopWidth: PxFit(10),
                                         borderTopColor: Theme.lightBorder,
-                                    }}>
+                                    }}
+                                >
                                     <View style={styles.footer}>
                                         <Text
                                             style={[
@@ -145,7 +150,8 @@ class WithdrawLogDetails extends Component {
                                                 {
                                                     lineHeight: PxFit(22),
                                                 },
-                                            ]}>
+                                            ]}
+                                        >
                                             回执信息 {'   '} <Text style={[styles.textRight]}> {withdraw.remark} </Text>
                                         </Text>
                                     </View>
