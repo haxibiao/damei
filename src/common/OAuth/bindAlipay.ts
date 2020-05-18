@@ -5,6 +5,7 @@ import { AlipayAppID, Scheme } from '@app/app.json';
 import { Loading } from 'components';
 import { GQL } from 'apollo';
 import { app } from 'store';
+import { Tools } from 'utils';
 
 export const getAlipayAuthCode = (props: { callback: Function }) => {
     const { callback } = props;
@@ -34,24 +35,26 @@ export const bindAlipay = (props: { authCode: any; onFaild: Function }) => {
                 code: authCode,
                 oauth_type: 'alipay',
             },
+            errorPolicy: 'all',
             refetchQueries: () => [
                 {
-                    query: GQL.UserMeansQuery,
+                    query: GQL.UserAccountSecurityQuery,
                     variables: { id: app.me.id },
                 },
                 {
-                    query: GQL.UserQuery,
+                    query: GQL.UserWalletQuery,
                     variables: { id: app.me.id },
                 },
             ],
         })
         .then((data: any) => {
             // Loading.hide();
+            console.log('data', data);
             Toast.show({
                 content: '绑定成功',
             });
             // bindAlipaySucceedTrack();
-            Helper.middlewareNavigate('Main', null, Helper.middlewareNavigate({ routeName: '提现' }));
+            Tools.replace('Withdraws');
         })
         .catch((error: { toString?: any; error?: any }) => {
             console.log('error', error);

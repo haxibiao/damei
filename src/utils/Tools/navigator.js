@@ -20,3 +20,18 @@ export const navigate = (name: string, params?: object, action?: any) => {
     });
     rootNavigation.dispatch(navigateAction);
 };
+
+export const replace = (name: string, params?: object, action?: any) => {
+    const navigateAction = CommonActions.reset({
+        index: 1,
+        routes: [
+            {
+                name: 'Main',
+            },
+            {
+                name: 'Withdraws',
+            },
+        ],
+    });
+    rootNavigation.dispatch(navigateAction);
+};
