@@ -18,7 +18,6 @@ import {
 import { Theme, PxFit, WPercent, Tools, SCREEN_WIDTH } from 'utils';
 import { compose, graphql, Query, Mutation, GQL } from 'apollo';
 
-import { useNavigation } from '@react-navigation/native';
 import { app } from 'store';
 
 type replyComment = { id: string, content: any, user: Object, count_likes: boolean, liked: boolean };
@@ -41,15 +40,15 @@ class CommentItem extends Component<Props> {
 
     likeComment = () => {
         this.setState(
-            prevState => ({
+            (prevState) => ({
                 liked: !prevState.liked,
                 count_likes: prevState.liked ? --prevState.count_likes : ++prevState.count_likes,
             }),
-            () => this.bounceAnimation(this.state.liked),
+            () => this.bounceAnimation(this.state.liked)
         );
     };
 
-    bounceAnimation = isLiked => {
+    bounceAnimation = (isLiked) => {
         this.props.comment.liked = isLiked;
         this.props.comment.count_likes = this.state.count_likes;
         try {
@@ -104,13 +103,14 @@ class CommentItem extends Component<Props> {
     };
 
     showOverlay = (comment, parent_comment_id) => {
-        let {  showCommentModal, replyComment } = this.props;
-        let navigation = useNavigation();
+        let { showCommentModal, replyComment } = this.props;
         if (app.userCache && app.userCache.is_admin) {
             PullChooser.show([
                 {
                     title: '举报',
-                    onPress: () => { if(navigation) navigation.navigate('ReportComment', { comment_id: comment.id })},
+                    onPress: () => {
+                        Tools.navigate('ReportComment', { comment_id: comment.id });
+                    },
                 },
                 {
                     title: '回复',
@@ -128,7 +128,9 @@ class CommentItem extends Component<Props> {
             PullChooser.show([
                 {
                     title: '举报',
-                    onPress: () => { if(navigation)navigation.navigate('ReportComment', { comment_id: comment.id })},
+                    onPress: () => {
+                        Tools.navigate('ReportComment', { comment_id: comment.id });
+                    },
                 },
                 {
                     title: '回复',
@@ -142,8 +144,7 @@ class CommentItem extends Component<Props> {
     };
 
     render() {
-        let { comment,  questionId, user, parent_comment_id } = this.props;
-        let navigation = useNavigation();
+        let { comment, questionId, user, parent_comment_id } = this.props;
         let { liked, count_likes, bounce, visible, limit, count_replyComment } = this.state;
         let scale = bounce.interpolate({
             inputRange: [1, 1.1, 1.2],
@@ -157,12 +158,14 @@ class CommentItem extends Component<Props> {
                         paddingHorizontal: PxFit(Theme.itemSpace),
                         marginTop: PxFit(5),
                     }}
-                    onPress={() => this.showOverlay(comment, parent_comment_id)}>
+                    onPress={() => this.showOverlay(comment, parent_comment_id)}
+                >
                     <TouchFeedback
                         onPress={() => {
-                            if(navigation) navigation.navigate('User', { user: comment.user })
+                            Tools.navigate('User', { user: comment.user });
                         }}
-                        style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        style={{ flexDirection: 'row', alignItems: 'center' }}
+                    >
                         <Avatar source={comment.user.avatar} size={PxFit(24)} />
                         <View style={[styles.profile, { marginLeft: PxFit(10) }]}>
                             <Row>
@@ -172,7 +175,8 @@ class CommentItem extends Component<Props> {
                                 <Animated.View style={{ transform: [{ scale: scale }] }}>
                                     <TouchFeedback
                                         style={styles.touchItem}
-                                        onPress={Tools.throttle(this.likeComment, 400)}>
+                                        onPress={Tools.throttle(this.likeComment, 400)}
+                                    >
                                         <Iconfont
                                             name={'like-fill'}
                                             size={PxFit(20)}
@@ -182,10 +186,8 @@ class CommentItem extends Component<Props> {
                                 </Animated.View>
                                 {count_likes > 0 && (
                                     <SafeText
-                                        style={[
-                                            styles.countLikes,
-                                            { color: liked ? Theme.themeRed : Theme.backColor },
-                                        ]}>
+                                        style={[styles.countLikes, { color: liked ? Theme.themeRed : Theme.backColor }]}
+                                    >
                                         {count_likes}
                                     </SafeText>
                                 )}
@@ -196,7 +198,8 @@ class CommentItem extends Component<Props> {
                         style={{
                             width: SCREEN_WIDTH - (PxFit(42) + PxFit(34) + PxFit(Theme.itemSpace) * 2),
                             marginLeft: PxFit(34),
-                        }}>
+                        }}
+                    >
                         <Row>
                             {comment.content && (
                                 <Text style={styles.contentText}>
@@ -270,5 +273,5 @@ const styles = StyleSheet.create({
 
 export default compose(
     graphql(GQL.toggleLikeMutation, { name: 'toggleLikeMutation' }),
-    graphql(GQL.deleteCommentMutation, { name: 'deleteCommentMutation' }),
+    graphql(GQL.deleteCommentMutation, { name: 'deleteCommentMutation' })
 )(CommentItem);

@@ -19,8 +19,6 @@ import { Theme, PxFit, WPercent, Tools } from 'utils';
 
 import { Query, Mutation, compose, withApollo, graphql, GQL } from 'apollo';
 
-import { useNavigation } from '@react-navigation/native';
-
 import ChildCommentItem from './ChildCommentItem';
 
 import { app } from 'store';
@@ -45,15 +43,15 @@ class CommentItem extends Component<Props> {
 
     likeComment = () => {
         this.setState(
-            prevState => ({
+            (prevState) => ({
                 liked: !prevState.liked,
                 count_likes: prevState.liked ? --prevState.count_likes : ++prevState.count_likes,
             }),
-            () => this.bounceAnimation(this.state.liked),
+            () => this.bounceAnimation(this.state.liked)
         );
     };
 
-    bounceAnimation = isLiked => {
+    bounceAnimation = (isLiked) => {
         this.props.comment.liked = isLiked;
         this.props.comment.count_likes = this.state.count_likes;
         try {
@@ -107,7 +105,7 @@ class CommentItem extends Component<Props> {
         }
     };
 
-    acceptComment = comment => {
+    acceptComment = (comment) => {
         const { questionId } = this.props;
         app.client
             .mutate({
@@ -126,21 +124,21 @@ class CommentItem extends Component<Props> {
                     },
                 ],
             })
-            .then(data => {
+            .then((data) => {
                 console.log('data', data);
                 Toast.show({
                     content: '采纳成功',
                 });
             })
-            .catch(err => {
+            .catch((err) => {
                 const str = err.toString().replace(/Error: GraphQL error: /, '');
                 Toast.show({ content: str });
             });
     };
 
-    showOverlay = comment => {
+    showOverlay = (comment) => {
         const { showCommentModal, replyComment, isAnswer, question } = this.props;
-        let navigation = useNavigation();
+
         const isShowAccept =
             question.user.id === app.me.id &&
             question.form === 2 &&
@@ -152,7 +150,7 @@ class CommentItem extends Component<Props> {
                 {
                     title: '举报',
                     onPress: () => {
-                        if(navigation) navigation.navigate('ReportComment', { comment_id: comment.id })
+                        Tools.navigate('ReportComment', { comment_id: comment.id });
                     },
                 },
                 {
@@ -178,7 +176,7 @@ class CommentItem extends Component<Props> {
                 {
                     title: '举报',
                     onPress: () => {
-                        if(navigation) navigation.navigate('ReportComment', { comment_id: comment.id })
+                        Tools.navigate('ReportComment', { comment_id: comment.id });
                     },
                 },
                 {
@@ -194,7 +192,7 @@ class CommentItem extends Component<Props> {
                 {
                     title: '举报',
                     onPress: () => {
-                        if(navigation) navigation.navigate('ReportComment', { comment_id: comment.id })
+                        Tools.navigate('ReportComment', { comment_id: comment.id });
                     },
                 },
                 {
@@ -238,16 +236,7 @@ class CommentItem extends Component<Props> {
     };
 
     render() {
-        const {
-            comment,
-            questionId,
-            showCommentModal,
-            replyComment,
-            isAnswer,
-            AnswerCount,
-            index,
-        } = this.props;
-        let navigation = useNavigation();
+        const { comment, questionId, showCommentModal, replyComment, isAnswer, AnswerCount, index } = this.props;
         const { liked, count_likes, bounce, visible, limit, loadingMore } = this.state;
         const scale = bounce.interpolate({
             inputRange: [1, 1.1, 1.2],
@@ -265,9 +254,11 @@ class CommentItem extends Component<Props> {
                             />
                         </View>
                     )}
-                    <TouchFeedback onPress={() => {
-                        if(navigation) navigation.navigate('User', { user: comment.user })
-                        }}>
+                    <TouchFeedback
+                        onPress={() => {
+                            Tools.navigate('User', { user: comment.user });
+                        }}
+                    >
                         <Avatar source={comment.user.avatar} size={PxFit(34)} />
                     </TouchFeedback>
                     <View style={{ flex: 1, marginLeft: PxFit(10) }}>
@@ -280,7 +271,8 @@ class CommentItem extends Component<Props> {
                                 <Animated.View style={{ transform: [{ scale: scale }] }}>
                                     <TouchFeedback
                                         style={styles.touchItem}
-                                        onPress={Tools.throttle(this.likeComment, 400)}>
+                                        onPress={Tools.throttle(this.likeComment, 400)}
+                                    >
                                         <Iconfont
                                             name={'like-fill'}
                                             size={PxFit(20)}
@@ -290,10 +282,8 @@ class CommentItem extends Component<Props> {
                                 </Animated.View>
                                 {count_likes > 0 && (
                                     <SafeText
-                                        style={[
-                                            styles.countLikes,
-                                            { color: liked ? Theme.themeRed : Theme.backColor },
-                                        ]}>
+                                        style={[styles.countLikes, { color: liked ? Theme.themeRed : Theme.backColor }]}
+                                    >
                                         {count_likes}
                                     </SafeText>
                                 )}
@@ -313,7 +303,8 @@ class CommentItem extends Component<Props> {
                 <Query
                     query={GQL.childCommentQuery}
                     variables={{ comment_id: comment.id, limit: limit }}
-                    fetchPolicy="network-only">
+                    fetchPolicy='network-only'
+                >
                     {({ data, loading, error, refetch, fetchMore }) => {
                         if (!(data && data.comments && data.comments[0] && data.comments[0].comments.length > 0))
                             return null;
@@ -330,7 +321,6 @@ class CommentItem extends Component<Props> {
                                             showCommentModal={showCommentModal}
                                             replyComment={replyComment}
                                             questionId={questionId}
-                                            navigation={navigation}
                                         />
                                     );
                                 })}
@@ -379,16 +369,18 @@ class CommentItem extends Component<Props> {
                                                 },
                                             });
                                         }
-                                    }}>
+                                    }}
+                                >
                                     {loading || loadingMore ? (
                                         <Row style={{ paddingBottom: 10 }}>
-                                            <ActivityIndicator size="small" color={Theme.grey} />
+                                            <ActivityIndicator size='small' color={Theme.grey} />
                                             <Text
                                                 style={{
                                                     fontSize: PxFit(12),
                                                     color: Theme.grey,
                                                     paddingLeft: PxFit(7),
-                                                }}>
+                                                }}
+                                            >
                                                 加载中
                                             </Text>
                                         </Row>
@@ -404,7 +396,7 @@ class CommentItem extends Component<Props> {
         );
     }
 
-    showLoading = comments => {
+    showLoading = (comments) => {
         let { limit } = this.state;
         if (comments.comments_count == comments.comments.length) {
             return null;
@@ -494,5 +486,5 @@ const styles = StyleSheet.create({
 
 export default compose(
     graphql(GQL.toggleLikeMutation, { name: 'toggleLikeMutation' }),
-    graphql(GQL.deleteCommentMutation, { name: 'deleteCommentMutation' }),
+    graphql(GQL.deleteCommentMutation, { name: 'deleteCommentMutation' })
 )(CommentItem);
