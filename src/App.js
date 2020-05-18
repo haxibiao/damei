@@ -20,6 +20,8 @@ import { LicenseUrl, LicenseKey } from '../app.json';
 import { LivePullManager } from 'hxf-tencent-live'; //导入直播
 import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 
+import * as Sentry from '@sentry/react-native';
+
 @observer
 class App extends Component {
     toast: Toast;
@@ -33,6 +35,10 @@ class App extends Component {
     }
 
     componentDidMount() {
+        Sentry.init({
+            dsn: 'http://69903599c4cb473085a58faa227b9944@sentry.haxibiao.cn:9000/11',
+        });
+
         ad.AdManager.init();
         // 信息流广告先预加载，提速第一次签到时显示的速度
         ad.AdManager.loadFeedAd();

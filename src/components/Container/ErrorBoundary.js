@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Image, Text } from 'react-native';
 import TouchFeedback from '../TouchableView/TouchFeedback';
 import { Theme, PxFit, SCREEN_WIDTH, WPercent } from '../../utils';
+import * as Sentry from '@sentry/react-native';
 
 class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -23,6 +24,7 @@ class ErrorBoundary extends React.Component {
     componentDidCatch(error, info) {
         // You can also log the error to an error reporting service
         // logErrorToMyService(error, info);
+        Sentry.captureException(error);
         this.setState({ hasError: true });
     }
 
