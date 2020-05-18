@@ -9,6 +9,9 @@ import ApolloClient from 'apollo-boost';
 import LottieView from 'lottie-react-native';
 import * as PermissionChecker from './CommonWidgetPermissionChecker';
 import HeaderBackButton from '../../widgets/HeaderBackButton';
+
+
+
 var StatusBarHeight = StatusBar.currentHeight ?? 0;// 状态栏高度
 console.log(StatusBarHeight);
 import { app } from 'store';
@@ -108,7 +111,7 @@ const Live = (props: { navigation: any, inCurrent: boolean; }) => {
 
         const GoPushHandler = () => {
             if (app.login) {
-                if (DataCenter.App.sufficient_permissions) {
+                if (app.sufficient_permissions) {
                     props.navigation.navigate("startlive");
                 } else {
                     //权限不够，打开权限窗口

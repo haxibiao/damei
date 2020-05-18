@@ -243,7 +243,7 @@ class TaskItem extends Component {
         }
     };
 
-    _showReward = task => {
+    _showReward = (task) => {
         if (task.type == 4) {
             if (ISIOS) {
                 return (
@@ -337,7 +337,7 @@ class TaskItem extends Component {
         );
     };
 
-    showNormalReward = task => {
+    showNormalReward = (task) => {
         if (task.gold > 0) {
             return (
                 <View style={styles.reword}>
@@ -348,7 +348,7 @@ class TaskItem extends Component {
         }
     };
 
-    _showRewardTicket = task => {
+    _showRewardTicket = (task) => {
         if (task.ticket < 0) {
             return (
                 <View style={styles.reword}>
@@ -367,7 +367,7 @@ class TaskItem extends Component {
         }
     };
 
-    _showContribute = task => {
+    _showContribute = (task) => {
         if (task.contribute > 0) {
             return (
                 <View style={styles.reword}>
@@ -381,7 +381,7 @@ class TaskItem extends Component {
         }
     };
 
-    _showTaskDetail = task => {
+    _showTaskDetail = (task) => {
         if (this.state.showTaskDetail) {
             return (
                 <Animated.View style={[styles.taskDetail, { opacity: this.state.fadeValue }]}>
@@ -393,7 +393,7 @@ class TaskItem extends Component {
         // 任务详情由后端返回较好
     };
 
-    _showTaskContent = task => {
+    _showTaskContent = (task) => {
         if (task.type == 6) {
             return <Text style={styles.taskDetailText}>{`点击领现金查看详情`}</Text>;
         }
@@ -411,9 +411,8 @@ class TaskItem extends Component {
         if (task.type == 3) {
             return (
                 <Text
-                    style={
-                        styles.taskDetailText
-                    }>{`出题被审核通过才能获取奖励。出题添加更加详细的解析会获取最高的奖励哦，没有解析将只能获得${
+                    style={styles.taskDetailText}
+                >{`出题被审核通过才能获取奖励。出题添加更加详细的解析会获取最高的奖励哦，没有解析将只能获得${
                     task.gold
                 }智慧点的奖励。恶意刷题和乱出解析将会受到惩罚哦！`}</Text>
             );
@@ -483,7 +482,8 @@ class TaskItem extends Component {
                         if (task.type == 4) {
                             goTask && goTask();
                         }
-                    }}>
+                    }}
+                >
                     <Row>
                         <Text style={styles.name}>{task.name}</Text>
                         <Row>{this._showReward(task)}</Row>
@@ -519,11 +519,11 @@ class TaskItem extends Component {
 const styles = StyleSheet.create({
     buttonTitleStyle: {
         color: Theme.defaultTextColor,
-        fontSize: PxFit(14),
+        fontSize: PxFit(13),
         fontWeight: 'bold',
     },
     container: {
-        marginLeft: PxFit(15),
+        marginLeft: PxFit(12),
         paddingVertical: PxFit(12),
         // borderTopWidth: PxFit(1),
         // borderTopColor: Theme.lightBorder,
@@ -573,8 +573,8 @@ const styles = StyleSheet.create({
         lineHeight: 18,
     },
     taskRight: {
-        paddingLeft: 5,
-        paddingRight: 15,
+        paddingLeft: 2,
+        paddingRight: 10,
         paddingVertical: PxFit(5),
     },
     themeButton: {
@@ -587,5 +587,5 @@ const styles = StyleSheet.create({
 
 export default compose(
     graphql(GQL.TaskRewardMutation, { name: 'TaskRewardMutation' }),
-    graphql(GQL.ReceiveTaskMutation, { name: 'ReceiveTaskMutation' }),
+    graphql(GQL.ReceiveTaskMutation, { name: 'ReceiveTaskMutation' })
 )(TaskItem);
