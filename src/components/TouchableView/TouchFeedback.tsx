@@ -17,6 +17,7 @@ function TouchFeedback(props: {
     const activeOpacity = props?.activeOpacity ?? 0.6;
 
     const middleware = (callback: any, navigation: any) => {
+      
         return () => {
             if (TOKEN) {
                 callback && callback();
@@ -43,6 +44,7 @@ function TouchFeedback(props: {
         let disabled = props.disabled;
 
         if (authenticated && navigation) {
+          
             onPress = middleware(onPress, navigation);
         }
 

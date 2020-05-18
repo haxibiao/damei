@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Page } from '../../widgets';
 import { app, config } from 'store';
 import { GQL } from '@src/apollo';
-import { observer } from 'mobx-react';
+import { observer } from 'store';
 
 /**
  *  子组件部分引入
@@ -16,7 +16,7 @@ import { ApolloClient } from 'apollo-boost';
 
 let client: ApolloClient<unknown>; //旧后端client
 
-const Profile = (props: any) => {
+const Profile = observer((props: any) => {
     const [userinfo, setuserinfo] = useState({ ...app.me });
 
     useEffect(() => {
@@ -42,7 +42,7 @@ const Profile = (props: any) => {
                 .catch((err) => {});
         }
     }
-
+    console.log('Profile app.login', app.login)
     return (
         <Page.PageCleared safe>
             <ScrollView>
@@ -56,6 +56,6 @@ const Profile = (props: any) => {
             </ScrollView>
         </Page.PageCleared>
     );
-};
+});
 
-export default observer(Profile);
+export default Profile;

@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 import { Page, StyleSheet, TouchableOpacity, Image } from '../../../widgets';
 import { View, Text, } from 'react-native-ui-lib';
 import { sw, sh } from '../../../tools';
-import { observer } from 'mobx-react';
+import { observer,app } from 'store';
+
+import { TouchFeedback } from "components"
 
 const generalSub = [
     {
@@ -22,20 +24,22 @@ const generalSub = [
     },
 ];
 
-const WidgetPartFour = (props: {
+const WidgetPartFour = observer((props: {
     navigation: any;
     userinfo:any;
 }) => {
-
+    console.log('app.login', app.login)
     return (
         <View style={{ width: sw, height: 'auto' }} paddingH-10 marginT-20>
             {
                 generalSub.map((item: { name: string, icon: string, targetRoute: string; }, index: number) => {
                     return (
-                        <TouchableOpacity
+                        <TouchFeedback
                             activeOpacity={0.9}
                             style={styles.itemContainer}
                             key={index}
+                            navigation={props.navigation}
+                            authenticated
                             onPress={() => {
                                 if(item.name == '设置'){
                                     props.navigation.navigate(item.targetRoute,{'user': props?.userinfo ?? {}});
@@ -49,13 +53,13 @@ const WidgetPartFour = (props: {
                                 <Text marginL-16>{item.name}</Text>
                             </View>
                             <Image source={{ uri: 'right_arrow' }} resizeMode='contain' style={{ height: 18, width: 18 }} />
-                        </TouchableOpacity>
+                        </TouchFeedback>
                     );
                 })
             }
         </View>
     );
-};
+});
 
 export default WidgetPartFour;
 

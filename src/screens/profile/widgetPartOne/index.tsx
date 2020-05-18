@@ -6,7 +6,7 @@ import { sw, sh } from '../../../tools';
 import { DataCenter, observer } from '../../../data';
 import { app } from 'store';
 import { TouchFeedback } from 'components';
-import { PxFit } from 'utils';
+import { PxFit,Theme } from 'utils';
 
 const MemoName = observer((props: { navigation: any; name?: string }) => {
     const goToLogin = () => {
@@ -21,7 +21,11 @@ const MemoName = observer((props: { navigation: any; name?: string }) => {
                 </Text>
             ) : (
                 <TouchFeedback onPress={goToLogin}>
-                    <Text style={{ fontWeight: '500' }}>前往登录</Text>
+                        <Text style={{
+                            fontWeight: 'bold',
+                            fontSize: PxFit(20),
+                            color: Theme.defaultTextColor
+                        }}>{'登录/注册'}</Text>
                 </TouchFeedback>
             )}
         </View>
@@ -30,16 +34,16 @@ const MemoName = observer((props: { navigation: any; name?: string }) => {
 
 const MemoDesc = observer((props: { desc: string }) => {
     return (
-        <View row style={{ flex: 1 }} centerV>
+        <View row style={{ flex: 1 ,marginTop:5}} centerV >
             {app.login ? (
                 <>
                     <Image source={{ uri: 'driver_level' }} resizeMode='contain' style={{ height: 23, width: 23 }} />
-                    <Text style={{ color: '#FCCF01', fontSize: 14, fontWeight: '500', marginTop: PxFit(15) }}>
+                    <Text style={{ color: '#FCCF01', fontSize: 14, fontWeight: '500', marginTop: PxFit(2) }}>
                         当前头衔 {props?.desc ?? ''}
                     </Text>
                 </>
             ) : (
-                <Text style={{ color: '#333', fontSize: 14, fontWeight: '500' }}>欢迎来到答妹</Text>
+                <Text style={{ marginTop: PxFit(10),fontSize: PxFit(14),}}>欢迎来到答妹</Text>
             )}
         </View>
     );
@@ -52,6 +56,8 @@ const MemoLevel = observer((props: { navigation: any; userinfo: any }) => {
             onPress={() => {
                 props.navigation.navigate('GradeDescription', { user: props.userinfo });
             }}
+            navigation={props.navigation}
+            authenticated
         >
             <Text text70 style={{ fontWeight: '600' }}>
                 {props.userinfo?.level?.level ?? 1}
@@ -67,6 +73,8 @@ const MemoFollow = observer((props: { navigation: any; count?: number }) => {
             onPress={() => {
                 props.navigation.navigate('Society', { follower: false });
             }}
+            navigation={props.navigation}
+            authenticated
         >
             <Text text70 style={{ fontWeight: '600' }}>
                 {props?.count ?? 0}
@@ -82,6 +90,8 @@ const MemoFollowers = observer((props: { navigation: any; count?: number }) => {
             onPress={() => {
                 props.navigation.navigate('Society', { follower: true });
             }}
+            navigation={props.navigation}
+            authenticated
         >
             <Text text70 style={{ fontWeight: '600' }}>
                 {props.count ?? 0}
@@ -98,11 +108,11 @@ const MemoAvatar = observer((props: { navigation: any; user?: any }) => {
     return (
         <>
             {app.login ? (
-                <TouchFeedback onPress={onPressHandler}>
+                <TouchFeedback onPress={onPressHandler} navigation={props.navigation} authenticated>
                     <Avatar uri={avatar + "?t=" + Date.now()} size={sw * 0.23} />
                 </TouchFeedback>
             ) : (
-                <TouchFeedback onPress={onPressHandler}>
+                <TouchFeedback onPress={onPressHandler} navigation={props.navigation} authenticated>
                     <Avatar uri={'default_avatar'} size={sw * 0.23} />
                 </TouchFeedback>
             )}
