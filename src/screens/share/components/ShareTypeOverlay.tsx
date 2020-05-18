@@ -4,9 +4,11 @@ import { PageContainer, TouchFeedback, Iconfont, Row } from 'components';
 import { Theme, PxFit, Config, SCREEN_WIDTH, Api } from 'utils';
 
 import { Overlay } from 'teaset';
-import { WeChat, Share } from 'native';
+import { Share } from 'native';
 
-const ShareTypeOverlay = props => {
+import * as WeChat from 'react-native-wechat';
+
+const ShareTypeOverlay = (props) => {
     const { user } = props;
     const content = user.invite_slogan;
 
@@ -35,15 +37,17 @@ const ShareTypeOverlay = props => {
                 <TouchFeedback
                     onPress={async () => {
                         // props.hide();
-                        WeChat.isSupported().then(result => {
-                            if (result) {
-                                WeChat.shareText(content);
-                            } else {
-                                Toast.show({ content: '未安装微信或当前微信版本较低' });
-                            }
-                        });
+                        try {
+                            await WeChat.shareToSession({
+                                type: 'text',
+                                description: content,
+                            });
+                        } catch (e) {
+                            Toast.show({ content: '未安装微信或当前微信版本较低' });
+                        }
                     }}
-                    style={{ alignItems: 'center' }}>
+                    style={{ alignItems: 'center' }}
+                >
                     <Image source={require('@src/assets/images/wechat.png')} style={styles.imageStyle} />
 
                     <Text style={{ color: Theme.grey, fontSize: 12 }}>微信好友</Text>
@@ -60,7 +64,8 @@ const ShareTypeOverlay = props => {
                             });
                         }
                     }}
-                    style={{ alignItems: 'center' }}>
+                    style={{ alignItems: 'center' }}
+                >
                     <Image source={require('@src/assets/images/qq.png')} style={styles.imageStyle} />
                     <Text style={{ color: Theme.grey, fontSize: 12 }}>QQ好友</Text>
                 </TouchFeedback>
@@ -76,7 +81,8 @@ const ShareTypeOverlay = props => {
                             });
                         }
                     }}
-                    style={{ alignItems: 'center' }}>
+                    style={{ alignItems: 'center' }}
+                >
                     <Image source={require('@src/assets/images/weibo.png')} style={styles.imageStyle} />
                     <Text style={{ color: Theme.grey, fontSize: 12 }}>微博</Text>
                 </TouchFeedback>
@@ -92,7 +98,8 @@ const ShareTypeOverlay = props => {
                             });
                         }
                     }}
-                    style={{ alignItems: 'center' }}>
+                    style={{ alignItems: 'center' }}
+                >
                     <Image source={require('@src/assets/images/qzone.png')} style={styles.imageStyle} />
                     <Text style={{ color: Theme.grey, fontSize: 12 }}>QQ空间</Text>
                 </TouchFeedback>

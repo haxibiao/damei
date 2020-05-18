@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Image, ScrollView, ImageBackground } from 'react-native';
 import { PageContainer, TouchFeedback, Iconfont, Row, Button } from 'components';
 import { Theme, PxFit, Config, SCREEN_WIDTH } from 'utils';
-import { WeChat, Share } from 'native';
-
-const ShareGuide = props => {
+import * as WeChat from 'react-native-wechat';
+const ShareGuide = (props) => {
     const content = props.user.invite_slogan;
     return (
         <View style={styles.container}>
@@ -13,7 +12,8 @@ const ShareGuide = props => {
                     flexDirection: 'row',
                     justifyContent: 'flex-end',
                 }}
-                onPress={() => props.hide()}>
+                onPress={() => props.hide()}
+            >
                 <Iconfont name={'close'} size={16} color={Theme.grey} />
             </TouchFeedback>
             <View>
@@ -36,17 +36,20 @@ const ShareGuide = props => {
                     style={styles.buttonImage}
                     onPress={() => {
                         props.hide();
-                        WeChat.isSupported().then(result => {
-                            if (result) {
-                                WeChat.shareText(content);
-                            } else {
-                                Toast.show({ content: '未安装微信或当前微信版本较低' });
-                            }
-                        });
-                    }}>
+                        try {
+                            WeChat.shareToSession({
+                                type: 'text',
+                                description: content,
+                            });
+                        } catch (e) {
+                            Toast.show({ content: '未安装微信或当前微信版本较低' });
+                        }
+                    }}
+                >
                     <ImageBackground
                         source={require('@src/assets/images/share_guide_button.png')}
-                        style={styles.button}>
+                        style={styles.button}
+                    >
                         <Text style={styles.buttonText}>去粘贴</Text>
                     </ImageBackground>
                 </TouchFeedback>
