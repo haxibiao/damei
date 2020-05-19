@@ -21,6 +21,9 @@ query commentNotificationsQuery($filter: [NotificationEnum], $limit: Int, $offse
                     id
                     level
                 }
+                profile {
+                    age
+                }
             }
             feedback {
                 id
@@ -152,6 +155,9 @@ query FansNotificationsQuery($filter: [NotificationEnum], $limit: Int, $offset: 
                     id
                     level
                 }
+                profile {
+                    age
+                }
             }
         }
     }
@@ -192,6 +198,13 @@ query likeNotificationsQuery($offset: Int, $limit: Int, $filter: [NotificationEn
                 level {
                     id
                     level
+                }
+                profile {
+                    sub_name
+                    birthday
+                    age
+                    introduction
+                    posts_count
                 }
             }
             comment {
