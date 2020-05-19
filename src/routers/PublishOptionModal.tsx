@@ -65,8 +65,7 @@ const showPublishOption = (navigation: any) => {
                             <Text style={styles.subtitle}>分享有趣视频</Text>
                         </View>
                     </TouchableOpacity>
-
-                    <StartLiveButton navigation={navigation} />
+                    {!config.disabled && <StartLiveButton navigation={navigation} />}
                 </View>
 
                 <TouchableOpacity
