@@ -37,15 +37,6 @@
 		2CC3A8DD244977C200DFC31A /* DrawFeedAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3A852244977C200DFC31A /* DrawFeedAdManager.m */; };
 		2CC3A8DE244977C200DFC31A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 2CC3A856244977C200DFC31A /* LICENSE */; };
 		2CC3A8DF244977C200DFC31A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2CC3A857244977C200DFC31A /* README.md */; };
-		2CC3A8E0244977C200DFC31A /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3A859244977C200DFC31A /* UIProgressView+AFNetworking.m */; };
-		2CC3A8E1244977C200DFC31A /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3A85B244977C200DFC31A /* UIRefreshControl+AFNetworking.m */; };
-		2CC3A8E2244977C200DFC31A /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3A85E244977C200DFC31A /* AFNetworkActivityIndicatorManager.m */; };
-		2CC3A8E3244977C200DFC31A /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3A864244977C200DFC31A /* UIImageView+AFNetworking.m */; };
-		2CC3A8E4244977C200DFC31A /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3A867244977C200DFC31A /* UIButton+AFNetworking.m */; };
-		2CC3A8E5244977C200DFC31A /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3A868244977C200DFC31A /* UIActivityIndicatorView+AFNetworking.m */; };
-		2CC3A8E6244977C200DFC31A /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3A869244977C200DFC31A /* UIWebView+AFNetworking.m */; };
-		2CC3A8E7244977C200DFC31A /* AFAutoPurgingImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3A86A244977C200DFC31A /* AFAutoPurgingImageCache.m */; };
-		2CC3A8E8244977C200DFC31A /* AFImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3A86C244977C200DFC31A /* AFImageDownloader.m */; };
 		2CC3A8E9244977C200DFC31A /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3A872244977C200DFC31A /* AFURLResponseSerialization.m */; };
 		2CC3A8EA244977C200DFC31A /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3A873244977C200DFC31A /* AFHTTPSessionManager.m */; };
 		2CC3A8EB244977C200DFC31A /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3A875244977C200DFC31A /* AFURLSessionManager.m */; };
@@ -160,26 +151,6 @@
 		2CC3A852244977C200DFC31A /* DrawFeedAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawFeedAdManager.m; sourceTree = "<group>"; };
 		2CC3A856244977C200DFC31A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		2CC3A857244977C200DFC31A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		2CC3A859244977C200DFC31A /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
-		2CC3A85A244977C200DFC31A /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AFNetworking.h"; sourceTree = "<group>"; };
-		2CC3A85B244977C200DFC31A /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
-		2CC3A85C244977C200DFC31A /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
-		2CC3A85D244977C200DFC31A /* AFImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageDownloader.h; sourceTree = "<group>"; };
-		2CC3A85E244977C200DFC31A /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
-		2CC3A85F244977C200DFC31A /* AFAutoPurgingImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAutoPurgingImageCache.h; sourceTree = "<group>"; };
-		2CC3A860244977C200DFC31A /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
-		2CC3A861244977C200DFC31A /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
-		2CC3A862244977C200DFC31A /* UIImage+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+AFNetworking.h"; sourceTree = "<group>"; };
-		2CC3A863244977C200DFC31A /* UIProgressView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIProgressView+AFNetworking.h"; sourceTree = "<group>"; };
-		2CC3A864244977C200DFC31A /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		2CC3A865244977C200DFC31A /* UIKit+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIKit+AFNetworking.h"; sourceTree = "<group>"; };
-		2CC3A866244977C200DFC31A /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
-		2CC3A867244977C200DFC31A /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AFNetworking.m"; sourceTree = "<group>"; };
-		2CC3A868244977C200DFC31A /* UIActivityIndicatorView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActivityIndicatorView+AFNetworking.m"; sourceTree = "<group>"; };
-		2CC3A869244977C200DFC31A /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
-		2CC3A86A244977C200DFC31A /* AFAutoPurgingImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAutoPurgingImageCache.m; sourceTree = "<group>"; };
-		2CC3A86B244977C200DFC31A /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
-		2CC3A86C244977C200DFC31A /* AFImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImageDownloader.m; sourceTree = "<group>"; };
 		2CC3A86E244977C200DFC31A /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		2CC3A86F244977C200DFC31A /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		2CC3A870244977C200DFC31A /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
@@ -428,37 +399,9 @@
 			children = (
 				2CC3A856244977C200DFC31A /* LICENSE */,
 				2CC3A857244977C200DFC31A /* README.md */,
-				2CC3A858244977C200DFC31A /* UIKit+AFNetworking */,
 				2CC3A86D244977C200DFC31A /* AFNetworking */,
 			);
 			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		2CC3A858244977C200DFC31A /* UIKit+AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				2CC3A859244977C200DFC31A /* UIProgressView+AFNetworking.m */,
-				2CC3A85A244977C200DFC31A /* UIButton+AFNetworking.h */,
-				2CC3A85B244977C200DFC31A /* UIRefreshControl+AFNetworking.m */,
-				2CC3A85C244977C200DFC31A /* UIImageView+AFNetworking.h */,
-				2CC3A85D244977C200DFC31A /* AFImageDownloader.h */,
-				2CC3A85E244977C200DFC31A /* AFNetworkActivityIndicatorManager.m */,
-				2CC3A85F244977C200DFC31A /* AFAutoPurgingImageCache.h */,
-				2CC3A860244977C200DFC31A /* UIWebView+AFNetworking.h */,
-				2CC3A861244977C200DFC31A /* UIActivityIndicatorView+AFNetworking.h */,
-				2CC3A862244977C200DFC31A /* UIImage+AFNetworking.h */,
-				2CC3A863244977C200DFC31A /* UIProgressView+AFNetworking.h */,
-				2CC3A864244977C200DFC31A /* UIImageView+AFNetworking.m */,
-				2CC3A865244977C200DFC31A /* UIKit+AFNetworking.h */,
-				2CC3A866244977C200DFC31A /* UIRefreshControl+AFNetworking.h */,
-				2CC3A867244977C200DFC31A /* UIButton+AFNetworking.m */,
-				2CC3A868244977C200DFC31A /* UIActivityIndicatorView+AFNetworking.m */,
-				2CC3A869244977C200DFC31A /* UIWebView+AFNetworking.m */,
-				2CC3A86A244977C200DFC31A /* AFAutoPurgingImageCache.m */,
-				2CC3A86B244977C200DFC31A /* AFNetworkActivityIndicatorManager.h */,
-				2CC3A86C244977C200DFC31A /* AFImageDownloader.m */,
-			);
-			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
 		2CC3A86D244977C200DFC31A /* AFNetworking */ = {
@@ -844,13 +787,14 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 3W7L7CX92N;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 3W7L7CX92N;
 						LastSwiftMigration = 1140;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1127,36 +1071,28 @@
 			files = (
 				2CC3A8EE244977C200DFC31A /* AFSecurityPolicy.m in Sources */,
 				2CC3A8EB244977C200DFC31A /* AFURLSessionManager.m in Sources */,
-				2CC3A8E0244977C200DFC31A /* UIProgressView+AFNetworking.m in Sources */,
 				2CC3A8F5244977C200DFC31A /* TVCHttpMessageURLProtocol.m in Sources */,
 				2CC3A903244977C200DFC31A /* NSString+Json.m in Sources */,
 				2CC3A908244977C200DFC31A /* BUDFullscreenViewController.m in Sources */,
 				2CC3A906244977C200DFC31A /* BUDCocoaSecurity.m in Sources */,
-				2CC3A8E3244977C200DFC31A /* UIImageView+AFNetworking.m in Sources */,
 				2CC3A8FE244977C200DFC31A /* VodUploader.m in Sources */,
 				2CC3A910244977C200DFC31A /* BUDFeedStyleHelper.m in Sources */,
 				2CC3A90F244977C200DFC31A /* BUDSettingTableView.m in Sources */,
 				2CC3A902244977C200DFC31A /* UIView+Draw.m in Sources */,
 				2CC3A8F4244977C200DFC31A /* TVCCommon.m in Sources */,
-				2CC3A8E4244977C200DFC31A /* UIButton+AFNetworking.m in Sources */,
 				2CC3A8F0244977C200DFC31A /* TVCUtils.m in Sources */,
 				2CC3A90D244977C200DFC31A /* BUDRefreshButton.m in Sources */,
 				2CC3A8DA244977C200DFC31A /* DrawFeedAd.m in Sources */,
 				2CC3A904244977C200DFC31A /* NSString+LocalizedString.m in Sources */,
-				2CC3A8E1244977C200DFC31A /* UIRefreshControl+AFNetworking.m in Sources */,
-				2CC3A8E2244977C200DFC31A /* AFNetworkActivityIndicatorManager.m in Sources */,
 				2CC3A907244977C200DFC31A /* BUDRewardedVideoAdViewController.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				2CC3A8F8244977C200DFC31A /* TVCClientInner.m in Sources */,
-				2CC3A8E5244977C200DFC31A /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				2CC3A911244977C200DFC31A /* BUDDrawTableViewCell.m in Sources */,
 				2CC3A8DD244977C200DFC31A /* DrawFeedAdManager.m in Sources */,
 				2CC3A8F2244977C200DFC31A /* TXUGCPublishUtil.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				2CC3A8D9244977C200DFC31A /* FeedAd.m in Sources */,
 				2CC3A90B244977C200DFC31A /* BUDFeedNormalModel.m in Sources */,
-				2CC3A8E7244977C200DFC31A /* AFAutoPurgingImageCache.m in Sources */,
-				2CC3A8E6244977C200DFC31A /* UIWebView+AFNetworking.m in Sources */,
 				2CC3A8F6244977C200DFC31A /* TXUGCPublishOptCenter.m in Sources */,
 				2CC3A90C244977C200DFC31A /* BUDFeedNormalTableViewCell.m in Sources */,
 				2CC3A8D6244977C200DFC31A /* RewardVideo.m in Sources */,
@@ -1182,7 +1118,6 @@
 				2CC3A913244977C200DFC31A /* BUDdemoDislikeCollectionCell.m in Sources */,
 				2CC3A8F1244977C200DFC31A /* TXUGCPublish.m in Sources */,
 				148ECEE324437D510005BEF3 /* fix_swift.swift in Sources */,
-				2CC3A8E8244977C200DFC31A /* AFImageDownloader.m in Sources */,
 				2CC3A901244977C200DFC31A /* BUDBase64.m in Sources */,
 				2CC3A8E9244977C200DFC31A /* AFURLResponseSerialization.m in Sources */,
 			);
@@ -1243,7 +1178,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3W7L7CX92N;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1275,7 +1210,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3W7L7CX92N;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = dameiTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1300,8 +1235,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 3W7L7CX92N;
@@ -1399,7 +1334,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.damei;
 				PRODUCT_NAME = damei;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = damei_test;
 				SWIFT_OBJC_BRIDGING_HEADER = "damei-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1414,8 +1349,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3W7L7CX92N;
 				ENABLE_BITCODE = NO;
@@ -1512,7 +1447,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.damei;
 				PRODUCT_NAME = damei;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = damei_test;
 				SWIFT_OBJC_BRIDGING_HEADER = "damei-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

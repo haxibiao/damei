@@ -67,7 +67,7 @@ class index extends Component {
             const userCache = await storage.getItem(keys.userCache);
             const phone = ISIOS ? '' : await Util.getPhoneNumber();
             console.log('!app.login', !app.login, !userCache, !config.disableAd);
-            if (!app.login && !userCache && !config.disableAd) {
+            if (!app.login && !userCache && (!config.disableAd || Config.AppStore == 'tencent')) {
                 if (!app.createUserAgreement && Config.AppStore == 'tencent') {
                     UserAgreementOverlay.show({
                         callback: () => this.loadUserReword(phone),

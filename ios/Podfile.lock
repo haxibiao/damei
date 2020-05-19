@@ -244,6 +244,8 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
   - React-jsinspector (0.61.5)
+  - react-native-alipay-auth (1.0.0):
+    - React
   - react-native-appearance (0.3.3):
     - React
   - react-native-blur (0.8.0):
@@ -339,11 +341,17 @@ PODS:
     - React
   - RNScreens (2.4.0):
     - React
+  - RNSentry (1.3.9):
+    - React
+    - Sentry (~> 4.4.0)
   - RNSVG (9.6.2):
     - React
   - RNVectorIcons (6.6.0):
     - React
   - RSKImageCropper (2.2.3)
+  - Sentry (4.4.3):
+    - Sentry/Core (= 4.4.3)
+  - Sentry/Core (4.4.3)
   - SSZipArchive (2.2.2)
   - TXLiteAVSDK_Professional (7.1.8775)
   - Yoga (1.14.0)
@@ -386,6 +394,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-alipay-auth (from `../node_modules/react-native-alipay-auth`)
   - react-native-appearance (from `../node_modules/react-native-appearance`)
   - "react-native-blur (from `../node_modules/@react-native-community/blur`)"
   - "react-native-cameraroll (from `../node_modules/@react-native-community/cameraroll`)"
@@ -422,6 +431,7 @@ DEPENDENCIES:
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - "RNSentry (from `../node_modules/@sentry/react-native`)"
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -435,6 +445,7 @@ SPEC REPOS:
     - Bytedance-UnionAD
     - JWT
     - RSKImageCropper
+    - Sentry
     - SSZipArchive
     - TXLiteAVSDK_Professional
 
@@ -507,6 +518,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-alipay-auth:
+    :path: "../node_modules/react-native-alipay-auth"
   react-native-appearance:
     :path: "../node_modules/react-native-appearance"
   react-native-blur:
@@ -577,6 +590,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSentry:
+    :path: "../node_modules/@sentry/react-native"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
@@ -625,6 +640,7 @@ SPEC CHECKSUMS:
   React-jsi: cb2cd74d7ccf4cffb071a46833613edc79cdf8f7
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
+  react-native-alipay-auth: 18f46632aeab1c3b022cecd4596f6b34690fd761
   react-native-appearance: 98e4530857c366de634f58e5db91bf97feaa96ff
   react-native-blur: cad4d93b364f91e7b7931b3fa935455487e5c33c
   react-native-cameraroll: 4360c9faab50dc6844f56d222c2d0c7ef5f1fe92
@@ -660,13 +676,15 @@ SPEC CHECKSUMS:
   RNPermissions: 6772df08e03565f718f7e140d9fccae441b8ca8b
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
   RNScreens: b5c0e1b2b04512919e78bd3898e144a157ce2363
+  RNSentry: 9c9783b13fb5cba387fff55f085cc1da3854ce71
   RNSVG: ff9b094e39dd4a437ebe17d1c7ceed286e75f426
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   RSKImageCropper: a446db0e8444a036b34f3c43db01b2373baa4b2a
+  Sentry: 14bdd673870e8cf64932b149fad5bbbf39a9b390
   SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
   TXLiteAVSDK_Professional: 2eb1d5cb5b80f4debe49d36af58c14924d288c1b
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
 PODFILE CHECKSUM: 86ecfe48f3bd393793d4132591242bb8b280cc94
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.8.3
