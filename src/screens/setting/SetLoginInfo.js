@@ -37,13 +37,6 @@ class SetLoginInfo extends Component {
                     account,
                     password: this.state.password,
                 },
-                refetchQueries: () => [
-                    {
-                        query: GQL.UserAutoQuery,
-                        variables: { id: app.me.id },
-                        fetchPolicy: 'network-only',
-                    },
-                ],
                 errorPolicy: 'all',
             });
         } catch (ex) {
@@ -66,11 +59,11 @@ class SetLoginInfo extends Component {
     };
 
     render() {
-        const { navigation,route } = this.props;
+        const { navigation, route } = this.props;
         let { verificationCode, tips, submitting, password, account } = this.state;
         let { phone } = route.params;
         return (
-            <PageContainer title="设置登录信息" white submitting={submitting} submitTips="注册中...">
+            <PageContainer title='设置登录信息' white submitting={submitting} submitTips='注册中...'>
                 <View style={styles.container}>
                     <View style={styles.header}>
                         <Text style={styles.tipsText}>
@@ -80,9 +73,9 @@ class SetLoginInfo extends Component {
                     </View>
                     <View style={styles.textWrap}>
                         <CustomTextInput
-                            placeholder="请输入手机号"
+                            placeholder='请输入手机号'
                             style={{ height: PxFit(48) }}
-                            onChangeText={value => {
+                            onChangeText={(value) => {
                                 this.setState({
                                     account: value,
                                 });
@@ -94,10 +87,10 @@ class SetLoginInfo extends Component {
                     </View>
                     <View style={styles.textWrap}>
                         <CustomTextInput
-                            placeholder="请输入密码"
+                            placeholder='请输入密码'
                             style={{ height: PxFit(48) }}
                             secureTextEntry={true}
-                            onChangeText={value => {
+                            onChangeText={(value) => {
                                 this.setState({
                                     password: value,
                                 });
@@ -108,7 +101,7 @@ class SetLoginInfo extends Component {
 
                     <View style={styles.buttonWrap}>
                         <Button
-                            title="完成"
+                            title='完成'
                             onPress={this.setLoginInfo}
                             style={styles.button}
                             disabled={password && account ? false : true}

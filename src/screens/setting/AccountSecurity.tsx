@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { PageContainer, TouchFeedback, Iconfont, Row, ListItem, Avatar, ItemSeparator, Loading } from 'components';
 import { Theme, PxFit, Config, ISIOS, Tools } from 'utils';
@@ -17,6 +17,7 @@ const AccountSecurity = (props) => {
         variables: {
             id: user.id,
         },
+        fetchPolicy:"network-only",
         client: app.newClient,
     }); 
     console.log('data', data)
@@ -27,6 +28,14 @@ const AccountSecurity = (props) => {
 
     // const { loading, user } = data;
 
+  useEffect(() => {
+        let focus = props.navigation.addListener('focus', () => {
+            refetch();
+            console.log('focus', focus)
+        });
+        return () => focus();
+    }, [app.newClient]);
+    
     const bindWechat = () => {
         if (isBindWechat) {
             Toast.show({

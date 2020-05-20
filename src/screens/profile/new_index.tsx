@@ -16,7 +16,7 @@ import { ApolloClient } from 'apollo-boost';
 let client: ApolloClient<unknown>; //旧后端client
 
 const Profile = observer((props: any) => {
-    console.log('app.me', app.me)
+  
     const [userinfo, setuserinfo] = useState({ ...app.me });
 
     useEffect(() => {
@@ -34,8 +34,10 @@ const Profile = observer((props: any) => {
                 .query({
                     query: GQL.UserQuery,
                     variables: app.me.id,
+                    fetchPolicy:"network-only"
                 })
                 .then((rs) => {
+                    console.log('rs', rs)
                     let user = rs.data.user ?? {};
                     setuserinfo({ ...user });
                     app.updateUserCache(user);
@@ -45,7 +47,7 @@ const Profile = observer((props: any) => {
             setuserinfo({})
         }
     }
-    console.log('Profile app.login', config)
+    console.log('Profile app.login', userinfo)
     return (
         <Page.PageCleared safe>
             <ScrollView>

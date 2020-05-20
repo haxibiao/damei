@@ -1,6 +1,7 @@
 query UserAccountSecurityQuery($id: Int!) {
     user(id: $id) {
         id
+        account
         gold
         is_bind_wechat
         ticket
