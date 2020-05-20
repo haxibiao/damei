@@ -48,7 +48,7 @@ class App extends Component {
             // 只针对华为检测是否开启开屏广告 （做请求后再加载开屏广告首屏会先露出）
 
             if (Config.AppStore === 'huawei' && !data.disable[Config.AppStore]) {
-                if (isAndroid) ad.Splash.loadSplashAd();
+                ad.Splash.loadSplashAd();
             }
             if (Platform.OS == 'ios') {
                 if (!data.disable.ios) {

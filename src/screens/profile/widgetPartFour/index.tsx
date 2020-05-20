@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Page, StyleSheet, TouchableOpacity, Image } from '../../../widgets';
 import { View, Text, } from 'react-native-ui-lib';
 import { sw, sh } from '../../../tools';
-import { observer,app } from 'store';
+import { observer,app ,config} from 'store';
 
 import { TouchFeedback } from "components"
 import { PxFit } from "utils";
@@ -34,6 +34,7 @@ const WidgetPartFour = observer((props: {
         <View style={{ width: sw, height: 'auto' }} paddingH-10 marginT-20>
             {
                 generalSub.map((item: { name: string, icon: string, targetRoute: string; }, index: number) => {
+                    if (config.disableAd && item.name== "我的钱包") return null;
                     return (
                         <TouchFeedback
                             activeOpacity={0.9}

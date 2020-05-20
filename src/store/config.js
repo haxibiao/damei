@@ -88,7 +88,8 @@ class config {
 
     @action.bound
     saveAdvertConfig(data) {
-        console.log('saveAdvertConfig data', data);
+        console.log('saveAdvertConfig data', Config.AppStore);
+
         this.enableSplash = data.enable_splash;
         this.enableQuestion = data.enable_question;
         this.enableReward = data.enable_reward;
@@ -96,6 +97,8 @@ class config {
         this.enableBanner = data.enable_banner;
 
         this.disableAd = data.disable[Platform.OS === 'ios' ? 'ios' : Config.AppStore];
+
+        console.log('this.disableAd', this.disableAd);
     }
 }
 

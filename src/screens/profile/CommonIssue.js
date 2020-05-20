@@ -22,16 +22,8 @@ class CommonIssue extends Component {
                 <ScrollView
                     contentContainerStyle={styles.container}
                     showsVerticalScrollIndicator={false}
-                    bounces={false}>
-                    <View style={styles.issueItem}>
-                        <View style={styles.issuePH}>
-                            <Text style={styles.questionText}>Q：免广告是什么？</Text>
-                            <Text style={styles.answerText}>
-                                A：答题时花费一定的智慧点就可以24小时免广告，但只限当前题目所在专题哦。
-                            </Text>
-                        </View>
-                    </View>
-
+                    bounces={false}
+                >
                     <View style={styles.issueItem}>
                         <View style={styles.issuePH}>
                             <Text style={styles.questionText}>Q：题目出现问题怎么办?</Text>

@@ -7,7 +7,7 @@ import LiveList from '../live';
 import { observer } from 'store';
 import { config } from 'store';
 import LoginMountPoint from '../../data/LoginMountPoint';
-
+import { ISIOS, PxFit, Theme, Config } from 'utils';
 import VideoStore from './VideoStore';
 
 const VideoPlayground = (props: any) => {
@@ -24,7 +24,7 @@ const VideoPlayground = (props: any) => {
 
     return (
         <Page.PageCleared barStyle={'light-content'}>
-            {config.disableAd ? (
+            {config.disableAd || ISIOS ? (
                 <Video tabLabel='推荐' />
             ) : (
                 <ScrollableTabView

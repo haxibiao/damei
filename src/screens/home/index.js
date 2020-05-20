@@ -14,8 +14,9 @@ import {
     beginnerGuidance,
     VideoTaskGuidance,
     UserAgreementOverlay,
+    TouchFeedback,
 } from 'components';
-import { Config, SCREEN_WIDTH, SCREEN_HEIGHT, Theme, PxFit, NAVBAR_HEIGHT, ISIOS } from 'utils';
+import { Config, SCREEN_WIDTH, SCREEN_HEIGHT, Theme, PxFit, NAVBAR_HEIGHT, ISIOS, Tools } from 'utils';
 import PlateItem from './components/PlateItem';
 
 import { observer, app, keys, storage, config } from 'store';
@@ -27,8 +28,6 @@ import NetInfo from '@react-native-community/netinfo';
 
 import { Util } from 'native';
 import { Overlay } from 'teaset';
-
-import TimeReward from './components/TimeReward';
 
 import UserRewardOverlay from './components/UserRewardOverlay';
 
@@ -248,7 +247,7 @@ class index extends Component {
 
     menuPress = () => {
         const { navigation } = this.props;
-        if (app.userCache.level.level < 2) {
+        if (Tools.syncGetter('userCache.level.level', app) < 2) {
             Toast.show({
                 content: `达到${2}级才可以出题哦`,
             });
@@ -265,6 +264,14 @@ class index extends Component {
                     <Text style={styles.title}>所有题库</Text>
                 </View>
                 {this._renderCategoryList()}
+                <View style={{ position: 'absolute', right: PxFit(Theme.itemSpace), bottom: PxFit(20) }}>
+                    <TouchFeedback authenticated navigation={this.props.navigation} onPress={this.menuPress}>
+                        <Image
+                            source={require('../../assets/images/ic_ring_menu.png')}
+                            style={{ width: PxFit(60), height: PxFit(60) }}
+                        />
+                    </TouchFeedback>
+                </View>
             </PageContainer>
         );
     }

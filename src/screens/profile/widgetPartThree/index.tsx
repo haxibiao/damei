@@ -4,6 +4,7 @@ import { View, Text } from 'react-native-ui-lib';
 import { sw, sh } from '../../../tools';
 import { observer } from 'mobx-react';
 import { TouchFeedback } from 'components';
+import { config } from 'store';
 
 const subviews = [
     {
@@ -49,12 +50,22 @@ const subviews = [
 ];
 const subviewsPadding = 8;
 const containerMarginH = 13;
-const subviewItemWidth = (sw - subviewsPadding * 2 - containerMarginH * 2) / 4;
 
 const WidgetPartThree = (props: { navigation: any }) => {
+    const subviewItemWidth = (sw - subviewsPadding * 2 - containerMarginH * 2) / (config.disableAd ? 3 : 4);
     return (
-        <View style={[{ paddingHorizontal: subviewsPadding, backgroundColor: '#FFFBFC' }, styles.container]}>
+        <View
+            style={[
+                {
+                    paddingHorizontal: subviewsPadding,
+                    backgroundColor: '#FFFBFC',
+                    marginTop: config.disableAd ? 30 : 5,
+                },
+                styles.container,
+            ]}
+        >
             {subviews.map((item: { name: string; icon: string; targetRoute: string }, index: number) => {
+                if (config.disableAd && (item.name == '赚钱攻略' || item.name == '排行榜')) return null;
                 return (
                     <TouchFeedback
                         navigation={props.navigation}
@@ -64,7 +75,7 @@ const WidgetPartThree = (props: { navigation: any }) => {
                         }}
                         key={index}
                         style={{
-                            height: subviewItemWidth,
+                            height: 85,
                             width: subviewItemWidth,
                             justifyContent: 'center',
                             alignItems: 'center',

@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, Dimensions, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Overlay } from 'teaset';
-import { app, config } from 'store';
-import { DataCenter, observer } from '../data';
+import { app, config, observer } from 'store';
 import * as PermissionChecker from '../screens/live/CommonWidgetPermissionChecker';
+import { ISAndroid } from 'utils';
+
 const { width: sw, height: sh } = Dimensions.get('window');
 
 const IconSize = 65;
@@ -65,7 +66,7 @@ const showPublishOption = (navigation: any) => {
                             <Text style={styles.subtitle}>分享有趣视频</Text>
                         </View>
                     </TouchableOpacity>
-                    {!config.disabled && <StartLiveButton navigation={navigation} />}
+                    {!config.disableAd && ISAndroid && <StartLiveButton navigation={navigation} />}
                 </View>
 
                 <TouchableOpacity

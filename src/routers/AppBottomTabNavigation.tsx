@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icons, SvgIcon } from '../res';
 
 import { app, config, observer } from 'store';
+import { ISAndroid } from "utils";
 
 
 function dp(want_px: number) {
@@ -64,8 +65,8 @@ const icons_unfocused: any[] = ['ic_tab_study', 'ic_tab_message', 'ic_tab_task',
 const icons_focused: any[] = ['ic_tab_study_selected', 'ic_tab_message_selected', 'ic_tab_task_selected', 'ic_tab_mine_selected'];
 
 
-export default function AppBottomTabNavigation() {
-
+ function AppBottomTabNavigation () {
+    console.log('config', config)
     return (
         <BottomTab.Navigator
             initialRouteName={One}
@@ -73,14 +74,19 @@ export default function AppBottomTabNavigation() {
             tabBar={(props: any) => <BottomTabBar {...props} />}>
             <BottomTab.Screen name={One} component={TabOne} />
             <BottomTab.Screen name={Two} component={TabTwo} />
-
-            <BottomTab.Screen name={PUBLIC} component={PublicPlaceHolder} />
-
-            <BottomTab.Screen name={Three} component={TabThree} />
+            {
+                ISAndroid && <BottomTab.Screen name={PUBLIC} component={PublicPlaceHolder} />
+            }
+            {
+               (!config.disableAd ||ISAndroid) && <BottomTab.Screen name={Three} component={TabThree} />
+            }
+         
             <BottomTab.Screen name={Four} component={TabFour} />
         </BottomTab.Navigator>
     );
 }
+
+export default observer(AppBottomTabNavigation);
 
 /**
  * 自定义【文字图标】底部导航条
