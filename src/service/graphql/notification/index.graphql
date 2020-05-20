@@ -204,7 +204,6 @@ query likeNotificationsQuery($offset: Int, $limit: Int, $filter: [NotificationEn
                     birthday
                     age
                     introduction
-                    posts_count
                 }
             }
             comment {
