@@ -465,24 +465,10 @@ class TaskItem extends Component {
         const { RewarVisible, showTaskDetail } = this.state;
         return (
             <View>
-                <TouchFeedback
+                <View
                     // activeOpacity={0.6}
                     // disabled={task.type == 2 ? false : true}
                     style={styles.container}
-                    onPress={() => {
-                        if (task.type == 3) {
-                            if (user.level.level < min_level) {
-                                Toast.show({
-                                    content: `${min_level}级之后才可以出题哦`,
-                                });
-                            } else {
-                                navigation.navigate('Contribute', { category: {} });
-                            }
-                        }
-                        if (task.type == 4) {
-                            goTask && goTask();
-                        }
-                    }}
                 >
                     <Row>
                         <Text style={styles.name}>{task.name}</Text>
@@ -509,7 +495,7 @@ class TaskItem extends Component {
                             />
                         </TouchFeedback>
                     </Row>
-                </TouchFeedback>
+                </View>
                 {this._showTaskDetail(task)}
             </View>
         );
