@@ -408,7 +408,7 @@ class index extends Component {
                         <Iconfont name='close' size={PxFit(24)} color={Theme.primaryColor} />
                     </TouchFeedback>
                 }
-                autoKeyboardInsets
+                autoKeyboardInsets={false}
             >
                 <View style={styles.container} bounces={false}>
                     <View style={styles.formContainer}>

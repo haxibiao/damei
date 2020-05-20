@@ -6,7 +6,7 @@ import { TouchFeedback, Iconfont, CustomTextInput, Row } from 'components';
 import { useMutation, GQL } from 'apollo';
 import { app } from 'store';
 
-const CommentInput = props => {
+const CommentInput = (props) => {
     const [defaultText] = useState(props.count_comments > 2 ? '写评论...' : '写回答...');
     const [content, setContent] = useState('');
 
@@ -22,7 +22,7 @@ const CommentInput = props => {
         isPost,
     } = props;
     console.log('comment input', isPost);
-    const onChangeText = useCallback(value => {
+    const onChangeText = useCallback((value) => {
         setContent(value);
     }, []);
 
@@ -45,7 +45,7 @@ const CommentInput = props => {
                 commentable_id: questionId,
                 limit: 10,
             },
-            data: { comments: [{ ...createComment }, ...prev.comments] },
+            data: { comments: [createComment, ...prev.comments] },
         });
     }, []);
     const updateRepliesQuery = useCallback((cache, { data: { createComment } }) => {
@@ -113,14 +113,14 @@ const CommentInput = props => {
                           accepted: false,
                       },
             },
-            onError: error => {
+            onError: (error) => {
                 const content = error.message.replace('GraphQL error: ', '') || '评论失败';
                 Toast.show({ content });
             },
             onCompleted: () => {
                 onCommented();
             },
-        },
+        }
     );
 
     const createCommentHandler = useCallback(() => {
@@ -144,7 +144,7 @@ const CommentInput = props => {
                 </Row>
                 <TouchFeedback disabled={content.length < 1} style={styles.touchItem} onPress={createCommentHandler}>
                     <Iconfont
-                        name="plane-fill"
+                        name='plane-fill'
                         size={PxFit(22)}
                         color={content.length > 0 ? Theme.boyColor : Theme.subTextColor}
                     />
