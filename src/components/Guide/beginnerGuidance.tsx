@@ -7,7 +7,7 @@
 import React, { Component, useState, useCallback, useMemo, useEffect } from 'react';
 import { StyleSheet, View, TouchableWithoutFeedback, Text, BackHandler } from 'react-native';
 import { Overlay } from 'teaset';
-import { app, storage, keys } from 'store';
+import { app, storage, config } from 'store';
 import { PxFit, Theme, SCREEN_WIDTH, SCREEN_HEIGHT, ISAndroid } from '../../utils';
 
 interface Props {
@@ -66,7 +66,7 @@ const beginnerGuidance = (props: Props) => {
     (async function() {
         // OverlayKey = Overlay.show(overlayView);
         const result = await storage.getItem(guidanceType);
-        if (!result) {
+        if (!result && !config.disableAd) {
             OverlayKey = Overlay.show(overlayView);
             if (ISAndroid) {
                 backListener = BackHandler.addEventListener('hardwareBackPress', () => {
