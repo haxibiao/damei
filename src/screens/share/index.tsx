@@ -1,7 +1,7 @@
 import React, { Component, useState, useRef } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, FlatList, Image, Dimensions, Animated, Linking } from 'react-native';
 import { PageContainer, TouchFeedback, PullChooser, Iconfont } from 'components';
-import { Theme, SCREEN_WIDTH, PxFit, Tools, SCREEN_HEIGHT, Config } from 'utils';
+import { Theme, SCREEN_WIDTH, PxFit, Tools, SCREEN_HEIGHT, Config, ISIOS } from 'utils';
 
 import { compose, useQuery, GQL } from 'apollo';
 import { app } from 'store';
@@ -11,7 +11,7 @@ import ShareRule from './components/ShareRule';
 import ShareTypeOverlay from './components/ShareTypeOverlay';
 import ShareGuide from './components/ShareGuide';
 
-const index = props => {
+const index = (props) => {
     const [progress, setProgress] = useState(0.1);
     const { navigation } = props;
     const webview = useRef(null);
@@ -55,7 +55,7 @@ const index = props => {
         const ShareGuideOverlayKey = Overlay.show(shareGuideOverlayView);
     };
 
-    const onMessageAction = event => {
+    const onMessageAction = (event) => {
         // console.log('触发:', event);
         console.log('event :', event.nativeEvent.data);
         console.log('data :', data, error);
@@ -84,10 +84,11 @@ const index = props => {
     return (
         <PageContainer
             white
-            title="邀请好友"
+            title='邀请好友'
             navBarStyle={{
                 borderBottomWidth: 0,
-            }}>
+            }}
+        >
             <View
                 style={{
                     height: 2,
@@ -121,9 +122,11 @@ const index = props => {
                     // Toast.show({ content: '阅读完成,奖励已送达', layout: 'bottom' });
                 }}
             />
-            <View style={{ position: 'absolute', left: 0, bottom: 0, width: SCREEN_WIDTH }}>
-                <ShareTypeOverlay user={user} />
-            </View>
+            {!ISIOS && (
+                <View style={{ position: 'absolute', left: 0, bottom: 0, width: SCREEN_WIDTH }}>
+                    <ShareTypeOverlay user={user} />
+                </View>
+            )}
         </PageContainer>
     );
 };
