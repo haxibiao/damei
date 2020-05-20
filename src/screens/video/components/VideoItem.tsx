@@ -63,7 +63,7 @@ export default observer((props) => {
                     }}
                     onAdClick={() => getReward(media)}
                 />
-                {VideoStore.getReward.length < 1 && (
+                {VideoStore.getReward.length < 1 && !ISIOS && (
                     <View
                         style={{
                             bottom: Theme.HOME_INDICATOR_HEIGHT + 15,
