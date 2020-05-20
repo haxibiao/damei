@@ -163,30 +163,35 @@ const AccountSecurity = (props) => {
                         </View>
                     }
                 />
-                <ListItem
-                    style={styles.listItem}
-                    leftComponent={<Text style={styles.itemText}>懂得赚账号</Text>}
-                    rightComponent={
-                        <View style={styles.rightWrap}>
-                            <Text style={DongdezhuanUser ? styles.rightText : styles.linkText}>
-                                {DongdezhuanUser ? `已绑定(${DongdezhuanUser.name||app.me.name})` : '去绑定'}
-                            </Text>
-                            <Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />
-                        </View>
-                    }
-                />
-                <ListItem
-                    style={styles.listItem}
-                    leftComponent={<Text style={styles.itemText}>答题赚钱账号</Text>}
-                    rightComponent={
-                        <View style={styles.rightWrap}>
-                            <Text style={DZUser ? styles.rightText : styles.linkText}>
-                                {DZUser ? `已绑定(${DZUser.name||app.me.name})` : '去绑定'}
-                            </Text>
-                            <Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />
-                        </View>
-                    }
-                />
+                {
+                    !ISIOS &&
+                    <>
+                     <ListItem
+                        style={styles.listItem}
+                        leftComponent={<Text style={styles.itemText}>懂得赚账号</Text>}
+                        rightComponent={
+                            <View style={styles.rightWrap}>
+                                <Text style={DongdezhuanUser ? styles.rightText : styles.linkText}>
+                                    {DongdezhuanUser ? `已绑定(${DongdezhuanUser.name||app.me.name})` : '去绑定'}
+                                </Text>
+                                <Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />
+                            </View>
+                        }
+                    />
+                    <ListItem
+                        style={styles.listItem}
+                        leftComponent={<Text style={styles.itemText}>答题赚钱账号</Text>}
+                        rightComponent={
+                            <View style={styles.rightWrap}>
+                                <Text style={DZUser ? styles.rightText : styles.linkText}>
+                                    {DZUser ? `已绑定(${DZUser.name||app.me.name})` : '去绑定'}
+                                </Text>
+                                <Iconfont name='right' size={PxFit(14)} color={Theme.subTextColor} />
+                            </View>
+                        }
+                    />
+                    </>
+               }
             </View>
         </PageContainer>
     );
