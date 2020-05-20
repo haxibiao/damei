@@ -7,7 +7,7 @@ import { exceptionCapture } from '@src/common';
 import { app } from 'store';
 import { Overlay } from 'teaset';
 import SignedReturn from './components/SignedReturn';
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
 import { BoxShadow } from 'react-native-shadow';
 
 interface Sign {
@@ -33,7 +33,7 @@ const Attendance = (props: any): JSX.Element => {
     const overlayRef = useRef();
     const [boxShadowHeight, setBoxShadowHeight] = useState(150);
 
-    const onLayoutEffect = useCallback(event => {
+    const onLayoutEffect = useCallback((event) => {
         setBoxShadowHeight(event.nativeEvent.layout.height);
     }, []);
 
@@ -88,7 +88,7 @@ const Attendance = (props: any): JSX.Element => {
                 Toast.show({ content: '今天已经签到过了哦' });
             }
         }),
-        [signIns, today_signed],
+        [signIns, today_signed]
     );
 
     const onSignInSuccess = useCallback((returns: SignInReturns) => {
@@ -96,20 +96,21 @@ const Attendance = (props: any): JSX.Element => {
             <Overlay.PopView
                 style={{ alignItems: 'center', justifyContent: 'center' }}
                 animated={true}
-                ref={overlayRef}>
+                ref={overlayRef}
+            >
                 <SignedReturn
                     gold={returns.gold_reward}
                     reward={returns.contribute_reward}
                     close={() => overlayRef.current.close()}
                     client={client}
                 />
-            </Overlay.PopView>,
+            </Overlay.PopView>
         );
     }, []);
 
     return (
-        <PageContainer hiddenNavBar contentViewStyle={styles.contentViewStyle} white>
-            <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
+        <View style={{ flex: 1 }}>
+            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <Image style={styles.attendanceBg} source={require('@src/assets/images/attendance_bg.png')} />
                 <View style={styles.header}>
                     <View style={styles.keepSignIn}>
@@ -127,7 +128,8 @@ const Attendance = (props: any): JSX.Element => {
                 <BoxShadow
                     setting={Object.assign({}, shadowOpt, {
                         height: boxShadowHeight,
-                    })}>
+                    })}
+                >
                     <View style={styles.attendanceBook} onLayout={onLayoutEffect}>
                         <TouchableWithoutFeedback onPress={toDaySignIn}>
                             <View style={styles.attendance}>
@@ -165,12 +167,11 @@ const Attendance = (props: any): JSX.Element => {
                                                     elem.signed
                                                         ? require('@src/assets/images/coin_grey.png')
                                                         : require('@src/assets/images/coin_yellow.png')
-                                                }>
+                                                }
+                                            >
                                                 <Text
-                                                    style={[
-                                                        styles.rewardGoldText,
-                                                        elem.signed && { color: '#a0a0a0' },
-                                                    ]}>
+                                                    style={[styles.rewardGoldText, elem.signed && { color: '#a0a0a0' }]}
+                                                >
                                                     {elem.gold_reward || 0}
                                                 </Text>
                                             </ImageBackground>
@@ -184,7 +185,6 @@ const Attendance = (props: any): JSX.Element => {
                         </TouchableWithoutFeedback>
                     </View>
                 </BoxShadow>
-
                 <View style={styles.footer}>
                     <Text style={styles.ruleText}>签到规则</Text>
                     <Text style={styles.footerText}>1. 连续签到天数越多，可得奖励越高。</Text>
@@ -193,15 +193,13 @@ const Attendance = (props: any): JSX.Element => {
                     <Text style={styles.footerText}>4. 签到超过{app.config.max_signs_day}天，签到数将自动清0。</Text>
                 </View>
             </ScrollView>
-            <View style={styles.navigatorWrap}>
-                <NavigatorBar
-                    navigation={navigation}
-                    style={styles.navigatorBar}
-                    titleStyle={styles.titleStyle}
-                    title="签到详情"
-                />
-            </View>
-        </PageContainer>
+            <NavigatorBar
+                navigation={navigation}
+                style={styles.navigatorBar}
+                titleStyle={styles.titleStyle}
+                title='签到详情'
+            />
+        </View>
     );
 };
 
@@ -260,11 +258,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: coinImageWidth,
     },
-    container: {
+    contentContainer: {
         flexGrow: 1,
         paddingBottom: Theme.HOME_INDICATOR_HEIGHT + PxFit(Theme.itemSpace) * 2,
     },
-    contentViewStyle: { marginTop: 0 },
+    contentViewStyle: {
+        marginTop: 0,
+    },
     footer: {
         marginHorizontal: PxFit(Theme.itemSpace),
         marginTop: PxFit(5),
@@ -305,6 +305,7 @@ const styles = StyleSheet.create({
     },
     navigatorBar: {
         backgroundColor: 'transparent',
+        ...StyleSheet.absoluteFill,
     },
     navigatorWrap: {
         ...StyleSheet.absoluteFill,
