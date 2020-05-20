@@ -16,7 +16,7 @@ import {
     Row,
 } from 'components';
 
-import { Theme, PxFit, SCREEN_WIDTH, Api, Config } from 'utils';
+import { Theme, PxFit, SCREEN_WIDTH, Api, Config, ISIOS } from 'utils';
 
 import { graphql, compose, withApollo, GQL } from 'apollo';
 
@@ -40,9 +40,9 @@ class SubmitTaskScreen extends Component {
     // 打开相册
     openPhotos = () => {
         Api.imagePicker(
-            images => {
+            (images) => {
                 const { pictures } = this.state;
-                images.map(image => {
+                images.map((image) => {
                     pictures.push(`data:${image.mime};base64,${image.data}`);
                 });
                 if (pictures.length > 6) {
@@ -56,7 +56,7 @@ class SubmitTaskScreen extends Component {
                     });
                 }
             },
-            { includeBase64: true },
+            { includeBase64: true }
         );
     };
 
@@ -85,10 +85,10 @@ class SubmitTaskScreen extends Component {
         // 超时检测
 
         Promise.race(promises)
-            .then(result => {
+            .then((result) => {
                 this.submitTask(result.data.uploadImage);
             })
-            .catch(rejected => {
+            .catch((rejected) => {
                 this.setState({
                     isVisible: false,
                 });
@@ -100,7 +100,7 @@ class SubmitTaskScreen extends Component {
 
     // 提交任务
     async submitTask(images) {
-        const { navigation,route } = this.props;
+        const { navigation, route } = this.props;
         const { task } = route.params;
         const { appstore, content } = this.state;
         let result = {};
@@ -138,14 +138,14 @@ class SubmitTaskScreen extends Component {
         }
     }
 
-    dropHandler = name => {
+    dropHandler = (name) => {
         this.setState({ appstore: name });
         console.log('name', name);
     };
 
     render() {
         const { content, pictures, isVisible, appstore } = this.state;
-        const { navigation,route } = this.props;
+        const { navigation, route } = this.props;
         const { task } = route.params;
         return (
             <PageContainer
@@ -156,21 +156,30 @@ class SubmitTaskScreen extends Component {
                 }}
                 titleStyle={{ color: Theme.defaultTextColor }}
                 backButtonColor={Theme.defaultTextColor}
-                title="提交任务">
+                title='提交任务'
+            >
                 <ScrollView style={styles.container} keyboardShouldPersistTaps={'always'}>
                     <BoxShadow
                         setting={Object.assign({}, shadowOpt, {
                             height: PxFit(48),
-                        })}>
+                        })}
+                    >
                         <View style={styles.header}>
                             <View>
                                 <Text style={{}}>{task.details}</Text>
                             </View>
                             <TouchFeedback
                                 style={styles.row}
-                                onPress={() => Linking.openURL('market://details?id=' + Config.PackageName)}>
+                                onPress={() =>
+                                    Linking.openURL(
+                                        ISIOS
+                                            ? 'itms-apps://itunes.apple.com/app/id1462854524'
+                                            : 'market://details?id=' + Config.PackageName
+                                    )
+                                }
+                            >
                                 <Text style={{ fontSize: 12, color: Theme.grey }}>去应用商店评价</Text>
-                                <Iconfont name="right" size={PxFit(14)} color={Theme.grey} />
+                                <Iconfont name='right' size={PxFit(14)} color={Theme.grey} />
                             </TouchFeedback>
                         </View>
                     </BoxShadow>
@@ -189,14 +198,16 @@ class SubmitTaskScreen extends Component {
                         tintColor={'#666666'}
                         activityTintColor={Theme.primaryColor}
                         handler={(selection, row) => this.dropHandler(this.appstores[row])}
-                        data={this.appstores}>
+                        data={this.appstores}
+                    >
                         <View style={styles.main}>
                             <View
                                 style={{
                                     paddingVertical: PxFit(14),
                                     borderBottomWidth: PxFit(0.5),
                                     borderColor: Theme.borderColor,
-                                }}>
+                                }}
+                            >
                                 <CustomTextInput
                                     style={styles.input}
                                     placeholder={'应用商店账号(手机号或邮箱)'}
@@ -204,7 +215,7 @@ class SubmitTaskScreen extends Component {
                                     underline
                                     textAlignVertical={'top'}
                                     defaultValue={content}
-                                    onChangeText={value => {
+                                    onChangeText={(value) => {
                                         this.setState({
                                             content: value,
                                         });
@@ -228,7 +239,8 @@ class SubmitTaskScreen extends Component {
                                                     this.setState({
                                                         pictures,
                                                     });
-                                                }}>
+                                                }}
+                                            >
                                                 <Iconfont name={'close'} size={12} color={Theme.white} />
                                             </TouchableOpacity>
                                         </View>

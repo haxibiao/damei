@@ -51,7 +51,7 @@ class App extends Component {
                 ad.Splash.loadSplashAd();
             }
             if (Platform.OS == 'ios') {
-                if (!data.disable.ios) {
+                if (!data.disable['ios']) {
                     ad.Splash.loadSplashAd();
                 }
             }

@@ -148,9 +148,8 @@ const AccountSecurity = (props) => {
                     onPress={() => {
                         if (user.wallet && user.wallet.pay_info_change_count === -1) {
                             Toast.show({ content: '支付宝信息更改次数已达上限' });
-                        } else {
-                            // checkLoginInfo(auto_uuid_user, auto_phone_user, navigation, user);
-                            navigation.navigate('SettingWithdrawInfo');
+                        } else {           
+                            ISIOS ? checkLoginInfo(auto_uuid_user, auto_phone_user, navigation, user): Helper.middlewareNavigate('SettingWithdrawInfo');
                         }
                     }}
                     style={styles.listItem}
