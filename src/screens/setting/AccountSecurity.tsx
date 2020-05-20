@@ -102,7 +102,7 @@ const AccountSecurity = (props) => {
                     style={styles.listItem}
                     leftComponent={<Text style={styles.itemText}>{auto_uuid_user ? '访客' : '账号'}</Text>}
                     rightComponent={
-                        <Text style={styles.rightText}>{auto_uuid_user ? '未设置手机号' : user.account}</Text>
+                        <Text style={styles.rightText}>{auto_uuid_user ? '未设置手机号' :Tools.syncGetter('user.account', data) }</Text>
                     }
                 />
                 {auto_uuid_user && (
