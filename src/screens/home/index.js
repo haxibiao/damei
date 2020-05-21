@@ -264,14 +264,6 @@ class index extends Component {
                     <Text style={styles.title}>所有题库</Text>
                 </View>
                 {this._renderCategoryList()}
-                <View style={{ position: 'absolute', right: PxFit(Theme.itemSpace), bottom: PxFit(20) }}>
-                    <TouchFeedback authenticated navigation={this.props.navigation} onPress={this.menuPress}>
-                        <Image
-                            source={require('../../assets/images/ic_ring_menu.png')}
-                            style={{ width: PxFit(60), height: PxFit(60) }}
-                        />
-                    </TouchFeedback>
-                </View>
             </PageContainer>
         );
     }

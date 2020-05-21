@@ -24,7 +24,7 @@ const VideoPlayground = (props: any) => {
 
     return (
         <Page.PageCleared barStyle={'light-content'}>
-            {config.disableAd || ISIOS ? (
+            {config.disableAd ? (
                 <Video tabLabel='推荐' />
             ) : (
                 <ScrollableTabView

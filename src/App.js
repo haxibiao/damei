@@ -39,6 +39,9 @@ class App extends Component {
             dsn: 'http://69903599c4cb473085a58faa227b9944@sentry.haxibiao.cn:9000/11',
         });
 
+        Sentry.setRelease('release');
+        Sentry.setDist('dist');
+
         ad.AdManager.init();
         // 信息流广告先预加载，提速第一次签到时显示的速度
         ad.AdManager.loadFeedAd();
@@ -74,7 +77,7 @@ class App extends Component {
         this.checkServer();
         // 微信注册
 
-        !ISIOS && WeChat.registerApp('wxe3f5d153afd38a62');
+        WeChat.registerApp('wxe3f5d153afd38a62');
 
         // 注册全局变量Toast
         global.Toast = this.toast;

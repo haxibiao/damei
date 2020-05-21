@@ -75,10 +75,12 @@ const icons_focused: any[] = ['ic_tab_study_selected', 'ic_tab_message_selected'
             <BottomTab.Screen name={One} component={TabOne} />
             <BottomTab.Screen name={Two} component={TabTwo} />
             {
-                ISAndroid && <BottomTab.Screen name={PUBLIC} component={PublicPlaceHolder} />
+                  !config.disableAd  &&    <BottomTab.Screen name={PUBLIC} component={PublicPlaceHolder} />
             }
+         
+        
             {
-               (!config.disableAd ||ISAndroid) && <BottomTab.Screen name={Three} component={TabThree} />
+               !config.disableAd  && <BottomTab.Screen name={Three} component={TabThree} />
             }
          
             <BottomTab.Screen name={Four} component={TabFour} />
