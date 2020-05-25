@@ -6,7 +6,7 @@ import { Theme, PxFit, Config, SCREEN_WIDTH, Api } from 'utils';
 import { Overlay } from 'teaset';
 import { Share } from 'native';
 
-import * as WeChat from 'react-native-wechat';
+import * as WeChat from 'react-native-wechat-lib';
 
 const ShareTypeOverlay = (props) => {
     const { user } = props;

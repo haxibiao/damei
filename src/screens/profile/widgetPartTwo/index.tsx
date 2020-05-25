@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { Page, StyleSheet, Image } from '../../../widgets';
 import { sw, sh } from '../../../tools';
-import { View, Text } from 'react-native-ui-lib';
+import { View, Text } from 'react-native';
 import { observer, DataCenter } from '../../../data';
 import { Config } from '../../../utils';
 import { app } from 'store';
-import { TouchFeedback } from 'components';
+import { TouchFeedback ,Row} from 'components';
 
 const Item = (props: { name: string; icon: string; value: number; marginR?: number; callback?: any }) => {
     return (
@@ -15,10 +15,10 @@ const Item = (props: { name: string; icon: string; value: number; marginR?: numb
             style={[{ marginRight: props.marginR ?? 0 }, styles.itemContainer]}
         >
             <Text>{props.name}</Text>
-            <View row marginT-6>
-                <Image source={{ uri: props.icon }} resizeMode='contain' style={{ width: 20, height: 20 }} />
-                <Text marginL-10>{props.value}</Text>
-            </View>
+            <Row style={{marginTop:6}}>
+                <Image source={{ uri: props.icon }} resizeMode='contain' style={{ width: 20, height: 20 ,}} />
+                <Text style={{marginLeft:10}}>{props.value}</Text>
+            </Row>
         </TouchFeedback>
     );
 };
@@ -35,10 +35,10 @@ const WidgetPartTwo = (props: { navigation: any; userinfo: any }) => {
     };
 
     return (
-        <View row style={{ width: sw }} centerH centerV marginV-15>
+        <Row  style={{ width: sw,justifyContent:"center",marginVertical:15 }} >
             <Item name='智慧点' icon='diamond' callback={GoldHandler} value={props?.userinfo?.gold ?? 0} marginR={10} />
             <Item name='精力点' icon='heart' value={props?.userinfo?.ticket ?? 0} />
-        </View>
+        </Row>
     );
 };
 

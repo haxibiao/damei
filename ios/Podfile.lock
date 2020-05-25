@@ -21,7 +21,7 @@ PODS:
   - boost-for-react-native (1.63.0)
   - BVLinearGradient (2.5.6):
     - React
-  - Bytedance-UnionAD (2.9.0.3)
+  - Bytedance-UnionAD (2.9.5.6)
   - CodePush (5.7.0):
     - Base64 (~> 1.1)
     - JWT (~> 3.0.0-beta.7)
@@ -273,7 +273,7 @@ PODS:
     - React
   - react-native-viewpager (3.3.0):
     - React
-  - react-native-webview (8.2.1):
+  - react-native-webview (9.4.0):
     - React
   - React-RCTActionSheet (0.61.5):
     - React-Core/RCTActionSheetHeaders (= 0.61.5)
@@ -312,8 +312,6 @@ PODS:
     - ReactCommon/jscallinvoker (= 0.61.5)
   - ReactNativeART (1.2.0):
     - React
-  - ReactNativeUiLib (2.0.2):
-    - React
   - rn-fetch-blob (0.12.0):
     - React-Core
   - RNCAsyncStorage (1.9.0):
@@ -322,7 +320,7 @@ PODS:
     - React
   - RNDateTimePicker (2.3.2):
     - React
-  - RNDeviceInfo (5.5.4):
+  - RNDeviceInfo (5.5.8):
     - React
   - RNGestureHandler (1.6.1):
     - React
@@ -361,7 +359,7 @@ DEPENDENCIES:
   - appcenter-analytics (from `../node_modules/appcenter-analytics`)
   - appcenter-crashes (from `../node_modules/appcenter-crashes`)
   - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
-  - Bytedance-UnionAD (~> 2.9.0.3)
+  - Bytedance-UnionAD (~> 2.9.5.6)
   - CodePush (from `../node_modules/react-native-code-push`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
@@ -384,7 +382,7 @@ DEPENDENCIES:
   - Picker (from `../node_modules/react-native-picker`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
-  - RCTWeChat (from `../node_modules/react-native-wechat`)
+  - RCTWeChat (from `../node_modules/react-native-wechat-lib`)
   - React (from `../node_modules/react-native/`)
   - React-Core (from `../node_modules/react-native/`)
   - React-Core/DevSupport (from `../node_modules/react-native/`)
@@ -420,7 +418,6 @@ DEPENDENCIES:
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "ReactNativeART (from `../node_modules/@react-native-community/art`)"
-  - ReactNativeUiLib (from `../node_modules/react-native-ui-lib/lib`)
   - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
@@ -503,7 +500,7 @@ EXTERNAL SOURCES:
   RCTTypeSafety:
     :path: "../node_modules/react-native/Libraries/TypeSafety"
   RCTWeChat:
-    :path: "../node_modules/react-native-wechat"
+    :path: "../node_modules/react-native-wechat-lib"
   React:
     :path: "../node_modules/react-native/"
   React-Core:
@@ -568,8 +565,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   ReactNativeART:
     :path: "../node_modules/@react-native-community/art"
-  ReactNativeUiLib:
-    :path: "../node_modules/react-native-ui-lib/lib"
   rn-fetch-blob:
     :path: "../node_modules/rn-fetch-blob"
   RNCAsyncStorage:
@@ -608,7 +603,7 @@ SPEC CHECKSUMS:
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
-  Bytedance-UnionAD: 68d6621374dfdc98f7e8c8597bce02dec80344e3
+  Bytedance-UnionAD: c416fab8b06ccb24e4f73baa453cda2548ca8320
   CodePush: d2e54ad42df82a8db65b2d23d8191b950ba945e1
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: aaeaf388755e4f29cd74acbc9e3b8da6d807c37f
@@ -632,7 +627,7 @@ SPEC CHECKSUMS:
   Picker: 37554355aef82a532ea95b71b6eeba66bc86182b
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
-  RCTWeChat: edb02d76aaf9b2e698e515e3c57bf143a290d9d7
+  RCTWeChat: 21edc74a8d759566d226e6fa12e7ea5ac6bf2129
   React: b6a59ef847b2b40bb6e0180a97d0ca716969ac78
   React-Core: 688b451f7d616cc1134ac95295b593d1b5158a04
   React-CoreModules: d04f8494c1a328b69ec11db9d1137d667f916dcb
@@ -653,7 +648,7 @@ SPEC CHECKSUMS:
   react-native-video: eee541262ada11bc7ffe8ec5508e6a877937c462
   react-native-view-shot: 4475fde003fe8a210053d1f98fb9e06c1d834e1c
   react-native-viewpager: a7b438ca32c57b2614ece2a123e7fe116f743131
-  react-native-webview: 160ac8d6bb974e2933f2de6bb7464a8e934ff31d
+  react-native-webview: cf5527893252b3b036eea024a1da6996f7344c74
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
   React-RCTBlob: d89293cc0236d9cb0933d85e430b0bbe81ad1d72
@@ -665,12 +660,11 @@ SPEC CHECKSUMS:
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   ReactNativeART: 78edc68dd4a1e675338cd0cd113319cf3a65f2ab
-  ReactNativeUiLib: 9883f80a22b855d4a866ceee433d1e24b1014a2a
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNCAsyncStorage: 453cd7c335ec9ba3b877e27d02238956b76f3268
   RNCMaskedView: 4383c3140f1235391fd6029968c166f09ddd0973
   RNDateTimePicker: 4bd49e09f91ca73d69119a9e1173b0d43b82f5e5
-  RNDeviceInfo: 6a3d16fce033f6979c4a6a41e62244d183e8c765
+  RNDeviceInfo: 655265668063a05fff096c6819da0b7289753ef7
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNImageCropPicker: cf129d17e042ce3e96fb9ada967c28f21f977c82
   RNPermissions: 6772df08e03565f718f7e140d9fccae441b8ca8b
@@ -685,6 +679,6 @@ SPEC CHECKSUMS:
   TXLiteAVSDK_Professional: 2eb1d5cb5b80f4debe49d36af58c14924d288c1b
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: 86ecfe48f3bd393793d4132591242bb8b280cc94
+PODFILE CHECKSUM: f7804aa4c67a7f1cfcf90c219b36b357a5bbedf9
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.9.1

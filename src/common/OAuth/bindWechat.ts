@@ -1,4 +1,4 @@
-// import * as WeChat from 'react-native-wechat';
+// import * as WeChat from 'react-native-wechat-lib';
 // import { app } from 'store';
 // import { GQL } from 'apollo';
 // import JAnalytics from 'janalytics-react-native';

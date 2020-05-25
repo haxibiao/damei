@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { Page, StyleSheet, TouchableOpacity, Image } from '../../../widgets';
-import { View, Text } from 'react-native-ui-lib';
+import { View, Text } from 'react-native';
 import { sw, sh } from '../../../tools';
 import { observer } from 'mobx-react';
-import { TouchFeedback } from 'components';
+import { TouchFeedback, Row } from 'components';
 import { config } from 'store';
 
 const subviews = [
@@ -82,9 +82,7 @@ const WidgetPartThree = (props: { navigation: any }) => {
                         }}
                     >
                         <Image source={{ uri: item.icon }} resizeMode='contain' style={{ height: 30, width: 30 }} />
-                        <Text text90 marginT-10>
-                            {item.name}
-                        </Text>
+                        <Text style={{ marginTop: 10 }}>{item.name}</Text>
                     </TouchFeedback>
                 );
             })}

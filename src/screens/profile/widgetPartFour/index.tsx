@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { Page, StyleSheet, TouchableOpacity, Image } from '../../../widgets';
-import { View, Text, } from 'react-native-ui-lib';
+
+import { View, Text } from "react-native";
 import { sw, sh } from '../../../tools';
 import { observer,app ,config} from 'store';
 
-import { TouchFeedback } from "components"
-import { PxFit } from "utils";
+import { TouchFeedback,Row } from "components"
+import { PxFit,SCREEN_WIDTH } from "utils";
 
 const generalSub = [
     {
@@ -31,7 +32,7 @@ const WidgetPartFour = observer((props: {
 }) => {
     console.log('app.login', app.login)
     return (
-        <View style={{ width: sw, height: 'auto' }} paddingH-10 marginT-20>
+        <View style={{ width: sw, height: 'auto',paddingHorizontal:10,marginTop:20 }} >
             {
                 generalSub.map((item: { name: string, icon: string, targetRoute: string; }, index: number) => {
                     if (config.disableAd && item.name== "我的钱包") return null;
@@ -50,10 +51,10 @@ const WidgetPartFour = observer((props: {
                                 }
                             }}
                         >
-                            <View style={{ width: sw * 0.5 }} row centerV>
+                            <Row style={{ width: sw * 0.5 }} >
                                 <Image source={{ uri: item.icon }} style={{ height: 25, width: 25 }} resizeMode='contain' />
-                                <Text marginL-16 style={{  fontSize: PxFit(16)}}> {item.name}</Text>
-                            </View>
+                                <Text style={{ marginLeft:16, fontSize: PxFit(16)}}> {item.name}</Text>
+                            </Row>
                             <Image source={{ uri: 'right_arrow' }} resizeMode='contain' style={{ height: 18, width: 18 }} />
                         </TouchFeedback>
                     );

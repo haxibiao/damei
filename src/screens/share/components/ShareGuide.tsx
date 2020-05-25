@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Image, ScrollView, ImageBackground } from 'react-native';
 import { PageContainer, TouchFeedback, Iconfont, Row, Button } from 'components';
 import { Theme, PxFit, Config, SCREEN_WIDTH } from 'utils';
-import * as WeChat from 'react-native-wechat';
+import * as WeChat from 'react-native-wechat-lib';
 const ShareGuide = (props) => {
     const content = props.user.invite_slogan;
     return (
@@ -37,10 +37,17 @@ const ShareGuide = (props) => {
                     onPress={() => {
                         props.hide();
                         try {
-                            WeChat.shareToSession({
-                                type: 'text',
-                                description: content,
-                            });
+                            WeChat.shareText({
+                                text: content,
+                                scene: 0,
+                            })
+                                .then((result) => {
+                                    console.log('result', result);
+                                })
+                                .catch((err) => {
+                                    console.log('err', err);
+                                });
+                            // console.log('result', result);
                         } catch (e) {
                             Toast.show({ content: '未安装微信或当前微信版本较低' });
                         }

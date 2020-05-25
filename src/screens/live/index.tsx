@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, StatusBar, Platform, FlatList, RefreshControl, TouchableOpacity, ImageBackground, Image, Dimensions } from 'react-native';
 import { Page } from '../../widgets';
-import { View as UIView, Image as UIImage } from 'react-native-ui-lib';
 import { DataCenter, observer } from '../../data';
 import { GQL } from '../../network';
 const { width: sw, height: sh } = Dimensions.get('window');

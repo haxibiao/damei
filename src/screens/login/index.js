@@ -8,7 +8,7 @@ import { Theme, PxFit, SCREEN_WIDTH, SCREEN_HEIGHT, ISIOS, Config } from 'utils'
 import { Query, withApollo, compose, graphql, GQL } from 'apollo';
 import { app } from 'store';
 // import { WeChat } from 'native';
-import * as WeChat from 'react-native-wechat';
+import * as WeChat from 'react-native-wechat-lib';
 
 import DeviceInfo from 'react-native-device-info';
 

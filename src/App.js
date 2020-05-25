@@ -5,7 +5,7 @@ import { app, config, observer } from 'store';
 
 import Orientation from 'react-native-orientation';
 import codePush from 'react-native-code-push';
-import * as WeChat from 'react-native-wechat';
+import * as WeChat from 'react-native-wechat-lib';
 import { ad } from 'native';
 import { ISIOS, PxFit, Theme, Config } from 'utils';
 
@@ -77,7 +77,13 @@ class App extends Component {
         this.checkServer();
         // 微信注册
 
-        WeChat.registerApp('wxe3f5d153afd38a62');
+        WeChat.registerApp('wxe3f5d153afd38a62', 'https://www.datizhuanqian.com/')
+            .then((registerApp) => {
+                console.log('registerApp', registerApp);
+            })
+            .catch((error) => {
+                console.log('error', error);
+            });
 
         // 注册全局变量Toast
         global.Toast = this.toast;

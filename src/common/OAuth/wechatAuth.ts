@@ -1,4 +1,4 @@
-import * as WeChat from 'react-native-wechat';
+import * as WeChat from 'react-native-wechat-lib';
 
 interface Props {
     callback?: Function;
