@@ -15,18 +15,21 @@ const CardWidth = sw * 0.8;
 const CardHeight = CardWidth * 0.23;
 const StatusBarHeight = StatusBar.currentHeight ?? 0;
 
+const DefaultPlaceholder = "点击修改标题";
 const ShowTimeWidgetConfigureLayer = (props:{
     navigation:any,
     startCallback:() => void
 }) => {
 
-    const [titlevalue, settitlevalue] = useState(`${app.me?.name ?? ''}的直播`);
+    const [titlevalue, settitlevalue] = useState(DefaultPlaceholder);
     const [showBeauty,setshowbeauty] = useState(false);
 
     let clicked = false;
 
     const titleHandler = (text: string) => {
-        settitlevalue(text);
+        if(titlevalue.length <= 20){
+            settitlevalue(text);
+        }
     }
 
     const StartLiveHandler = () => {
@@ -34,10 +37,12 @@ const ShowTimeWidgetConfigureLayer = (props:{
         if(!clicked){
             clicked = true;
             if(client){
+                var livetitle = `${app.me?.name ?? ''}的直播`;
+                if(titlevalue != DefaultPlaceholder) livetitle = titlevalue;
                 client.mutate({
                     mutation: GQL.GetLivePushURL,
                     variables: {
-                        title: titlevalue
+                        title: livetitle
                     },
                     fetchPolicy: 'no-cache',
                 }).then((result:any) => {
@@ -78,8 +83,8 @@ const ShowTimeWidgetConfigureLayer = (props:{
             <View style={styles.cameraSwitch}>
                 <RoundedImage uri={app.me?.avatar ?? ''} width={60} height={60} radius={5} />
                 <View style={{ marginLeft: 12 }}>
-                    <Text style={styles.liveTitle}>直播标题</Text>
-                    <TextInput value={titlevalue} onChangeText={titleHandler} onFocus={() => {settitlevalue('')}} style={styles.input} maxLength={15} />
+                    <Text style={styles.liveTitle} >直播标题</Text>
+                    <TextInput value={titlevalue}  onChangeText={titleHandler} onFocus={() => {settitlevalue('')}} style={styles.input} maxLength={15} />
                 </View>
                 <TouchableOpacity onPress={() => { 
                     LivePushManager.liveSwitchCamera() 
@@ -142,7 +147,8 @@ const styles = StyleSheet.create({
     liveTitle:{
         color: '#ffffffaa', 
         fontSize: 16, 
-        marginStart: 3.8 
+        marginStart: 3.8 ,
+        marginBottom:5,
     },
     input:{ 
         paddingVertical: 0, 
