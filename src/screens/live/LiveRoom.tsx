@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, Alert, StatusBar, Image } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Alert, StatusBar } from 'react-native';
 import { LivePullManager, LivePullView, LIVE_TYPE } from 'hxf-tencent-live';
 import LottieView from 'lottie-react-native';
 import { when, observer, DataCenter } from '../../data';
@@ -101,6 +101,8 @@ const LiveRoom = (props: any) => {
                 streamer.count_audience = count_audience;
                 setstreamer(streamer);
                 setprepared(true);
+                LiveStore.setFollowedStreamer(streamer.is_followed);
+                LiveStore.setStreamer(streamer);
                 console.log('拉流地址: ', pull_url);
                 if (pull_url) {
                     //开始拉流 -- 
@@ -125,6 +127,8 @@ const LiveRoom = (props: any) => {
             //组件销毁，清除数据
             LiveStore.clearDankamu();
             LiveStore.setStreamerLeft(false);
+            LiveStore.setFollowedStreamer(false);
+            LiveStore.setStreamer({});
         }
     }, []);
 

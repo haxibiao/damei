@@ -9,6 +9,7 @@ import { DataCenter } from '../../data';
 import { ApolloClient } from 'apollo-boost';
 import {GQL as NewGQL} from '../../network';
 const StatusBarHeight = StatusBar.currentHeight ?? 0; //状态栏高度
+import {useStatusHeight} from 'components';
 // import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const { width: sw, height: sh } = Dimensions.get("window");
@@ -49,11 +50,14 @@ const FollowButton = observer((props:{isFollowed:boolean,streamerid:string}) => 
                 console.log("关注成功",rs);
                 if(rs.data.followToggle == null){
                     setfollowed(false);
+                    LiveStore.setFollowedStreamer(false);
                 }else{
                     setfollowed(true);
+                    LiveStore.setFollowedStreamer(true);
                 }
             }).catch((err:any) => {
-                console.log("关注mutation错误",err)
+                console.log("关注mutation错误",err);
+                Toast({content: '网络错误，请稍后重试'});
             })
         }
     }
@@ -106,8 +110,7 @@ const CurrentPeople = observer((props:any) => {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{alignItems:'center'}}
             renderItem={({item,index}) => {
-                console.log(item.user_avatar,item.user_id);
-                return <Avatar uri={item.user_avatar} size={TOP_WIDGET_AVATAR_SIZE*1.1} frameStyle={{marginEnd:2,backgroundColor:'white'}}/>
+                return <Avatar uri={item?.user_avatar ?? ''} size={TOP_WIDGET_AVATAR_SIZE*1.1} frameStyle={{marginEnd:2,backgroundColor:'white'}}/>
             }}
             />
             </View>
@@ -195,8 +198,10 @@ const CloseButton = observer((props:any) => {
 
 const LiveRoomTopWidgets = (props:{navigation:any,streamer:{id:string,name:string,avatar:string,count_audience:number,is_followed},loadingEnd:boolean}) => {
 
+    const statusHeight = useStatusHeight();
+
     return (
-        <View style={[styles.TopWidgetContainer,{marginTop: StatusBarHeight + 12,zIndex:props.loadingEnd ? 22 : 10}]}>
+        <View style={[styles.TopWidgetContainer,{marginTop:5+statusHeight,zIndex:props.loadingEnd ? 22 : 10}]}>
             <View style={styles.TopLeftWidget}>
                 <TouchableOpacity activeOpacity={0.9} onPress={() => {
                     console.log("点击头像")
@@ -208,7 +213,7 @@ const LiveRoomTopWidgets = (props:{navigation:any,streamer:{id:string,name:strin
                         console.log("navigation不存在")
                     }
                 }}>
-                    <Avatar uri={props.streamer.avatar} size={TOP_WIDGET_AVATAR_SIZE}/>
+                    <Avatar uri={props?.streamer?.avatar ?? ''} size={TOP_WIDGET_AVATAR_SIZE}/>
                 </TouchableOpacity>
                 <View style={styles.hot}>
                     <Text style={styles.nameTitle} numberOfLines={1}>{props?.streamer?.name+'什么鬼' ?? ''}</Text>
@@ -239,15 +244,16 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
     },
     TopLeftWidget: {
-        height: TOP_WIDGET_HEIGHT,
-        width: TOP_WIDGET_WIDTH,
+        height: TOP_WIDGET_HEIGHT+8,
+        width: TOP_WIDGET_WIDTH+20,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
         backgroundColor: '#00000033',
-        borderRadius: TOP_WIDGET_HEIGHT / 2,
+        borderRadius: (TOP_WIDGET_HEIGHT+10) / 2,
         overflow: 'hidden',
-        paddingHorizontal:5
+        paddingHorizontal:5,
+        paddingVertical:4,
     },
     AudienceCountWrapper:{
         paddingHorizontal: 9,

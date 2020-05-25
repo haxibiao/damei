@@ -17,6 +17,8 @@ class LiveStore {
         user_name:string,
         user_avatar:string,
     }[] = [];
+    @observable followedStreamer:boolean = false;
+    @observable streamer:any = {};
 
     @action.bound
     public setonlinepeople(people:{
@@ -73,6 +75,12 @@ class LiveStore {
     @action.bound
     public clearDankamu(){
         this.dankamu = [];
+    }
+    @action.bound setFollowedStreamer(follow:boolean){
+        this.followedStreamer = follow;
+    }
+    @action.bound setStreamer(streamer:any){
+        this.streamer = {...streamer}
     }
 
 }

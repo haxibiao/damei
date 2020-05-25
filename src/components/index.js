@@ -82,6 +82,8 @@ import VideoTaskGuidance from './Guide/VideoTaskGuidance';
 import AnswerGuidance from './Guide/AnswerGuidance';
 import SetQuestionGuidance from './Guide/SetQuestionGuidance';
 
+import useStatusHeight from './useStatusHeight';
+
 export {
     Iconfont,
     Avatar,
@@ -145,4 +147,5 @@ export {
     VideoTaskGuidance,
     AnswerGuidance,
     SetQuestionGuidance,
+    useStatusHeight
 };
