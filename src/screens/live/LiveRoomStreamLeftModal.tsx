@@ -44,13 +44,12 @@ const Content = observer((props: { navigation: any }) => {
             console.log("用户离开直播间接口错误", err);
         });
         LiveStore.setStreamerLeft(false);
-
         hideStreamerLeft();
     }
 
     return (
         <View style={{ height: sh, width: sw, justifyContent: 'center', alignItems: 'center', position: 'absolute', top: 0 }}>
-            <View style={{ width: sw * 0.78, minHeight: sw * 0.48, justifyContent: 'space-around',alignItems:'center',backgroundColor:'white',borderRadius:20 }}>
+            <View style={{ width: sw * 0.78, minHeight: sw * 0.62, justifyContent: 'space-around',alignItems:'center',backgroundColor:'white',borderRadius:20 }}>
                 <View style={{width:'100%',alignItems:'center'}}>
                     <Image source={require('./res/offline.png')} resizeMode='contain' style={{ height: sw * 0.3, width: sw * 0.3 }} />
                     <Text style={{ color: '#999', fontSize: 16 }}>主播已下播~</Text>

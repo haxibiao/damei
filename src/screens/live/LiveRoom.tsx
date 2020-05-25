@@ -101,6 +101,7 @@ const LiveRoom = (props: any) => {
                 streamer.count_audience = count_audience;
                 setstreamer(streamer);
                 setprepared(true);
+                setloading(false);
                 LiveStore.setFollowedStreamer(streamer.is_followed);
                 LiveStore.setStreamer(streamer);
                 console.log('拉流地址: ', pull_url);
@@ -110,7 +111,7 @@ const LiveRoom = (props: any) => {
                     setTimeout(() => {
                         LivePullManager.liveStartPull(pull_url, 0);
                     }, 500);
-                }
+                };
                 LiveStore.pushDankamu({ name: `小答妹: *~(￣▽￣)~[] []~(￣▽￣)~* 欢迎来到${streamer.name}的直播间`, message: '' });
                 LiveStore.pushDankamu({ name: '小答妹: 为了营造绿色网络环境、请遵守文明准则哦。禁止发表涉及暴力、色情、歧视等言论。不遵守者一旦被查出将有封号风险。', message: '' })
             }).catch((err: any) => {

@@ -27,8 +27,8 @@ export default observer((props) => {
     // const store = useContext(StoreContext);
     const client = useClientMaker(app.me.token, false, checkServer); // 构建apollo client;
     const newclient = useClientMaker(app.me.token, true, checkServer); // 新的后台 endpoint
-    app.client = client; //旧版全局状态
-    app.newClient = newclient; //新版全局状态
+    app.setClient(client);
+    app.setNewClient(newclient);
     DataCenter.AppSetClient(client);
     DataCenter.AppSetNewClient(newclient);
 

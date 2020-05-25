@@ -29,6 +29,14 @@ class app {
     @observable sufficient_permissions: boolean = false;
 
     @action.bound
+    setClient(c){
+        this.client = c;
+    }
+    @action.bound
+    setNewClient(c){
+        this.newClient = c;
+    }
+    @action.bound
     AppSetSufficientPermissions(sufficent) {
         this.sufficient_permissions = sufficent;
     }
