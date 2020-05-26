@@ -7,6 +7,7 @@ import {
     CommentLive,
     LeaveLiveRoom,
     ExceptionLiveReport,
+    GetUserInfo
 } from './graphql/live.graphql';
 
 import {
@@ -38,4 +39,5 @@ export {
     CategoriesQuery,            //推荐题库查询
     InterestCategoriesQuery,    //兴趣题库查询,
     AnswerMutation,             //提交题目答案
+    GetUserInfo
 }

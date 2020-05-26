@@ -6,8 +6,7 @@ import LiveStore from './LiveStore';
 import LiveBeautyStore from './LiveBeautyStore';
 import { Avatar } from 'hxf-react-native-uilib';
 import { LivePushManager } from 'hxf-tencent-live';
-// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import * as OnlinePeopleModal from './ShowTimeWidgetOnlinePeopleModal';
+import CommonWidgetTopOnlinePeopleList from './CommonWidgetTopOnlinePeopleList';
 import { Overlay } from 'teaset';
 import { app } from '../../store'; //TODO: replace this import later
 const { width: sw, height: sh } = Dimensions.get("window");
@@ -20,7 +19,6 @@ const TOP_WIDGET_FOLLOW_HEIGHT = TOP_WIDGET_HEIGHT * 0.5;
 const TOP_WIDGET_FOLLOW_WIDTH = TOP_WIDGET_FOLLOW_HEIGHT * 2.2;
 const TOP_WIDGET_CENTER_WIDTH = TOP_WIDGET_WIDTH - TOP_WIDGET_AVATAR_SIZE - 12;
 const TOP_WIDGET_CLOSE_SIZE = 28;
-const TOP_WIDGET_ONLINE_WRAPPER_HEIGHT = 23;
 
 const ModalContent = observer((props: any) => {
 
@@ -92,43 +90,6 @@ const HotValue = observer(() => {
     return <Text style={{ fontSize: 8, color: 'white' }}>{`当前热度${LiveStore.hot}`}</Text>
 })
 
-const OnlinePeople = observer((props: any) => {
-
-    const getCount = () => {
-        let c = LiveStore.count_audience;
-        if(c >= 1000 && c < 10000){
-            return (c/1000).toFixed(1) + 'k';
-        }else if(c >= 10000){
-            return (c/10000).toFixed(1)+'w';
-        }
-        return c;
-    }
-
-
-    return (
-        <View style={styles.AudienceContainer}>
-            <View style={{minWidth:35,maxWidth:sw * 0.34,height:36}}>
-            <FlatList
-            keyExtractor={(item,index) => index.toString()}
-            data={LiveStore.onlinePeople}
-            horizontal
-            contentContainerStyle={{alignItems:'center'}}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({item,index}) => {
-                return <Avatar size={TOP_WIDGET_AVATAR_SIZE} uri={item.user_avatar} frameStyle={{ marginEnd:2 }} />
-            }}
-            />
-            </View>
-            
-        <TouchableOpacity  onPress={() => { OnlinePeopleModal.showOnlinePeopleModal() }} style={styles.AudienceCountWrapper}>
-            <Text style={{
-                fontSize: 12,
-                color: 'white'
-            }}>{getCount()}</Text>
-        </TouchableOpacity>
-        </View>
-    )
-})
 
 const ShowTimeWidgetLiveOnWidgetTopBar = (props: { navigation: any }) => {
 
@@ -168,7 +129,7 @@ const ShowTimeWidgetLiveOnWidgetTopBar = (props: { navigation: any }) => {
             </View>
 
             <View style={styles.row}>
-                <OnlinePeople />
+                <CommonWidgetTopOnlinePeopleList navigation={props.navigation}/>
                 <TouchableOpacity activeOpacity={0.9} onPress={() => { showQuitModal(props.navigation) }}>
                     <Image source={require('./res/close.png')} resizeMode={'contain'} style={{ height: TOP_WIDGET_CLOSE_SIZE, width: TOP_WIDGET_CLOSE_SIZE }} />
                 </TouchableOpacity>
@@ -207,22 +168,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#FE5F5F',
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    AudienceCountWrapper: {
-        paddingHorizontal: 5,
-        height: TOP_WIDGET_ONLINE_WRAPPER_HEIGHT,
-        minWidth: TOP_WIDGET_ONLINE_WRAPPER_HEIGHT,
-        backgroundColor: '#00000033',
-        borderRadius: TOP_WIDGET_ONLINE_WRAPPER_HEIGHT / 2,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginEnd: 3
-    },
-    AudienceContainer: {
-        flexDirection:'row',
-        alignItems:'center',
-        position:'absolute',
-        right: TOP_WIDGET_CLOSE_SIZE,
     },
     row:{
         flexDirection: 'row',

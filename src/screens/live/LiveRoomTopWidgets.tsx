@@ -11,6 +11,9 @@ import {GQL as NewGQL} from '../../network';
 const StatusBarHeight = StatusBar.currentHeight ?? 0; //状态栏高度
 import {useStatusHeight} from 'components';
 // import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import * as CommonWidgetStreamerCardModal from './CommonWidgetStreamerCardModal';
+import CommonWidgetTopOnlinePeopleList from './CommonWidgetTopOnlinePeopleList'; 
+import * as CommonWidgetUserCardModal from './CommonWidgetUserCardModal';
 
 const { width: sw, height: sh } = Dimensions.get("window");
 
@@ -34,12 +37,11 @@ let clickinter: number;
 let client:ApolloClient<unknown>;
 let newclient:ApolloClient<unknown>;
 const FollowButton = observer((props:{isFollowed:boolean,streamerid:string}) => {
-    const [followed,setfollowed] = useState(false);
 
     useEffect(() => {
         client = DataCenter.App.client;
         newclient = DataCenter.App.newclient;
-        setfollowed(props.isFollowed);
+        LiveStore.setFollowedStreamer(props.isFollowed);
     },[props.isFollowed]);
     function followMutate(){
         if(client){
@@ -49,10 +51,8 @@ const FollowButton = observer((props:{isFollowed:boolean,streamerid:string}) => 
             }).then((rs) => {
                 console.log("关注成功",rs);
                 if(rs.data.followToggle == null){
-                    setfollowed(false);
                     LiveStore.setFollowedStreamer(false);
                 }else{
-                    setfollowed(true);
                     LiveStore.setFollowedStreamer(true);
                 }
             }).catch((err:any) => {
@@ -62,11 +62,10 @@ const FollowButton = observer((props:{isFollowed:boolean,streamerid:string}) => 
         }
     }
 
-
     return (
         <View style={{backgroundColor: '#ffffffee',borderRadius:TOP_WIDGET_FOLLOW_CONTAINER_SIZE/2,height:TOP_WIDGET_FOLLOW_CONTAINER_SIZE,width:TOP_WIDGET_FOLLOW_CONTAINER_SIZE_WIDTH,justifyContent:'center',alignItems:'center',marginEnd:0}}>
             {
-                followed ? (
+                LiveStore.followedStreamer ? (
                     <TouchableOpacity onPress={followMutate}>
                         <Image source={require('../../assets/images/ic_liked.png')} style={{height:TOP_FOLLOW_SIZE,width:TOP_FOLLOW_SIZE}} resizeMode='contain'/>
                     </TouchableOpacity>
@@ -87,114 +86,6 @@ const HotDot = observer(() => {
     return <Text style={styles.HotDot} numberOfLines={1}>{`热度${LiveStore.hot}`}</Text>
 });
 
-/**
- *  topwidget 子组件 => 当前人数
- */
-const CurrentPeople = observer((props:any) => {
-    useEffect(() => {
-        return () => {
-            /**
-             *  将热度和人数值复位
-             */
-            LiveStore.setHot(0);
-        }
-    },[])
-
-    return (
-        <View style={{flexDirection:'row',alignItems:'center'}}>
-            <View style={{minWidth:35,maxWidth:sw * 0.4,height:36}}>
-            <FlatList
-            keyExtractor={(item,index) => index.toString()}
-            data={LiveStore.onlinePeople}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{alignItems:'center'}}
-            renderItem={({item,index}) => {
-                return <Avatar uri={item?.user_avatar ?? ''} size={TOP_WIDGET_AVATAR_SIZE*1.1} frameStyle={{marginEnd:2,backgroundColor:'white'}}/>
-            }}
-            />
-            </View>
-        </View>
-    )
-});
-
-/**
- * 在线人数
- */
-const OnlineCount = observer((props:any) => {
-
-    const getCount = () => {
-        let c = LiveStore.count_audience;
-        if(c >= 1000 && c < 10000){
-            return (c/1000).toFixed(1) + 'k';
-        }else if(c >= 10000){
-            return (c/10000).toFixed(1)+'w';
-        }
-        return c;
-    }
-
-    return (
-        <View style={{height:TOP_WIDGET_CLOSE_SIZE,minWidth:TOP_WIDGET_CLOSE_SIZE,borderRadius:TOP_WIDGET_CLOSE_SIZE/2,backgroundColor:'#00000033',justifyContent:'center',alignItems:'center',paddingHorizontal:3}}>
-            <Text style={{fontSize:12,color:'white'}}>{getCount()}</Text>
-        </View>
-    )
-})
-
-/**
- * 离开直播间按钮
- */
-const CloseButton = observer((props:any) => {
-
-    useEffect(() => {
-        return () => {
-            //为防止用户直接使用物理按键返回，在组件销毁时也调用离开mutation
-            newclient.mutate({
-                mutation: NewGQL.LeaveLiveRoom,
-                variables: {roomid: LiveStore.roomidForOnlinePeople}
-            }).then(rs => {
-                //离开成功
-                console.log("[Protect]用户离开直播间mutation调用成功",rs);
-            }).catch(err => {
-                //TODO: 离开接口调用失败
-                console.log("[Protect]用户离开直播间接口错误",err);
-            });
-            LiveStore.setStreamerLeft(false); //离开时设置 主播下播 为false, 隐藏下播状态图
-            LivePullManager.liveStopPull();
-            console.log("[Protect]停止拉流");
-            LiveStore.clearDankamu();
-            console.log("[Protect]清除弹幕数据");
-        }
-    },[])
-
-    return (
-        <TouchableOpacity 
-        activeOpacity={0.9} 
-        onPress={ () => {
-            props.navigation.goBack();
-            //销毁直播
-            LivePullManager.liveStopPull();
-            console.log("停止拉流");
-            //清除弹幕
-            LiveStore.clearDankamu();
-            console.log("清除弹幕数据");
-
-            //离开直播间接口调用
-            newclient.mutate({
-                mutation: NewGQL.LeaveLiveRoom,
-                variables: {roomid: LiveStore.roomidForOnlinePeople}
-            }).then(rs => {
-                //离开成功
-                console.log("用户离开直播间",rs);
-            }).catch(err => {
-                //TODO: 离开接口调用失败
-                console.log("用户离开直播间接口错误",err);
-            });
-            LiveStore.setStreamerLeft(false);
-        }}>
-            <Image source={require('./res/close.png')} resizeMode={'contain'} style={{ height: TOP_WIDGET_CLOSE_SIZE, width: TOP_WIDGET_CLOSE_SIZE }} />
-        </TouchableOpacity>
-    )
-})
 
 const LiveRoomTopWidgets = (props:{navigation:any,streamer:{id:string,name:string,avatar:string,count_audience:number,is_followed},loadingEnd:boolean}) => {
 
@@ -204,14 +95,9 @@ const LiveRoomTopWidgets = (props:{navigation:any,streamer:{id:string,name:strin
         <View style={[styles.TopWidgetContainer,{marginTop:5+statusHeight,zIndex:props.loadingEnd ? 22 : 10}]}>
             <View style={styles.TopLeftWidget}>
                 <TouchableOpacity activeOpacity={0.9} onPress={() => {
-                    console.log("点击头像")
-                    //跳转到用户详情页
-                    if(props.navigation){
-                        console.log("navigation存在，进行跳转",props.navigation)
-                        props.navigation.navigate('User',{user: {id:props.streamer.id,name:props.streamer.name}});
-                    }else{
-                        console.log("navigation不存在")
-                    }
+                    
+                    CommonWidgetStreamerCardModal.show(props.navigation);
+                    // CommonWidgetUserCardModal.show(props.navigation);
                 }}>
                     <Avatar uri={props?.streamer?.avatar ?? ''} size={TOP_WIDGET_AVATAR_SIZE}/>
                 </TouchableOpacity>
@@ -223,10 +109,7 @@ const LiveRoomTopWidgets = (props:{navigation:any,streamer:{id:string,name:strin
 
             <HotDot />
 
-            <View style={styles.row}>
-                <CurrentPeople count_audience={props.streamer.count_audience ?? 0}/>
-                <OnlineCount />
-            </View>
+            <CommonWidgetTopOnlinePeopleList navigation={props.navigation}/>
 
         </View>
     )

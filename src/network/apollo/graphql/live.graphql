@@ -11,6 +11,9 @@ mutation EnterLiveRoom($id: ID!) {
       name
       avatar
       is_followed
+      level {
+        level
+      }
     }
   }
 }
@@ -45,6 +48,20 @@ query GetOnlinePeople($roomid:Int!) {
     avatar
   }
 }
+#观众信息查询
+query GetUserInfo($id: Int!){
+  user(id: $id){
+    id
+    name
+    avatar
+    is_followed
+    level {
+      level
+      name
+    }
+  }
+}
+
 #获取直播推流地址
 mutation GetLivePushURL($title: String){
   createLiveRoom(title: $title){
