@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, Alert, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Alert, StatusBar,BackHandler,InteractionManager } from 'react-native';
 import { LivePullManager, LivePullView, LIVE_TYPE } from 'hxf-tencent-live';
 import LottieView from 'lottie-react-native';
 import { when, observer, DataCenter } from '../../data';
@@ -40,6 +40,12 @@ const LiveRoom = (props: any) => {
     const [streamer, setstreamer] = useState({}); //主播信息
 
     useEffect(() => {
+        BackHandler.addEventListener("hardwareBackPress",function(){
+            return true;
+        })
+    },[]);
+
+    useEffect(() => {
 
         let beginevt = LivePullManager.subscrib('PLAY_EVT_PLAY_BEGIN', (event) => {
             //LiveStore.pushDankamu({name:"直播开始!",message:''});
@@ -77,10 +83,12 @@ const LiveRoom = (props: any) => {
         return () => {
             // connectevt.remove();
             // loadingevt.remove();
-            beginevt.remove();
-            endevt.remove();
-            reconnect.remove();
-            disconnectevt.remove();
+            InteractionManager.runAfterInteractions(() => {
+                beginevt.remove();
+                endevt.remove();
+                reconnect.remove();
+                disconnectevt.remove();
+            });
         }
     }, [])
 
@@ -126,10 +134,12 @@ const LiveRoom = (props: any) => {
 
         return () => {
             //组件销毁，清除数据
-            LiveStore.clearDankamu();
-            LiveStore.setStreamerLeft(false);
-            LiveStore.setFollowedStreamer(false);
-            LiveStore.setStreamer({});
+            InteractionManager.runAfterInteractions(() => {
+                LiveStore.clearDankamu();
+                LiveStore.setStreamerLeft(false);
+                LiveStore.setFollowedStreamer(false);
+                LiveStore.setStreamer({});
+            });
         }
     }, []);
 

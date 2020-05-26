@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Dimensions,SafeAreaView, TouchableOpacity,NativeModules,StatusBar, Image, Slider } from 'react-native';
+import { View, StyleSheet, Dimensions,SafeAreaView,BackHandler, TouchableOpacity,NativeModules,StatusBar, Image, Slider } from 'react-native';
 import { LivePushManager } from 'hxf-tencent-live';
 const { width: sw, height: sh } = Dimensions.get('window');
 import ShowTimeWidgetLiveOnWidgetTopBar from './ShowTimeWidgetLiveOnWidgetTopBar';
@@ -61,7 +61,11 @@ const AbilitySideBar = (props:any) => {
 }
 
 const ShowTimeWidgetLiveOnLayer = (props:{navigation:any}) => {
-
+    useEffect(() => {
+        BackHandler.addEventListener("hardwareBackPress",function(){
+            return true;
+        })
+    },[]);
     return (
         <View style={styles.body}>
             <SafeAreaView style={styles.safearea}>
