@@ -15,21 +15,16 @@ const FollowHeight = 38;
 const AvatarSize = 75;
 
 let key: any = null;
-let client: any = null;
-let newclient: any = null;
+
 const ContentView = observer((props: any) => {
     const navigation = props.navigation;
     const [userinfo, setuserinfo] = useState();
     const [followed, setfollowed] = useState(false);
-    const [reported,setreported] = useState(false);
-    useEffect(() => {
-        client = app.client;
-        newclient = app.newClient;
-    }, []);
+    const [reported, setreported] = useState(false);
 
     useEffect(() => {
-        if (props.userid) {
-            newclient.query({
+        if (props.userid && app.newClient) {
+            app.newClient.query({
                 query: NewGQL.GetUserInfo,
                 variables: { id: props.userid }
             }).then(rs => {
@@ -42,17 +37,20 @@ const ContentView = observer((props: any) => {
     }, []);
 
     function followMutate() {
-        if (client) {
-            client.mutate({
+        console.log('user id: ', userinfo.id)
+        if (app.client) {
+            app.client.mutate({
                 mutation: GQL.FollowToggbleMutation,
                 variables: { followed_type: 'users', followed_id: userinfo.id }
             }).then((rs: any) => {
+                console.log(rs)
                 if (rs.data.followToggle == null) {
                     setfollowed(false);
                 } else {
                     setfollowed(true);
                 }
             }).catch((err: any) => {
+                console.log(err)
                 Toast({ content: '网络错误，请稍后重试' });
             });
         }
@@ -85,29 +83,28 @@ const ContentView = observer((props: any) => {
                 <Avatar uri={userinfo?.avatar ?? ''} size={AvatarSize} borderWidth={1} borderColor={'white'} frameStyle={{ marginTop: -25, marginBottom: 10, backgroundColor: 'white' }} />
             </TouchableOpacity>
 
-            {
-                userinfo && (
-                    <>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: "center" }}>
-                            <Text style={{ color: "#222", marginEnd: 12, fontSize: 16 }}>{userinfo?.name ?? ''}</Text>
-                            <Image source={require('./res/level_badge.png')} resizeMode={'contain'} style={{ height: 20, width: 20, marginEnd: 6 }} />
-                            {userinfo?.level && <Text style={{ fontSize: 16, color: '#888' }}>{userinfo?.level?.level ?? 1}级</Text>}
-                        </View>
-                        <Text style={{ color: '#888', marginTop: 20, marginBottom: 8 }}>{userinfo?.level?.name ?? ''}</Text>
-                        <TouchableOpacity
-                            onPress={followMutate}
-                            style={{
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                width: FollowWidth,
-                                height: FollowHeight,
-                                backgroundColor: followed ? '#ddd' : '#FDF187',
-                                borderRadius: FollowHeight / 2,
-                                marginTop: 30
-                            }}>
-                            <Text style={{ color: '#555', fontSize: 15 }}>{followed ? "取消关注" : "关注"}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
+            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: "center" }}>
+                <Text style={{ color: "#222", marginEnd: 12, fontSize: 16 }}>{userinfo?.name ?? ''}</Text>
+                <Image source={require('./res/level_badge.png')} resizeMode={'contain'} style={{ height: 20, width: 20, marginEnd: 6 }} />
+                {userinfo?.level && <Text style={{ fontSize: 16, color: '#888' }}>{userinfo?.level?.level ?? 1}级</Text>}
+            </View>
+            <Text style={{ color: '#888', marginTop: 20, marginBottom: 8 }}>{userinfo?.level?.name ?? '加载中...'}</Text>
+            <TouchableOpacity
+                onPress={followMutate}
+                disabled={!userinfo}
+                style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: FollowWidth,
+                    height: FollowHeight,
+                    backgroundColor: followed ? '#ddd' : '#FDF187',
+                    borderRadius: FollowHeight / 2,
+                    marginTop: 30,
+                    opacity: !userinfo ? 0 : 1
+                }}>
+                <Text style={{ color: '#555', fontSize: 15 }}>{followed ? "取消关注" : "关注"}</Text>
+            </TouchableOpacity>
+            {/* <TouchableOpacity
                             onPress={reportHandler}
                             disabled={reported}
                             style={{
@@ -120,10 +117,7 @@ const ContentView = observer((props: any) => {
                                 marginTop: 15
                             }}>
                             <Text style={{ color: reported ? '#555' : 'white', fontSize: 15 }}>{reported ? "已举报" : "举报"}</Text>
-                        </TouchableOpacity>
-                    </>
-                )
-            }
+                        </TouchableOpacity> */}
         </View>
     );
 });

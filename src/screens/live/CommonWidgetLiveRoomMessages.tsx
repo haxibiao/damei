@@ -1,10 +1,33 @@
 import React, { useEffect,useRef } from 'react';
-import { View, Text, StyleSheet, Dimensions, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, FlatList,TouchableOpacity } from 'react-native';
 import { observer } from 'mobx-react';
 import LiveStore from './LiveStore';
 const { width: sw, height: sh } = Dimensions.get("window");
 const Store = LiveStore; //直播 store
+import * as CommonWidgetSlideUpReportModal from './CommonWidgetSlideUpReportModal';
 
+const RenderDanmu = ({ item, index }: { item: any, index: number }) => {
+
+    const ClickHandler = () => {
+        CommonWidgetSlideUpReportModal.show();
+    };
+    const isDisable = () => {
+        if(item.message == '') return true;
+        return false;
+    }
+
+    return (
+        <TouchableOpacity 
+        onPress={ClickHandler}
+        disabled={isDisable()}
+        style={styles.dankamuWrapper}>
+            <Text style={styles.dankamuText}>
+                <Text style={styles.dankamuName}>{item.name + (item.message != '' ? '：' : '')}</Text>
+                {item.message}
+            </Text>
+        </TouchableOpacity>
+    )
+}
 const CommonWidgetLiveRoomMessages = (props) => {
     const ListRef = useRef<FlatList>(null);
 
@@ -12,18 +35,6 @@ const CommonWidgetLiveRoomMessages = (props) => {
         if(ListRef != null){
             ListRef.current?.scrollToEnd();
         }
-    }
-
-    const RenderDanmu = ({ item, index }: { item: any, index: number }) => {
-
-        return (
-            <View style={styles.dankamuWrapper}>
-                <Text style={styles.dankamuText}>
-                    <Text style={styles.dankamuName}>{item.name + (item.message != '' ? '：' : '')}</Text>
-                    {item.message}
-                </Text>
-            </View>
-        )
     }
 
     return (
