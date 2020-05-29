@@ -1,0 +1,7 @@
+#import './toggleLikeMutation.gql'
+
+query me {
+    user {
+        id
+    }
+}

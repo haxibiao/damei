@@ -1,0 +1,62 @@
+#点赞通知
+query likeNotificationsQuery($offset: Int, $limit: Int, $filter: [NotificationEnum]) {
+    notifications(offset: $offset, limit: $limit, filter: $filter, read_filter: 0) {
+        type
+        like {
+            id
+            question {
+                id
+                description
+                created_at
+                image {
+                    id
+                    path
+                }
+                video {
+                    id
+                    url
+                    path
+                    cover
+                }
+                category {
+                    id
+                    name
+                }
+                count
+            }
+            user {
+                id
+                name
+                gender
+                avatar
+                is_admin
+                level {
+                    id
+                    level
+                }
+                profile {
+                    sub_name
+                    birthday
+                    age
+                    introduction
+                }
+            }
+            comment {
+                id
+                content
+                time_ago
+                parent_comment {
+                    id
+                    content
+                }
+                feedback {
+                    id
+                    title
+                }
+            }
+            created_at
+        }
+        read_at
+        created_at
+    }
+}

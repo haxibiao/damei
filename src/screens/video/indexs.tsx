@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { Page, VideoLiveScrollTab } from '../../widgets';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Video from './Video';
-import LiveList from '../live';
+// import LiveList from '../live';
 import { observer } from 'store';
 import { config } from 'store';
 import LoginMountPoint from '../../data/LoginMountPoint';
@@ -27,15 +27,15 @@ const VideoPlayground = (props: any) => {
             {config.disableAd ? (
                 <Video tabLabel='推荐' />
             ) : (
-                <ScrollableTabView
-                    tabBarPosition='overlayTop'
-                    onChangeTab={tabHandler}
-                    renderTabBar={() => <VideoLiveScrollTab />}
-                >
-                    <Video tabLabel='推荐' />
-                    <LiveList tabLabel='直播' navigation={props.navigation} inCurrent={currentPage == 1} />
-                </ScrollableTabView>
-            )}
+                    <ScrollableTabView
+                        tabBarPosition='overlayTop'
+                        onChangeTab={tabHandler}
+                        renderTabBar={() => <VideoLiveScrollTab />}
+                    >
+                        <Video tabLabel='推荐' />
+                        {/* <LiveList tabLabel='直播' navigation={props.navigation} inCurrent={currentPage == 1} /> */}
+                    </ScrollableTabView>
+                )}
         </Page.PageCleared>
     );
 };

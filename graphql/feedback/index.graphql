@@ -1,0 +1,10 @@
+#import './CreateFeedbackMutation.gql'
+#import './feedbackCommentsQuery.gql'
+#import './feedbackQuery.gql'
+#import './feedbacksQuery.gql'
+
+query me {
+    user {
+        id
+    }
+}

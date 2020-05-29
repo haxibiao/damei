@@ -1,0 +1,59 @@
+#系统通知
+query systemNotificationsQuery($filter: [NotificationEnum], $limit: Int, $offset: Int) {
+    notifications(filter: $filter, limit: $limit, offset: $offset, read_filter: 0) {
+        type
+        created_at
+        data
+        report {
+            id
+            created_at
+            reason
+            question {
+                id
+                description
+            }
+        }
+        user {
+            id
+            name
+            gender
+            level {
+                id
+                level
+                ticket_max
+            }
+            ticket
+            next_level_exp
+        }
+        withdraw {
+            id
+            status
+            amount
+            to_account
+            updated_at
+            biz_no
+            remark
+        }
+        curation {
+            id
+            created_at
+            type
+            question {
+                id
+                description
+            }
+            remark
+            gold_awarded
+        }
+        question {
+            id
+            submit
+            description
+            created_at
+            category {
+                id
+                name
+            }
+        }
+    }
+}

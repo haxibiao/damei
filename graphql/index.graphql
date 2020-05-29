@@ -10,6 +10,10 @@
 #import './task/index.graphql'
 #import './share/index.graphql'
 
+#import './feedback/index.graphql'
+#import './like/index.graphql'
+#import './notification/index.graphql'
+
 query me {
     user {
         id

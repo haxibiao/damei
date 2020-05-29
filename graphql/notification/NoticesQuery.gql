@@ -1,0 +1,10 @@
+#官方公告
+query NoticesQuery($limit: Int, $offset: Int) {
+    notices(limit: $limit, offset: $offset) {
+        id
+        title
+        content
+        created_at
+        route
+    }
+}

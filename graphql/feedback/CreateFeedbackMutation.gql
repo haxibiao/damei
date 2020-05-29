@@ -1,0 +1,7 @@
+#创建反馈
+mutation CreateFeedbackMutation($title: String, $content: String, $images: [String]) {
+    createFeedback(title: $title, content: $content, images: $images) {
+        id
+        title
+    }
+}

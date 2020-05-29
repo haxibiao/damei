@@ -1,7 +1,7 @@
 //直播
- import Live from '../screens/live';
- import LiveWatch from '../screens/live/LiveRoom';
- import StartLive from '../screens/live/ShowTimeStartLive';
+//  import Live from '../screens/live';
+//  import LiveWatch from '../screens/live/LiveRoom';
+//  import StartLive from '../screens/live/ShowTimeStartLive';
 
 
 import MainTabNavigator from './MainTabNavigator';
@@ -319,13 +319,13 @@ export default {
     SetLoginInfo: {
         screen: SetLoginInfoScreen,
     },
-    liveroom: {
-        screen: Live
-    },
-    startlive: {
-        screen: StartLive
-    },
-    livewatch: {
-        screen: LiveWatch
-    }
+    // liveroom: {
+    //     screen: Live
+    // },
+    // startlive: {
+    //     screen: StartLive
+    // },
+    // livewatch: {
+    //     screen: LiveWatch
+    // }
 };

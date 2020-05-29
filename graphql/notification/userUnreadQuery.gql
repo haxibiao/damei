@@ -1,0 +1,12 @@
+#通知未读数
+query userUnreadQuery($id: Int) {
+    user(id: $id) {
+        id
+        unread_comment_notifications_count
+        unread_withdraw_notifications_count
+        unread_notifications_count
+        unread_user_follow_notifications_count
+        unread_like_notifications_count
+        unread_notices_count
+    }
+}

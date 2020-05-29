@@ -1,0 +1,10 @@
+#官方公告详情
+query NoticeQuery($id: Int!) {
+    notice(id: $id) {
+        id
+        title
+        content
+        created_at
+        route
+    }
+}

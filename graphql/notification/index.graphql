@@ -1,0 +1,13 @@
+#import './commentNotificationsQuery.gql'
+#import './FansNotificationsQuery.gql'
+#import './likeNotificationsQuery.gql'
+#import './NoticeQuery.gql'
+#import './NoticesQuery.gql'
+#import './systemNotificationsQuery.gql'
+#import './userUnreadQuery.gql'
+
+query me {
+    user {
+        id
+    }
+}

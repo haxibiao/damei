@@ -1,0 +1,31 @@
+#反馈列表
+query feedbacksQuery($user_id: Int, $offset: Int, $limit: Int) {
+    feedbacks(user_id: $user_id, offset: $offset, limit: $limit) {
+        id
+        title
+        content
+        hot
+        publish_comments_count
+        time_ago
+        images {
+            id
+            path
+            width
+            height
+        }
+        user {
+            id
+            name          
+            avatar
+            is_admin
+            gender
+            profile {              
+                age
+            }
+            level {
+                id
+                level
+            }
+        }
+    }
+}

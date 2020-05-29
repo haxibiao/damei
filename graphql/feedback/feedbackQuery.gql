@@ -1,0 +1,31 @@
+#反馈详情
+query feedbackQuery($id: Int!) {
+    feedback(id: $id) {
+        id
+        title
+        content
+        hot
+        publish_comments_count
+        time_ago
+        images {
+            id
+            path
+            width
+            height
+        }
+        user {
+            id
+            name
+            avatar
+            gender
+            is_admin
+            profile {              
+                age
+            }
+            level {
+                id
+                level
+            }
+        }
+    }
+}

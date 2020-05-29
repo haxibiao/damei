@@ -1,0 +1,78 @@
+#评论通知
+query commentNotificationsQuery($filter: [NotificationEnum], $limit: Int, $offset: Int) {
+    notifications(filter: $filter, limit: $limit, offset: $offset, read_filter: 0) {
+        type
+        created_at
+        comment {
+            id
+            content
+            time_ago
+            parent_comment {
+                id
+                content
+            }
+            user {
+                id
+                name
+                gender
+                avatar
+                is_admin
+                level {
+                    id
+                    level
+                }
+                profile {
+                    age
+                }
+            }
+            feedback {
+                id
+                title
+            }
+            question {
+                id
+                gold
+                description
+                count_likes
+                count_comments
+                liked
+                form
+                is_resolved
+                created_at
+                count
+                submit
+                video {
+                    id
+                    width
+                    height
+                    url
+                    cover
+                    is_ad_video
+                }
+                user {
+                    id
+                    name
+                    avatar
+                    followed_user_status
+                    profile {
+                        age
+                    }
+                    level {
+                        id
+                        level
+                    }
+                }
+                image {
+                    id
+                    width
+                    height
+                    path
+                }
+                category {
+                    id
+                    name
+                }
+            }
+        }
+    }
+}
