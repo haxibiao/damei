@@ -1,8 +1,5 @@
-#import './share/query.graphql'
-#import './share/mutate.graphql'
-
-#import './question/query.graphql'
-#import './question/mutate.graphql'
+#import './comment/index.graphql'
+#import './contribute/index.graphql'
 
 #import './user/index.graphql'
 #import './withdraw/index.graphql'
@@ -20,7 +17,7 @@
 #import './reward/TimeRewardMutation.gql'
 
 query me {
-    user {
-        id
-    }
+  user {
+    id
+  }
 }
