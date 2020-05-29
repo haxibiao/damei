@@ -1,0 +1,5 @@
+
+#领取任务
+mutation ReceiveTaskMutation($task_id: Int!) {
+    receiveTask(task_id: $task_id)
+}

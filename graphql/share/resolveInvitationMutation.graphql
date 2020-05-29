@@ -1,0 +1,13 @@
+# 口令邀请
+mutation resolveInvitationMutation($slogan: String!) {
+    resolveInvitation(slogan: $slogan) {
+        id
+        user {
+            id
+            avatar
+            name
+        }
+        be_inviter_reward
+        be_inviter_reward_unit
+    }
+}

@@ -1,0 +1,4 @@
+#答复任务
+mutation ReplyTaskMutation($task_id: Int!, $content: ReplyContent) {
+    replyTask(task_id: $task_id, content: $content)
+}

@@ -1,0 +1,17 @@
+# 签到记录
+query SignInsQuery($days: Int) {
+    signIns(days: $days) {
+        today_signed
+        keep_signin_days
+        signs {
+            day
+            year
+            date
+            created_at
+            signed
+            gold_reward
+            contribute_reward
+            is_gift
+        }
+    }
+}

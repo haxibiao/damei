@@ -1,0 +1,8 @@
+#看视频奖励
+mutation UserRewardMutation($reward: RewardEnum) {
+    userReward(reward: $reward) {
+        gold
+        ticket
+        contribute
+    }
+}

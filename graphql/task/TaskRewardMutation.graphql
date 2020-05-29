@@ -1,0 +1,4 @@
+#领取奖励
+mutation TaskRewardMutation($task_id: Int!) {
+    taskReward(task_id: $task_id)
+}

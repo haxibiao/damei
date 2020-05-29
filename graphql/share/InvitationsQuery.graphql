@@ -1,0 +1,10 @@
+query InvitationsQuery($user_id: Int, $filter: InvitationFilterEnum) {
+    invitations(user_id: $user_id, filter: $filter) {
+        id
+        invited_in
+        beInviter {
+            name
+            avatar
+        }
+    }
+}

@@ -1,0 +1,6 @@
+# 用户已经看过分红数
+mutation updateUserStockInfoMutation($is_first_stock: Boolean!) {
+    updateUserStockInfo(is_first_stock: $is_first_stock) {
+        id
+    }
+}

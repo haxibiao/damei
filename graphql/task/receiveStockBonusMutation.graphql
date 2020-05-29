@@ -1,0 +1,21 @@
+# 领取分红
+mutation receiveStockBonusMutation($position: Int!) {
+    receiveStockBonus(position: $position) {
+        id
+        received
+        bonusExpirationTime
+        totalBonusEarnings
+        stockRate
+        stockNumber
+        perStockPrice
+        yesterdayEarnings
+        totalEarnings
+        todayUnclaimedBonusEarnings
+        goldTree {
+            rmb
+            total
+            balance
+            received_at
+        }
+    }
+}

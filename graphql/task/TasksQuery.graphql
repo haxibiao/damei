@@ -1,0 +1,15 @@
+query TasksQuery($type: Int, $offset: Int, $limit: Int) {
+    tasks(type: $type, offset: $offset, limit: $limit) {
+        id
+        name
+        details
+        type
+        gold
+        ticket
+        count
+        status
+        taskStatus
+        route
+        submit_name
+    }
+}
