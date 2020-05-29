@@ -1,0 +1,31 @@
+# 视频流列表
+query VideosQuery($type: VideoTypeEnum, $limit: Int, $offset: Int) {
+    videos(type: $type, limit: $limit, offset: $offset) {
+        id
+        width
+        height
+        url
+        cover
+        is_ad_video
+        question {
+            id
+            description
+            count_likes
+            count_comments
+            liked
+            form
+            gold
+            is_resolved
+            user {
+                id
+                name
+                avatar
+                followed_user_status
+            }
+            category {
+                id
+                name
+            }
+        }
+    }
+}

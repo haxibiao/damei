@@ -1,0 +1,4 @@
+#取消广告服务
+mutation ShieldingCategoryAdMutation($category_id: Int!) {
+    shieldingCategoryAd(category_id: $category_id)
+}

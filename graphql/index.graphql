@@ -14,6 +14,11 @@
 #import './like/index.graphql'
 #import './notification/index.graphql'
 
+#import './question/index.graphql'
+#import './report/reportMutation.gql'
+#import './reward/systemConfigQuery.gql'
+#import './reward/TimeRewardMutation.gql'
+
 query me {
     user {
         id

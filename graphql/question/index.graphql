@@ -1,0 +1,16 @@
+#import './CategoriesQuery.gql'
+#import './SearchCategoriesQuery.gql'
+#import './QuestionListQuery.gql'
+#import './QuestionQuery.gql'
+#import './VideosQuery.gql'
+#import './QuestionAnswerMutation.gql'
+#import './toggleFavoriteMutation.gql'
+#import './auditMutation.gql'
+#import './ShieldingCategoryAdMutation.gql'
+#import './UserRewardMutation.gql'
+
+query me {
+  user {
+    id
+  }
+}

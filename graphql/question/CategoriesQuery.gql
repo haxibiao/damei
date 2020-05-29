@@ -1,0 +1,20 @@
+#专题分类
+query CategoriesQuery($offset: Int, $limit: Int, $allow_submit: Int) {
+    categories(offset: $offset, limit: $limit, allow_submit: $allow_submit) {
+        id
+        name
+        description
+        icon
+        count
+        parent_id
+        status
+        is_official
+        user_id
+        created_at
+        children {
+            id
+            name
+            icon
+        }
+    }
+}

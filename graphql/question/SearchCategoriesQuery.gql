@@ -1,0 +1,10 @@
+# 搜索题库
+query SearchCategoriesQuery($offset: Int, $limit: Int, $keyword: String) {
+    categories(allow_submit: 1, offset: $offset, limit: $limit, keyword: $keyword) {
+        id
+        name
+        icon
+        description
+        user_can_submit
+    }
+}

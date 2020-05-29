@@ -1,0 +1,6 @@
+# 收藏题目
+mutation toggleFavoriteMutation($data: ToggleFavoriteInputType) {
+    toggleFavorite(data: $data) {
+        id
+    }
+}
