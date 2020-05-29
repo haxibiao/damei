@@ -1,0 +1,8 @@
+#import './share/query.graphql'
+#import './share/mutate.graphql'
+
+#import './question/query.graphql'
+#import './question/mutate.graphql'
+
+#import './user/query.graphql'
+#import './user/mutate.graphql'
