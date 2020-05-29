@@ -26,7 +26,7 @@ class WithdrawLog extends Component {
 			<View style={{ flex: 1 }}>
 				<Query query={GQL.WithdrawsQuery} fetchPolicy="network-only">
 					{({ data, error, loading, refetch, fetchMore }) => {
-						let withdraws = Tools.syncGetter('withdraws', data);
+						let withdraws = Tools.syncGetter('withdraws.data', data);
 						if (error) return <ErrorView onPress={refetch} error={error} />;
 						if (loading) return <LoadingSpinner />;
 						if (!withdraws || withdraws.length === 0)
@@ -52,28 +52,25 @@ class WithdrawLog extends Component {
 								ListHeaderComponent={this._userWithdrawInfo}
 								onEndReachedThreshold={0.3}
 								onEndReached={() => {
-									fetchMore({
-										variables: {
-											offset: withdraws.length
-										},
-										updateQuery: (prev, { fetchMoreResult }) => {
-											if (
-												!(
-													fetchMoreResult &&
-													fetchMoreResult.withdraws &&
-													fetchMoreResult.withdraws.length > 0
-												)
-											) {
-												this.setState({
-													finished: true
-												});
-												return prev;
+									if (data.withdraws.paginatorInfo.hasMorePages) {
+										fetchMore({
+											variables: {
+												page: ++data.withdraws.paginatorInfo.currentPage
+											},
+											updateQuery: (prev, { fetchMoreResult }) => {
+												return {
+													withdraws: {
+														...fetchMoreResult.withdraws,
+														data: [ ...prev.withdraws.data, ...fetchMoreResult.withdraws.data]
+													}
+												}
 											}
-											return Object.assign({}, prev, {
-												withdraws: [...prev.withdraws, ...fetchMoreResult.withdraws]
-											});
-										}
-									});
+										})
+									} else {
+										this.setState({
+											finished: true
+										});
+									}
 								}}
 								ListFooterComponent={() => <ListFooter finished={this.state.finished} />}
 							/>

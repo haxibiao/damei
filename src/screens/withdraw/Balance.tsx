@@ -9,10 +9,7 @@ import { GQL, useQuery } from 'apollo';
 const Balance = () => {
     const [finished, setFinished] = useState(false);
     const { data, loading, error, refetch, fetchMore } = useQuery(GQL.TransactionsQuery);
-    console.log('====================================');
-    console.log(error, data, GQL);
-    console.log('====================================');
-    const transactions = Tools.syncGetter('transactions', data);
+    const transactions = Tools.syncGetter('transactions.data', data);
     return (
         <PageContainer
             white
@@ -36,26 +33,23 @@ const Balance = () => {
                     renderItem={({ item }) => <BalanceItem item={item} />}
                     onEndReachedThreshold={0.3}
                     onEndReached={() => {
-                        fetchMore({
-                            variables: {
-                                offset: transactions.length,
-                            },
-                            updateQuery: (prev, { fetchMoreResult }) => {
-                                if (
-                                    !(
-                                        fetchMoreResult &&
-                                        fetchMoreResult.transactions &&
-                                        fetchMoreResult.transactions.length > 0
-                                    )
-                                ) {
-                                    setFinished(true);
-                                    return prev;
+                        if (data.transactions.paginatorInfo.hasMorePages) {
+                            fetchMore({
+                                variables: {
+                                    page: ++data.transactions.paginatorInfo.currentPage
+                                },
+                                updateQuery: (prev, { fetchMoreResult }) => {
+                                    return {
+                                        transactions: {
+                                            ...fetchMoreResult.transactions,
+                                            data: [ ...prev.transactions.data, ...fetchMoreResult.transactions.data]
+                                        }
+                                    }
                                 }
-                                return Object.assign({}, prev, {
-                                    transactions: [...prev.transactions, ...fetchMoreResult.transactions],
-                                });
-                            },
-                        });
+                            })
+                        } else {
+                            setFinished(true);
+                        }
                     }}
                     ListFooterComponent={() => <ListFooter finished={finished} />}
                 />

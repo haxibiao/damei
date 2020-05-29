@@ -1,10 +1,16 @@
 #余额变动记录
-query TransactionsQuery($limit: Int, $offset: Int) {
-    transactions(limit: $limit, offset: $offset) {
-        id
-        amount
-        remark
-        created_at
-        balance
+query TransactionsQuery($first: Int, $page: Int) {
+    transactions(first: $first, page: $page) {
+    	paginatorInfo {
+          	currentPage
+          	hasMorePages
+        }
+    	data {
+          	id
+            amount
+            remark
+            created_at
+            balance
+        }
     }
 }
