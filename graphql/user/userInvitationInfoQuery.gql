@@ -1,0 +1,22 @@
+#邀请信息
+query userInvitationInfoQuery($user_id: Int) {
+    user(id: $user_id) {
+        id
+        invitations_success_count
+        invitation {
+            reward_total_share_bonus
+            reward_total_amount
+        }
+        invite_code
+        invite_slogan
+        wallet {
+            id
+            real_name
+            pay_account
+            pay_info_change_count
+            total_withdraw_amount
+            available_balance
+            balance
+        }
+    }
+}

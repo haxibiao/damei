@@ -1,0 +1,9 @@
+#用户累计收入排行榜 "TOTAL_WITHDRAW"
+query userWithdrawRank {
+    users(rank: TOTAL_WITHDRAW) {
+        id
+        name
+        avatar
+        transaction_sum_amount
+    }
+}

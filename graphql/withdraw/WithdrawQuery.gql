@@ -1,0 +1,15 @@
+#提现详情
+query WithdrawQuery($id: Int!) {
+    withdraw(id: $id) {
+        id
+        status
+        amount
+        remark
+        trade_no
+        biz_no
+        created_at
+        updated_at
+        to_account
+        to_platform
+    }
+}

@@ -1,0 +1,9 @@
+#用户提现信息
+query UserWithdrawQuery($id: Int) {
+    user(id: $id) {
+        id
+        gold
+        total_withdraw_amount
+        balance
+    }
+}

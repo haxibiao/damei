@@ -1,0 +1,90 @@
+#用户个人资料
+query UserQuery($id: Int) {
+    user(id: $id) {
+        id
+        account
+        name
+        withdrawInfo {
+            amount
+            description
+        }
+        wallet {
+            id
+            real_name
+            pay_account
+            pay_info_change_count
+            total_withdraw_amount
+            available_balance
+            balance
+        }
+        profile {
+            introduction
+            birthday
+            age
+            total_contributes
+        }
+        gender
+        avatar
+        gold
+        ticket
+        exp
+        next_level_exp
+        follow_users_count
+        followers_count
+        adinfo {
+            tt_appid
+            tt_codeid
+            cpc_ad_id
+            cpc_ad_url
+            bannerAd {
+                appid
+                codeid
+            }
+            fullScreenVideoAd {
+                appid
+                codeid
+            }
+        }
+        level {
+            id
+            name
+            ticket_max
+            level
+            exp
+        }
+        week_contributes
+        today_contributes
+        today_new_questions_count
+        today_left_questions_count
+        today_withdraw_left
+        exchange_rate
+        video_duration
+        explanation_video_duration
+        has_reward_new_user
+        is_bind_wechat
+        is_admin
+        verified_at
+        bonusExpirationTime
+        totalBonusEarnings
+        stockRate
+        stockNumber
+        perStockPrice
+        yesterdayEarnings
+        totalEarnings
+        todayUnclaimedBonusEarnings
+        is_first_stock
+        invitations_success_count
+        reward_video_click
+        is_bind_dongdezhuan
+        dongdezhuanUser {
+            id
+            name
+            account
+        }
+        DZUser {
+            id
+            name
+            account
+        }
+    }
+}

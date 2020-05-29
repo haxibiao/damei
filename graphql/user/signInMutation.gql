@@ -1,0 +1,42 @@
+#登录
+mutation signInMutation($account: String!, $password: String, $code: String) {
+    signIn(account: $account, password: $password, code: $code) {
+        id
+        account
+        token
+        avatar
+        name
+        withdrawInfo {
+            amount
+            description
+        }
+        wallet {
+            id
+            real_name
+            pay_account
+            pay_info_change_count
+            total_withdraw_amount
+            available_balance
+            balance
+        }
+        profile {
+            introduction
+            birthday
+            age
+            total_contributes
+        }
+        gender
+        is_admin
+        verified_at
+        bonusExpirationTime
+        totalBonusEarnings
+        stockRate
+        stockNumber
+        perStockPrice
+        yesterdayEarnings
+        totalEarnings
+        todayUnclaimedBonusEarnings
+        is_first_stock
+        invitations_success_count
+    }
+}

@@ -1,0 +1,4 @@
+#判断账号来源
+query IsInviteUser($account: String!) {
+    isInviteUser(account: $account)
+}

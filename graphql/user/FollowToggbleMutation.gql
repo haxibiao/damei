@@ -1,0 +1,10 @@
+#关注
+mutation FollowToggbleMutation($followed_type: FollowedEnumType!, $followed_id: Int!) {
+    followToggle(followed_type: $followed_type, followed_id: $followed_id) {
+        id
+        follow_user {
+            id
+        }
+        created_at
+    }
+}

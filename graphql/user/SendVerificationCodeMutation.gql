@@ -1,0 +1,13 @@
+#手机验证
+mutation SendVerificationCodeMutation($account: String!, $action: VerificationActionEnum!) {
+    sendVerificationCode(account: $account, action: $action) {
+        id
+        user {
+            id
+            name
+        }
+        code
+        channel
+        surplusSecond
+    }
+}

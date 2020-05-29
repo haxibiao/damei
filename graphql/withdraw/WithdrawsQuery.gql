@@ -1,0 +1,11 @@
+#提现日志
+query WithdrawsQuery($limit: Int, $offset: Int) {
+    withdraws(limit: $limit, offset: $offset) {
+        id
+        status
+        amount
+        created_at
+        remark
+        to_platform
+    }
+}

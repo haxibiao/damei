@@ -1,0 +1,4 @@
+#提交提现
+mutation CreateWithdrawMutation($amount: Float!, $platform: WithdrawPlatformEnum) {
+    createWithdrawal(amount: $amount, platform: $platform)
+}

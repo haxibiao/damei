@@ -1,0 +1,4 @@
+#判断账号是否注册
+query accountHasExisted($account: String!) {
+    accountHasExisted(account: $account)
+}

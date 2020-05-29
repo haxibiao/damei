@@ -1,0 +1,32 @@
+#uuid注册用户绑定账号密码
+mutation UUIDBindMutation($account: String, $password: String!) {
+    uuidBind(account: $account, password: $password) {
+        id
+        account
+        token
+        avatar
+        name
+        withdrawInfo {
+            amount
+            description
+        }
+        wallet {
+            id
+            real_name
+            pay_account
+            pay_info_change_count
+            total_withdraw_amount
+            available_balance
+            balance
+        }
+        profile {
+            introduction
+            birthday
+            age
+            total_contributes
+        }
+        gender
+        is_admin
+        verified_at
+    }
+}

@@ -1,0 +1,6 @@
+#绑定微信
+mutation BindWechatMutation($union_id: String, $code: String) {
+    bindWechat(union_id: $union_id, code: $code, version: "v2") {
+        id
+    }
+}

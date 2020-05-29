@@ -1,0 +1,27 @@
+#我的收藏
+query FavoritesQuery($offset: Int, $limit: Int) {
+    favorites(offset: $offset, limit: $limit) {
+        id
+        created_at
+        question {
+            id
+            description
+            created_at
+            image {
+                id
+                path
+            }
+            video {
+                id
+                url
+                path
+                cover
+            }
+            category {
+                id
+                name
+            }
+            count
+        }
+    }
+}

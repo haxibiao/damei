@@ -1,0 +1,14 @@
+#兑换记录
+query ExchangesQuery($limit: Int, $offset: Int) {
+    exchanges(limit: $limit, offset: $offset) {
+        id
+        rmb
+        exchange_rate
+        gold
+        created_at
+        user {
+            id
+            name
+        }
+    }
+}

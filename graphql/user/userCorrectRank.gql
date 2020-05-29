@@ -1,0 +1,9 @@
+#用户答对题总数排行榜 "DOUBLE_HIT_ANSWER"
+query userCorrectRank {
+    users(rank: DOUBLE_HIT_ANSWER) {
+        id
+        name
+        avatar
+        correct_count
+    }
+}

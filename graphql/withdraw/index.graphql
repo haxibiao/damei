@@ -1,0 +1,14 @@
+#import './SetUserPaymentInfoMutation.gql'
+#import './CreateWithdrawMutation.gql'
+#import './WithdrawsQuery.gql'
+#import './WithdrawQuery.gql'
+#import './TransactionsQuery.gql'
+#import './OAuthBindMutation.gql'
+#import './SetRealNameMutation.gql'
+#import './UserWalletQuery.gql'
+
+query me {
+    user {
+        id
+    }
+}

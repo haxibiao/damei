@@ -1,0 +1,8 @@
+#修改账号
+mutation UpdateUserAccountMutation($account: String) {
+    updateUserAccount(account: $account) {
+        id
+        account
+        name
+    }
+}

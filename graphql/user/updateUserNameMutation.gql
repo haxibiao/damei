@@ -1,0 +1,7 @@
+#更改昵称
+mutation updateUserNameMutation($name: String!) {
+    updateUserName(name: $name) {
+        id
+        name
+    }
+}

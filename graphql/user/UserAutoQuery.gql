@@ -1,0 +1,55 @@
+#静默注册用户信息查询
+query UserAutoQuery($id: Int) {
+    user(id: $id) {
+        id
+        auto_uuid_user
+        auto_phone_user
+        account
+        name
+        profile {
+            introduction
+            birthday
+            age
+            total_contributes
+        }
+        gender
+        avatar
+        gold
+        ticket
+        next_level_exp
+        level {
+            id
+            name
+            ticket_max
+            level
+            exp
+        }
+        withdrawInfo {
+            amount
+            description
+        }
+        wallet {
+            id
+            real_name
+            pay_account
+            pay_info_change_count
+            total_withdraw_amount
+            available_balance
+            balance
+        }
+        has_reward_new_user
+        is_bind_wechat
+        is_admin
+        verified_at
+        bonusExpirationTime
+        totalBonusEarnings
+        stockRate
+        stockNumber
+        perStockPrice
+        yesterdayEarnings
+        totalEarnings
+        todayUnclaimedBonusEarnings
+        is_first_stock
+        invitations_success_count
+    }
+}

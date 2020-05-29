@@ -1,0 +1,21 @@
+#关注列表
+query FollowsQuery($user_id: Int, $filter: FollowedEnumType, $offset: Int, $limit: Int) {
+    follows(user_id: $user_id, filter: $filter, offset: $offset, limit: $limit) {
+        id
+        follow_user {
+            id
+            name
+            avatar
+            gender
+            profile {
+                birthday
+                introduction
+            }
+            followed_user_status
+            level {
+                id
+                level
+            }
+        }
+    }
+}

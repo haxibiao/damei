@@ -1,0 +1,18 @@
+# 用户答题状态（精力点、智慧点）
+query UserMetaQuery($id: Int!) {
+    user(id: $id) {
+        id
+        gold
+        ticket
+        exp
+        next_level_exp
+        exchange_rate
+        level {
+            id
+            name
+            ticket_max
+            level
+            exp
+        }
+    }
+}

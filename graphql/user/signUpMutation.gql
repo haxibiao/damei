@@ -1,0 +1,43 @@
+#注册
+mutation signUpMutation($account: String!, $password: String!, $uuid: String) {
+    signUp(account: $account, password: $password, uuid: $uuid) {
+        id
+        account
+        token
+        avatar
+        name
+        withdrawInfo {
+            amount
+            description
+        }
+        wallet {
+            id
+            real_name
+            pay_account
+            pay_info_change_count
+            total_withdraw_amount
+            available_balance
+            balance
+        }
+        profile {
+            introduction
+            birthday
+            age
+            total_contributes
+        }
+        gender
+        is_admin
+        verified_at
+        is_old_user
+        bonusExpirationTime
+        totalBonusEarnings
+        stockRate
+        stockNumber
+        perStockPrice
+        yesterdayEarnings
+        totalEarnings
+        todayUnclaimedBonusEarnings
+        is_first_stock
+        invitations_success_count
+    }
+}

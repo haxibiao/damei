@@ -1,0 +1,13 @@
+#贡献记录
+query ContributesQuery($limit: Int, $offset: Int) {
+    user {
+        id
+        contributes(limit: $limit, offset: $offset) {
+            id
+            time
+            type
+            reason
+            amount
+        }
+    }
+}

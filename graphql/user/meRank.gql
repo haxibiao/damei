@@ -1,0 +1,11 @@
+#我的排名
+query meRank($id: Int) {
+    user(id: $id) {
+        id
+        avatar
+        name
+        rank
+        transaction_sum_amount
+        correct_count
+    }
+}
