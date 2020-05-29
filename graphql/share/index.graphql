@@ -1,0 +1,3 @@
+#import './InvitationRewardsQuery.graphql'
+#import './InvitationsQuery.graphql'
+#import './resolveInvitationMutation.graphql'

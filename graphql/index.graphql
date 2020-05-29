@@ -7,19 +7,8 @@
 #import './user/index.graphql'
 #import './withdraw/index.graphql'
 
-#import './share/InvitationRewardsQuery.graphql'
-#import './share/InvitationsQuery.graphql'
-#import './share/resolveInvitationMutation.graphql'
-#import './task/CreateSignInMutation.graphql'
-#import './task/receiveStockBonusMutation.graphql'
-#import './task/ReceiveTaskMutation.graphql'
-#import './task/ReplyTaskMutation.graphql'
-#import './task/SignInsQuery.graphql'
-#import './task/TaskRewardMutation.graphql'
-#import './task/TasksQuery.graphql'
-#import './task/updateUserStockInfoMutation.graphql'
-#import './task/UploadImage.graphql'
-#import './task/UserRewardMutation.graphql'
+#import './task/index.graphql'
+#import './share/index.graphql'
 
 query me {
     user {
