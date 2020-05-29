@@ -1,0 +1,60 @@
+# 出题记录
+query mySubmitQuestionHistoryQuery($offset: Int, $limit: Int) {
+  user {
+    id
+    name
+    avatar
+    gender
+    profile {
+      age
+    }
+    level {
+      id
+      level
+    }
+    questions(offset: $offset, limit: $limit, order: CREATED_AT) {
+      id
+      description
+      created_at
+      image {
+        id
+        path
+      }
+      video {
+        id
+        url
+        path
+        cover
+        height
+        width
+      }
+      category {
+        id
+        name
+      }
+      user {
+        id
+        name
+        avatar
+        gender
+        profile {
+          age
+        }
+        level {
+          id
+          level
+        }
+      }
+      submit
+      status
+      remark
+      count
+      accepted_count
+      declined_count
+      correct_count
+      liked
+      count_likes
+      count_comments
+    }
+  }
+}

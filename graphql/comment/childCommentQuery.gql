@@ -1,0 +1,32 @@
+#题目评论二级评论
+query childCommentQuery($comment_id: Int!, $offset: Int, $limit: Int) {
+  comments(commentable_type: comments, comment_id: $comment_id) {
+    id
+    comments_count
+    comments(offset: $offset, limit: $limit) {
+      id
+      content
+      user {
+        id
+        name
+        avatar
+        is_admin
+        level {
+          id
+          level
+        }
+        gender
+      }
+      liked
+      time_ago
+      count_likes
+      reply {
+        id
+        user {
+          id
+          name
+        }
+      }
+    }
+  }
+}

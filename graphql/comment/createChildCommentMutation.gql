@@ -1,0 +1,48 @@
+#创建子评论
+mutation createChildCommentMutation(
+  $content: String
+  $comment_id: Int
+  $images: [String]
+  $commentable_id: Int
+  $commentable_type: CommentTableEnum
+) {
+  createComment(
+    content: $content
+    images: $images
+    comment_id: $comment_id
+    commentable_id: $commentable_id
+    commentable_type: $commentable_type
+  ) {
+    id
+    content
+    user {
+      id
+      name
+      avatar
+      is_admin
+      level {
+        id
+        level
+      }
+      gender
+    }
+    liked
+    time_ago
+    count_likes
+    reply {
+      id
+      content
+      user {
+        id
+        name
+        avatar
+        is_admin
+        level {
+          id
+          level
+        }
+        gender
+      }
+    }
+  }
+}

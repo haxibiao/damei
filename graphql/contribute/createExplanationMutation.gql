@@ -1,0 +1,11 @@
+# 用户出题解析
+mutation createExplanationMutation(
+  $content: String
+  $video_id: Int
+  $images: [String]
+) {
+  createExplanation(content: $content, video_id: $video_id, images: $images) {
+    id
+    content
+  }
+}

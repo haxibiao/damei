@@ -1,0 +1,32 @@
+# 用户出题
+mutation createQuestionMutation($data: CreateQuestionInputType) {
+  createQuestion(data: $data) {
+    id
+    gold
+    description
+    count_likes
+    count_comments
+    liked
+    form
+    is_resolved
+    created_at
+    video {
+      id
+      width
+      height
+      url
+      cover
+      is_ad_video
+    }
+    user {
+      id
+      name
+      avatar
+      followed_user_status
+    }
+    category {
+      id
+      name
+    }
+  }
+}

@@ -1,0 +1,15 @@
+#import './createQuestionMutation.gql'
+#import './createExplanationMutation.gql'
+#import './publishQuestion.gql'
+#import './removeQuestionMutation.gql'
+#import './deleteQuestionMutation.gql'
+#import './mySubmitQuestionHistoryQuery.gql'
+#import './myVideoQuestionHistoryQuery.gql'
+#import './resolveDouyinVideo.gql'
+#import './SpidersQuery.gql'
+
+query me {
+  user {
+    id
+  }
+}

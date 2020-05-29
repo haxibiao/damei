@@ -1,0 +1,68 @@
+query myVideoQuestionHistoryQuery(
+  $offset: Int
+  $limit: Int
+  $QuestionFormEnumType: QuestionFormEnumType
+) {
+  user {
+    id
+    name
+    avatar
+    gender
+    profile {
+      age
+    }
+    level {
+      id
+      level
+    }
+    questions(
+      offset: $offset
+      limit: $limit
+      order: CREATED_AT
+      form: $QuestionFormEnumType
+    ) {
+      id
+      gold
+      description
+      count_likes
+      count_comments
+      liked
+      form
+      is_resolved
+      created_at
+      count
+      submit
+      video {
+        id
+        width
+        height
+        url
+        cover
+        is_ad_video
+      }
+      user {
+        id
+        name
+        avatar
+        followed_user_status
+        profile {
+          age
+        }
+        level {
+          id
+          level
+        }
+      }
+      image {
+        id
+        width
+        height
+        path
+      }
+      category {
+        id
+        name
+      }
+    }
+  }
+}

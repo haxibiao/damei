@@ -1,0 +1,32 @@
+# 题目评论列表
+query questionCommentsQuery(
+  $commentable_type: CommentTableEnum
+  $commentable_id: Int!
+  $offset: Int
+  $limit: Int
+) {
+  comments(
+    commentable_type: $commentable_type
+    commentable_id: $commentable_id
+    offset: $offset
+    limit: $limit
+  ) {
+    id
+    content
+    user {
+      id
+      name
+      avatar
+      is_admin
+      level {
+        id
+        level
+      }
+      gender
+    }
+    liked
+    time_ago
+    comments_count
+    count_likes
+  }
+}

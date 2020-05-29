@@ -1,0 +1,7 @@
+#采纳评论
+mutation AcceptCommentMutation($id: Int!) {
+  acceptComment(id: $id) {
+    id
+    accepted
+  }
+}

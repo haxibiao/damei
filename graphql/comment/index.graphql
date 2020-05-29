@@ -1,0 +1,12 @@
+#import './questionCommentsQuery.gql'
+#import './childCommentQuery.gql'
+#import './createCommentMutation.gql'
+#import './createChildCommentMutation.gql'
+#import './deleteCommentMutation.gql'
+#import './AcceptCommentMutation.gql'
+
+query me {
+  user {
+    id
+  }
+}

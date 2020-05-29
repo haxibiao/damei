@@ -1,0 +1,4 @@
+# 撤回题目
+mutation removeQuestionMutation($id: Int) {
+  removeQuestion(id: $id)
+}
