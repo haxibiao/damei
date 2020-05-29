@@ -1,6 +1,6 @@
 # 视频流列表
-query VideosQuery($type: VideoTypeEnum, $limit: Int, $offset: Int) {
-    videos(type: $type, limit: $limit, offset: $offset) {
+query VideosQuery( $limit: Int, $offset: Int) {
+    videos( limit: $limit, offset: $offset) {
         id
         width
         height

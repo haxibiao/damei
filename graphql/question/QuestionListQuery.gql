@@ -1,5 +1,5 @@
 #题目列表
-query QuestionListQuery($category_id: Int, $offset: Int, $limit: Int) {
+query QuestionListQuery($category_id: Int!, $offset: Int, $limit: Int) {
     questions(category_id: $category_id, offset: $offset, limit: $limit) {
         id
         description
@@ -45,8 +45,10 @@ query QuestionListQuery($category_id: Int, $offset: Int, $limit: Int) {
                 url
             }
             images {
-                width
-                path
+                data{
+                    width
+                    path 
+                } 
             }
         }
         type

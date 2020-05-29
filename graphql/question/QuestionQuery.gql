@@ -1,5 +1,5 @@
 #题目查询
-query QuestionQuery($id: Int) {
+query QuestionQuery($id: Int!) {
     question(id: $id) {
         id
         description
@@ -45,8 +45,10 @@ query QuestionQuery($id: Int) {
                 url
             }
             images {
-                width
-                path
+                data{
+                    width
+                    path
+                }
             }
         }
         type
