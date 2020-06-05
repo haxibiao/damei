@@ -22,6 +22,7 @@ export type UploadOption = {
 export function vodUpload(props: UploadOption) {
     const { videoPath, onBeforeUpload, onStarted, onProcess, onCancelled, onCompleted, onError } = props;
 
+    //FIXME: 这里有很奇怪的梗一直没处理，签名函数从haxibiao.com迁移到答赚或者答妹的web代码里就不好用...有服务器ip 域名的关系？
     fetch('https://haxibiao.com/api/signature/vod-' + Config.Name, { method: 'GET' })
         .then((response) => response.text())
         .then((signature) => {
@@ -49,7 +50,7 @@ export function vodUpload(props: UploadOption) {
         });
 }
 
-function saveVideo(data: { video_id: any; video_url: any }, onCompleted: Function) {
+function saveVideo(data: { video_id: any; video_url: any; }, onCompleted: Function) {
     console.log('be_save_video', data);
     console.log('Config', Config.ServerRoot + '/api/video?from=qcvod&api_token=' + app.me.token);
     fetch(Config.ServerRoot + '/api/video?from=qcvod&api_token=' + app.me.token, {
